@@ -1,0 +1,710 @@
+=========================================
+   GENERAL METRICS - SQ    
+=========================================
+
+SQ Best Lap Delta:
+Driver  sq_driver_best_laptime_s  sq_field_best_laptime_s  sq_best_lap_delta
+   ALB                    90.216                   87.869           0.026710
+   ALO                   131.963                   87.869           0.501815
+   ANT                    88.091                   87.869           0.002526
+   BEA                    90.116                   87.869           0.025572
+   BOR                    89.994                   87.869           0.024184
+   BOT                    91.826                   87.869           0.045033
+   COL                    89.320                   87.869           0.016513
+   GAS                    89.474                   87.869           0.018266
+   HAD                    89.422                   87.869           0.017674
+   HAM                    88.618                   87.869           0.008524
+   HUL                    90.019                   87.869           0.024468
+   LAW                    91.043                   87.869           0.036122
+   LEC                    88.239                   87.869           0.004211
+   LIN                    90.573                   87.869           0.030773
+   NOR                    87.869                   87.869           0.000000
+   OCO                    91.245                   87.869           0.038421
+   PIA                    88.108                   87.869           0.002720
+   RUS                    88.493                   87.869           0.007101
+   SAI                    90.224                   87.869           0.026801
+   VER                    88.461                   87.869           0.006737
+
+SQ Clean Laps Count:
+Driver  sq_clean_laps_count
+   LEC                    4
+   GAS                    4
+   BOR                    4
+   COL                    4
+   HAD                    4
+   ALB                    4
+   RUS                    4
+   HAM                    4
+   NOR                    3
+   ANT                    3
+   SAI                    3
+   VER                    3
+   PIA                    3
+   HUL                    3
+   BEA                    2
+   OCO                    2
+   BOT                    2
+   LIN                    2
+   LAW                    1
+   PER                    0
+   ALO                    0
+   STR                    0
+
+SQ Sector Deltas:
+Driver  sq_sector1_delta  sq_sector2_delta  sq_sector3_delta
+   LEC          0.299500          0.254500          0.168750
+   NOR          0.311667          0.355667          0.292000
+   PIA          0.404667          0.257000          0.211667
+   HAM          0.461750          0.524750          0.246250
+   ANT          0.585000          0.290333          0.251000
+   VER          0.751333          0.243333          0.199667
+   RUS          0.815250          0.468250          0.111750
+   HAD          0.991000          0.662000          0.510250
+   COL          1.000000          0.793750          0.333500
+   HUL          1.173333          0.744000          0.662333
+   GAS          1.184000          0.581250          0.429500
+   BOR          1.398750          0.534500          0.780750
+   BEA          1.434000          0.719000          0.491000
+   LIN          1.504000          0.895000          0.602500
+   SAI          1.562000          0.824000          0.419667
+   LAW          1.665000          1.035000          0.622000
+   ALB          1.883500          0.747750          0.530000
+   OCO          1.922500          0.929000          0.679000
+   BOT          2.086000          1.414500          0.850000
+   PER               NaN               NaN               NaN
+   ALO               NaN               NaN               NaN
+   STR               NaN               NaN               NaN
+
+SQ Max Speed Trap:
+Driver  sq_max_speed_trap  sq_speed_trap_avg  sq_valid_laps_count  sq_speed_trap_delta
+   ANT              333.0         319.000000                  3.0                  0.0
+   RUS              333.0         328.750000                  4.0                  0.0
+   ALB              331.0         328.250000                  4.0                  2.0
+   SAI              329.0         328.333333                  3.0                  4.0
+   COL              328.0         326.750000                  4.0                  5.0
+   GAS              328.0         325.250000                  4.0                  5.0
+   LEC              328.0         325.250000                  4.0                  5.0
+   HAM              327.0         324.250000                  4.0                  6.0
+   VER              327.0         326.333333                  3.0                  6.0
+   BEA              325.0         323.500000                  2.0                  8.0
+   PIA              324.0         323.000000                  3.0                  9.0
+   HAD              322.0         319.500000                  4.0                 11.0
+   BOR              322.0         320.250000                  4.0                 11.0
+   NOR              322.0         321.666667                  3.0                 11.0
+   OCO              320.0         320.000000                  2.0                 13.0
+   LIN              320.0         318.500000                  2.0                 13.0
+   BOT              319.0         315.000000                  2.0                 14.0
+   HUL              319.0         318.333333                  3.0                 14.0
+   LAW              318.0         318.000000                  1.0                 15.0
+   PER                NaN                NaN                  NaN                  NaN
+   ALO                NaN                NaN                  NaN                  NaN
+   STR                NaN                NaN                  NaN                  NaN
+
+SQ S1 vs S3 Ratio (PU Deployment Asymmetry):
+Driver  sq_best_s1_s  sq_best_s3_s  sq_s1_vs_s3_ratio  sq_pu_asymmetry_delta
+   OCO        31.684        25.282           1.253224               0.030485
+   LAW        31.339        25.260           1.240657               0.017918
+   BOT        31.541        25.484           1.237679               0.014939
+   LIN        31.118        25.147           1.237444               0.014705
+   BEA        30.899        25.023           1.234824               0.012085
+   ALB        30.974        25.164           1.230885               0.008146
+   SAI        30.876        25.111           1.229581               0.006842
+   VER        30.206        24.650           1.225396               0.002656
+   RUS        30.234        24.718           1.223157               0.000418
+   ALO        48.147        39.369           1.222967               0.000228
+   GAS        30.597        25.028           1.222511              -0.000228
+   COL        30.408        24.904           1.221009              -0.001730
+   BOR        30.848        25.275           1.220495              -0.002244
+   HUL        30.688        25.271           1.214356              -0.008383
+   ANT        29.959        24.723           1.211787              -0.010952
+   HAD        30.428        25.129           1.210872              -0.011867
+   PIA        29.751        24.748           1.202158              -0.020581
+   NOR        29.682        24.754           1.199079              -0.023660
+   LEC        29.674        24.804           1.196339              -0.026400
+   HAM        29.736        24.959           1.191394              -0.031345
+   PER           NaN           NaN                NaN                    NaN
+   STR           NaN           NaN                NaN                    NaN
+
+SQ ERS Efficiency Proxy (Delta vs Field):
+Driver  braking_time_s  full_throttle_time_s  sq_ers_efficiency_proxy
+   NOR          12.586                46.235                 0.527341
+   LEC          13.670                49.890                 0.503412
+   VER          14.202                49.470                 0.337127
+   HAM          13.892                48.266                 0.328188
+   ALO          14.179                48.896                 0.302295
+   BOT          14.062                47.162                 0.207676
+   GAS          14.515                46.714                 0.072141
+   HUL          14.904                47.479                 0.039470
+   BOR          15.301                48.521                 0.024915
+   LAW          14.701                46.361                 0.007410
+   COL          14.208                44.701                 0.000000
+   ANT          16.136                49.161                -0.099519
+   PIA          15.251                45.415                -0.168348
+   HAD          15.597                46.072                -0.192284
+   BEA          15.147                44.339                -0.218939
+   RUS          17.442                50.880                -0.229089
+   OCO          16.479                45.104                -0.409126
+   PER          17.419                46.951                -0.450795
+   SAI          17.122                45.492                -0.489253
+   ALB          19.061                44.376                -0.818081
+   LIN          22.019                50.721                -0.842675
+
+SQ Global Track Evolution (Seconds):
+Driver  sq_track_evolution_s
+   LEC                 0.601
+   VER                 0.601
+   PIA                 0.601
+   HAM                 0.601
+   ANT                 0.601
+
+=========================================
+   COMPOUND SPECIFIC METRICS - SQ 
+=========================================
+
+--- COMPOUND: SOFT ---
+Laps on SOFT:
+Driver  sq_laps_on_soft
+   PIA                2
+   LEC                1
+   HAM                1
+   ANT                1
+   RUS                1
+   NOR                1
+   GAS                1
+   HAD                1
+   COL                1
+   VER                1
+   LAW                0
+   LIN                0
+   BOT                0
+   ALO                0
+   PER                0
+   ALB                0
+   OCO                0
+   HUL                0
+   BOR                0
+   BEA                0
+   SAI                0
+   STR                0
+Avg Pace on SOFT:
+Driver  sq_compound_soft_avg  sq_compound_soft_laps  sq_compound_soft_best
+   LEC                   NaN                    NaN                    NaN
+   VER                   NaN                    NaN                    NaN
+   PIA                   NaN                    NaN                    NaN
+   HAM                   NaN                    NaN                    NaN
+   ANT                   NaN                    NaN                    NaN
+   RUS                   NaN                    NaN                    NaN
+   NOR                   NaN                    NaN                    NaN
+   GAS                   NaN                    NaN                    NaN
+   HAD                   NaN                    NaN                    NaN
+   SAI                   NaN                    NaN                    NaN
+   COL                   NaN                    NaN                    NaN
+   ALB                   NaN                    NaN                    NaN
+   BEA                   NaN                    NaN                    NaN
+   BOR                   NaN                    NaN                    NaN
+   HUL                   NaN                    NaN                    NaN
+   OCO                   NaN                    NaN                    NaN
+   LAW                   NaN                    NaN                    NaN
+   PER                   NaN                    NaN                    NaN
+   ALO                   NaN                    NaN                    NaN
+   BOT                   NaN                    NaN                    NaN
+   LIN                   NaN                    NaN                    NaN
+   STR                   NaN                    NaN                    NaN
+
+--- COMPOUND: MEDIUM ---
+Laps on MEDIUM:
+Driver  sq_laps_on_medium
+   LEC                 10
+   NOR                 10
+   COL                 10
+   SAI                 10
+   HAD                 10
+   GAS                 10
+   ALB                 10
+   HAM                 10
+   BOR                  9
+   HUL                  9
+   RUS                  8
+   ANT                  7
+   VER                  7
+   BEA                  6
+   LIN                  6
+   PIA                  5
+   ALO                  5
+   OCO                  4
+   LAW                  3
+   PER                  2
+   BOT                  2
+   STR                  2
+Avg Pace on MEDIUM:
+Driver  sq_compound_medium_avg  sq_compound_medium_laps  sq_compound_medium_best
+   LEC               88.192000                      3.0                   88.333
+   HAM               88.745667                      3.0                   88.841
+   RUS               89.004000                      3.0                   88.903
+   COL               89.704333                      3.0                   89.527
+   HAD               89.718333                      3.0                   89.750
+   GAS               89.743000                      3.0                   89.973
+   HUL               89.980667                      3.0                   90.019
+   BOR               90.155000                      4.0                   89.994
+   SAI               90.206667                      3.0                   90.224
+   ALB               90.602250                      4.0                   90.216
+   VER                     NaN                      NaN                      NaN
+   PIA                     NaN                      NaN                      NaN
+   ANT                     NaN                      NaN                      NaN
+   NOR                     NaN                      NaN                      NaN
+   BEA                     NaN                      NaN                      NaN
+   OCO                     NaN                      NaN                      NaN
+   LAW                     NaN                      NaN                      NaN
+   PER                     NaN                      NaN                      NaN
+   ALO                     NaN                      NaN                      NaN
+   BOT                     NaN                      NaN                      NaN
+   LIN                     NaN                      NaN                      NaN
+   STR                     NaN                      NaN                      NaN
+
+--- COMPOUND: HARD ---
+Laps on HARD:
+Driver  sq_laps_on_hard
+   LEC                0
+   VER                0
+   LIN                0
+   BOT                0
+   ALO                0
+   PER                0
+   LAW                0
+   OCO                0
+   HUL                0
+   BOR                0
+   BEA                0
+   ALB                0
+   COL                0
+   SAI                0
+   HAD                0
+   GAS                0
+   NOR                0
+   RUS                0
+   ANT                0
+   HAM                0
+   PIA                0
+   STR                0
+Avg Pace on HARD:
+Driver  sq_compound_hard_avg  sq_compound_hard_laps  sq_compound_hard_best
+   LEC                   NaN                    NaN                    NaN
+   VER                   NaN                    NaN                    NaN
+   PIA                   NaN                    NaN                    NaN
+   HAM                   NaN                    NaN                    NaN
+   ANT                   NaN                    NaN                    NaN
+   RUS                   NaN                    NaN                    NaN
+   NOR                   NaN                    NaN                    NaN
+   GAS                   NaN                    NaN                    NaN
+   HAD                   NaN                    NaN                    NaN
+   SAI                   NaN                    NaN                    NaN
+   COL                   NaN                    NaN                    NaN
+   ALB                   NaN                    NaN                    NaN
+   BEA                   NaN                    NaN                    NaN
+   BOR                   NaN                    NaN                    NaN
+   HUL                   NaN                    NaN                    NaN
+   OCO                   NaN                    NaN                    NaN
+   LAW                   NaN                    NaN                    NaN
+   PER                   NaN                    NaN                    NaN
+   ALO                   NaN                    NaN                    NaN
+   BOT                   NaN                    NaN                    NaN
+   LIN                   NaN                    NaN                    NaN
+   STR                   NaN                    NaN                    NaN
+
+=========================================
+   LONG RUN METRICS (>=5 Laps) - SQ 
+=========================================
+
+SQ Long Run Avg Pace (Overall):
+   Driver  sq_longrun_medium_avg_pace
+0     LEC                         NaN
+1     VER                         NaN
+2     PIA                         NaN
+3     HAM                         NaN
+4     ANT                         NaN
+5     RUS                         NaN
+6     NOR                         NaN
+7     GAS                         NaN
+8     HAD                         NaN
+9     SAI                         NaN
+10    COL                         NaN
+11    ALB                         NaN
+12    BEA                         NaN
+13    BOR                         NaN
+14    HUL                         NaN
+15    OCO                         NaN
+16    LAW                         NaN
+17    PER                         NaN
+18    ALO                         NaN
+19    BOT                         NaN
+20    LIN                         NaN
+21    STR                         NaN
+
+SQ Long Run Primary Compound:
+Driver  sq_longrun_compound  sq_longrun_stint_laps
+   LEC                  NaN                      0
+   VER                  NaN                      0
+   PIA                  NaN                      0
+   HAM                  NaN                      0
+   ANT                  NaN                      0
+   RUS                  NaN                      0
+   NOR                  NaN                      0
+   GAS                  NaN                      0
+   HAD                  NaN                      0
+   SAI                  NaN                      0
+   COL                  NaN                      0
+   ALB                  NaN                      0
+   BEA                  NaN                      0
+   BOR                  NaN                      0
+   HUL                  NaN                      0
+   OCO                  NaN                      0
+   LAW                  NaN                      0
+   PER                  NaN                      0
+   ALO                  NaN                      0
+   BOT                  NaN                      0
+   LIN                  NaN                      0
+   STR                  NaN                      0
+
+SQ Average Lift & Coast Time per Lap (Seconds):
+Driver  sq_avg_lift_coast_time_s
+   LEC                       NaN
+   VER                       NaN
+   PIA                       NaN
+   HAM                       NaN
+   ANT                       NaN
+   RUS                       NaN
+   NOR                       NaN
+   GAS                       NaN
+   HAD                       NaN
+   SAI                       NaN
+   COL                       NaN
+   ALB                       NaN
+   BEA                       NaN
+   BOR                       NaN
+   HUL                       NaN
+   OCO                       NaN
+   LAW                       NaN
+   PER                       NaN
+   ALO                       NaN
+   BOT                       NaN
+   LIN                       NaN
+   STR                       NaN
+
+SQ Speed Trap Variance (km/h) during Long Runs:
+Driver  sq_speed_trap_std_kmh  sq_speed_trap_mean_kmh
+   LEC                    NaN                     NaN
+   VER                    NaN                     NaN
+   PIA                    NaN                     NaN
+   HAM                    NaN                     NaN
+   ANT                    NaN                     NaN
+   RUS                    NaN                     NaN
+   NOR                    NaN                     NaN
+   GAS                    NaN                     NaN
+   HAD                    NaN                     NaN
+   SAI                    NaN                     NaN
+   COL                    NaN                     NaN
+   ALB                    NaN                     NaN
+   BEA                    NaN                     NaN
+   BOR                    NaN                     NaN
+   HUL                    NaN                     NaN
+   OCO                    NaN                     NaN
+   LAW                    NaN                     NaN
+   PER                    NaN                     NaN
+   ALO                    NaN                     NaN
+   BOT                    NaN                     NaN
+   LIN                    NaN                     NaN
+   STR                    NaN                     NaN
+
+--- LONG RUNS ON SOFT ---
+Degradation Rate:
+   Driver  sq_longrun_soft_deg_rate
+0     LEC                       NaN
+1     VER                       NaN
+2     PIA                       NaN
+3     HAM                       NaN
+4     ANT                       NaN
+5     RUS                       NaN
+6     NOR                       NaN
+7     GAS                       NaN
+8     HAD                       NaN
+9     SAI                       NaN
+10    COL                       NaN
+11    ALB                       NaN
+12    BEA                       NaN
+13    BOR                       NaN
+14    HUL                       NaN
+15    OCO                       NaN
+16    LAW                       NaN
+17    PER                       NaN
+18    ALO                       NaN
+19    BOT                       NaN
+20    LIN                       NaN
+21    STR                       NaN
+Consistency (Std Dev):
+Driver  sq_longrun_soft_consistency
+   LEC                          NaN
+   VER                          NaN
+   PIA                          NaN
+   HAM                          NaN
+   ANT                          NaN
+   RUS                          NaN
+   NOR                          NaN
+   GAS                          NaN
+   HAD                          NaN
+   SAI                          NaN
+   COL                          NaN
+   ALB                          NaN
+   BEA                          NaN
+   BOR                          NaN
+   HUL                          NaN
+   OCO                          NaN
+   LAW                          NaN
+   PER                          NaN
+   ALO                          NaN
+   BOT                          NaN
+   LIN                          NaN
+   STR                          NaN
+Fuel Corrected Base Pace:
+Driver  sq_soft_fuel_corrected_pace  sq_soft_est_start_fuel_kg
+   LEC                          NaN                        NaN
+   VER                          NaN                        NaN
+   PIA                          NaN                        NaN
+   HAM                          NaN                        NaN
+   ANT                          NaN                        NaN
+   RUS                          NaN                        NaN
+   NOR                          NaN                        NaN
+   GAS                          NaN                        NaN
+   HAD                          NaN                        NaN
+   SAI                          NaN                        NaN
+   COL                          NaN                        NaN
+   ALB                          NaN                        NaN
+   BEA                          NaN                        NaN
+   BOR                          NaN                        NaN
+   HUL                          NaN                        NaN
+   OCO                          NaN                        NaN
+   LAW                          NaN                        NaN
+   PER                          NaN                        NaN
+   ALO                          NaN                        NaN
+   BOT                          NaN                        NaN
+   LIN                          NaN                        NaN
+   STR                          NaN                        NaN
+Total Degradation Projection (18 laps):
+Driver  sq_longrun_soft_deg_rate  sq_longrun_soft_deg_total
+   LEC                       NaN                        NaN
+   VER                       NaN                        NaN
+   PIA                       NaN                        NaN
+   HAM                       NaN                        NaN
+   ANT                       NaN                        NaN
+   RUS                       NaN                        NaN
+   NOR                       NaN                        NaN
+   GAS                       NaN                        NaN
+   HAD                       NaN                        NaN
+   SAI                       NaN                        NaN
+   COL                       NaN                        NaN
+   ALB                       NaN                        NaN
+   BEA                       NaN                        NaN
+   BOR                       NaN                        NaN
+   HUL                       NaN                        NaN
+   OCO                       NaN                        NaN
+   LAW                       NaN                        NaN
+   PER                       NaN                        NaN
+   ALO                       NaN                        NaN
+   BOT                       NaN                        NaN
+   LIN                       NaN                        NaN
+   STR                       NaN                        NaN
+
+--- LONG RUNS ON MEDIUM ---
+Degradation Rate:
+   Driver  sq_longrun_medium_deg_rate
+0     LEC                         NaN
+1     VER                         NaN
+2     PIA                         NaN
+3     HAM                         NaN
+4     ANT                         NaN
+5     RUS                         NaN
+6     NOR                         NaN
+7     GAS                         NaN
+8     HAD                         NaN
+9     SAI                         NaN
+10    COL                         NaN
+11    ALB                         NaN
+12    BEA                         NaN
+13    BOR                         NaN
+14    HUL                         NaN
+15    OCO                         NaN
+16    LAW                         NaN
+17    PER                         NaN
+18    ALO                         NaN
+19    BOT                         NaN
+20    LIN                         NaN
+21    STR                         NaN
+Consistency (Std Dev):
+Driver  sq_longrun_medium_consistency
+   LEC                            NaN
+   VER                            NaN
+   PIA                            NaN
+   HAM                            NaN
+   ANT                            NaN
+   RUS                            NaN
+   NOR                            NaN
+   GAS                            NaN
+   HAD                            NaN
+   SAI                            NaN
+   COL                            NaN
+   ALB                            NaN
+   BEA                            NaN
+   BOR                            NaN
+   HUL                            NaN
+   OCO                            NaN
+   LAW                            NaN
+   PER                            NaN
+   ALO                            NaN
+   BOT                            NaN
+   LIN                            NaN
+   STR                            NaN
+Fuel Corrected Base Pace:
+Driver  sq_medium_fuel_corrected_pace  sq_medium_est_start_fuel_kg
+   LEC                            NaN                          NaN
+   VER                            NaN                          NaN
+   PIA                            NaN                          NaN
+   HAM                            NaN                          NaN
+   ANT                            NaN                          NaN
+   RUS                            NaN                          NaN
+   NOR                            NaN                          NaN
+   GAS                            NaN                          NaN
+   HAD                            NaN                          NaN
+   SAI                            NaN                          NaN
+   COL                            NaN                          NaN
+   ALB                            NaN                          NaN
+   BEA                            NaN                          NaN
+   BOR                            NaN                          NaN
+   HUL                            NaN                          NaN
+   OCO                            NaN                          NaN
+   LAW                            NaN                          NaN
+   PER                            NaN                          NaN
+   ALO                            NaN                          NaN
+   BOT                            NaN                          NaN
+   LIN                            NaN                          NaN
+   STR                            NaN                          NaN
+Total Degradation Projection (18 laps):
+Driver  sq_longrun_medium_deg_rate  sq_longrun_medium_deg_total
+   LEC                         NaN                          NaN
+   VER                         NaN                          NaN
+   PIA                         NaN                          NaN
+   HAM                         NaN                          NaN
+   ANT                         NaN                          NaN
+   RUS                         NaN                          NaN
+   NOR                         NaN                          NaN
+   GAS                         NaN                          NaN
+   HAD                         NaN                          NaN
+   SAI                         NaN                          NaN
+   COL                         NaN                          NaN
+   ALB                         NaN                          NaN
+   BEA                         NaN                          NaN
+   BOR                         NaN                          NaN
+   HUL                         NaN                          NaN
+   OCO                         NaN                          NaN
+   LAW                         NaN                          NaN
+   PER                         NaN                          NaN
+   ALO                         NaN                          NaN
+   BOT                         NaN                          NaN
+   LIN                         NaN                          NaN
+   STR                         NaN                          NaN
+
+--- LONG RUNS ON HARD ---
+Degradation Rate:
+   Driver  sq_longrun_hard_deg_rate
+0     LEC                       NaN
+1     VER                       NaN
+2     PIA                       NaN
+3     HAM                       NaN
+4     ANT                       NaN
+5     RUS                       NaN
+6     NOR                       NaN
+7     GAS                       NaN
+8     HAD                       NaN
+9     SAI                       NaN
+10    COL                       NaN
+11    ALB                       NaN
+12    BEA                       NaN
+13    BOR                       NaN
+14    HUL                       NaN
+15    OCO                       NaN
+16    LAW                       NaN
+17    PER                       NaN
+18    ALO                       NaN
+19    BOT                       NaN
+20    LIN                       NaN
+21    STR                       NaN
+Consistency (Std Dev):
+Driver  sq_longrun_hard_consistency
+   LEC                          NaN
+   VER                          NaN
+   PIA                          NaN
+   HAM                          NaN
+   ANT                          NaN
+   RUS                          NaN
+   NOR                          NaN
+   GAS                          NaN
+   HAD                          NaN
+   SAI                          NaN
+   COL                          NaN
+   ALB                          NaN
+   BEA                          NaN
+   BOR                          NaN
+   HUL                          NaN
+   OCO                          NaN
+   LAW                          NaN
+   PER                          NaN
+   ALO                          NaN
+   BOT                          NaN
+   LIN                          NaN
+   STR                          NaN
+Fuel Corrected Base Pace:
+Driver  sq_hard_fuel_corrected_pace  sq_hard_est_start_fuel_kg
+   LEC                          NaN                        NaN
+   VER                          NaN                        NaN
+   PIA                          NaN                        NaN
+   HAM                          NaN                        NaN
+   ANT                          NaN                        NaN
+   RUS                          NaN                        NaN
+   NOR                          NaN                        NaN
+   GAS                          NaN                        NaN
+   HAD                          NaN                        NaN
+   SAI                          NaN                        NaN
+   COL                          NaN                        NaN
+   ALB                          NaN                        NaN
+   BEA                          NaN                        NaN
+   BOR                          NaN                        NaN
+   HUL                          NaN                        NaN
+   OCO                          NaN                        NaN
+   LAW                          NaN                        NaN
+   PER                          NaN                        NaN
+   ALO                          NaN                        NaN
+   BOT                          NaN                        NaN
+   LIN                          NaN                        NaN
+   STR                          NaN                        NaN
+Total Degradation Projection (18 laps):
+Driver  sq_longrun_hard_deg_rate  sq_longrun_hard_deg_total
+   LEC                       NaN                        NaN
+   VER                       NaN                        NaN
+   PIA                       NaN                        NaN
+   HAM                       NaN                        NaN
+   ANT                       NaN                        NaN
+   RUS                       NaN                        NaN
+   NOR                       NaN                        NaN
+   GAS                       NaN                        NaN
+   HAD                       NaN                        NaN
+   SAI                       NaN                        NaN
+   COL                       NaN                        NaN
+   ALB                       NaN                        NaN
+   BEA                       NaN                        NaN
+   BOR                       NaN                        NaN
+   HUL                       NaN                        NaN
+   OCO                       NaN                        NaN
+   LAW                       NaN                        NaN
+   PER                       NaN                        NaN
+   ALO                       NaN                        NaN
+   BOT                       NaN                        NaN
+   LIN                       NaN                        NaN
+   STR                       NaN                        NaN

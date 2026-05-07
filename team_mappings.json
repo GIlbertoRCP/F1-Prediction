@@ -1,0 +1,28 @@
+{
+  "PU_MAP": {
+    "Mercedes": 5,
+    "McLaren": 5,
+    "Williams": 5,
+    "Alpine": 5,
+    "Ferrari": 3.5,
+    "Haas": 4,
+    "Cadillac": 2,
+    "Aston Martin": 1,
+    "Red Bull Racing": 3,
+    "Racing Bulls": 3,
+    "Audi": 2
+  },
+  "WORKS_MAP": {
+    "Mercedes": 1,
+    "Ferrari": 1,
+    "Aston Martin": 1,
+    "Red Bull Racing": 1,
+    "Audi": 1,
+    "McLaren": 0,
+    "Williams": 0,
+    "Alpine": 0,
+    "Haas": 0,
+    "Cadillac": 0,
+    "Racing Bulls": 0
+  }
+}
