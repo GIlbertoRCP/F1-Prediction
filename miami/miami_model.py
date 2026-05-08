@@ -20,7 +20,7 @@ _spec.loader.exec_module(f1_fe)
 
 import fastf1
 
-fastf1.Cache.enable_cache("./f1_cache")
+fastf1.Cache.enable_cache("./.f1_cache")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. CONFIGURATION
@@ -59,6 +59,76 @@ MIAMI_CIRCUIT_PROFILE = {
     "street_circuit": 0,  # permanent circuit
     "traction_zones": 0.60,  # slow-speed traction sensitivity
 }
+
+FEATURE_COLS = [
+        # ── FP1 (all weekends) ────────────────────────────────────────────────
+        "fp1_best_lap_delta",
+        "fp1_clean_laps_count",
+        "fp1_sector1_delta",
+        "fp1_sector2_delta",
+        "fp1_sector3_delta",
+        "fp1_max_speed_trap",
+        "fp1_speed_trap_delta",
+        "fp1_compound_medium_avg",
+        "fp1_laps_on_hard",
+        # ── FP2 long run (standard weekends → NaN in sprint races) ───────────
+        "fp2_best_lap_delta",
+        "fp2_clean_laps_count",
+        "fp2_sector1_delta",
+        "fp2_sector2_delta",
+        "fp2_sector3_delta",
+        "fp2_max_speed_trap",
+        "fp2_longrun_medium_avg_pace",
+        "fp2_longrun_medium_deg_rate",
+        "fp2_longrun_medium_deg_total",
+        "fp2_longrun_medium_consistency",
+        "fp2_longrun_hard_avg_pace",
+        "fp2_longrun_hard_deg_rate",
+        "fp2_medium_fuel_corrected_pace",
+        "fp2_pu_asymmetry_delta",  # 2026-only: NaN for historical
+        "fp2_speed_trap_std_kmh",  # 2026-only: ERS variance
+        "fp2_avg_lift_coast_time_s",  # 2026-only: battery starvation proxy
+        "fp2_ers_efficiency_proxy",  # 2026-only: deploy vs recover ratio
+        # ── FP3 (standard weekends → NaN in sprint races) ─────────────────────
+        "fp3_best_lap_delta",
+        "fp3_sector1_delta",
+        "fp3_sector2_delta",
+        "fp3_sector3_delta",
+        "fp3_soft_best_lap_delta",
+        "fp3_vs_fp2_soft_improvement",
+        "fp3_s1_delta_vs_fp2",
+        "fp3_s2_delta_vs_fp2",
+        "fp3_s3_delta_vs_fp2",
+        "fp3_is_true_qualy_sim",
+        "fp3_track_evolution_s",
+        # ── Sprint sessions (sprint weekends → NaN for standard) ──────────────
+        "sq_best_lap_delta",
+        "sq_sector1_delta",
+        "sq_sector2_delta",
+        "sq_sector3_delta",
+        "sq_speed_trap_delta",
+        "s_finish_position",
+        "s_positions_gained",
+        "s_classified",
+        # ── Qualifying (always available) ─────────────────────────────────────
+        "grid_position",
+        "is_front_row",
+        "started_top_10",
+        "q3_delta_to_pole",
+        "best_q_delta_to_pole",
+        "q3_participation",
+        "best_q_vs_fp3_improvement",
+        "quali_best_relative_sector",  # categorical → one-hot encoded
+        # ── Team / Power Unit (strongest structural feature in 2026) ──────────
+        "pu_score",
+        "is_works",
+        "pu_is_works",  # interaction: works advantage × PU level
+        # ── New 2026 specific features ─────────────────────────────────────────
+        "has_upgrade_this_weekend",
+        "dnf_rate_2026",
+        "ers_clipping_penalty_index",
+    ]
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 2. FEATURE EXTRACTION HELPERS
