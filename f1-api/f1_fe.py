@@ -2,7 +2,7 @@ import fastf1
 import pandas as pd
 import numpy as np
 
-fastf1.Cache.enable_cache('./f1_cache')
+fastf1.Cache.enable_cache('./.f1_cache')
 
 # CIRCUITO
 def get_best_lap_delta(year: int, gp: str, session_type: str) -> pd.DataFrame:
