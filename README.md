@@ -12,8 +12,11 @@ f1/
 │   └── f1_fe.py              # Feature Engineering Library (core)
 ├── miami/
 │   └── miami_model.py        # Miami 2026 Race Prediction Model
-├── team_mappings.json         # PU scores & works team flags
-├── f1_cache/                  # FastF1 local telemetry cache
+├── team_mappings.json         # Constructor → PU score & works team flags
+├── f1_cache/                  # FastF1 local telemetry cache (auto-populated)
+├── pyproject.toml             # Project metadata & dependency spec (PEP 621)
+├── uv.lock                    # Locked dependency graph (uv)
+├── .python-version            # Pinned interpreter: 3.13
 └── README.md
 ```
 
@@ -562,36 +565,74 @@ Phase 4: Predict Miami 2026
 
 ---
 
-## 🛠️ Dependencies
+## 🛠️ Environment & Dependencies
 
-```toml
-[dependencies]
-fastf1 = ">=3.4"
-pandas = ">=2.0"
-numpy = ">=1.26"
-xgboost = ">=2.0"
-```
+This project is managed with [**uv**](https://docs.astral.sh/uv/) — a fast, PEP 621-compliant Python package and project manager.
+
+### Runtime Requirements
+
+| Package | Constraint | Role |
+|---|---|---|
+| Python | `>=3.13` | Interpreter (pinned via `.python-version`) |
+| `fastf1` | `>=3.8.3` | F1 telemetry, timing & session data via the Ergast/OpenF1 APIs |
+| `xgboost` | `>=3.2.0` | `XGBRanker` pairwise ranking model |
+| `lightgbm` | `>=4.6.0` | Gradient-boosted baseline / ablation experiments |
+| `scikit-learn` | `>=1.8.0` | Preprocessing, cross-validation utilities |
+| `scipy` | `>=1.17.1` | `np.polyfit` wrappers, statistical helpers |
+
+Full transitive dependency graph is pinned in `uv.lock`.
 
 ---
 
-## 🚀 Usage
+## 🚀 Setup & Usage
+
+### 1. Install uv
 
 ```bash
-# From the project root
-cd miami
-python miami_model.py
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-FastF1 cache is populated automatically on first run. Subsequent runs are significantly faster.
+### 2. Create virtual environment & sync dependencies
+
+```bash
+# From the project root — reads pyproject.toml + uv.lock
+uv sync
+```
+
+This creates `.venv/` with Python 3.13 and installs all locked dependencies. No manual `pip install` required.
+
+### 3. Run the Miami 2026 prediction model
+
+```bash
+uv run python miami/miami_model.py
+```
+
+> **FastF1 cache**: Session data is fetched from the OpenF1/Ergast APIs on first run and stored in `f1_cache/`. Subsequent runs load from disk — typically **5-10× faster**.
+
+### 4. Adding dependencies
+
+```bash
+# Add a package and update uv.lock
+uv add <package>
+
+# Update an existing dependency to its latest compatible version
+uv lock --upgrade-package <package>
+```
+
+### 5. Running one-off scripts without full sync
+
+```bash
+uv run python get_2026_teams.py
+```
 
 ---
 
 ## 📝 Notes on 2026 ERS Features
 
-The 2026 regulations introduced a radically different hybrid system with **higher electrical power deployment**. Three new features were added specifically for 2026:
+The 2026 regulations introduced a radically different hybrid system with **higher electrical power deployment** (~350 kW electrical vs ~120 kW in 2025). Three new features were added specifically for 2026:
 
 1. **`fp2_avg_lift_coast_time_s`** — measures battery starvation (L&C events at racing speed)
 2. **`fp2_ers_efficiency_proxy`** — measures deploy/recover balance on the fastest lap
 3. **`fp2_speed_trap_std_kmh`** — measures ERS consistency across long run laps
 
-These features will be `NaN` for all pre-2026 historical rows. XGBoost handles this natively via its Sparsity-Aware Split Finding algorithm — it learns separate split directions for missing values and effectively treats historical rows as having "no 2026 ERS signal."
+These features will be `NaN` for all pre-2026 historical rows. XGBoost handles this natively via its **Sparsity-Aware Split Finding** algorithm — it learns separate split directions for missing values and effectively treats historical rows as having "no 2026 ERS signal." This means the model can jointly train on 2024–2025 data (where these columns are always absent) and 2026 data without imputation, avoiding any information leakage.
