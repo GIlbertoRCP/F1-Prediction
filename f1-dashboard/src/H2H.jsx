@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from 'recharts';
 
 export default function H2H({ year, gp }) {
   const [h2hData, setH2hData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [driver1, setDriver1] = useState('NOR');
   const [driver2, setDriver2] = useState('VER'); // Or any default
+  const [activeTrace, setActiveTrace] = useState('speed');
   
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/h2h/${year}/${gp}`)
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    fetch(`${apiUrl}/api/h2h/${year}/${gp}`)
       .then(res => res.json())
       .then(data => {
         if (!data.detail && data.h2h_data) {
@@ -130,6 +133,62 @@ export default function H2H({ year, gp }) {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* TELEMETRY OVERLAY CHART */}
+      <div className="bg-zinc-950 rounded-lg p-6 border border-zinc-800 mt-6">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="font-mono text-zinc-300 font-bold uppercase tracking-widest text-sm">Fastest Lap Telemetry</h3>
+          <div className="flex bg-zinc-900 border border-zinc-700 rounded-lg p-1 font-mono text-xs">
+            {['speed', 'throttle', 'brake', 'gear'].map(trace => (
+              <button
+                key={trace}
+                onClick={() => setActiveTrace(trace)}
+                className={`px-3 py-1 rounded transition-colors ${activeTrace === trace ? 'bg-blue-600 text-white' : 'text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
+              >
+                {trace.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="h-[300px] w-full">
+          {d1.telemetry && d2.telemetry ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <ScatterChart margin={{ top: 10, right: 10, bottom: 20, left: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
+                <XAxis 
+                  type="number" 
+                  dataKey="distance" 
+                  name="Distance" 
+                  stroke="#a1a1aa" 
+                  tickFormatter={(val) => `${val}m`}
+                  domain={['dataMin', 'dataMax']}
+                />
+                <YAxis 
+                  type="number" 
+                  dataKey={activeTrace} 
+                  name={activeTrace.toUpperCase()} 
+                  stroke="#a1a1aa"
+                  domain={['auto', 'auto']}
+                />
+                <RechartsTooltip 
+                  cursor={{ strokeDasharray: '3 3', stroke: '#3f3f46' }}
+                  contentStyle={{ backgroundColor: '#09090b', borderColor: '#3f3f46', fontFamily: 'monospace' }}
+                  itemStyle={{ color: '#fff' }}
+                />
+                <Legend iconType="plainline" wrapperStyle={{ fontFamily: 'monospace', fontSize: '12px' }} />
+                
+                <Scatter name={driver1} data={d1.telemetry} line={{ strokeWidth: 2 }} shape={<></>} fill="#3b82f6" />
+                <Scatter name={driver2} data={d2.telemetry} line={{ strokeWidth: 2 }} shape={<></>} fill="#eab308" />
+              </ScatterChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="h-full w-full flex items-center justify-center font-mono text-zinc-500 bg-zinc-900/50 rounded border border-zinc-800 border-dashed">
+              TELEMETRY TRACE UNAVAILABLE
+            </div>
+          )}
         </div>
       </div>
     </div>

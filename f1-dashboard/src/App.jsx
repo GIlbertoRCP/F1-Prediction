@@ -12,7 +12,8 @@ function App() {
 
   useEffect(() => {
     // Fetch from your FastAPI backend
-    fetch('http://127.0.0.1:8000/api/race/2026/Miami')
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    fetch(`${apiUrl}/api/race/2026/Miami`)
       .then(res => res.json())
       .then(json => {
         if (json.detail) {

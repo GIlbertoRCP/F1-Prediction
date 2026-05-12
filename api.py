@@ -210,6 +210,20 @@ def get_h2h_data(year: int, gp: str):
                 coast_mock = round(0.5 + (len(driver) * 0.12), 3)
                 deg_mock = round(0.002 + (len(driver) * 0.001), 3)
 
+                # Extract downsampled telemetry trace
+                telemetry_trace = []
+                if not tel.empty:
+                    # Downsample to every 8th point to keep payload small but retain curve shape
+                    tel_sampled = tel.iloc[::8]
+                    for _, row in tel_sampled.iterrows():
+                        telemetry_trace.append({
+                            "distance": float(row["Distance"]) if pd.notnull(row.get("Distance")) else 0,
+                            "speed": float(row["Speed"]) if pd.notnull(row.get("Speed")) else 0,
+                            "throttle": float(row["Throttle"]) if pd.notnull(row.get("Throttle")) else 0,
+                            "brake": float(row["Brake"]) if pd.notnull(row.get("Brake")) else 0,
+                            "gear": int(row["nGear"]) if pd.notnull(row.get("nGear")) else 0,
+                        })
+
                 h2h_data[driver] = {
                     "lap_time": lap_time,
                     "s1_time": s1_time,
@@ -218,7 +232,8 @@ def get_h2h_data(year: int, gp: str):
                     "s1_s3_ratio": s1_time / s3_time if s3_time > 0 else 0,
                     "ers_efficiency": ers_mock,
                     "lift_and_coast": coast_mock,
-                    "stint_deg_rate": deg_mock
+                    "stint_deg_rate": deg_mock,
+                    "telemetry": telemetry_trace
                 }
             except Exception as e:
                 print(f"Skipping {driver} for H2H: {e}")

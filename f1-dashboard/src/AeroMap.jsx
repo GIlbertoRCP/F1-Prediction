@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from 'recharts';
 
 // Official team colors for the scatter dots
 const teamColors = {
@@ -47,7 +47,8 @@ export default function AeroMap({ year, gp }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/aero/${year}/${gp}`)
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    fetch(`${apiUrl}/api/aero/${year}/${gp}`)
       .then(res => res.json())
       .then(data => {
         // FIX: Check if the backend sent an error message
@@ -144,6 +145,7 @@ export default function AeroMap({ year, gp }) {
               {validData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={teamColors[entry.team] || "#ffffff"} stroke="#000" strokeWidth={1} />
               ))}
+              <LabelList dataKey="driver" position="top" fill="#a1a1aa" fontSize={11} fontWeight="bold" />
             </Scatter>
           </ScatterChart>
         </ResponsiveContainer>

@@ -3,11 +3,14 @@ name = "f1"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "fastf1>=3.8.3",
     "lightgbm>=4.6.0",
     "scikit-learn>=1.8.0",
     "scipy>=1.17.1",
     "xgboost>=3.2.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "pandas>=2.2.0",
 ]
