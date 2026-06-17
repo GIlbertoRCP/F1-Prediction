@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"Roboto Mono"', 'monospace'], // Crucial for F1 timing screens
+        sans: ['"Outfit"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        orbitron: ['"Orbitron"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"Roboto Mono"', 'monospace'],
       }
     },
   },

@@ -1,67 +1,77 @@
 import { useState, useEffect } from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from 'recharts';
+import TrackMap from './TrackMap';
 
 export default function H2H({ year, gp }) {
   const [h2hData, setH2hData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [driver1, setDriver1] = useState('NOR');
-  const [driver2, setDriver2] = useState('VER'); // Or any default
+  const [driver1, setDriver1] = useState('');
+  const [driver2, setDriver2] = useState('');
   const [activeTrace, setActiveTrace] = useState('speed');
   
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-    fetch(`${apiUrl}/api/h2h/${year}/${gp}`)
+    setLoading(true);
+    fetch(`${apiUrl}/api/h2h/${year}/${encodeURIComponent(gp)}`)
       .then(res => res.json())
       .then(data => {
-        if (!data.detail && data.h2h_data) {
+        if (!data.detail && data.h2h_data && Object.keys(data.h2h_data).length > 0) {
           setH2hData(data.h2h_data);
           const drivers = Object.keys(data.h2h_data);
           if (drivers.length >= 2) {
-            setDriver1('NOR');
-            setDriver2('ANT');
+            setDriver1(drivers[0]);
+            setDriver2(drivers[1]);
+          } else if (drivers.length === 1) {
+            setDriver1(drivers[0]);
+            setDriver2(drivers[0]);
           }
+        } else {
+          setH2hData(null);
         }
         setLoading(false);
       })
       .catch(err => {
         console.error("Failed to fetch H2H:", err);
+        setH2hData(null);
         setLoading(false);
       });
   }, [year, gp]);
 
   if (loading) {
     return (
-      <div className="h-64 mt-8 flex items-center justify-center font-mono text-zinc-500 animate-pulse bg-zinc-900 border border-zinc-800 rounded-lg">
+      <div className="h-72 mt-8 flex flex-col items-center justify-center font-mono text-zinc-500 animate-pulse bg-zinc-900/40 border border-zinc-800/80 rounded-lg">
+        <div className="h-8 w-8 border-2 border-t-yellow-500 border-zinc-800 rounded-full animate-spin mb-4" />
         ANALYZING TELEMETRY DELTAS...
       </div>
     );
   }
 
-  if (!h2hData || !h2hData[driver1] || !h2hData[driver2]) {
+  // Safe checks for empty datasets
+  if (!h2hData || Object.keys(h2hData).length === 0) {
     return (
-      <div className="h-64 mt-8 flex items-center justify-center font-mono text-red-500 bg-red-950/20 border border-red-900 rounded-lg">
-        H2H DATA UNAVAILABLE
+      <div className="h-64 mt-8 flex items-center justify-center font-mono text-yellow-500 bg-yellow-950/10 border border-yellow-900/30 rounded-lg">
+        ⚠️ TELEMETRY DELTAS UNAVAILABLE FOR THIS GRAND PRIX
       </div>
     );
   }
 
-  const d1 = h2hData[driver1];
-  const d2 = h2hData[driver2];
+  const activeDriver1 = h2hData[driver1] ? driver1 : Object.keys(h2hData)[0];
+  const activeDriver2 = h2hData[driver2] ? driver2 : (Object.keys(h2hData)[1] || Object.keys(h2hData)[0]);
+
+  const d1 = h2hData[activeDriver1];
+  const d2 = h2hData[activeDriver2];
 
   const compare = (val1, val2, lowerIsBetter = false) => {
     const diff = val1 - val2;
-    // Format diff to string with sign
     const diffStr = diff > 0 ? `+${diff.toFixed(3)}` : diff.toFixed(3);
     
     let isBetter = false;
     if (diff < 0) isBetter = lowerIsBetter;
     if (diff > 0) isBetter = !lowerIsBetter;
     
-    // In the mockup, negative deltas in lap time are green, positive are red.
-    // However, top speed positive deltas are green.
-    let color = 'text-zinc-400';
+    let color = 'text-zinc-500 bg-zinc-950/40';
     if (diff !== 0) {
-        color = isBetter ? 'text-green-400' : 'text-red-400';
+        color = isBetter ? 'text-emerald-400 bg-emerald-950/25 border-emerald-900/30' : 'text-rose-400 bg-rose-950/25 border-rose-900/30';
     }
 
     return { diffStr, color };
@@ -79,118 +89,136 @@ export default function H2H({ year, gp }) {
   ];
 
   return (
-    <div className="bg-zinc-900 rounded-lg border border-zinc-800 p-6 shadow-2xl mt-8">
-      <h2 className="text-xl font-bold mb-6 uppercase tracking-wide border-l-4 border-yellow-500 pl-3 flex items-center gap-2">
-        <span className="text-yellow-500">⚡</span> H2H Delta Analysis
+    <div className="bg-zinc-900/50 backdrop-blur-md rounded-lg border border-zinc-800 p-6 shadow-2xl mt-8">
+      {/* SECTION HEADER */}
+      <h2 className="font-orbitron text-lg font-black mb-6 uppercase tracking-wide border-l-4 border-yellow-500 pl-3 flex items-center gap-2 text-white">
+        <span className="text-yellow-500">⚡</span> Driver Telemetry Overlay
       </h2>
       
-      <div className="bg-zinc-950 rounded-lg p-6 border border-zinc-800">
-        {/* DRIVER SELECTION ROW */}
-        <div className="flex justify-between items-center mb-8 pb-6 border-b border-zinc-800">
-          <select 
-            value={driver1} 
-            onChange={(e) => setDriver1(e.target.value)}
-            className="bg-zinc-800 text-white border border-zinc-700 rounded px-4 py-2 font-mono font-bold text-lg w-32 focus:outline-none focus:border-zinc-500"
-          >
-            {Object.keys(h2hData).map(d => <option key={d} value={d}>{d}</option>)}
-          </select>
-          
-          <div className="text-zinc-600 font-bold font-mono tracking-widest text-sm">VS</div>
-          
-          <select 
-            value={driver2} 
-            onChange={(e) => setDriver2(e.target.value)}
-            className="bg-zinc-800 text-white border border-zinc-700 rounded px-4 py-2 font-mono font-bold text-lg w-32 focus:outline-none focus:border-zinc-500"
-          >
-            {Object.keys(h2hData).map(d => <option key={d} value={d}>{d}</option>)}
-          </select>
-        </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* METRICS COMPARATOR PANEL (5 COLS) */}
+        <div className="lg:col-span-5 bg-zinc-950/80 rounded-lg p-5 border border-zinc-800 flex flex-col justify-between">
+          {/* DRIVER SELECTION ROW */}
+          <div className="flex justify-between items-center mb-6 pb-4 border-b border-zinc-800/80">
+            <select 
+              value={activeDriver1} 
+              onChange={(e) => setDriver1(e.target.value)}
+              className="bg-zinc-900 text-blue-400 border border-zinc-800 rounded px-3 py-1.5 font-orbitron font-black text-base w-28 focus:outline-none focus:border-blue-500 cursor-pointer hover:bg-zinc-800 transition-colors"
+            >
+              {Object.keys(h2hData).map(d => <option key={d} value={d}>{d}</option>)}
+            </select>
+            
+            <div className="text-zinc-500 font-bold font-mono tracking-widest text-xs uppercase px-4 py-1 bg-zinc-900 rounded-full border border-zinc-800">VS</div>
+            
+            <select 
+              value={activeDriver2} 
+              onChange={(e) => setDriver2(e.target.value)}
+              className="bg-zinc-900 text-yellow-500 border border-zinc-800 rounded px-3 py-1.5 font-orbitron font-black text-base w-28 focus:outline-none focus:border-yellow-500 cursor-pointer hover:bg-zinc-800 transition-colors"
+            >
+              {Object.keys(h2hData).map(d => <option key={d} value={d}>{d}</option>)}
+            </select>
+          </div>
 
-        {/* METRICS ROWS */}
-        <div className="flex flex-col gap-6">
-          {metrics.map(m => {
-            const val1 = d1[m.key];
-            const val2 = d2[m.key];
-            const { diffStr, color } = compare(val1, val2, m.lowerIsBetter);
-            const finalDiffStr = m.diffFormat ? m.diffFormat(diffStr) : diffStr;
+          {/* METRICS ROWS */}
+          <div className="flex flex-col gap-4 flex-grow">
+            {metrics.map(m => {
+              const val1 = d1[m.key] || 0;
+              const val2 = d2[m.key] || 0;
+              const { diffStr, color } = compare(val1, val2, m.lowerIsBetter);
+              const finalDiffStr = m.diffFormat ? m.diffFormat(diffStr) : diffStr;
 
-            return (
-              <div key={m.key} className="flex justify-between items-center pb-6 border-b border-zinc-800/50 last:border-0 last:pb-0">
-                <div className="w-1/3 text-left font-mono text-zinc-300">
-                  {m.format(val1)}
+              return (
+                <div key={m.key} className="flex justify-between items-center py-2.5 border-b border-zinc-900/40 last:border-0">
+                  {/* Driver 1 value */}
+                  <div className="w-1/4 text-left font-mono font-bold text-sm text-zinc-300">
+                    {m.format(val1)}
+                  </div>
+                  
+                  {/* Metric Label and Badge */}
+                  <div className="w-2/4 flex flex-col items-center justify-center">
+                    <span className="text-[9px] font-mono text-zinc-500 font-bold tracking-wider uppercase mb-1">{m.label}</span>
+                    <span className={`font-mono text-[9px] font-black px-2 py-0.5 rounded border ${color}`}>
+                      {finalDiffStr}
+                    </span>
+                  </div>
+                  
+                  {/* Driver 2 value */}
+                  <div className="w-1/4 text-right font-mono font-bold text-sm text-zinc-300">
+                    {m.format(val2)}
+                  </div>
                 </div>
-                
-                <div className="w-1/3 flex flex-col items-center justify-center">
-                  <span className="text-xs font-mono text-zinc-500 mb-2">{m.label}</span>
-                  <span className={`font-mono text-xs font-bold px-2 py-1 rounded bg-zinc-900 border border-zinc-800 ${color}`}>
-                    {finalDiffStr}
-                  </span>
-                </div>
-                
-                <div className="w-1/3 text-right font-mono text-zinc-300">
-                  {m.format(val2)}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* TELEMETRY OVERLAY CHART */}
-      <div className="bg-zinc-950 rounded-lg p-6 border border-zinc-800 mt-6">
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="font-mono text-zinc-300 font-bold uppercase tracking-widest text-sm">Fastest Lap Telemetry</h3>
-          <div className="flex bg-zinc-900 border border-zinc-700 rounded-lg p-1 font-mono text-xs">
-            {['speed', 'throttle', 'brake', 'gear'].map(trace => (
-              <button
-                key={trace}
-                onClick={() => setActiveTrace(trace)}
-                className={`px-3 py-1 rounded transition-colors ${activeTrace === trace ? 'bg-blue-600 text-white' : 'text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
-              >
-                {trace.toUpperCase()}
-              </button>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        <div className="h-[300px] w-full">
-          {d1.telemetry && d2.telemetry ? (
-            <ResponsiveContainer width="100%" height="100%">
-              <ScatterChart margin={{ top: 10, right: 10, bottom: 20, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
-                <XAxis 
-                  type="number" 
-                  dataKey="distance" 
-                  name="Distance" 
-                  stroke="#a1a1aa" 
-                  tickFormatter={(val) => `${val}m`}
-                  domain={['dataMin', 'dataMax']}
-                />
-                <YAxis 
-                  type="number" 
-                  dataKey={activeTrace} 
-                  name={activeTrace.toUpperCase()} 
-                  stroke="#a1a1aa"
-                  domain={['auto', 'auto']}
-                />
-                <RechartsTooltip 
-                  cursor={{ strokeDasharray: '3 3', stroke: '#3f3f46' }}
-                  contentStyle={{ backgroundColor: '#09090b', borderColor: '#3f3f46', fontFamily: 'monospace' }}
-                  itemStyle={{ color: '#fff' }}
-                />
-                <Legend iconType="plainline" wrapperStyle={{ fontFamily: 'monospace', fontSize: '12px' }} />
-                
-                <Scatter name={driver1} data={d1.telemetry} line={{ strokeWidth: 2 }} shape={<></>} fill="#3b82f6" />
-                <Scatter name={driver2} data={d2.telemetry} line={{ strokeWidth: 2 }} shape={<></>} fill="#eab308" />
-              </ScatterChart>
-            </ResponsiveContainer>
-          ) : (
-            <div className="h-full w-full flex items-center justify-center font-mono text-zinc-500 bg-zinc-900/50 rounded border border-zinc-800 border-dashed">
-              TELEMETRY TRACE UNAVAILABLE
+        {/* CHART TRACE PANEL (7 COLS) */}
+        <div className="lg:col-span-7 bg-zinc-950/80 rounded-lg p-5 border border-zinc-800 flex flex-col">
+          {/* TRACE SWITCHER */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-zinc-800/80">
+            <h3 className="font-mono text-zinc-400 font-bold uppercase tracking-wider text-xs">Qualifying Telemetry Overlay</h3>
+            <div className="flex bg-zinc-900 border border-zinc-800 rounded-lg p-0.5 font-mono text-[10px] font-bold">
+              {['speed', 'throttle', 'brake', 'gear'].map(trace => (
+                <button
+                  key={trace}
+                  onClick={() => setActiveTrace(trace)}
+                  className={`px-3 py-1.5 rounded transition-all ${activeTrace === trace ? 'bg-blue-600 text-white shadow-md font-black' : 'text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
+                >
+                  {trace.toUpperCase()}
+                </button>
+              ))}
             </div>
-          )}
+          </div>
+
+          {/* TELEMETRY CHART */}
+          <div className="h-[280px] w-full mt-2">
+            {d1.telemetry && d2.telemetry && d1.telemetry.length > 0 && d2.telemetry.length > 0 ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <ScatterChart margin={{ top: 10, right: 10, bottom: 20, left: -20 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#1f1f23" vertical={false} />
+                  <XAxis 
+                    type="number" 
+                    dataKey="distance" 
+                    name="Distance" 
+                    stroke="#52525b" 
+                    tickFormatter={(val) => `${val}m`}
+                    domain={['dataMin', 'dataMax']}
+                    tick={{ fontSize: 9, fontFamily: 'monospace' }}
+                  />
+                  <YAxis 
+                    type="number" 
+                    dataKey={activeTrace} 
+                    name={activeTrace.toUpperCase()} 
+                    stroke="#52525b"
+                    domain={activeTrace === 'throttle' ? [0, 100] : activeTrace === 'brake' ? [0, 1] : ['auto', 'auto']}
+                    tick={{ fontSize: 9, fontFamily: 'monospace' }}
+                  />
+                  <RechartsTooltip 
+                    cursor={{ strokeDasharray: '3 3', stroke: '#3f3f46' }}
+                    contentStyle={{ backgroundColor: '#09090b', borderColor: '#27272a', fontFamily: 'monospace', borderRadius: '6px', fontSize: '11px' }}
+                    itemStyle={{ color: '#fff' }}
+                  />
+                  <Legend iconType="circle" wrapperStyle={{ fontFamily: 'monospace', fontSize: '10px', marginTop: '10px' }} />
+                  
+                  <Scatter name={activeDriver1} data={d1.telemetry} line={{ strokeWidth: 1.5, stroke: '#3b82f6' }} shape={<></>} fill="#3b82f6" />
+                  <Scatter name={activeDriver2} data={d2.telemetry} line={{ strokeWidth: 1.5, stroke: '#eab308' }} shape={<></>} fill="#eab308" />
+                </ScatterChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-full w-full flex items-center justify-center font-mono text-zinc-600 bg-zinc-900/10 rounded border border-zinc-800/80 border-dashed">
+                ⚠️ TELEMETRY OVERLAY DATA RETRIEVAL FAILURE
+              </div>
+            )}
+          </div>
         </div>
       </div>
+      
+      <TrackMap 
+        driver1={activeDriver1}
+        driver2={activeDriver2}
+        d1Telemetry={d1?.telemetry || []}
+        d2Telemetry={d2?.telemetry || []}
+      />
     </div>
   );
 }

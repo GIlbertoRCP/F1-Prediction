@@ -1,0 +1,202 @@
+{
+  "Australian Grand Prix": {
+    "high_speed_ratio": 0.60,
+    "overtaking_difficulty": 0.55,
+    "brake_intensity": 0.60,
+    "pu_sensitivity": 0.70,
+    "street_circuit": 1,
+    "traction_zones": 0.60
+  },
+  "Chinese Grand Prix": {
+    "high_speed_ratio": 0.55,
+    "overtaking_difficulty": 0.50,
+    "brake_intensity": 0.65,
+    "pu_sensitivity": 0.75,
+    "street_circuit": 0,
+    "traction_zones": 0.65
+  },
+  "Japanese Grand Prix": {
+    "high_speed_ratio": 0.65,
+    "overtaking_difficulty": 0.60,
+    "brake_intensity": 0.50,
+    "pu_sensitivity": 0.75,
+    "street_circuit": 0,
+    "traction_zones": 0.55
+  },
+  "Miami Grand Prix": {
+    "high_speed_ratio": 0.55,
+    "overtaking_difficulty": 0.45,
+    "brake_intensity": 0.65,
+    "pu_sensitivity": 0.70,
+    "street_circuit": 1,
+    "traction_zones": 0.60
+  },
+  "Canadian Grand Prix": {
+    "high_speed_ratio": 0.60,
+    "overtaking_difficulty": 0.45,
+    "brake_intensity": 0.80,
+    "pu_sensitivity": 0.80,
+    "street_circuit": 1,
+    "traction_zones": 0.75
+  },
+  "Monaco Grand Prix": {
+    "high_speed_ratio": 0.20,
+    "overtaking_difficulty": 1.00,
+    "brake_intensity": 0.80,
+    "pu_sensitivity": 0.30,
+    "street_circuit": 1,
+    "traction_zones": 0.90
+  },
+  "Spanish Grand Prix": {
+    "high_speed_ratio": 0.60,
+    "overtaking_difficulty": 0.65,
+    "brake_intensity": 0.55,
+    "pu_sensitivity": 0.70,
+    "street_circuit": 0,
+    "traction_zones": 0.60
+  },
+  "Barcelona Grand Prix": {
+    "high_speed_ratio": 0.60,
+    "overtaking_difficulty": 0.65,
+    "brake_intensity": 0.55,
+    "pu_sensitivity": 0.70,
+    "street_circuit": 0,
+    "traction_zones": 0.60
+  },
+  "Austrian Grand Prix": {
+    "high_speed_ratio": 0.70,
+    "overtaking_difficulty": 0.35,
+    "brake_intensity": 0.60,
+    "pu_sensitivity": 0.85,
+    "street_circuit": 0,
+    "traction_zones": 0.65
+  },
+  "British Grand Prix": {
+    "high_speed_ratio": 0.70,
+    "overtaking_difficulty": 0.40,
+    "brake_intensity": 0.45,
+    "pu_sensitivity": 0.80,
+    "street_circuit": 0,
+    "traction_zones": 0.40
+  },
+  "Hungarian Grand Prix": {
+    "high_speed_ratio": 0.35,
+    "overtaking_difficulty": 0.80,
+    "brake_intensity": 0.75,
+    "pu_sensitivity": 0.45,
+    "street_circuit": 0,
+    "traction_zones": 0.80
+  },
+  "Belgian Grand Prix": {
+    "high_speed_ratio": 0.75,
+    "overtaking_difficulty": 0.35,
+    "brake_intensity": 0.50,
+    "pu_sensitivity": 0.85,
+    "street_circuit": 0,
+    "traction_zones": 0.50
+  },
+  "Dutch Grand Prix": {
+    "high_speed_ratio": 0.50,
+    "overtaking_difficulty": 0.75,
+    "brake_intensity": 0.65,
+    "pu_sensitivity": 0.60,
+    "street_circuit": 0,
+    "traction_zones": 0.65
+  },
+  "Italian Grand Prix": {
+    "high_speed_ratio": 0.85,
+    "overtaking_difficulty": 0.30,
+    "brake_intensity": 0.40,
+    "pu_sensitivity": 0.95,
+    "street_circuit": 0,
+    "traction_zones": 0.30
+  },
+  "Azerbaijan Grand Prix": {
+    "high_speed_ratio": 0.60,
+    "overtaking_difficulty": 0.50,
+    "brake_intensity": 0.75,
+    "pu_sensitivity": 0.80,
+    "street_circuit": 1,
+    "traction_zones": 0.70
+  },
+  "Singapore Grand Prix": {
+    "high_speed_ratio": 0.30,
+    "overtaking_difficulty": 0.85,
+    "brake_intensity": 0.85,
+    "pu_sensitivity": 0.40,
+    "street_circuit": 1,
+    "traction_zones": 0.85
+  },
+  "United States Grand Prix": {
+    "high_speed_ratio": 0.60,
+    "overtaking_difficulty": 0.45,
+    "brake_intensity": 0.65,
+    "pu_sensitivity": 0.70,
+    "street_circuit": 0,
+    "traction_zones": 0.65
+  },
+  "Mexico City Grand Prix": {
+    "high_speed_ratio": 0.55,
+    "overtaking_difficulty": 0.60,
+    "brake_intensity": 0.70,
+    "pu_sensitivity": 0.80,
+    "street_circuit": 0,
+    "traction_zones": 0.70
+  },
+  "São Paulo Grand Prix": {
+    "high_speed_ratio": 0.55,
+    "overtaking_difficulty": 0.45,
+    "brake_intensity": 0.60,
+    "pu_sensitivity": 0.75,
+    "street_circuit": 0,
+    "traction_zones": 0.70
+  },
+  "Las Vegas Grand Prix": {
+    "high_speed_ratio": 0.75,
+    "overtaking_difficulty": 0.40,
+    "brake_intensity": 0.65,
+    "pu_sensitivity": 0.90,
+    "street_circuit": 1,
+    "traction_zones": 0.60
+  },
+  "Qatar Grand Prix": {
+    "high_speed_ratio": 0.70,
+    "overtaking_difficulty": 0.60,
+    "brake_intensity": 0.50,
+    "pu_sensitivity": 0.75,
+    "street_circuit": 0,
+    "traction_zones": 0.55
+  },
+  "Abu Dhabi Grand Prix": {
+    "high_speed_ratio": 0.50,
+    "overtaking_difficulty": 0.55,
+    "brake_intensity": 0.70,
+    "pu_sensitivity": 0.65,
+    "street_circuit": 0,
+    "traction_zones": 0.65
+  },
+  "Bahrain Grand Prix": {
+    "high_speed_ratio": 0.50,
+    "overtaking_difficulty": 0.40,
+    "brake_intensity": 0.70,
+    "pu_sensitivity": 0.75,
+    "street_circuit": 0,
+    "traction_zones": 0.75
+  },
+  "Saudi Arabian Grand Prix": {
+    "high_speed_ratio": 0.75,
+    "overtaking_difficulty": 0.55,
+    "brake_intensity": 0.55,
+    "pu_sensitivity": 0.85,
+    "street_circuit": 1,
+    "traction_zones": 0.50
+  },
+  "default": {
+    "high_speed_ratio": 0.55,
+    "overtaking_difficulty": 0.50,
+    "brake_intensity": 0.65,
+    "pu_sensitivity": 0.70,
+    "street_circuit": 0,
+    "traction_zones": 0.60
+  }
+}

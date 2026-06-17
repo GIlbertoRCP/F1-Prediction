@@ -48,7 +48,7 @@ export default function AeroMap({ year, gp }) {
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-    fetch(`${apiUrl}/api/aero/${year}/${gp}`)
+    fetch(`${apiUrl}/api/aero/${year}/${encodeURIComponent(gp)}`)
       .then(res => res.json())
       .then(data => {
         // FIX: Check if the backend sent an error message

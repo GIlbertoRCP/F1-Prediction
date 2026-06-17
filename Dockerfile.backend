@@ -13,7 +13,7 @@ COPY get_2026_teams.py ./
 RUN uv pip install --system -r pyproject.toml
 
 # Copy application code
-COPY api.py main.py team_mappings.json ./
+COPY api.py main.py team_mappings.json f1_model.py circuit_profiles.json ./
 COPY miami/ ./miami/
 COPY f1-api/ ./f1-api/
 

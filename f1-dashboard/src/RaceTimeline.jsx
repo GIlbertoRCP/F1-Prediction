@@ -1,101 +1,116 @@
 import { useState } from 'react';
 
-export default function RaceTimeline({ logs }) {
+// Helper to convert time strings (e.g., "1:12:45" or "45:12") to total seconds
+const parseTimeToSeconds = (timeStr) => {
+  if (!timeStr) return 0;
+  const parts = timeStr.split(':').map(Number);
+  if (parts.length === 3) {
+    return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  } else if (parts.length === 2) {
+    return parts[0] * 60 + parts[1];
+  }
+  return Number(timeStr) || 0;
+};
+
+export default function RaceTimeline({ logs, gpName, year }) {
   const [activePhase, setActivePhase] = useState(0);
+
+  const hasLogs = logs && logs.length > 0;
+
+  if (!hasLogs) {
+    return (
+      <div className="bg-zinc-900/40 border border-zinc-800 p-8 rounded-lg mt-8 text-center max-w-2xl mx-auto flex flex-col items-center gap-6 shadow-2xl relative overflow-hidden">
+        <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
+        
+        <div className="h-14 w-14 bg-blue-950/40 text-blue-400 border border-blue-900 rounded-full flex items-center justify-center text-2xl font-bold animate-pulse font-mono">
+          ⏱
+        </div>
+        <div>
+          <h2 className="font-orbitron font-black text-lg text-white mb-2 uppercase tracking-wide">Pre-Race Event Bulletin</h2>
+          <p className="text-zinc-400 text-sm font-sans leading-relaxed">
+            The {gpName} {year} has not started yet, or is currently in progress. Race control messages and timing log timeline feeds will go live as soon as the checkered flag falls.
+          </p>
+        </div>
+        <div className="w-full bg-zinc-950/80 border border-zinc-800 rounded p-4 text-left font-mono text-[11px] leading-relaxed">
+          <div className="text-blue-400 font-bold uppercase mb-2">// PREDICTIVE ANALYSIS INDICATORS</div>
+          <div>· Model status: <span className="text-emerald-400 font-bold">XGBRanker calibrated</span></div>
+          <div>· Track classification: <span className="text-white font-bold">{gpName} circuit profile merged</span></div>
+          <div>· System recommendation: <span className="text-yellow-500 font-bold">Check Aero Setup & Grid tabs for practice pace analytics</span></div>
+        </div>
+      </div>
+    );
+  }
+
+  // Parse times of all logs
+  const logsWithSeconds = logs.map(log => ({
+    ...log,
+    seconds: parseTimeToSeconds(log.Time)
+  }));
+  
+  // Divide total elapsed time into 4 equal quarters
+  const maxSec = Math.max(...logsWithSeconds.map(l => l.seconds), 1);
+  const quarter = maxSec / 4;
 
   const phases = [
     {
       id: 0,
-      title: "Laps 1 - 10",
-      subtitle: "The Thermal Shock & Heavy-Fuel Survival",
-      desc: "As the lights went out for the 2026 Miami Grand Prix, internet forums were already abuzz with reports of brutal track temperatures exceeding 55 degrees Celsius. Under the new regulations, which shifted the power unit dependency to a 50/50 split between internal combustion and electrical power, the opening phase became a tense game of thermal chess.",
-      desc2: "With cars carrying heavy starting fuel loads (100kg+), the immense weight pushed tire carcass temperatures instantly toward their blistering point. To combat this, veterans immediately deployed extreme Lift & Coast tactics at the end of the long straights. As shown in the telemetry distribution below, Alonso and Verstappen sacrificed massive amounts of raw lap time to protect their brakes and manage battery State of Charge.",
-      desc3: "While Alonso focused on survival, George Russell weaponized the Mercedes power unit, clocking 333 km/h in the speed traps, though his high variance suggested he was stuck in a brutal DRS train. Further back, Williams and Haas ran extreme low-drag setups to survive the midfield straights; Alex Albon and Oliver Bearman both clocked 327 km/h, boasting high S1/S3 ratios (1.293 and 1.282) which indicated they were completely sacrificing Sector 3 cornering downforce to stay competitive in Sector 1.",
-      contextTitle: "Telemetry Context: Lift & Coast Mechanics",
-      contextDesc: "Lift and Coast (L&C) involves releasing the accelerator pedal significantly before the optimal braking point. In the 2026 regulations, this is critical not just for fuel saving, but for cooling the MGU-K and preventing brake caliper thermal runaway. Alonso's extreme 1.52s metric indicates that critical thermal limits were breached almost immediately, forcing an extreme management map.",
+      title: "Opening Phase",
+      subtitle: "Start & Early Battles",
+      desc: `The opening quarter of the ${gpName} saw teams managing heavy fuel loads and cold tyres. Drivers focused on securing track positions and settling into tyre conservation routines.`,
+      logRange: [0, quarter],
       stats: [
-        { label: "ALO Lift & Coast", val: "1.52s/lap" },
-        { label: "ALB Top Speed", val: "327 km/h" },
-        { label: "Track Evolution", val: "0.000s" }
-      ],
-      logRange: [0, 10]
+        { label: "Safety Cars", val: logs.filter(l => l.Category === "SafetyCar" && parseTimeToSeconds(l.Time) <= quarter).length },
+        { label: "Penalties", val: logs.filter(l => l.Category === "Penalty" && parseTimeToSeconds(l.Time) <= quarter).length },
+        { label: "Active Logs", val: logsWithSeconds.filter(l => l.seconds <= quarter).length }
+      ]
     },
     {
       id: 1,
-      title: "Laps 11 - 25",
-      subtitle: "The Strategic Anomaly of Lance Stroll",
-      desc: "As the medium tires began to degredate heavily across the field, the pit window violently swung open. Several drivers reported severe rear thermal degradation. The 2026 active aerodynamics, specifically the manual override allowed in dirty air, led to intense DRS trains forming in the midfield.",
-      desc2: "Lance Stroll completely bypassed the expected pit window, extending his first stint incredibly deep into the race. The Aston Martin telemetry showed a surprisingly low S1/S3 ratio for him compared to Alonso, meaning his setup was preserving the rear tires much better in the high-speed sections at the cost of straight-line speed.",
-      desc3: "Meanwhile, the Red Bulls began flexing their ERS efficiency. Verstappen consistently pulled away from the DRS threat by deploying his MGU-K heavily exiting turn 16, maintaining a 1.2s gap effortlessly while simultaneously charging the battery down the long back straight.",
-      contextTitle: "Telemetry Context: Stint Extension",
-      contextDesc: "Tire degradation curves on the 2026 compounds are highly non-linear. Stroll managed to keep the carcass temperature in the optimal window, allowing him to bypass the sudden 'cliff' that caught out drivers like Ocon and Magnussen, who lost over 1.5 seconds per lap before pitting.",
+      title: "Mid-Race Phase",
+      subtitle: "Strategy & First Stops",
+      desc: `As tyre degradation set in, the pit window opened. Drivers fought to optimize tyre life, manage hybrid battery charge, and execute clean overtakes inside the DRS zones.`,
+      logRange: [quarter, quarter * 2],
       stats: [
-        { label: "STR Tire Life", val: "24 Laps" },
-        { label: "VER ERS Depletion", val: "Optimal" },
-        { label: "Pit Stops", val: "12 Drivers" }
-      ],
-      logRange: [10, 25]
+        { label: "Safety Cars", val: logs.filter(l => l.Category === "SafetyCar" && parseTimeToSeconds(l.Time) > quarter && parseTimeToSeconds(l.Time) <= quarter * 2).length },
+        { label: "Penalties", val: logs.filter(l => l.Category === "Penalty" && parseTimeToSeconds(l.Time) > quarter && parseTimeToSeconds(l.Time) <= quarter * 2).length },
+        { label: "Active Logs", val: logsWithSeconds.filter(l => l.seconds > quarter && l.seconds <= quarter * 2).length }
+      ]
     },
     {
       id: 2,
-      title: "Laps 26 - 35",
-      subtitle: "Red Bull Efficiency vs Mercedes Cliff",
-      desc: "Following the first cycle of pit stops, the true base pace of the cars revealed itself. Stripped of heavy fuel and traffic, the leading pack engaged in a raw time trial.",
-      desc2: "Mercedes suddenly hit a catastrophic aerodynamic cliff. Russell reported severe bouncing in the high-speed sections. The telemetry showed that their active front wing elements were stalling unpredictably, costing them critical downforce. Their sector 1 times plummeted.",
-      desc3: "Red Bull and McLaren seized the opportunity. Norris set consecutive fastest laps, utilizing the McLaren's superior low-speed mechanical grip. However, Verstappen responded with metronomic consistency, maintaining a standard deviation in his lap times of just 0.082s—a robotic feat of precision.",
-      contextTitle: "Telemetry Context: Active Aero Stall",
-      contextDesc: "The 2026 active aero system allows front and rear wings to adjust dynamically. If the hydraulic actuators desynchronize by even a few milliseconds during a high-G corner, the airflow detaches from the floor, causing sudden loss of downforce and subsequent bouncing (porpoising).",
+      title: "Tricky Transitions",
+      subtitle: "Tire Cliffs & Setup Adaptations",
+      desc: `The third quarter introduced track evolution shifts and potential weather adjustments. Power units were pushed hard, and some drivers faced reliability issues or tactical changes.`,
+      logRange: [quarter * 2, quarter * 3],
       stats: [
-        { label: "VER Consistency", val: "0.082s STD" },
-        { label: "NOR Fastest Lap", val: "1:28.4" },
-        { label: "RUS Time Loss", val: "-0.8s/lap" }
-      ],
-      logRange: [25, 35]
+        { label: "Safety Cars", val: logs.filter(l => l.Category === "SafetyCar" && parseTimeToSeconds(l.Time) > quarter * 2 && parseTimeToSeconds(l.Time) <= quarter * 3).length },
+        { label: "Penalties", val: logs.filter(l => l.Category === "Penalty" && parseTimeToSeconds(l.Time) > quarter * 2 && parseTimeToSeconds(l.Time) <= quarter * 3).length },
+        { label: "Active Logs", val: logsWithSeconds.filter(l => l.seconds > quarter * 2 && l.seconds <= quarter * 3).length }
+      ]
     },
     {
       id: 3,
-      title: "Laps 36 - 45",
-      subtitle: "The Rubbered-In Crossover Point",
-      desc: "As the Miami track rubbered in and temperatures slightly cooled, the crossover point for the Hard compound tire arrived. Drivers who gambled on a long Middle Stint began reaping the rewards of massive track evolution.",
-      desc2: "Ferrari, who had been quiet all race, suddenly came alive. Leclerc, running a higher downforce setup (S1/S3 ratio heavily favoring Sector 1), found immense grip. He began hunting down the McLarens, utilizing superior traction out of the slow chicanes.",
-      desc3: "The midfield battle became chaotic. Alpine and Kick Sauber engaged in a massive scrap, swapping positions multiple times per lap. The telemetry showed extreme spikes in battery deployment, indicating drivers were burning through their ERS allocation desperately to defend.",
-      contextTitle: "Telemetry Context: Track Evolution",
-      contextDesc: "Track evolution refers to the grip level increasing as cars lay down rubber on the racing line. In Miami, this evolution was worth almost 1.2 seconds of lap time by lap 40. High-downforce setups benefit exponentially from this, as the added mechanical grip multiplies the aerodynamic load.",
+      title: "Closing Sprints",
+      subtitle: "Podium Shootout & Checkered Flag",
+      desc: `Low fuel loads unlocked peak performance. The final quarter was a race-to-the-line sprint as drivers exhausted their ERS hybrid batteries to claim valuable points.`,
+      logRange: [quarter * 3, maxSec + 1],
       stats: [
-        { label: "Track Grip", val: "+1.2s" },
-        { label: "LEC Pace Delta", val: "-0.4s/lap" },
-        { label: "Overtakes", val: "14" }
-      ],
-      logRange: [35, 45]
-    },
-    {
-      id: 4,
-      title: "Laps 46 - Finish",
-      subtitle: "The Gen-Z Active Aero Shootout",
-      desc: "The final 10 laps became a sheer sprint to the finish. With fuel loads at their absolute minimum, the cars were operating at peak performance. The 2026 Manual Override (Push-to-Pass) system was heavily utilized.",
-      desc2: "Verstappen and Norris engaged in a cat-and-mouse game. Norris saved his Manual Override allocation for the back straight, attempting to break the DRS tow. Verstappen countered by optimizing his corner exits, ensuring he stayed within the critical 1-second delta.",
-      desc3: "In the end, it was a test of thermal management vs raw battery power. The telemetry across the grid spiked in the final laps as drivers emptied their energy stores completely, crossing the line in a breathtaking demonstration of the new hybrid era.",
-      contextTitle: "Telemetry Context: Manual Override",
-      contextDesc: "The 2026 regulations introduced a manual override mode that allows drivers to access the full 350kW electrical deployment for a set duration, bypassing the automated energy management. Misjudging this deployment can leave a driver entirely vulnerable on the next straight.",
-      stats: [
-        { label: "NOR Override Use", val: "Max" },
-        { label: "VER Defenses", val: "Successful" },
-        { label: "Final Gap", val: "0.842s" }
-      ],
-      logRange: [45, 100] // 100 to catch the rest
+        { label: "Safety Cars", val: logs.filter(l => l.Category === "SafetyCar" && parseTimeToSeconds(l.Time) > quarter * 3).length },
+        { label: "Penalties", val: logs.filter(l => l.Category === "Penalty" && parseTimeToSeconds(l.Time) > quarter * 3).length },
+        { label: "Active Logs", val: logsWithSeconds.filter(l => l.seconds > quarter * 3).length }
+      ]
     }
   ];
 
-  const active = phases.find(p => p.id === activePhase);
+  const active = phases.find(p => p.id === activePhase) || phases[0];
 
-  // Safe slicing of logs if available
-  const displayLogs = logs && logs.length > 0 
-    ? logs.slice(active.logRange[0], active.logRange[1] > logs.length ? logs.length : active.logRange[1])
-    : [];
+  // Slice logs according to the active phase's time boundary
+  const displayLogs = logsWithSeconds.filter(
+    log => log.seconds >= active.logRange[0] && log.seconds < active.logRange[1]
+  );
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 mt-8">
-      
       {/* LEFT COLUMN: PHASE SELECTION */}
       <div className="w-full lg:w-1/4 flex flex-col gap-4">
         {phases.map((phase) => {
@@ -104,16 +119,16 @@ export default function RaceTimeline({ logs }) {
             <div 
               key={phase.id}
               onClick={() => setActivePhase(phase.id)}
-              className={`border rounded-lg p-4 cursor-pointer transition flex items-center justify-between
-                ${isActive ? 'bg-zinc-950 border-yellow-600/50' : 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800'}`}
+              className={`border rounded-lg p-4 cursor-pointer transition-all flex items-center justify-between shadow-md
+                ${isActive ? 'bg-zinc-900 border-yellow-600/50 scale-102' : 'bg-zinc-900/35 border-zinc-800 hover:bg-zinc-900/70'}`}
             >
               <div>
-                <div className="text-xs font-mono text-zinc-500 mb-1">{phase.title}</div>
-                <div className={`font-bold text-sm ${isActive ? 'text-yellow-500' : 'text-zinc-300'}`}>
+                <div className="text-[10px] font-mono text-zinc-500 mb-1 uppercase tracking-widest">{phase.title}</div>
+                <div className={`font-orbitron font-bold text-xs ${isActive ? 'text-yellow-500 animate-pulse' : 'text-zinc-400'}`}>
                   {phase.subtitle}
                 </div>
               </div>
-              {isActive && <span className="text-yellow-500 font-bold">{'>'}</span>}
+              {isActive && <span className="text-yellow-500 font-bold font-mono">⚡</span>}
             </div>
           );
         })}
@@ -121,71 +136,104 @@ export default function RaceTimeline({ logs }) {
 
       {/* RIGHT COLUMN: PHASE DETAILS */}
       <div className="w-full lg:w-3/4">
-        <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 shadow-2xl transition-all duration-300">
-          <div className="flex items-center gap-4 mb-6">
-            <span className="bg-zinc-800 text-zinc-400 font-mono text-xs px-3 py-1 rounded-full border border-zinc-700">
-              Phase {active.id + 1}
+        <div className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-lg p-6 sm:p-8 shadow-2xl">
+          {/* Phase Badge Header */}
+          <div className="flex items-center gap-3 mb-6">
+            <span className="bg-zinc-800/80 text-zinc-400 font-mono text-[10px] px-3 py-1 rounded-full border border-zinc-700/60 uppercase tracking-widest">
+              Stage {active.id + 1} of 4
             </span>
-            <span className="text-yellow-500 font-bold font-mono text-sm">{active.title}</span>
+            <span className="text-yellow-500 font-bold font-orbitron text-xs tracking-wider uppercase">{active.title}</span>
           </div>
           
-          <h2 className="text-2xl font-bold text-white mb-6">{active.subtitle}</h2>
+          <h2 className="text-xl font-orbitron font-black text-white mb-4 uppercase tracking-wide border-b border-zinc-800 pb-3">{active.subtitle}</h2>
           
-          <div className="text-zinc-300 space-y-4 mb-8 text-sm leading-relaxed">
-            <p>{active.desc}</p>
-            <p>{active.desc2}</p>
-            <p>{active.desc3}</p>
-          </div>
+          <p className="text-zinc-400 text-sm leading-relaxed mb-8 font-sans">
+            {active.desc}
+          </p>
 
-          <div className="bg-zinc-950 border border-blue-900/50 rounded-lg p-6 mb-8 flex gap-4">
-            <div className="text-blue-500 text-2xl">ℹ</div>
-            <div>
-              <h3 className="text-blue-400 font-bold text-sm mb-2 uppercase">{active.contextTitle}</h3>
-              <p className="text-zinc-400 text-xs leading-relaxed">
-                {active.contextDesc}
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-zinc-500 font-mono text-xs font-bold mb-4 uppercase">Phase Telemetry Context</h3>
+          {/* Stats Grid */}
+          <div className="mb-8">
+            <h3 className="text-zinc-500 font-mono text-[10px] font-bold mb-4 uppercase tracking-wider">// Phase Analytics Summary</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {active.stats.map((stat, idx) => (
-                <div key={idx} className={`p-4 rounded-lg ${idx === 0 ? 'bg-yellow-950/20 border border-yellow-900/50' : idx === 1 ? 'bg-blue-950/20 border border-blue-900/50' : 'bg-red-950/20 border border-red-900/50'}`}>
-                  <div className={`font-mono text-xs mb-1 uppercase ${idx === 0 ? 'text-yellow-600/80' : idx === 1 ? 'text-blue-600/80' : 'text-red-500/80'}`}>
-                    {stat.label}
+              {active.stats.map((stat, idx) => {
+                let cardStyle = "bg-zinc-950/60 border-zinc-800/50 text-zinc-300";
+                let labelColor = "text-zinc-500";
+                let valColor = "text-white";
+
+                if (stat.label === "Safety Cars" && stat.val > 0) {
+                  cardStyle = "bg-yellow-950/20 border-yellow-900/30";
+                  labelColor = "text-yellow-600";
+                  valColor = "text-yellow-400";
+                } else if (stat.label === "Penalties" && stat.val > 0) {
+                  cardStyle = "bg-red-950/20 border-red-900/30";
+                  labelColor = "text-red-500";
+                  valColor = "text-red-400";
+                } else if (stat.label === "Active Logs") {
+                  cardStyle = "bg-blue-950/25 border-blue-900/30";
+                  labelColor = "text-blue-400";
+                  valColor = "text-blue-300";
+                }
+
+                return (
+                  <div key={idx} className={`p-4 rounded-lg border flex flex-col justify-between ${cardStyle}`}>
+                    <div className={`font-mono text-[9px] mb-2 uppercase font-bold tracking-widest ${labelColor}`}>
+                      {stat.label}
+                    </div>
+                    <div className={`font-orbitron font-black text-2xl ${valColor}`}>
+                      {stat.val}
+                    </div>
                   </div>
-                  <div className={`font-bold text-xl ${idx === 0 ? 'text-yellow-500' : idx === 1 ? 'text-blue-400' : 'text-red-400'}`}>
-                    {stat.val}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
-          {/* Fallback to actual logs if needed */}
-          {displayLogs.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-zinc-800">
-               <h3 className="text-zinc-500 font-mono text-xs font-bold mb-4 uppercase">Raw Race Control Logs ({active.title})</h3>
-               <div className="h-[200px] overflow-y-auto pr-4">
-                 <div className="flex flex-col gap-3 font-mono text-xs">
+          {/* Chronological Event Log Stream */}
+          <div className="mt-8 pt-8 border-t border-zinc-800/60">
+            <h3 className="text-zinc-500 font-mono text-[10px] font-bold mb-4 uppercase tracking-wider">// Chronological Control Log Stream</h3>
+            <div className="h-[250px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+              {displayLogs.length > 0 ? (
+                <div className="flex flex-col gap-3 font-mono text-[11px]">
                   {displayLogs.map((log, idx) => {
-                    let bgStyle = "bg-zinc-950 border-zinc-800 text-zinc-300";
-                    if (log.Category === "Penalty") bgStyle = "bg-red-950/30 border-red-900 text-red-200";
-                    if (log.Category === "SafetyCar") bgStyle = "bg-yellow-950/30 border-yellow-900 text-yellow-200";
+                    let logStyle = "bg-zinc-950/40 border-zinc-800 text-zinc-300";
+                    let badge = "bg-zinc-800 text-zinc-400 border-zinc-700";
+                    
+                    if (log.Category === "Penalty") {
+                      logStyle = "bg-red-950/10 border-red-950 text-red-200";
+                      badge = "bg-red-900/40 text-red-400 border-red-800/50";
+                    } else if (log.Category === "SafetyCar") {
+                      logStyle = "bg-yellow-950/10 border-yellow-950 text-yellow-200";
+                      badge = "bg-yellow-900/40 text-yellow-400 border-yellow-800/50";
+                    } else if (log.Category === "Flag") {
+                      logStyle = "bg-emerald-950/10 border-emerald-950 text-emerald-200";
+                      badge = "bg-emerald-900/40 text-emerald-400 border-emerald-800/50";
+                    } else if (log.Category === "Drs") {
+                      logStyle = "bg-blue-950/10 border-blue-950 text-blue-200";
+                      badge = "bg-blue-900/40 text-blue-400 border-blue-800/50";
+                    }
 
                     return (
-                      <div key={idx} className={`p-3 rounded border ${bgStyle}`}>
-                        <div className="text-zinc-500 mb-1">T+ {log.Time}</div>
-                        <div className="font-bold leading-relaxed">{log.Message}</div>
+                      <div key={idx} className={`p-3 rounded border flex flex-col sm:flex-row items-start sm:items-center gap-3 ${logStyle}`}>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-zinc-500 font-bold select-none">{log.Time}</span>
+                          <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-wider border ${badge}`}>
+                            {log.Category}
+                          </span>
+                        </div>
+                        <div className="leading-relaxed break-words font-sans text-xs text-zinc-300">
+                          {log.Message}
+                        </div>
                       </div>
                     );
                   })}
-                 </div>
-               </div>
+                </div>
+              ) : (
+                <div className="h-full flex items-center justify-center font-mono text-[11px] text-zinc-600 bg-zinc-950/20 border border-dashed border-zinc-800/60 rounded">
+                  NO RACE CONTROL BULLETINS LOGGED IN THIS TIMESTEP
+                </div>
+              )}
             </div>
-          )}
-
+          </div>
         </div>
       </div>
     </div>

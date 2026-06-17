@@ -1,6 +1,6 @@
-# 🏎️ F1 Race Prediction Pipeline — 2026 Season
+# 🏎️ F1 Oracle — Race Prediction & Telemetry Analysis Platform
 
-> Machine learning pipeline for predicting Formula 1 race results using telemetry-based feature engineering via [FastF1](https://theoehrly.github.io/Fast-F1/) and an `XGBRanker` pairwise ranking model.
+> An end-to-end Machine Learning and telemetry analysis application for predicting Formula 1 race results and comparing driver setups. Powered by an `XGBRanker` pairwise ranking model on [FastF1](https://theoehrly.github.io/Fast-F1/) telemetry features, a FastAPI backend, and an interactive React dashboard.
 
 ---
 
@@ -8,14 +8,26 @@
 
 ```
 f1/
+├── api.py                     # FastAPI backend server
+├── f1_model.py                # Generalized Model Training & Inference Pipeline
 ├── f1-api/
-│   └── f1_fe.py              # Feature Engineering Library (core)
+│   └── f1_fe.py               # Feature Engineering Library (core)
+├── f1-dashboard/              # React + Vite Frontend Dashboard
+│   ├── src/
+│   │   ├── App.jsx            # Dashboard layout and prediction leaderboard
+│   │   ├── AeroMap.jsx        # Aerodynamic profile visualizer
+│   │   ├── H2H.jsx            # Head-to-Head telemetry charts
+│   │   └── RaceTimeline.jsx   # Live Race Control events log
+│   └── Dockerfile.frontend    # Docker config for the frontend
 ├── miami/
-│   └── miami_model.py        # Miami 2026 Race Prediction Model
+│   └── miami_model.py         # Dedicated Miami 2026 prediction script
+├── circuit_profiles.json      # Dynamic track characteristics database
 ├── team_mappings.json         # Constructor → PU score & works team flags
 ├── f1_cache/                  # FastF1 local telemetry cache (auto-populated)
-├── pyproject.toml             # Project metadata & dependency spec (PEP 621)
-├── uv.lock                    # Locked dependency graph (uv)
+├── Dockerfile.backend         # Docker config for the FastAPI backend
+├── docker-compose.yml         # Container orchestration for full stack
+├── pyproject.toml             # Project metadata & Python dependencies
+├── uv.lock                    # Locked python dependency graph (uv)
 ├── .python-version            # Pinned interpreter: 3.13
 └── README.md
 ```
@@ -586,30 +598,65 @@ Full transitive dependency graph is pinned in `uv.lock`.
 
 ## 🚀 Setup & Usage
 
-### 1. Install uv
+You can run the full application either locally (using `uv` and `npm`) or orchestrated via Docker Compose.
+
+### Option A: Running with Docker Compose (Recommended)
+
+To run the entire stack (FastAPI backend and React frontend) in containers:
 
 ```bash
+docker-compose up --build
+```
+
+- **Frontend Dashboard**: Open [http://localhost:5173](http://localhost:5173) in your browser.
+- **FastAPI Backend**: Accessible at [http://localhost:8000](http://localhost:8000) (interactive docs at [http://localhost:8000/docs](http://localhost:8000/docs)).
+
+---
+
+### Option B: Local Development Setup
+
+#### 1. Install uv & Node.js
+
+Ensure you have [uv](https://docs.astral.sh/uv/) and **Node.js (v20+)** installed.
+
+```bash
+# Install uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### 2. Create virtual environment & sync dependencies
+#### 2. Start the Backend API
 
 ```bash
-# From the project root — reads pyproject.toml + uv.lock
+# Sync Python dependencies and create virtual environment
 uv sync
+
+# Run the FastAPI server
+uv run uvicorn api:app --reload --port 8000
 ```
 
-This creates `.venv/` with Python 3.13 and installs all locked dependencies. No manual `pip install` required.
+#### 3. Start the Frontend Dashboard
 
-### 3. Run the Miami 2026 prediction model
+```bash
+cd f1-dashboard
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your web browser.
+
+---
+
+### 4. CLI Execution (Miami 2026 Model Script)
+
+If you only want to run the terminal-based Miami 2026 prediction script:
 
 ```bash
 uv run python miami/miami_model.py
 ```
 
-> **FastF1 cache**: Session data is fetched from the OpenF1/Ergast APIs on first run and stored in `f1_cache/`. Subsequent runs load from disk — typically **5-10× faster**.
+> **FastF1 Cache**: Session data is automatically fetched from Ergast/OpenF1 APIs on the first run and cached in `.f1_cache/`. Subsequent runs load from disk and are **5-10× faster**.
 
-### 4. Adding dependencies
+### 5. Adding dependencies
 
 ```bash
 # Add a package and update uv.lock
@@ -619,7 +666,7 @@ uv add <package>
 uv lock --upgrade-package <package>
 ```
 
-### 5. Running one-off scripts without full sync
+### 6. Running one-off scripts without full sync
 
 ```bash
 uv run python get_2026_teams.py
