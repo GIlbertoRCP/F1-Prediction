@@ -2,7 +2,7 @@ import os
 import math
 import pickle
 import fastapi
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 import fastf1
 import pandas as pd
@@ -40,14 +40,107 @@ fastf1.Cache.enable_cache("./.f1_cache")
 # In-memory cache for API endpoints
 API_CACHE = {}
 
+# ─────────────────────────────────────────────────────────────────────────────
+# AUTOMATED ASYNCHRONOUS PREFETCHING (Background Workers)
+# ─────────────────────────────────────────────────────────────────────────────
+PREFETCH_LOCKS = set()
+
+def background_prefetch(year: int, gp: str):
+    """Asynchronously trains model and warms up all dashboard endpoint caches for a GP."""
+    lock_key = (year, gp)
+    if lock_key in PREFETCH_LOCKS:
+        print(f"[Prefetch] Task for {gp} {year} is already in progress. Skipping.")
+        return
+        
+    PREFETCH_LOCKS.add(lock_key)
+    try:
+        print(f"[Prefetch] Starting background prefetch for {gp} {year}...")
+        
+        # 1. Warm up predictions cache
+        f1_model.train_and_predict_for_race(year, gp)
+        
+        # 2. Warm up other endpoints by invoking them (which updates API_CACHE)
+        try:
+            get_race_dashboard(year, gp)
+        except Exception as e:
+            print(f"[Prefetch] Error warming up race dashboard cache: {e}")
+            
+        try:
+            get_aero_setup(year, gp)
+        except Exception as e:
+            print(f"[Prefetch] Error warming up aero cache: {e}")
+            
+        try:
+            get_pairwise_probabilities(year, gp)
+        except Exception as e:
+            print(f"[Prefetch] Error warming up probability cache: {e}")
+            
+        try:
+            get_model_insights(year, gp)
+        except Exception as e:
+            print(f"[Prefetch] Error warming up insights cache: {e}")
+            
+        try:
+            get_engine_battle(year, gp)
+        except Exception as e:
+            print(f"[Prefetch] Error warming up engine battle cache: {e}")
+
+        print(f"[Prefetch] Background prefetch successfully completed for {gp} {year}!")
+    except Exception as e:
+        print(f"[Prefetch] Failed to prefetch {gp} {year}: {e}")
+    finally:
+        PREFETCH_LOCKS.discard(lock_key)
+
+def get_next_upcoming_race(year: int = 2026) -> str | None:
+    """Finds the next chronological upcoming race in the calendar."""
+    try:
+        now_utc = pd.Timestamp.now(tz='UTC')
+        sched = fastf1.get_event_schedule(year)
+        sched = sched[sched["RoundNumber"] > 0].sort_values("EventDate")
+        for _, row in sched.iterrows():
+            event_date = pd.to_datetime(row["EventDate"])
+            if event_date.tz is None:
+                event_date = event_date.tz_localize("UTC")
+            else:
+                event_date = event_date.tz_convert("UTC")
+            # First one in the future (adding days margin to ensure we don't pick a race that has finished)
+            if event_date + pd.Timedelta(days=1) > now_utc:
+                return str(row["EventName"])
+    except Exception as e:
+        print(f"[Prefetch] Error determining next upcoming race: {e}")
+    return None
+
+def get_next_chronological_race(year: int, current_gp: str) -> str | None:
+    """Finds the race immediately following the specified GP round."""
+    try:
+        sched = fastf1.get_event_schedule(year)
+        sched = sched[sched["RoundNumber"] > 0].sort_values("RoundNumber")
+        current_round = None
+        for _, row in sched.iterrows():
+            if current_gp.lower() in str(row["EventName"]).lower() or str(row["EventName"]).lower() in current_gp.lower():
+                current_round = row["RoundNumber"]
+                break
+        if current_round is not None:
+            next_row = sched[sched["RoundNumber"] == current_round + 1]
+            if not next_row.empty:
+                return str(next_row.iloc[0]["EventName"])
+    except Exception as e:
+        print(f"[Prefetch] Error determining next chronological race: {e}")
+    return None
+
 @app.get("/api/progress")
 def get_progress():
     """Returns the current background pipeline progress."""
     return f1_model.PROGRESS
 
 @app.get("/api/races")
-def get_races():
+def get_races(background_tasks: BackgroundTasks = None):
     """Returns the schedule of F1 seasons and GPs, marking their completion status."""
+    if background_tasks:
+        next_upcoming = get_next_upcoming_race(2026)
+        if next_upcoming:
+            background_tasks.add_task(background_prefetch, 2026, next_upcoming)
+
     cache_key = "schedule_list"
     if cache_key in API_CACHE:
         return API_CACHE[cache_key]
@@ -91,7 +184,12 @@ def get_races():
     return response
 
 @app.get("/api/race/{year}/{gp}")
-def get_race_dashboard(year: int, gp: str):
+def get_race_dashboard(year: int, gp: str, background_tasks: BackgroundTasks = None):
+    if background_tasks:
+        next_gp = get_next_chronological_race(year, gp)
+        if next_gp:
+            background_tasks.add_task(background_prefetch, year, next_gp)
+
     cache_key = f"race_{year}_{gp}"
     if cache_key in API_CACHE:
         return API_CACHE[cache_key]

@@ -5,7 +5,8 @@
     "brake_intensity": 0.60,
     "pu_sensitivity": 0.70,
     "street_circuit": 1,
-    "traction_zones": 0.60
+    "traction_zones": 0.60,
+    "track_length_km": 5.278
   },
   "Chinese Grand Prix": {
     "high_speed_ratio": 0.55,
@@ -13,7 +14,8 @@
     "brake_intensity": 0.65,
     "pu_sensitivity": 0.75,
     "street_circuit": 0,
-    "traction_zones": 0.65
+    "traction_zones": 0.65,
+    "track_length_km": 5.451
   },
   "Japanese Grand Prix": {
     "high_speed_ratio": 0.65,
@@ -21,7 +23,8 @@
     "brake_intensity": 0.50,
     "pu_sensitivity": 0.75,
     "street_circuit": 0,
-    "traction_zones": 0.55
+    "traction_zones": 0.55,
+    "track_length_km": 5.807
   },
   "Miami Grand Prix": {
     "high_speed_ratio": 0.55,
@@ -29,7 +32,8 @@
     "brake_intensity": 0.65,
     "pu_sensitivity": 0.70,
     "street_circuit": 1,
-    "traction_zones": 0.60
+    "traction_zones": 0.60,
+    "track_length_km": 5.412
   },
   "Canadian Grand Prix": {
     "high_speed_ratio": 0.60,
@@ -37,7 +41,8 @@
     "brake_intensity": 0.80,
     "pu_sensitivity": 0.80,
     "street_circuit": 1,
-    "traction_zones": 0.75
+    "traction_zones": 0.75,
+    "track_length_km": 4.361
   },
   "Monaco Grand Prix": {
     "high_speed_ratio": 0.20,
@@ -45,7 +50,8 @@
     "brake_intensity": 0.80,
     "pu_sensitivity": 0.30,
     "street_circuit": 1,
-    "traction_zones": 0.90
+    "traction_zones": 0.90,
+    "track_length_km": 3.337
   },
   "Spanish Grand Prix": {
     "high_speed_ratio": 0.60,
@@ -53,7 +59,8 @@
     "brake_intensity": 0.55,
     "pu_sensitivity": 0.70,
     "street_circuit": 0,
-    "traction_zones": 0.60
+    "traction_zones": 0.60,
+    "track_length_km": 4.657
   },
   "Barcelona Grand Prix": {
     "high_speed_ratio": 0.60,
@@ -61,7 +68,8 @@
     "brake_intensity": 0.55,
     "pu_sensitivity": 0.70,
     "street_circuit": 0,
-    "traction_zones": 0.60
+    "traction_zones": 0.60,
+    "track_length_km": 4.657
   },
   "Austrian Grand Prix": {
     "high_speed_ratio": 0.70,
@@ -69,7 +77,8 @@
     "brake_intensity": 0.60,
     "pu_sensitivity": 0.85,
     "street_circuit": 0,
-    "traction_zones": 0.65
+    "traction_zones": 0.65,
+    "track_length_km": 4.318
   },
   "British Grand Prix": {
     "high_speed_ratio": 0.70,
@@ -77,7 +86,8 @@
     "brake_intensity": 0.45,
     "pu_sensitivity": 0.80,
     "street_circuit": 0,
-    "traction_zones": 0.40
+    "traction_zones": 0.40,
+    "track_length_km": 5.891
   },
   "Hungarian Grand Prix": {
     "high_speed_ratio": 0.35,
@@ -85,7 +95,8 @@
     "brake_intensity": 0.75,
     "pu_sensitivity": 0.45,
     "street_circuit": 0,
-    "traction_zones": 0.80
+    "traction_zones": 0.80,
+    "track_length_km": 4.381
   },
   "Belgian Grand Prix": {
     "high_speed_ratio": 0.75,
@@ -93,7 +104,8 @@
     "brake_intensity": 0.50,
     "pu_sensitivity": 0.85,
     "street_circuit": 0,
-    "traction_zones": 0.50
+    "traction_zones": 0.50,
+    "track_length_km": 7.004
   },
   "Dutch Grand Prix": {
     "high_speed_ratio": 0.50,
@@ -101,7 +113,8 @@
     "brake_intensity": 0.65,
     "pu_sensitivity": 0.60,
     "street_circuit": 0,
-    "traction_zones": 0.65
+    "traction_zones": 0.65,
+    "track_length_km": 4.259
   },
   "Italian Grand Prix": {
     "high_speed_ratio": 0.85,
@@ -109,7 +122,8 @@
     "brake_intensity": 0.40,
     "pu_sensitivity": 0.95,
     "street_circuit": 0,
-    "traction_zones": 0.30
+    "traction_zones": 0.30,
+    "track_length_km": 5.793
   },
   "Azerbaijan Grand Prix": {
     "high_speed_ratio": 0.60,
@@ -117,7 +131,8 @@
     "brake_intensity": 0.75,
     "pu_sensitivity": 0.80,
     "street_circuit": 1,
-    "traction_zones": 0.70
+    "traction_zones": 0.70,
+    "track_length_km": 6.003
   },
   "Singapore Grand Prix": {
     "high_speed_ratio": 0.30,
@@ -125,7 +140,8 @@
     "brake_intensity": 0.85,
     "pu_sensitivity": 0.40,
     "street_circuit": 1,
-    "traction_zones": 0.85
+    "traction_zones": 0.85,
+    "track_length_km": 4.940
   },
   "United States Grand Prix": {
     "high_speed_ratio": 0.60,
@@ -133,7 +149,8 @@
     "brake_intensity": 0.65,
     "pu_sensitivity": 0.70,
     "street_circuit": 0,
-    "traction_zones": 0.65
+    "traction_zones": 0.65,
+    "track_length_km": 5.513
   },
   "Mexico City Grand Prix": {
     "high_speed_ratio": 0.55,
@@ -141,7 +158,8 @@
     "brake_intensity": 0.70,
     "pu_sensitivity": 0.80,
     "street_circuit": 0,
-    "traction_zones": 0.70
+    "traction_zones": 0.70,
+    "track_length_km": 4.304
   },
   "São Paulo Grand Prix": {
     "high_speed_ratio": 0.55,
@@ -149,7 +167,8 @@
     "brake_intensity": 0.60,
     "pu_sensitivity": 0.75,
     "street_circuit": 0,
-    "traction_zones": 0.70
+    "traction_zones": 0.70,
+    "track_length_km": 4.309
   },
   "Las Vegas Grand Prix": {
     "high_speed_ratio": 0.75,
@@ -157,7 +176,8 @@
     "brake_intensity": 0.65,
     "pu_sensitivity": 0.90,
     "street_circuit": 1,
-    "traction_zones": 0.60
+    "traction_zones": 0.60,
+    "track_length_km": 6.201
   },
   "Qatar Grand Prix": {
     "high_speed_ratio": 0.70,
@@ -165,7 +185,8 @@
     "brake_intensity": 0.50,
     "pu_sensitivity": 0.75,
     "street_circuit": 0,
-    "traction_zones": 0.55
+    "traction_zones": 0.55,
+    "track_length_km": 5.419
   },
   "Abu Dhabi Grand Prix": {
     "high_speed_ratio": 0.50,
@@ -173,7 +194,8 @@
     "brake_intensity": 0.70,
     "pu_sensitivity": 0.65,
     "street_circuit": 0,
-    "traction_zones": 0.65
+    "traction_zones": 0.65,
+    "track_length_km": 5.281
   },
   "Bahrain Grand Prix": {
     "high_speed_ratio": 0.50,
@@ -181,7 +203,8 @@
     "brake_intensity": 0.70,
     "pu_sensitivity": 0.75,
     "street_circuit": 0,
-    "traction_zones": 0.75
+    "traction_zones": 0.75,
+    "track_length_km": 5.412
   },
   "Saudi Arabian Grand Prix": {
     "high_speed_ratio": 0.75,
@@ -189,7 +212,8 @@
     "brake_intensity": 0.55,
     "pu_sensitivity": 0.85,
     "street_circuit": 1,
-    "traction_zones": 0.50
+    "traction_zones": 0.50,
+    "track_length_km": 6.174
   },
   "default": {
     "high_speed_ratio": 0.55,
@@ -197,6 +221,7 @@
     "brake_intensity": 0.65,
     "pu_sensitivity": 0.70,
     "street_circuit": 0,
-    "traction_zones": 0.60
+    "traction_zones": 0.60,
+    "track_length_km": 5.3
   }
 }

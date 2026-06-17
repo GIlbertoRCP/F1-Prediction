@@ -189,8 +189,10 @@ Identifies the tyre compound used in each driver's primary long run (the longest
 #### `get_fuel_corrected_pace(year, gp, session_type, compound, window_size=5)`
 Calculates "True Base Pace" by removing **both** tyre degradation and estimated fuel load from lap times. Allows fair comparison between drivers running different fuel programs.
 
-**Physics constants used**:
-- Fuel consumption: `1.5 kg/lap`
+**Physics constants and calculations used**:
+- Fuel consumption: scaled dynamically based on track length in `circuit_profiles.json` relative to a standard 5.3 km baseline:
+  $$\text{FUEL\_CONSUMPTION\_PER\_LAP} = 1.5 \times \frac{\text{track\_length\_km}}{5.3}$$
+  (e.g., Monaco consumption is scaled down to ~0.94 kg/lap, while Spa is scaled up to ~1.98 kg/lap)
 - Fuel safety margin: `5.0 kg`
 - Fuel time penalty: `0.03 s/kg` (~0.3s per 10kg)
 
@@ -690,6 +692,15 @@ uv lock --upgrade-package <package>
 ```bash
 uv run python get_2026_teams.py
 ```
+
+---
+
+## Automated Asynchronous Prefetching
+
+To avoid long wait times on a cold FastF1 cache when fetching session data, F1 Oracle implements background prefetching using FastAPI `BackgroundTasks`:
+1. **Initial load prefetching**: Loading the seasons calendar triggers an async prefetch worker for the next upcoming GP round of the active season.
+2. **Sequential prefetching**: Querying predictions for any GP round dynamically schedules a background prefetch for the next round chronologically.
+3. **Lock mechanism**: Uses a global tracking set (`PREFETCH_LOCKS`) to prevent launching concurrent duplicate prefetch tasks.
 
 ---
 

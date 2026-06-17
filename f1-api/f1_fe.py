@@ -761,6 +761,34 @@ def get_longrun_compound(year: int, gp: str, session_type: str, min_laps: int = 
     # Sort from longest stint to shortest
     return result.sort_values(col_laps, ascending=False).reset_index(drop=True)
 
+def load_track_length(gp_name: str) -> float:
+    """Loads track length dynamically from circuit_profiles.json relative to this file."""
+    import os
+    import json
+    
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    profiles_path = os.path.join(base_dir, "circuit_profiles.json")
+    
+    track_length = 5.3  # default fallback in km
+    if os.path.exists(profiles_path):
+        try:
+            with open(profiles_path, "r") as f:
+                profiles = json.load(f)
+            # Try matching
+            matched_profile = None
+            if gp_name in profiles:
+                matched_profile = profiles[gp_name]
+            else:
+                for name, profile in profiles.items():
+                    if name.lower() in gp_name.lower() or gp_name.lower() in name.lower():
+                        matched_profile = profile
+                        break
+            if matched_profile and "track_length_km" in matched_profile:
+                track_length = float(matched_profile["track_length_km"])
+        except Exception as e:
+            print(f"Error loading track length from circuit profiles: {e}")
+    return track_length
+
 def get_fuel_corrected_pace(year: int, gp: str, session_type: str, compound: str = 'MEDIUM', window_size: int = 5) -> pd.DataFrame:
     """
     Calculates the 'True Base Pace' by correcting lap times for both 
@@ -802,7 +830,8 @@ def get_fuel_corrected_pace(year: int, gp: str, session_type: str, compound: str
     valid_laps['LapTime_s'] = valid_laps['LapTime'].dt.total_seconds()
     
     # ── Parámetros Físicos F1 ───────────────────────────────────────────────
-    FUEL_CONSUMPTION_PER_LAP = 1.5  # kg burned per lap
+    track_length = load_track_length(gp)
+    FUEL_CONSUMPTION_PER_LAP = 1.5 * (track_length / 5.3)  # kg burned per lap scaled dynamically
     FUEL_MARGIN_KG = 5.0            # safety margin in the tank
     FUEL_PENALTY_PER_KG = 0.03      # seconds lost per kg (0.3s per 10kg)
     
