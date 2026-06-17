@@ -1,10 +1,10 @@
-# 🏎️ F1 Oracle — Race Prediction & Telemetry Analysis Platform
+# F1 Oracle — Race Prediction & Telemetry Analysis Platform
 
 > An end-to-end Machine Learning and telemetry analysis application for predicting Formula 1 race results and comparing driver setups. Powered by an `XGBRanker` pairwise ranking model on [FastF1](https://theoehrly.github.io/Fast-F1/) telemetry features, a FastAPI backend, and an interactive React dashboard.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 f1/
@@ -17,6 +17,10 @@ f1/
 │   │   ├── App.jsx            # Dashboard layout and prediction leaderboard
 │   │   ├── AeroMap.jsx        # Aerodynamic profile visualizer
 │   │   ├── H2H.jsx            # Head-to-Head telemetry charts
+│   │   ├── H2HMatrix.jsx      # Pairwise win probability matrix
+│   │   ├── EngineBattle.jsx   # 2026 PU supplier comparison
+│   │   ├── ModelInsights.jsx  # Calibrated model parameter insights
+│   │   ├── MonteCarlo.jsx     # Stochastic race outcome simulator
 │   │   └── RaceTimeline.jsx   # Live Race Control events log
 │   └── Dockerfile.frontend    # Docker config for the frontend
 ├── miami/
@@ -34,7 +38,7 @@ f1/
 
 ---
 
-## 🔬 Feature Engineering Library — `f1_fe.py`
+## Feature Engineering Library — f1_fe.py
 
 The library exposes **pure functions** that each return a `pd.DataFrame` indexed by `Driver`. All functions share these design principles:
 
@@ -46,7 +50,7 @@ The library exposes **pure functions** that each return a `pd.DataFrame` indexed
 
 ---
 
-### 🟢 Circuit Baseline Features
+### Circuit Baseline Features
 
 #### `get_best_lap_delta(year, gp, session_type)`
 Calculates the relative gap of each driver's best lap to the session's fastest lap.
@@ -122,7 +126,7 @@ Total laps completed by each driver on a specific tyre compound.
 
 ---
 
-### 🔵 Long Run / Race Simulation Features
+### Long Run / Race Simulation Features
 
 #### `get_longrun_avg_pace(year, gp, session_type, compound, window_size=8)`
 Finds the best **N strictly consecutive laps** within each driver's stint and returns their average. Requires lap numbers to be truly consecutive (no gaps from safety cars or slow laps).
@@ -199,7 +203,7 @@ Calculates "True Base Pace" by removing **both** tyre degradation and estimated 
 
 ---
 
-### 🟣 Power Unit / ERS Features (2026-specific)
+### Power Unit / ERS Features (2026-specific)
 
 #### `get_ers_efficiency_proxy(year, gp, session_type)`
 Analyzes micro-telemetry of the fastest lap to estimate ERS efficiency. Requires `telemetry=True`.
@@ -263,7 +267,7 @@ Low variance = perfectly tuned ERS map. High variance = ERS clipping or traffic.
 
 ---
 
-### 🟡 FP3 / Setup Tuning Features
+### FP3 / Setup Tuning Features
 
 #### `get_qualy_sim_delta(year, gp, session_type, compound)`
 Delta from each driver's best push lap on the specified compound to the overall session fastest.
@@ -323,7 +327,7 @@ Global track rubbering-in metric. Splits session in two halves and compares fast
 
 ---
 
-### 🔴 Qualifying Features
+### Qualifying Features
 
 #### `get_qualy_deltas(year, gp)`
 Official timing data from Q1/Q2/Q3 results.
@@ -371,7 +375,7 @@ Identifies each driver's strongest sector relative to the field in qualifying.
 
 ---
 
-### ⚫ Grid & Sprint Features
+### Grid & Sprint Features
 
 #### `get_grid_position_features(year, gp, session_type='R')`
 Final starting grid after all penalties from the Race session results.
@@ -400,7 +404,22 @@ Used for historical Miami 2024/2025 (sprint weekends).
 
 ---
 
-## 🤖 Miami 2026 Model — `miami/miami_model.py`
+## Interactive Dashboard Features
+
+The React + Vite frontend dashboard provides visual and interactive modules to explore telemetry and predictive outcomes:
+
+- **Grid Predictions**: Displays the final predicted race order, compared directly against actual classification and timing logs.
+- **Race Events**: Renders live Race Control logs (flags, safety cars, penalties, DRS status).
+- **Aero Setup**: Visualizes sector-by-sector aerodynamic ratios and speed trap statistics.
+- **H2H Telemetry**: Compares micro-telemetry (throttle, speed, brake, gear) of two selected drivers.
+- **Win Probability Matrix**: Computes calibrated pairwise driver matchups using Bradley-Terry logistic equations to build a beat-probability heatmap grid.
+- **Engine Battle**: Groups constructors by their engine supplier to evaluate aggregated top speed, ERS efficiency index, and clipping resistance.
+- **Model Insights**: Exposes relative feature importances and dynamically calibrated parameters (upgrade sigma, grid anchor weight, sprint boost sigma).
+- **Monte Carlo Simulator**: Runs client-side stochastic trials using the Box-Muller normal transform. Simulates track wetness/variance, safety cars, grid penalties, and crash risks to plot finishing probability distributions.
+
+---
+
+## Miami 2026 Model — `miami/miami_model.py`
 
 ### Architecture
 
@@ -554,7 +573,7 @@ is_sprint = event.get_session_name(4) == "Sprint"
 
 ---
 
-## 📊 Pipeline Execution Flow
+## Pipeline Execution Flow
 
 ```
 Phase 1: Build Training Set
@@ -577,7 +596,7 @@ Phase 4: Predict Miami 2026
 
 ---
 
-## 🛠️ Environment & Dependencies
+## Environment & Dependencies
 
 This project is managed with [**uv**](https://docs.astral.sh/uv/) — a fast, PEP 621-compliant Python package and project manager.
 
@@ -596,7 +615,7 @@ Full transitive dependency graph is pinned in `uv.lock`.
 
 ---
 
-## 🚀 Setup & Usage
+## Setup & Usage
 
 You can run the full application either locally (using `uv` and `npm`) or orchestrated via Docker Compose.
 
@@ -674,7 +693,7 @@ uv run python get_2026_teams.py
 
 ---
 
-## 📝 Notes on 2026 ERS Features
+## Notes on 2026 ERS Features
 
 The 2026 regulations introduced a radically different hybrid system with **higher electrical power deployment** (~350 kW electrical vs ~120 kW in 2025). Three new features were added specifically for 2026:
 

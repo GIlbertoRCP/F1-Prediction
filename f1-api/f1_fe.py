@@ -4,6 +4,27 @@ import numpy as np
 
 fastf1.Cache.enable_cache('./.f1_cache')
 
+
+def _keep_representative_laps(valid_laps: pd.DataFrame, factor: float = 1.07) -> pd.DataFrame:
+    """Drop in/out/aborted laps from already compound/green/pit-filtered long-run laps.
+
+    A fixed 107% gate against the session's fastest lap (typically a low-fuel
+    qualifying simulation) wrongly discards legitimate high-fuel long-run laps,
+    which are naturally several percent slower. Instead, within each driver-stint
+    keep only laps within ``factor`` of that stint's own median lap time. This
+    adapts to fuel load and tyre age and removes only true outliers (in/out laps,
+    spins, lift-and-coast aborts).
+    """
+    if valid_laps.empty or "Stint" not in valid_laps.columns:
+        return valid_laps
+    df = valid_laps.assign(_lt_s=valid_laps["LapTime"].dt.total_seconds())
+    grp = df.groupby(["Driver", "Stint"])["_lt_s"]
+    med = grp.transform("median")
+    size = grp.transform("size")
+    keep = (size < 3) | (df["_lt_s"] <= med * factor)
+    return df[keep].drop(columns="_lt_s")
+
+
 # CIRCUITO
 def get_best_lap_delta(year: int, gp: str, session_type: str) -> pd.DataFrame:
     """
@@ -286,10 +307,6 @@ def get_longrun_avg_pace(year: int, gp: str, session_type: str, compound: str = 
     laps = session.laps.copy()
     all_drivers = laps['Driver'].unique()
 
-    # Calculate 107% rule threshold based on the overall best lap time
-    best_lap_time = laps['LapTime'].min()
-    max_acceptable_lap = best_lap_time * 1.07
-
     # Apply quality filters for clean laps
     valid_laps = laps[
         (laps['Compound'] == compound.upper())
@@ -298,8 +315,9 @@ def get_longrun_avg_pace(year: int, gp: str, session_type: str, compound: str = 
         & (laps['PitInTime'].isna())
         & (laps['LapTime'].notna())
         & (laps['LapTime'] > pd.Timedelta(0))
-        & (laps['LapTime'] <= max_acceptable_lap)
     ].copy()
+
+    valid_laps = _keep_representative_laps(valid_laps)
 
     # DEFENSIVE CHECK: If no laps meet the criteria (e.g., Qualifying session), 
     # short-circuit and return NaNs to prevent pandas apply() crashes on empty DataFrames.
@@ -383,10 +401,6 @@ def get_longrun_deg_rate(year: int, gp: str, session_type: str, compound: str = 
     laps = session.laps.copy()
     all_drivers = laps['Driver'].unique()
 
-    # Calculate 107% rule threshold to filter out heavily aborted laps
-    best_lap_time = laps['LapTime'].min()
-    max_acceptable_lap = best_lap_time * 1.07
-
     # Apply quality filters
     valid_laps = laps[
         (laps['Compound'] == compound.upper())
@@ -395,8 +409,9 @@ def get_longrun_deg_rate(year: int, gp: str, session_type: str, compound: str = 
         & (laps['PitInTime'].isna())
         & (laps['LapTime'].notna())
         & (laps['LapTime'] > pd.Timedelta(0))
-        & (laps['LapTime'] <= max_acceptable_lap)
     ].copy()
+
+    valid_laps = _keep_representative_laps(valid_laps)
 
     # DEFENSIVE CHECK: Short-circuit if session has no valid data (e.g., Qualifying)
     if valid_laps.empty:
@@ -482,10 +497,6 @@ def get_longrun_deg_total(year: int, gp: str, session_type: str, compound: str =
     laps = session.laps.copy()
     all_drivers = laps['Driver'].unique()
 
-    # Calculate 107% rule threshold
-    best_lap_time = laps['LapTime'].min()
-    max_acceptable_lap = best_lap_time * 1.07
-
     # Apply quality filters
     valid_laps = laps[
         (laps['Compound'] == compound.upper())
@@ -494,8 +505,9 @@ def get_longrun_deg_total(year: int, gp: str, session_type: str, compound: str =
         & (laps['PitInTime'].isna())
         & (laps['LapTime'].notna())
         & (laps['LapTime'] > pd.Timedelta(0))
-        & (laps['LapTime'] <= max_acceptable_lap)
     ].copy()
+
+    valid_laps = _keep_representative_laps(valid_laps)
 
     # DEFENSIVE CHECK: Short-circuit if session has no valid data
     if valid_laps.empty:
@@ -588,10 +600,6 @@ def get_longrun_consistency(year: int, gp: str, session_type: str, compound: str
     laps = session.laps.copy()
     all_drivers = laps['Driver'].unique()
 
-    # Calculate 107% rule threshold
-    best_lap_time = laps['LapTime'].min()
-    max_acceptable_lap = best_lap_time * 1.07
-
     # Apply quality filters
     valid_laps = laps[
         (laps['Compound'] == compound.upper())
@@ -600,8 +608,9 @@ def get_longrun_consistency(year: int, gp: str, session_type: str, compound: str
         & (laps['PitInTime'].isna())
         & (laps['LapTime'].notna())
         & (laps['LapTime'] > pd.Timedelta(0))
-        & (laps['LapTime'] <= max_acceptable_lap)
     ].copy()
+
+    valid_laps = _keep_representative_laps(valid_laps)
 
     # DEFENSIVE CHECK: Short-circuit if session has no valid data
     if valid_laps.empty:
@@ -689,10 +698,6 @@ def get_longrun_compound(year: int, gp: str, session_type: str, min_laps: int = 
     laps = session.laps.copy()
     all_drivers = laps['Driver'].unique()
 
-    # Calculate 107% rule threshold
-    best_lap_time = laps['LapTime'].min()
-    max_acceptable_lap = best_lap_time * 1.07
-
     # Apply quality filters to count only representative laps
     valid_laps = laps[
         (laps['TrackStatus'] == '1')
@@ -700,9 +705,10 @@ def get_longrun_compound(year: int, gp: str, session_type: str, min_laps: int = 
         & (laps['PitInTime'].isna())
         & (laps['LapTime'].notna())
         & (laps['LapTime'] > pd.Timedelta(0))
-        & (laps['LapTime'] <= max_acceptable_lap)
         & (laps['Compound'].notna())  # Ensure compound data is logged
     ].copy()
+
+    valid_laps = _keep_representative_laps(valid_laps)
 
     # DEFENSIVE CHECK: Short-circuit if session has no valid data (e.g., Qualifying)
     if valid_laps.empty:
@@ -775,10 +781,6 @@ def get_fuel_corrected_pace(year: int, gp: str, session_type: str, compound: str
     laps = session.laps.copy()
     all_drivers = laps['Driver'].unique()
 
-    # 107% rule threshold
-    best_lap_time = laps['LapTime'].min()
-    max_acceptable_lap = best_lap_time * 1.07
-
     # Quality filters
     valid_laps = laps[
         (laps['Compound'] == compound.upper())
@@ -787,8 +789,9 @@ def get_fuel_corrected_pace(year: int, gp: str, session_type: str, compound: str
         & (laps['PitInTime'].isna())
         & (laps['LapTime'].notna())
         & (laps['LapTime'] > pd.Timedelta(0))
-        & (laps['LapTime'] <= max_acceptable_lap)
     ].copy()
+
+    valid_laps = _keep_representative_laps(valid_laps)
 
     if valid_laps.empty:
         result = pd.DataFrame({'Driver': all_drivers})

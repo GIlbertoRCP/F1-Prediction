@@ -286,3 +286,324 @@ def get_h2h_data(year: int, gp: str):
         return response_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FEATURE LABELS AND CATEGORIES FOR INTELLIGENT MODEL INSIGHTS
+# ─────────────────────────────────────────────────────────────────────────────
+FEATURE_MAPPINGS = {
+    # Practice 1 (FP1)
+    "fp1_best_lap_delta": {"label": "FP1 Best Lap Delta to Leader", "category": "Practice"},
+    "fp1_clean_laps_count": {"label": "FP1 Completed Clean Laps", "category": "Practice"},
+    "fp1_sector1_delta": {"label": "FP1 Sector 1 Delta", "category": "Practice"},
+    "fp1_sector2_delta": {"label": "FP1 Sector 2 Delta", "category": "Practice"},
+    "fp1_sector3_delta": {"label": "FP1 Sector 3 Delta", "category": "Practice"},
+    "fp1_max_speed_trap": {"label": "FP1 Maximum Speed Trap (km/h)", "category": "Practice"},
+    "fp1_speed_trap_delta": {"label": "FP1 Speed Trap Delta to Leader", "category": "Practice"},
+    "fp1_compound_medium_avg": {"label": "FP1 Medium Compound Average Pace", "category": "Practice"},
+    "fp1_laps_on_hard": {"label": "FP1 Laps Completed on Hard Compound", "category": "Practice"},
+    "fp1_vs_teammate": {"label": "FP1 Time Delta vs Teammate", "category": "Practice"},
+    
+    # Practice 2 (FP2)
+    "fp2_best_lap_delta": {"label": "FP2 Best Lap Delta to Leader", "category": "Practice"},
+    "fp2_clean_laps_count": {"label": "FP2 Completed Clean Laps", "category": "Practice"},
+    "fp2_sector1_delta": {"label": "FP2 Sector 1 Delta", "category": "Practice"},
+    "fp2_sector2_delta": {"label": "FP2 Sector 2 Delta", "category": "Practice"},
+    "fp2_sector3_delta": {"label": "FP2 Sector 3 Delta", "category": "Practice"},
+    "fp2_max_speed_trap": {"label": "FP2 Maximum Speed Trap (km/h)", "category": "Practice"},
+    "fp2_longrun_medium_avg_pace": {"label": "FP2 Medium Compound Longrun Pace", "category": "Practice"},
+    "fp2_longrun_medium_deg_rate": {"label": "FP2 Medium Tyre Wear Degradation Rate", "category": "Practice"},
+    "fp2_longrun_medium_deg_total": {"label": "FP2 Medium Expected Total Tyre Deg Loss", "category": "Practice"},
+    "fp2_longrun_medium_consistency": {"label": "FP2 Medium Longrun Stint Consistency", "category": "Practice"},
+    "fp2_longrun_hard_avg_pace": {"label": "FP2 Hard Compound Longrun Pace", "category": "Practice"},
+    "fp2_longrun_hard_deg_rate": {"label": "FP2 Hard Tyre Wear Degradation Rate", "category": "Practice"},
+    "fp2_medium_fuel_corrected_pace": {"label": "FP2 Fuel-Corrected Clean Lap Pace", "category": "Practice"},
+    "fp2_pu_asymmetry_delta": {"label": "FP2 Speed Delta across Sector Speed Traps", "category": "Practice"},
+    "fp2_speed_trap_std_kmh": {"label": "FP2 Speed Variance in Traps", "category": "Practice"},
+    "fp2_avg_lift_coast_time_s": {"label": "FP2 Fuel-Saving Lift & Coast Time (s)", "category": "Practice"},
+    "fp2_ers_efficiency_proxy": {"label": "FP2 Energy Recovery System Efficiency Index", "category": "Practice"},
+    
+    # Practice 3 (FP3)
+    "fp3_best_lap_delta": {"label": "FP3 Best Lap Delta to Leader", "category": "Practice"},
+    "fp3_sector1_delta": {"label": "FP3 Sector 1 Delta", "category": "Practice"},
+    "fp3_sector2_delta": {"label": "FP3 Sector 2 Delta", "category": "Practice"},
+    "fp3_sector3_delta": {"label": "FP3 Sector 3 Delta", "category": "Practice"},
+    "fp3_soft_best_lap_delta": {"label": "FP3 Soft Compound Best Lap Delta", "category": "Practice"},
+    "fp3_vs_fp2_soft_improvement": {"label": "FP3 vs FP2 Soft Compound Pace Gain", "category": "Practice"},
+    "fp3_s1_delta_vs_fp2": {"label": "FP3 vs FP2 Sector 1 Pace Gain", "category": "Practice"},
+    "fp3_s2_delta_vs_fp2": {"label": "FP3 vs FP2 Sector 2 Pace Gain", "category": "Practice"},
+    "fp3_s3_delta_vs_fp2": {"label": "FP3 vs FP2 Sector 3 Pace Gain", "category": "Practice"},
+    "fp3_is_true_qualy_sim": {"label": "FP3 Flag for True Qualifying Simulation", "category": "Practice"},
+    "fp3_track_evolution_s": {"label": "FP3 Track Evolution Rate (s/min)", "category": "Practice"},
+    
+    # Sprint Shootout (SQ) & Sprint Race (S)
+    "sq_best_lap_delta": {"label": "Sprint Shootout Best Lap Delta", "category": "Sprint"},
+    "sq_sector1_delta": {"label": "Sprint Shootout Sector 1 Delta", "category": "Sprint"},
+    "sq_sector2_delta": {"label": "Sprint Shootout Sector 2 Delta", "category": "Sprint"},
+    "sq_sector3_delta": {"label": "Sprint Shootout Sector 3 Delta", "category": "Sprint"},
+    "sq_speed_trap_delta": {"label": "Sprint Shootout Speed Trap Delta", "category": "Sprint"},
+    "sq_vs_teammate": {"label": "Sprint Shootout Delta vs Teammate", "category": "Sprint"},
+    "s_finish_position": {"label": "Sprint Race Finishing Position", "category": "Sprint"},
+    "s_positions_gained": {"label": "Sprint Race Grid Positions Gained/Lost", "category": "Sprint"},
+    "s_classified": {"label": "Sprint Race Classified Status Flag", "category": "Sprint"},
+    
+    # Qualifying (Q)
+    "grid_position": {"label": "Main Qualifying Grid Position", "category": "Qualifying"},
+    "is_front_row": {"label": "Qualifying Front Row (Top 2) Flag", "category": "Qualifying"},
+    "started_top_10": {"label": "Qualifying Q3 Top 10 Appearance Flag", "category": "Qualifying"},
+    "q3_delta_to_pole": {"label": "Q3 Final Time Delta to Pole Position", "category": "Qualifying"},
+    "best_q_delta_to_pole": {"label": "Overall Qualifying Best Lap Delta to Pole", "category": "Qualifying"},
+    "q3_participation": {"label": "Q3 Session Participation Flag", "category": "Qualifying"},
+    "best_q_vs_fp3_improvement": {"label": "Qualifying vs FP3 Track Improvement", "category": "Qualifying"},
+    "quali_best_relative_sector": {"label": "Qualifying Best Theoretical Sector Sum", "category": "Qualifying"},
+    
+    # Power Unit & Aero
+    "pu_score": {"label": "Engine Power Unit Performance Rating", "category": "Power Unit & Aero"},
+    "is_works": {"label": "Works Engine Manufacturer Status Flag", "category": "Power Unit & Aero"},
+    "pu_is_works": {"label": "Combined Engine Works Performance Indicator", "category": "Power Unit & Aero"},
+    "ers_clipping_penalty_index": {"label": "ERS Battery Clipping Index", "category": "Power Unit & Aero"},
+    
+    # Recent Form
+    "recent_form_avg": {"label": "Driver Season Form (Avg Finish)", "category": "Recent Form"},
+    "recent_form_wins": {"label": "Driver Season Wins Count", "category": "Recent Form"},
+    "team_2026_pace_rank": {"label": "Constructor Season Pace Ranking", "category": "Recent Form"}
+}
+
+@app.get("/api/insights/{year}/{gp}")
+def get_model_insights(year: int, gp: str):
+    cache_key = f"insights_{year}_{gp}"
+    if cache_key in API_CACHE:
+        return API_CACHE[cache_key]
+
+    try:
+        # Clean GP Name
+        try:
+            event = fastf1.get_event(year, gp)
+            gp_clean = event["EventName"]
+        except Exception:
+            gp_clean = gp
+
+        cache_dir = "./.f1_cache"
+        safe_gp_name = gp_clean.replace(" ", "_").replace("'", "").lower()
+        model_path = os.path.join(cache_dir, f"model_{year}_{safe_gp_name}.pkl")
+
+        # Train model if not already cached
+        if not os.path.exists(model_path):
+            print(f"[api.py] Model not cached for {gp_clean} {year}. Training first...")
+            f1_model.train_and_predict_for_race(year, gp)
+
+        # Load pickled model
+        with open(model_path, "rb") as f:
+            saved = pickle.load(f)
+
+        model = saved["model"]
+        final_cols = saved["final_cols"]
+        
+        # Get calibrated parameters
+        calibrated_params = {
+            "upgrade_sigma": float(saved.get("best_upgrade_sigma", f1_model.UPGRADE_SIGMA_PER_POINT)),
+            "grid_anchor_weight": float(saved.get("best_anchor_weight", f1_model.GRID_ANCHOR_WEIGHT)),
+            "sprint_sigma": float(saved.get("best_sprint_sigma", f1_model.SPRINT_BOOST_SIGMA))
+        }
+
+        # Calculate importances
+        feature_importances = []
+        if hasattr(model, 'feature_importances_'):
+            importances = model.feature_importances_.tolist()
+            # Map features
+            for col, imp in zip(final_cols, importances):
+                mapping = FEATURE_MAPPINGS.get(col, {"label": col, "category": "Other"})
+                feature_importances.append({
+                    "feature": col,
+                    "label": mapping["label"],
+                    "category": mapping["category"],
+                    "importance": float(imp)
+                })
+        else:
+            # Fallback if model doesn't have it (e.g. dummy booster)
+            feature_importances = [
+                {
+                    "feature": col,
+                    "label": FEATURE_MAPPINGS.get(col, {"label": col})["label"],
+                    "category": FEATURE_MAPPINGS.get(col, {"category": "Other"})["category"],
+                    "importance": 0.0
+                }
+                for col in final_cols
+            ]
+
+        # Sort descending
+        feature_importances = sorted(feature_importances, key=lambda x: x["importance"], reverse=True)
+
+        response_data = {
+            "gp": f"{gp_clean} {year}",
+            "calibrated_parameters": calibrated_params,
+            "feature_importances": feature_importances
+        }
+        API_CACHE[cache_key] = response_data
+        return response_data
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/engine/{year}/{gp}")
+def get_engine_battle(year: int, gp: str):
+    cache_key = f"engine_{year}_{gp}"
+    if cache_key in API_CACHE:
+        return API_CACHE[cache_key]
+
+    try:
+        import numpy as np
+        # 1. Clean GP name
+        try:
+            event = fastf1.get_event(year, gp)
+            gp_clean = event["EventName"]
+        except Exception:
+            gp_clean = gp
+
+        # 2. Build or load features
+        df_gp = f1_model.build_race_features(year, gp, include_circuit_context=True)
+        if df_gp.empty:
+            raise HTTPException(status_code=404, detail="No telemetry data available for this Grand Prix.")
+
+        # Ensure we have teammate deltas and works team info
+        df_gp = f1_model.add_teammate_deltas(df_gp)
+        
+        # Normalize teams
+        df_gp["Team_norm"] = df_gp["Team"].replace(f1_model.TEAM_NORM_MAP).fillna(df_gp["Team"])
+
+        # Map to Engine Manufacturers
+        engine_map = {
+            "Mercedes": "Mercedes",
+            "McLaren": "Mercedes",
+            "Williams": "Mercedes",
+            "Alpine": "Mercedes",
+            "Ferrari": "Ferrari",
+            "Haas": "Ferrari",
+            "Red Bull Racing": "Red Bull Powertrains",
+            "Racing Bulls": "Red Bull Powertrains",
+            "Cadillac": "Cadillac",
+            "Audi": "Audi",
+            "Aston Martin": "Honda"
+        }
+        df_gp["Manufacturer"] = df_gp["Team_norm"].map(engine_map).fillna("Unknown")
+
+        # Resolve ERS efficiency and battery clipping metrics
+        ers_col = "fp2_ers_efficiency_proxy" if "fp2_ers_efficiency_proxy" in df_gp.columns else "fp1_speed_trap_delta"
+        clipping_col = "ers_clipping_penalty_index"
+        
+        if clipping_col not in df_gp.columns:
+            if "fp2_ers_efficiency_proxy" in df_gp.columns and "fp2_pu_asymmetry_delta" in df_gp.columns:
+                asymmetry_risk = np.where(df_gp["fp2_pu_asymmetry_delta"] < 0, np.abs(df_gp["fp2_pu_asymmetry_delta"]), 0)
+                inefficiency_risk = np.where(df_gp["fp2_ers_efficiency_proxy"] < 0, np.abs(df_gp["fp2_ers_efficiency_proxy"]), 0)
+                df_gp["ers_clipping_penalty_index"] = asymmetry_risk * inefficiency_risk
+            else:
+                df_gp["ers_clipping_penalty_index"] = 0.0
+
+        # Resolve top speeds
+        speed_cols = [c for c in ["fp2_max_speed_trap", "fp1_max_speed_trap", "fp3_max_speed_trap"] if c in df_gp.columns]
+        if speed_cols:
+            df_gp["top_speed"] = df_gp[speed_cols].max(axis=1)
+        else:
+            df_gp["top_speed"] = 330.0
+
+        # Group by Manufacturer
+        grouped = df_gp.groupby("Manufacturer")
+        manufacturers_data = []
+
+        for name, group in grouped:
+            if name == "Unknown":
+                continue
+
+            # Calculate averages
+            avg_speed = float(group["top_speed"].mean())
+            
+            # ERS Efficiency Score
+            raw_ers = group[ers_col].mean() if ers_col in group.columns else 0.0
+            if ers_col == "fp2_ers_efficiency_proxy":
+                avg_ers_score = float(max(0, min(10, (raw_ers + 0.5) * 6.5)))
+            else:
+                avg_ers_score = float(max(0, min(10, 10 - abs(raw_ers) * 0.5)))
+
+            # Clipping Resistance Score
+            raw_clip = group["ers_clipping_penalty_index"].mean()
+            avg_clipping_score = float(max(0, min(10, 10 - raw_clip * 15.0)))
+
+            # Baseline PU Rating
+            pu_score = float(group["pu_score"].mean()) if "pu_score" in group.columns else 3.0
+
+            # List of active teams
+            teams = list(group["Team_norm"].unique())
+
+            # Combined rating
+            overall_rating = (avg_ers_score * 0.35) + (avg_clipping_score * 0.35) + (pu_score * 3.0) + ((avg_speed - 320) * 0.1)
+            overall_rating = max(1.0, min(10.0, overall_rating))
+
+            manufacturers_data.append({
+                "manufacturer": name,
+                "teams": teams,
+                "avg_top_speed": round(avg_speed, 1),
+                "ers_efficiency_score": round(avg_ers_score, 2),
+                "clipping_resistance_score": round(avg_clipping_score, 2),
+                "baseline_pu_rating": round(pu_score, 1),
+                "overall_performance_score": round(overall_rating, 2)
+            })
+
+        # Sort by overall performance descending
+        manufacturers_data = sorted(manufacturers_data, key=lambda x: x["overall_performance_score"], reverse=True)
+
+        # Assign ranks
+        for idx, m in enumerate(manufacturers_data):
+            m["rank"] = idx + 1
+
+        response_data = {
+            "gp": f"{gp_clean} {year}",
+            "manufacturers": manufacturers_data
+        }
+        API_CACHE[cache_key] = response_data
+        return response_data
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/probability/{year}/{gp}")
+def get_pairwise_probabilities(year: int, gp: str):
+    cache_key = f"probability_{year}_{gp}"
+    if cache_key in API_CACHE:
+        return API_CACHE[cache_key]
+
+    try:
+        # Clean GP name
+        try:
+            event = fastf1.get_event(year, gp)
+            gp_clean = event["EventName"]
+        except Exception:
+            gp_clean = gp
+
+        # Get dynamic predictions
+        df_top = f1_model.train_and_predict_for_race(year, gp)
+        if df_top.empty:
+            raise HTTPException(status_code=404, detail="Race data could not be computed.")
+
+        # Extract driver information and rank scores
+        drivers_data = []
+        for idx, row in df_top.iterrows():
+            grid_pos = row.get("grid_position")
+            drivers_data.append({
+                "position": int(idx + 1),
+                "driver": str(row["Driver"]),
+                "team": str(row.get("Team", "Unknown")),
+                "rank_score": float(row["rank_score"]),
+                "grid_position": int(grid_pos) if pd.notnull(grid_pos) else None
+            })
+
+        response_data = {
+            "gp": f"{gp_clean} {year}",
+            "drivers": drivers_data
+        }
+        API_CACHE[cache_key] = response_data
+        return response_data
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))

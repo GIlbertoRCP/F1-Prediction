@@ -3,6 +3,10 @@ import AeroMap from './AeroMap';
 import DataGrid from './DataGrid';
 import RaceTimeline from './RaceTimeline';
 import H2H from './H2H';
+import ModelInsights from './ModelInsights';
+import EngineBattle from './EngineBattle';
+import H2HMatrix from './H2HMatrix';
+import MonteCarlo from './MonteCarlo';
 import ErrorBoundary from './ErrorBoundary';
 
 function App() {
@@ -206,7 +210,7 @@ function App() {
             >
               {availableGps.map(g => (
                 <option key={g.gp} value={g.gp}>
-                  [{g.date}] {g.gp} {g.status === 'upcoming' ? '⏱' : '🏁'}
+                  [{g.date}] {g.gp} {g.status === 'upcoming' ? ' (Upcoming)' : ''}
                 </option>
               ))}
             </select>
@@ -232,25 +236,49 @@ function App() {
             onClick={() => setActiveTab('grid')}
             className={`px-4 py-2 rounded flex items-center gap-2 transition-all ${activeTab === 'grid' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
           >
-            📈 Grid Predictions
+            Grid Predictions
           </button>
           <button 
             onClick={() => setActiveTab('timeline')}
             className={`px-4 py-2 rounded flex items-center gap-2 transition-all ${activeTab === 'timeline' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
           >
-            ⏱ Race Events
+            Race Events
           </button>
           <button 
             onClick={() => setActiveTab('aero')}
             className={`px-4 py-2 rounded flex items-center gap-2 transition-all ${activeTab === 'aero' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
           >
-            🎯 Aero Setup
+            Aero Setup
           </button>
           <button 
             onClick={() => setActiveTab('h2h')}
             className={`px-4 py-2 rounded flex items-center gap-2 transition-all ${activeTab === 'h2h' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
           >
-            📊 H2H Telemetry
+            H2H Telemetry
+          </button>
+          <button 
+            onClick={() => setActiveTab('engine')}
+            className={`px-4 py-2 rounded flex items-center gap-2 transition-all ${activeTab === 'engine' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
+          >
+            Engine Battle
+          </button>
+          <button 
+            onClick={() => setActiveTab('insights')}
+            className={`px-4 py-2 rounded flex items-center gap-2 transition-all ${activeTab === 'insights' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
+          >
+            Model Insights
+          </button>
+          <button 
+            onClick={() => setActiveTab('probability')}
+            className={`px-4 py-2 rounded flex items-center gap-2 transition-all ${activeTab === 'probability' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
+          >
+            Win Probability
+          </button>
+          <button 
+            onClick={() => setActiveTab('montecarlo')}
+            className={`px-4 py-2 rounded flex items-center gap-2 transition-all ${activeTab === 'montecarlo' ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
+          >
+            Monte Carlo
           </button>
         </div>
       </nav>
@@ -338,7 +366,7 @@ function App() {
           <div className="h-[50vh] flex items-center justify-center p-4">
             <div className="max-w-md w-full text-red-500 font-mono bg-red-950/20 p-6 rounded-lg border border-red-900/50 shadow-2xl flex flex-col gap-4">
               <div className="flex items-center gap-2 border-b border-red-900/50 pb-3">
-                <span className="text-xl">⚠️</span>
+                <span className="text-sm font-bold uppercase tracking-widest text-red-500">Warning</span>
                 <h2 className="text-sm font-bold uppercase tracking-widest">Pipeline Compile Error</h2>
               </div>
               <p className="text-xs text-zinc-300 leading-relaxed font-sans">{raceData.error}</p>
@@ -355,6 +383,10 @@ function App() {
               {activeTab === 'timeline' && <RaceTimeline logs={raceData.logs} gpName={selectedGp} year={selectedYear} />}
               {activeTab === 'aero' && <AeroMap year={parseInt(selectedYear)} gp={selectedGp} />}
               {activeTab === 'h2h' && <H2H year={parseInt(selectedYear)} gp={selectedGp} />}
+              {activeTab === 'engine' && <EngineBattle year={parseInt(selectedYear)} gp={selectedGp} />}
+              {activeTab === 'insights' && <ModelInsights year={parseInt(selectedYear)} gp={selectedGp} />}
+              {activeTab === 'probability' && <H2HMatrix year={parseInt(selectedYear)} gp={selectedGp} />}
+              {activeTab === 'montecarlo' && <MonteCarlo year={parseInt(selectedYear)} gp={selectedGp} />}
             </div>
           </ErrorBoundary>
         )}
