@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import TrackMap from './TrackMap';
 
 export default function H2H({ year, gp }) {
@@ -8,8 +8,10 @@ export default function H2H({ year, gp }) {
   const [driver1, setDriver1] = useState('');
   const [driver2, setDriver2] = useState('');
   const [activeTrace, setActiveTrace] = useState('speed');
+  const [syncDistance, setSyncDistance] = useState(null);
   
   useEffect(() => {
+    setSyncDistance(null);
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
     setLoading(true);
     fetch(`${apiUrl}/api/h2h/${year}/${encodeURIComponent(gp)}`)
@@ -50,7 +52,7 @@ export default function H2H({ year, gp }) {
   if (!h2hData || Object.keys(h2hData).length === 0) {
     return (
       <div className="h-64 mt-8 flex items-center justify-center font-mono text-yellow-500 bg-yellow-950/10 border border-yellow-900/30 rounded-lg">
-        ⚠️ TELEMETRY DELTAS UNAVAILABLE FOR THIS GRAND PRIX
+        [!] TELEMETRY DELTAS UNAVAILABLE FOR THIS GRAND PRIX
       </div>
     );
   }
@@ -60,6 +62,35 @@ export default function H2H({ year, gp }) {
 
   const d1 = h2hData[activeDriver1];
   const d2 = h2hData[activeDriver2];
+
+  // Match closest points in both drivers' telemetry traces to syncDistance
+  const getSyncedTelemetryPoints = () => {
+    if (syncDistance === null || !d1?.telemetry || !d2?.telemetry || d1.telemetry.length === 0 || d2.telemetry.length === 0) return null;
+    
+    let p1 = d1.telemetry[0];
+    let minD1 = Math.abs(p1.distance - syncDistance);
+    for (let i = 1; i < d1.telemetry.length; i++) {
+      const diff = Math.abs(d1.telemetry[i].distance - syncDistance);
+      if (diff < minD1) {
+        minD1 = diff;
+        p1 = d1.telemetry[i];
+      }
+    }
+    
+    let p2 = d2.telemetry[0];
+    let minD2 = Math.abs(p2.distance - syncDistance);
+    for (let i = 1; i < d2.telemetry.length; i++) {
+      const diff = Math.abs(d2.telemetry[i].distance - syncDistance);
+      if (diff < minD2) {
+        minD2 = diff;
+        p2 = d2.telemetry[i];
+      }
+    }
+    
+    return { p1, p2 };
+  };
+  
+  const syncedPoints = getSyncedTelemetryPoints();
 
   const compare = (val1, val2, lowerIsBetter = false) => {
     const diff = val1 - val2;
@@ -92,7 +123,7 @@ export default function H2H({ year, gp }) {
     <div className="bg-zinc-900/50 backdrop-blur-md rounded-lg border border-zinc-800 p-6 shadow-2xl mt-8">
       {/* SECTION HEADER */}
       <h2 className="font-orbitron text-lg font-black mb-6 uppercase tracking-wide border-l-4 border-yellow-500 pl-3 flex items-center gap-2 text-white">
-        <span className="text-yellow-500">⚡</span> Driver Telemetry Overlay
+        Driver Telemetry Overlay
       </h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -200,16 +231,112 @@ export default function H2H({ year, gp }) {
                   />
                   <Legend iconType="circle" wrapperStyle={{ fontFamily: 'monospace', fontSize: '10px', marginTop: '10px' }} />
                   
+                  {syncDistance !== null && (
+                    <ReferenceLine 
+                      x={syncDistance} 
+                      stroke="#10b981" 
+                      strokeWidth={2} 
+                      strokeDasharray="3 3"
+                      label={{ 
+                        value: `SYNC: ${syncDistance.toFixed(0)}m`, 
+                        fill: '#10b981', 
+                        fontSize: 9, 
+                        fontFamily: 'monospace',
+                        position: 'top'
+                      }} 
+                    />
+                  )}
+                  
                   <Scatter name={activeDriver1} data={d1.telemetry} line={{ strokeWidth: 1.5, stroke: '#3b82f6' }} shape={<></>} fill="#3b82f6" />
                   <Scatter name={activeDriver2} data={d2.telemetry} line={{ strokeWidth: 1.5, stroke: '#eab308' }} shape={<></>} fill="#eab308" />
                 </ScatterChart>
               </ResponsiveContainer>
             ) : (
               <div className="h-full w-full flex items-center justify-center font-mono text-zinc-600 bg-zinc-900/10 rounded border border-zinc-800/80 border-dashed">
-                ⚠️ TELEMETRY OVERLAY DATA RETRIEVAL FAILURE
+                [!] TELEMETRY OVERLAY DATA RETRIEVAL FAILURE
               </div>
             )}
           </div>
+          
+          {/* SYNCED APEX COMPARISON BOX */}
+          {syncedPoints && (
+            <div className="mt-4 p-4 bg-zinc-950/90 rounded-lg border border-emerald-500/30 font-mono text-xs shadow-md">
+              <div className="flex justify-between items-center pb-2 border-b border-zinc-800 mb-3">
+                <span className="text-emerald-400 font-bold uppercase tracking-wider">Synced Apex Comparison ({syncDistance.toFixed(0)}m)</span>
+                <button 
+                  onClick={() => setSyncDistance(null)}
+                  className="text-zinc-500 hover:text-white px-2 py-0.5 rounded border border-zinc-800 hover:bg-zinc-900 transition-all text-[10px]"
+                >
+                  Clear Sync
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Speed comparison */}
+                <div className="bg-zinc-900/40 p-2.5 rounded border border-zinc-800 flex flex-col justify-between">
+                  <span className="text-[9px] text-zinc-500 font-bold uppercase mb-1">Apex Speed</span>
+                  <div className="flex justify-between items-baseline">
+                    <span className="text-blue-400 font-black text-sm">{syncedPoints.p1.speed.toFixed(0)} km/h</span>
+                    <span className="text-zinc-600 text-[10px]">vs</span>
+                    <span className="text-yellow-500 font-black text-sm">{syncedPoints.p2.speed.toFixed(0)} km/h</span>
+                  </div>
+                  <div className="mt-2 text-[10px]">
+                    {syncedPoints.p1.speed > syncedPoints.p2.speed ? (
+                      <span className="text-blue-400 font-semibold">{activeDriver1} carrying {(syncedPoints.p1.speed - syncedPoints.p2.speed).toFixed(1)} km/h more speed</span>
+                    ) : syncedPoints.p1.speed < syncedPoints.p2.speed ? (
+                      <span className="text-yellow-500 font-semibold">{activeDriver2} carrying {(syncedPoints.p2.speed - syncedPoints.p1.speed).toFixed(1)} km/h more speed</span>
+                    ) : (
+                      <span className="text-zinc-400 font-semibold">Equal cornering speed</span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Throttle comparison */}
+                <div className="bg-zinc-900/40 p-2.5 rounded border border-zinc-800 flex flex-col justify-between">
+                  <span className="text-[9px] text-zinc-500 font-bold uppercase mb-1">Throttle Application</span>
+                  <div className="flex justify-between items-baseline">
+                    <span className="text-blue-400 font-black text-sm">{syncedPoints.p1.throttle.toFixed(0)}%</span>
+                    <span className="text-zinc-600 text-[10px]">vs</span>
+                    <span className="text-yellow-500 font-black text-sm">{syncedPoints.p2.throttle.toFixed(0)}%</span>
+                  </div>
+                  <div className="mt-2 text-[10px]">
+                    {syncedPoints.p1.throttle > syncedPoints.p2.throttle ? (
+                      <span className="text-emerald-400 font-semibold">{activeDriver1} back on power earlier</span>
+                    ) : syncedPoints.p1.throttle < syncedPoints.p2.throttle ? (
+                      <span className="text-emerald-400 font-semibold">{activeDriver2} back on power earlier</span>
+                    ) : (
+                      <span className="text-zinc-500">Identical throttle level</span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Brake comparison */}
+                <div className="bg-zinc-900/40 p-2.5 rounded border border-zinc-800 flex flex-col justify-between">
+                  <span className="text-[9px] text-zinc-500 font-bold uppercase mb-1">Braking State</span>
+                  <div className="flex justify-between items-baseline">
+                    <span className={`font-black text-sm ${syncedPoints.p1.brake > 0.1 ? 'text-red-500' : 'text-zinc-500'}`}>
+                      {syncedPoints.p1.brake > 0.1 ? 'BRAKING' : 'OFF'}
+                    </span>
+                    <span className="text-zinc-600 text-[10px]">vs</span>
+                    <span className={`font-black text-sm ${syncedPoints.p2.brake > 0.1 ? 'text-red-500' : 'text-zinc-500'}`}>
+                      {syncedPoints.p2.brake > 0.1 ? 'BRAKING' : 'OFF'}
+                    </span>
+                  </div>
+                  <div className="mt-2 text-[10px]">
+                    {syncedPoints.p1.brake > 0.1 && syncedPoints.p2.brake <= 0.1 ? (
+                      <span className="text-rose-400 font-semibold">{activeDriver1} braking later/longer</span>
+                    ) : syncedPoints.p2.brake > 0.1 && syncedPoints.p1.brake <= 0.1 ? (
+                      <span className="text-rose-400 font-semibold">{activeDriver2} braking later/longer</span>
+                    ) : syncedPoints.p1.brake > 0.1 && syncedPoints.p2.brake > 0.1 ? (
+                      <span className="text-rose-400 font-semibold">Both drivers decelerating</span>
+                    ) : (
+                      <span className="text-zinc-500">Full speed acceleration zone</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       
@@ -218,6 +345,8 @@ export default function H2H({ year, gp }) {
         driver2={activeDriver2}
         d1Telemetry={d1?.telemetry || []}
         d2Telemetry={d2?.telemetry || []}
+        syncDistance={syncDistance}
+        onPointSelect={setSyncDistance}
       />
     </div>
   );

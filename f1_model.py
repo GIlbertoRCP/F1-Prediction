@@ -301,15 +301,54 @@ def safe_merge(base: pd.DataFrame, df: pd.DataFrame, on: str = "Driver") -> pd.D
     cols = [c for c in df.columns if c not in base.columns or c == on]
     return base.merge(df[cols], on=on, how="left")
 
+def load_parquet_cache(year: int, gp: str, session: str) -> pd.DataFrame | None:
+    cache_path = os.path.join(
+        ".f1_cache",
+        "parquet",
+        f"year={year}",
+        f"gp={gp}",
+        f"session={session}.parquet"
+    )
+    if os.path.exists(cache_path):
+        try:
+            df = pd.read_parquet(cache_path)
+            print(f"    [CACHE] Loaded {session} features from Parquet cache")
+            return df
+        except Exception as e:
+            print(f"    [CACHE] Error loading Parquet cache for {session}: {e}")
+    return None
+
+def save_parquet_cache(df: pd.DataFrame, year: int, gp: str, session: str) -> None:
+    if df is None:
+        return
+    cache_dir = os.path.join(
+        ".f1_cache",
+        "parquet",
+        f"year={year}",
+        f"gp={gp}"
+    )
+    os.makedirs(cache_dir, exist_ok=True)
+    cache_path = os.path.join(cache_dir, f"session={session}.parquet")
+    try:
+        df.to_parquet(cache_path, compression="snappy")
+        print(f"    [CACHE] Saved {session} features to Parquet cache")
+    except Exception as e:
+        print(f"    [CACHE] Error saving Parquet cache for {session}: {e}")
+
 def get_base_drivers(year: int, gp: str) -> pd.DataFrame:
     """Loads driver list from session results table."""
+    df_cached = load_parquet_cache(year, gp, "base")
+    if df_cached is not None:
+        return df_cached
     for session_type in ["Q", "SQ", "R", "S"]:
         try:
             s = fastf1.get_session(year, gp, session_type)
             s.load(telemetry=False, weather=False, messages=False)
             drivers = s.results["Abbreviation"].tolist()
             if drivers:
-                return pd.DataFrame({"Driver": drivers, "year": year, "gp": gp})
+                df = pd.DataFrame({"Driver": drivers, "year": year, "gp": gp})
+                save_parquet_cache(df, year, gp, "base")
+                return df
         except Exception:
             continue
     return pd.DataFrame()
@@ -318,6 +357,9 @@ def get_base_drivers(year: int, gp: str) -> pd.DataFrame:
 # 6. PRACTICES/QUALIFYING EXTRACTORS
 # ─────────────────────────────────────────────────────────────────────────────
 def extract_fp1_features(year: int, gp: str) -> pd.DataFrame:
+    df_cached = load_parquet_cache(year, gp, "fp1")
+    if df_cached is not None:
+        return df_cached
     print(f"    [FP1] Extracting features for {gp} {year}")
     dfs = []
     for fn, kwargs, label in [
@@ -333,13 +375,19 @@ def extract_fp1_features(year: int, gp: str) -> pd.DataFrame:
         except Exception as e:
             print(f"      WARN fp1.{label}: {e}")
     if not dfs:
-        return pd.DataFrame()
+        result = pd.DataFrame()
+        save_parquet_cache(result, year, gp, "fp1")
+        return result
     result = dfs[0]
     for df in dfs[1:]:
         result = safe_merge(result, df)
+    save_parquet_cache(result, year, gp, "fp1")
     return result
 
 def extract_fp2_features(year: int, gp: str) -> pd.DataFrame:
+    df_cached = load_parquet_cache(year, gp, "fp2")
+    if df_cached is not None:
+        return df_cached
     print(f"    [FP2] Extracting features for {gp} {year}")
     dfs = []
     for fn, kwargs, label in [
@@ -378,13 +426,19 @@ def extract_fp2_features(year: int, gp: str) -> pd.DataFrame:
             print(f"      WARN fp2.{label}: {e}")
 
     if not dfs:
-        return pd.DataFrame()
+        result = pd.DataFrame()
+        save_parquet_cache(result, year, gp, "fp2")
+        return result
     result = dfs[0]
     for df in dfs[1:]:
         result = safe_merge(result, df)
+    save_parquet_cache(result, year, gp, "fp2")
     return result
 
 def extract_fp3_features(year: int, gp: str) -> pd.DataFrame:
+    df_cached = load_parquet_cache(year, gp, "fp3")
+    if df_cached is not None:
+        return df_cached
     print(f"    [FP3] Extracting features for {gp} {year}")
     dfs = []
     for fn, kwargs, label in [
@@ -403,13 +457,19 @@ def extract_fp3_features(year: int, gp: str) -> pd.DataFrame:
         except Exception as e:
             print(f"      WARN fp3.{label}: {e}")
     if not dfs:
-        return pd.DataFrame()
+        result = pd.DataFrame()
+        save_parquet_cache(result, year, gp, "fp3")
+        return result
     result = dfs[0]
     for df in dfs[1:]:
         result = safe_merge(result, df)
+    save_parquet_cache(result, year, gp, "fp3")
     return result
 
 def extract_sprint_features(year: int, gp: str) -> pd.DataFrame:
+    df_cached = load_parquet_cache(year, gp, "sprint")
+    if df_cached is not None:
+        return df_cached
     print(f"    [SQ+S] Extracting features for {gp} {year}")
     dfs = []
     for fn, kwargs, label in [
@@ -442,13 +502,19 @@ def extract_sprint_features(year: int, gp: str) -> pd.DataFrame:
         print(f"      WARN sprint.race_results: {e}")
 
     if not dfs:
-        return pd.DataFrame()
+        result = pd.DataFrame()
+        save_parquet_cache(result, year, gp, "sprint")
+        return result
     result = dfs[0]
     for df in dfs[1:]:
         result = safe_merge(result, df)
+    save_parquet_cache(result, year, gp, "sprint")
     return result
 
 def extract_quali_features(year: int, gp: str) -> pd.DataFrame:
+    df_cached = load_parquet_cache(year, gp, "quali")
+    if df_cached is not None:
+        return df_cached
     print(f"    [Q] Extracting features for {gp} {year}")
     dfs = []
     for fn, kwargs, label in [
@@ -463,13 +529,19 @@ def extract_quali_features(year: int, gp: str) -> pd.DataFrame:
         except Exception as e:
             print(f"      WARN quali.{label}: {e}")
     if not dfs:
-        return pd.DataFrame()
+        result = pd.DataFrame()
+        save_parquet_cache(result, year, gp, "quali")
+        return result
     result = dfs[0]
     for df in dfs[1:]:
         result = safe_merge(result, df)
+    save_parquet_cache(result, year, gp, "quali")
     return result
 
 def extract_team_features(year: int, gp: str) -> pd.DataFrame:
+    df_cached = load_parquet_cache(year, gp, "team")
+    if df_cached is not None:
+        return df_cached
     print(f"    [TEAM] Extracting features for {gp} {year}")
     try:
         df_team = f1_fe.get_team_info(year, gp, "Q")
@@ -477,10 +549,14 @@ def extract_team_features(year: int, gp: str) -> pd.DataFrame:
         df_team["pu_score"] = df_team["Team_norm"].map(PU_MAP).fillna(2).astype(float)
         df_team["is_works"] = df_team["Team_norm"].map(WORKS_MAP).fillna(0).astype(float)
         df_team["pu_is_works"] = df_team["pu_score"] * df_team["is_works"]
-        return df_team[["Driver", "Team", "pu_score", "is_works", "pu_is_works"]]
+        result = df_team[["Driver", "Team", "pu_score", "is_works", "pu_is_works"]]
+        save_parquet_cache(result, year, gp, "team")
+        return result
     except Exception as e:
         print(f"      WARN team_features: {e}")
-        return pd.DataFrame()
+        result = pd.DataFrame()
+        save_parquet_cache(result, year, gp, "team")
+        return result
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 7. FEATURE MATRIX BUILDER

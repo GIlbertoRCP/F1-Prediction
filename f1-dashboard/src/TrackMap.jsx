@@ -71,7 +71,7 @@ const getDeltaColor = (diff) => {
   return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
 };
 
-export default function TrackMap({ driver1, driver2, d1Telemetry = [], d2Telemetry = [] }) {
+export default function TrackMap({ driver1, driver2, d1Telemetry = [], d2Telemetry = [], syncDistance = null, onPointSelect = null }) {
   const [activeMetric, setActiveMetric] = useState('speed'); // speed, throttle, brake
   const [activeMode, setActiveMode] = useState('delta'); // driver1, driver2, delta
   const [hoveredPoint, setHoveredPoint] = useState(null);
@@ -141,6 +141,21 @@ export default function TrackMap({ driver1, driver2, d1Telemetry = [], d2Telemet
       speedRange: { min: minSpeed, max: maxSpeed }
     };
   }, [d1Telemetry, d2Telemetry]);
+
+  // Compute syncPoint as closest coordinate point to syncDistance
+  const syncPoint = useMemo(() => {
+    if (syncDistance === null || points.length === 0) return null;
+    let closest = points[0];
+    let minDiff = Math.abs(closest.distance - syncDistance);
+    for (let i = 1; i < points.length; i++) {
+      const diff = Math.abs(points[i].distance - syncDistance);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = points[i];
+      }
+    }
+    return closest;
+  }, [points, syncDistance]);
 
   // 2. Build colored segments
   const segments = useMemo(() => {
@@ -250,7 +265,7 @@ export default function TrackMap({ driver1, driver2, d1Telemetry = [], d2Telemet
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 border-b border-zinc-800 pb-4">
         <div>
           <h2 className="font-orbitron text-lg font-black uppercase tracking-wide border-l-4 border-emerald-500 pl-3 text-white flex items-center gap-2">
-            <span>🗺️</span> Spatial Track Telemetry Map
+            Spatial Track Telemetry Map
           </h2>
           <p className="text-[10px] font-mono text-zinc-500 pl-4 mt-0.5">2D POSITION OVERLAY | SHAPING TELEMETRY ACROSS CORNERS</p>
         </div>
@@ -306,6 +321,11 @@ export default function TrackMap({ driver1, driver2, d1Telemetry = [], d2Telemet
             className="w-full h-full cursor-crosshair max-w-[440px] select-none"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
+            onClick={() => {
+              if (hoveredPoint && onPointSelect) {
+                onPointSelect(hoveredPoint.distance);
+              }
+            }}
           >
             {/* Outline Underlayer path for glow */}
             <path
@@ -350,6 +370,31 @@ export default function TrackMap({ driver1, driver2, d1Telemetry = [], d2Telemet
                   cy={hoveredPoint.scaledY}
                   r={5}
                   fill={activeMode === 'delta' ? getDeltaColor(hoveredPoint.speed - (hoveredPoint.d2Point?.speed || 0)) : (activeMode === 'driver1' ? '#3b82f6' : '#eab308')}
+                  stroke="#ffffff"
+                  strokeWidth={1.5}
+                />
+              </>
+            )}
+
+            {/* Sync Dot Overlay */}
+            {syncPoint && (
+              <>
+                {/* Glowing ring */}
+                <circle
+                  cx={syncPoint.scaledX}
+                  cy={syncPoint.scaledY}
+                  r={12}
+                  fill="transparent"
+                  stroke="#10b981"
+                  strokeWidth={2}
+                  className="animate-pulse"
+                />
+                {/* Center dot */}
+                <circle
+                  cx={syncPoint.scaledX}
+                  cy={syncPoint.scaledY}
+                  r={6}
+                  fill="#10b981"
                   stroke="#ffffff"
                   strokeWidth={1.5}
                 />
@@ -430,8 +475,8 @@ export default function TrackMap({ driver1, driver2, d1Telemetry = [], d2Telemet
               </div>
             ) : (
               <div className="flex-grow flex flex-col items-center justify-center text-center font-mono text-zinc-500 border border-dashed border-zinc-800 rounded-lg p-6">
-                <span className="text-lg mb-2">🎯</span>
-                <span className="text-[10px] uppercase tracking-widest leading-relaxed">Hover over any corner of the 2D circuit map to inspect overlay parameters</span>
+                <span className="text-[10px] text-zinc-500 font-bold tracking-wider uppercase mb-2">Select Apex</span>
+                <span className="text-[10px] uppercase tracking-widest leading-relaxed">Hover or click any corner of the 2D circuit map to sync telemetry lines</span>
               </div>
             )}
           </div>
