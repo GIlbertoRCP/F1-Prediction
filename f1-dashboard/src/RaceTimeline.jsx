@@ -22,8 +22,8 @@ export default function RaceTimeline({ logs, gpName, year }) {
       <div className="bg-zinc-900/40 border border-zinc-800 p-8 rounded-lg mt-8 text-center max-w-2xl mx-auto flex flex-col items-center gap-6 shadow-2xl relative overflow-hidden">
         <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
         
-        <div className="h-14 w-14 bg-blue-950/40 text-blue-400 border border-blue-900 rounded-full flex items-center justify-center text-2xl font-bold animate-pulse font-mono">
-          ⏱
+        <div className="h-14 w-14 bg-blue-950/40 text-blue-400 border border-blue-900 rounded-full flex items-center justify-center text-xs font-bold animate-pulse font-mono">
+          TIME
         </div>
         <div>
           <h2 className="font-orbitron font-black text-lg text-white mb-2 uppercase tracking-wide">Pre-Race Event Bulletin</h2>
@@ -128,7 +128,7 @@ export default function RaceTimeline({ logs, gpName, year }) {
                   {phase.subtitle}
                 </div>
               </div>
-              {isActive && <span className="text-yellow-500 font-bold font-mono">⚡</span>}
+              {isActive && <span className="text-yellow-500 font-bold font-mono">[ACTIVE]</span>}
             </div>
           );
         })}

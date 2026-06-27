@@ -46,7 +46,7 @@ export default function EngineBattle({ year, gp }) {
     return (
       <div className="bg-red-950/20 border border-red-900/50 p-6 rounded-lg font-mono text-red-500 text-xs max-w-lg mx-auto flex flex-col gap-2">
         <h3 className="font-bold text-sm uppercase tracking-wider flex items-center gap-2">
-          <span>⚠️</span> Engine Analytics Error
+          <span>[!]</span> Engine Analytics Error
         </h3>
         <p className="text-zinc-300">{error}</p>
         <span className="text-[10px] text-zinc-500 border-t border-red-900/20 pt-2 uppercase">
