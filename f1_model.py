@@ -26,6 +26,7 @@ sys.modules["f1_fe"] = f1_fe
 _spec.loader.exec_module(f1_fe)
 
 import fastf1
+from weekend_format import is_sprint_weekend
 
 fastf1.Cache.enable_cache("./.f1_cache")
 
@@ -125,6 +126,11 @@ UPGRADE_DESC = {
 UPGRADE_SIGMA_PER_POINT = 0.18
 GRID_ANCHOR_WEIGHT = 0.30
 SPRINT_BOOST_SIGMA = 0.20
+
+# "fixed": any session called "Sprint*" marks a sprint weekend (correct for 2022-2026 formats).
+# "legacy": the original check, which only matched 2022-2023 and missed every 2024+ sprint weekend;
+#          kept so scripts/export_model_scores.py --legacy-sprint-detection can reproduce old results.
+SPRINT_DETECTION = "fixed"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 2. CIRCUIT PROFILE DYNAMIC RESOLVER
@@ -565,9 +571,7 @@ def build_race_features(year: int, gp: str, include_circuit_context: bool = True
     """Assembles full feature matrix for a specific Grand Prix."""
     try:
         event = fastf1.get_event(year, gp)
-        # Check event format to identify sprint weekends
-        event_format = event.get_session_name(4)
-        is_sprint = event_format == "Sprint"
+        is_sprint = is_sprint_weekend(event, legacy=(SPRINT_DETECTION == "legacy"))
     except Exception:
         is_sprint = False
 
@@ -1209,8 +1213,7 @@ def train_and_predict_for_race(year: int, gp: str, use_cache: bool = True, diagn
 
     # Detect sprint weekend
     try:
-        event_format = event.get_session_name(4)
-        is_sprint = event_format == "Sprint"
+        is_sprint = is_sprint_weekend(event, legacy=(SPRINT_DETECTION == "legacy"))
     except Exception:
         is_sprint = False
 

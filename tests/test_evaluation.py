@@ -227,7 +227,7 @@ class RankerTests(unittest.TestCase):
         races = make_races(n_races=70, pole_wins=0.5, seed=5)
         table = build_feature_table(races)
         for informative in (True, False):
-            res, betas = evaluate_scored(races, table, make_scores(races, informative), min_scored=20)
+            res, betas = evaluate_scored(races, table, {"ranker": make_scores(races, informative)}, min_scored=20)
             base = sum(s.logloss for s in res["grid_plus_form"]) / len(res["grid_plus_form"])
             stacked = sum(s.logloss for s in res["grid_form_plus_ranker"]) / len(res["grid_form_plus_ranker"])
             if informative:
@@ -276,6 +276,18 @@ class RankerTests(unittest.TestCase):
             scores, warns = load_scores(path, races)
         self.assertEqual(len(scores[races[0].key]), len(races[0].entries))
         self.assertEqual(len(warns), 1)
+
+    def test_two_variants_are_compared_on_identical_races(self):
+        races = make_races(n_races=60, pole_wins=0.5, seed=21)
+        table = build_feature_table(races)
+        a, b = make_scores(races, True, seed=1), make_scores(races, False, seed=2)
+        del b[races[-1].key]                                   # variant b lacks the last race
+        res, betas = evaluate_scored(races, table, {"fixed": a, "legacy": b}, min_scored=20)
+        counts = {len(v) for v in res.values()}
+        self.assertEqual(counts, {len(races) - 1 - 20})        # every model scored on the same races
+        self.assertIn("grid_form_plus_fixed", res)
+        self.assertIn("legacy_only", res)
+        self.assertGreater(betas["fixed_only"][0], betas["legacy_only"][0])
 
 
 if __name__ == "__main__":

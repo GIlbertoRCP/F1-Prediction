@@ -7,6 +7,12 @@ Results are appended to data/model_scores/xgb_ranker_<year>.csv and can be score
 
     python3 -m evaluation.run --scores data/model_scores/xgb_ranker_2026.csv
 
+--legacy-sprint-detection reproduces the model as it was before the sprint-weekend fix (the old check
+missed every 2024+ sprint weekend). It writes to xgb_ranker_<year>_legacy.csv so the two variants never
+mix, and both can be compared in one report:
+
+    python3 -m evaluation.run --scores fixed=data/model_scores/xgb_ranker_2026.csv legacy=data/model_scores/xgb_ranker_2026_legacy.csv
+
 Needs the project's Python environment (FastF1, XGBoost, pandas), so run it with uv:
 
     uv run python scripts/export_model_scores.py --rounds 2     # quick smoke test on one race
@@ -29,7 +35,7 @@ os.chdir(ROOT)                      # f1_model.py reads team_mappings.json / ./.
 sys.path.insert(0, str(ROOT))
 
 FIELDS = ["season", "round", "race", "driver", "team", "grid_position", "rank_score",
-          "predicted_position", "model_code_commit", "exported_at"]
+          "predicted_position", "sprint_detection", "model_code_commit", "exported_at"]
 
 
 def completed_rounds(year: int) -> set[int]:
@@ -60,6 +66,8 @@ def main() -> None:
                     help="Season to backtest. The model's power-unit/upgrade priors are 2026-specific.")
     ap.add_argument("--rounds", type=str, default="", help="Comma-separated round numbers (default: all completed)")
     ap.add_argument("--force", action="store_true", help="Recompute rounds that are already in the CSV")
+    ap.add_argument("--legacy-sprint-detection", action="store_true",
+                    help="Reproduce the pre-fix model (sprint weekends treated as standard); writes a *_legacy.csv file")
     ap.add_argument("--fresh-features", action="store_true",
                     help="Ignore the Parquet feature cache (slower; use if you suspect stale cached features)")
     args = ap.parse_args()
@@ -73,8 +81,11 @@ def main() -> None:
 
     if args.fresh_features:
         f1_model.load_parquet_cache = lambda *a, **k: None
+    mode = "legacy" if args.legacy_sprint_detection else "fixed"
+    f1_model.SPRINT_DETECTION = mode
 
-    out = ROOT / "data" / "model_scores" / f"xgb_ranker_{args.year}.csv"
+    out = ROOT / "data" / "model_scores" / (f"xgb_ranker_{args.year}_legacy.csv" if mode == "legacy"
+                                            else f"xgb_ranker_{args.year}.csv")
     out.parent.mkdir(parents=True, exist_ok=True)
 
     wanted = {int(x) for x in args.rounds.split(",") if x.strip()} if args.rounds else None
@@ -92,7 +103,7 @@ def main() -> None:
         return
 
     commit = git_commit()
-    print(f"Exporting {len(todo)} round(s) from model code {commit}: {[r for r, _ in todo]}")
+    print(f"Exporting {len(todo)} round(s) from model code {commit} (sprint detection: {mode}): {[r for r, _ in todo]}")
     new_file = not out.exists() or args.force
     if args.force and out.exists():
         keep = []
@@ -125,7 +136,7 @@ def main() -> None:
                     "season": args.year, "round": rnd, "race": name, "driver": r["Driver"],
                     "team": r.get("Team", ""), "grid_position": r.get("grid_position", ""),
                     "rank_score": float(r["rank_score"]), "predicted_position": int(r["predicted_position"]),
-                    "model_code_commit": commit, "exported_at": now,
+                    "sprint_detection": mode, "model_code_commit": commit, "exported_at": now,
                 })
         print(f"Round {rnd} saved ({len(df)} drivers) in {time.time() - t0:.0f}s; "
               f"predicted winner: {df.iloc[0]['Driver']}", flush=True)

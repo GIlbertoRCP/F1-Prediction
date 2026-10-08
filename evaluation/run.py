@@ -4,6 +4,7 @@
     python3 -m evaluation.run --min-train 30
     python3 -m evaluation.run --predictions my_model.csv   # score a model that outputs win probabilities
     python3 -m evaluation.run --scores data/model_scores/xgb_ranker_2026.csv   # score a ranker's raw scores
+    python3 -m evaluation.run --scores fixed=a.csv legacy=b.csv   # compare variants on the same races
 
 --predictions CSV columns: season, round, driver_id (or driver), win_prob.
 Probabilities are floored at 0.001 and re-normalised per race so a model is not
@@ -78,15 +79,23 @@ def load_scores(path: Path, races):
     return scores, warnings
 
 
-def evaluate_scored(races, table, scores, min_scored: int):
-    """Walk-forward over races that have scores; baselines are evaluated on exactly the same races."""
+BASELINES = ("uniform", "grid_prior", "form_only", "grid_plus_form")
+
+
+def evaluate_scored(races, table, scores_by_label: dict, min_scored: int):
+    """Walk-forward over races that EVERY score file covers; baselines use exactly the same races.
+
+    scores_by_label: {label: {race_key: {driver_id: score}}}. For each label two models are built:
+    `<label>_only` and `grid_form_plus_<label>` (the score stacked on the grid+form baseline).
+    """
     idx_of = {r.key: i for i, r in enumerate(races)}
-    scored_idx = sorted(idx_of[k] for k in scores if k in idx_of)
+    common = set.intersection(*(set(sc) for sc in scores_by_label.values()))
+    scored_idx = sorted(idx_of[k] for k in common if k in idx_of)
     eval_idx = scored_idx[min_scored:]
-    models = default_models() + [
-        RankerModel("ranker_only", scores),
-        RankerModel("grid_form_plus_ranker", scores, stack_on_baseline=True),
-    ]
+    models = default_models()
+    for label, sc in scores_by_label.items():
+        models.append(RankerModel(f"{label}_only", sc))
+        models.append(RankerModel(f"grid_form_plus_{label}", sc, stack_on_baseline=True))
     results = {m.name: [] for m in models}
     betas = {}
     for t in eval_idx:
@@ -114,27 +123,39 @@ def ranker_section(title, results, betas, seed, note="") -> str:
         out.append(f"| `{name}` | {fmt_ci(s['top1'], pct=True)} | {fmt_ci(s['top3'], pct=True)} | "
                    f"{fmt_ci(s['mean_rank'], nd=2)} | {fmt_ci(s['logloss'])} | {fmt_ci(s['brier'])} |")
     out.append("")
+    ranker_names = [m for m in results if m not in BASELINES]
     for ref in ("grid_prior", "grid_plus_form"):
         out.append(f"Paired log-loss difference vs `{ref}` (negative = better):")
-        for name in ("ranker_only", "grid_form_plus_ranker"):
+        for name in ranker_names:
             d, (lo, hi) = paired_diff_ci([x.logloss for x in results[name]],
                                          [x.logloss for x in results[ref]], seed=seed)
             verdict = "better" if hi < 0 else ("worse" if lo > 0 else "not distinguishable")
             out.append(f"- `{name}`: {d:+.3f} [{lo:+.3f}, {hi:+.3f}] → **{verdict}**")
         out.append("")
+    stacked = [m for m in ranker_names if m.startswith("grid_form_plus_")]
+    if len(stacked) >= 2:
+        a = stacked[0]
+        out.append(f"Variant comparison, stacked models (negative = `{a}` is better):")
+        for b in stacked[1:]:
+            d, (lo, hi) = paired_diff_ci([x.logloss for x in results[a]], [x.logloss for x in results[b]], seed=seed)
+            verdict = "better" if hi < 0 else ("worse" if lo > 0 else "not distinguishable")
+            out.append(f"- `{a}` vs `{b}`: {d:+.3f} [{lo:+.3f}, {hi:+.3f}] → **{verdict}**")
+        out.append("")
     if betas:
-        out.append("Fitted weight on the ranker score at the last race (0 = ignored; larger = trusted more): "
-                   + ", ".join(f"`{k}` β={b:.2f} (from {n_tr} earlier scored races)" for k, (b, n_tr) in betas.items()) + "\n")
+        out.append("Fitted weight on the score at the last race (0 = ignored; larger = trusted more): "
+                   + ", ".join(f"`{k}` β={b:.2f} (from {n_tr} earlier races)" for k, (b, n_tr) in betas.items()) + "\n")
     return "\n".join(out)
 
 
-def build_ranker_report(races, table, scores, warnings, min_scored, freeze_date, seed) -> str:
-    results, betas = evaluate_scored(races, table, scores, min_scored)
+def build_ranker_report(races, table, scores_by_label, warnings, min_scored, freeze_date, seed) -> str:
+    results, betas = evaluate_scored(races, table, scores_by_label, min_scored)
     date_of = {r.key: r.date for r in races}
+    n_common = len(set.intersection(*(set(sc) for sc in scores_by_label.values())))
     out = ["\n## Your ranker vs the baselines\n"]
-    out.append(f"Scores exist for {len(scores)} races; the first {min_scored} are used only to fit the score→probability "
-               f"mapping, the rest are evaluated. Every row below is scored on the **same races**. "
-               f"Treat conclusions as provisional: samples this small give wide intervals.\n")
+    out.append(f"Score file(s): {', '.join(f'`{l}`' for l in scores_by_label)}. {n_common} races have scores in every file; "
+               f"the first {min_scored} are used only to fit the score→probability mapping, the rest are evaluated. "
+               f"Every row below is scored on the **same races**. Treat conclusions as provisional: samples this small "
+               f"give wide intervals.\n")
     for w in warnings:
         out.append(f"> **Warning:** {w}\n")
     out.append(ranker_section("All evaluated scored races", results, betas, seed,
@@ -203,7 +224,9 @@ def main():
     ap.add_argument("--min-train", type=int, default=15)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--predictions", type=Path, help="CSV of your own model's win probabilities")
-    ap.add_argument("--scores", type=Path, help="CSV of a ranker's raw scores (see scripts/export_model_scores.py)")
+    ap.add_argument("--scores", nargs="+", metavar="[LABEL=]CSV",
+                    help="CSV(s) of a ranker's raw scores (see scripts/export_model_scores.py). "
+                         "Give several as label=path to compare variants on the same races.")
     ap.add_argument("--min-scored", type=int, default=4,
                     help="Scored races used only to fit the score->probability mapping before evaluating")
     ap.add_argument("--freeze-date", default="2026-06-17",
@@ -212,22 +235,26 @@ def main():
     args = ap.parse_args()
 
     races = load_races(args.results_dir)
-    for flag, path, hint in (
-        ("--scores", args.scores, "Create it first with: uv run python scripts/export_model_scores.py"),
-        ("--predictions", args.predictions, ""),
-    ):
+    score_files: dict[str, Path] = {}
+    for i, spec in enumerate(args.scores or []):
+        label, _, path = spec.rpartition("=")
+        score_files[label or ("ranker" if len(args.scores) == 1 else f"ranker{i + 1}")] = Path(path)
+    for flag, path, hint in [("--scores", p, "Create it first with: uv run python scripts/export_model_scores.py")
+                             for p in score_files.values()] + [("--predictions", args.predictions, "")]:
         if path and not path.exists():
             raise SystemExit(f"{flag} file not found: {path}. {hint}".strip())
-    if len(races) <= args.min_train + 5:
-        raise SystemExit(f"Only {len(races)} races found in {args.results_dir}; need more than {args.min_train + 5}.")
     external = load_external(args.predictions, races) if args.predictions else None
     results = walk_forward(races, default_models(), args.min_train, build_feature_table(races), external)
     report = build_report(races, results, args.min_train, args.seed)
-    if args.scores:
-        scores, warns = load_scores(args.scores, races)
-        if len(scores) <= args.min_scored + 1:
-            raise SystemExit(f"Only {len(scores)} scored race(s) matched the results; need more than {args.min_scored + 1}.")
-        report += build_ranker_report(races, build_feature_table(races), scores, warns,
+    if score_files:
+        loaded, warns = {}, []
+        for label, path in score_files.items():
+            loaded[label], w = load_scores(path, races)
+            warns += [f"[{label}] {x}" for x in w]
+        common = set.intersection(*(set(v) for v in loaded.values()))
+        if len(common) <= args.min_scored + 1:
+            raise SystemExit(f"Only {len(common)} race(s) are scored in every file; need more than {args.min_scored + 1}.")
+        report += build_ranker_report(races, build_feature_table(races), loaded, warns,
                                       args.min_scored, args.freeze_date, args.seed)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(report)

@@ -57,11 +57,16 @@ python3 -m unittest discover -s tests     # run the tests
 
 ### Backtesting the XGBRanker model
 
+Run these one at a time (the export is slow; it saves after every race and can be resumed):
+
 ```bash
-uv run python scripts/export_model_scores.py --rounds 2     # smoke test: one race
-uv run python scripts/export_model_scores.py                # all completed 2026 races (resumable)
-python3 -m evaluation.run --scores data/model_scores/xgb_ranker_2026.csv
+uv run python scripts/export_model_scores.py --rounds 2        # smoke test: one race
+uv run python scripts/export_model_scores.py                   # all completed 2026 races
+uv run python scripts/export_model_scores.py --legacy-sprint-detection   # same, with the pre-fix behaviour
+python3 -m evaluation.run --scores fixed=data/model_scores/xgb_ranker_2026.csv legacy=data/model_scores/xgb_ranker_2026_legacy.csv
 ```
+
+**Sprint-weekend fix.** The original check `get_session_name(4) == "Sprint"` only matched the 2022-2023 sprint layout, so every 2024+ sprint weekend (e.g. China 2026) was treated as a standard weekend: FP2/FP3 features were empty and the sprint features and sprint adjustment were never used. `weekend_format.is_sprint_weekend` now checks every session name. `--legacy-sprint-detection` reproduces the old behaviour so the two versions can be compared. Per-race models cached by the dashboard (`.f1_cache/model_*.pkl`) were trained before the fix; delete them for sprint races to get fresh predictions.
 
 The export runs the same code path as the dashboard (`train_and_predict_for_race`) with the pickled-model cache and slow diagnostics switched off, so each race is predicted by a model trained on earlier races only. The report then scores the model's rank scores alone (`ranker_only`) and stacked on the grid+form baseline (`grid_form_plus_ranker`, which answers "do the telemetry features add anything?"). A second table covers only races after `--freeze-date` (default 2026-06-17, when the model code was last edited), i.e. races the hand-set constants could not have been tuned on. The model's power-unit and upgrade priors are 2026-specific, so only 2026 races are backtested.
 
