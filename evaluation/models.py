@@ -12,8 +12,17 @@ from collections import defaultdict
 
 from .data import Race
 
-FEATURES = ["log_grid", "team_score", "driver_score", "driver_win", "team_win"]
+BASE_FEATURES = ["log_grid", "team_score", "driver_score", "driver_win", "team_win"]
+# Qualifying-pace features (percent off the fastest qualifying lap of the weekend):
+#   q_gap          this driver's gap on Saturday
+#   team_q_gap     the team's best gap on Saturday (car pace, independent of one driver's mistake)
+#   log_quali_pos  log of the qualifying classification (differs from the grid after penalties)
+#   driver_q_form / team_q_form  exponentially weighted gap over earlier weekends
+QUALI_FEATURES = ["q_gap", "team_q_gap", "log_quali_pos", "driver_q_form", "team_q_form"]
+FEATURES = BASE_FEATURES + QUALI_FEATURES
 HALFLIFE = 6.0  # in appearances
+Q_GAP_CAP = 5.0       # percent; also used when a driver set no time
+Q_GAP_DEFAULT = 2.0   # form prior for a driver/team with no history
 
 
 class _EW:
@@ -39,15 +48,25 @@ def finish_score(entry, n: int) -> float:
     return 1.0 - (entry.finish_position - 1) / max(n - 1, 1)
 
 
+def _gap(entry) -> float:
+    g = entry.q_gap
+    return Q_GAP_CAP if g is None else min(max(g, 0.0), Q_GAP_CAP)
+
+
 def build_feature_table(races: list[Race], halflife: float = HALFLIFE):
     """table[i] = list of (driver_id, feature_vector, won) for races[i], using races[:i] only."""
     decay = 0.5 ** (1.0 / halflife)
     d_score, d_win = defaultdict(_EW), defaultdict(_EW)
     t_score, t_win = defaultdict(_EW), defaultdict(_EW)
+    d_q, t_q = defaultdict(_EW), defaultdict(_EW)
     table = []
     for race in races:
         n = len(race.entries)
         winner = race.winner_id
+        gaps = {e.driver_id: _gap(e) for e in race.entries}
+        team_best = {}
+        for e in race.entries:
+            team_best[e.team] = min(team_best.get(e.team, Q_GAP_CAP), gaps[e.driver_id])
         rows = []
         for e in race.entries:
             rows.append((
@@ -58,6 +77,11 @@ def build_feature_table(races: list[Race], halflife: float = HALFLIFE):
                     d_score[e.driver_id].mean(0.5),
                     d_win[e.driver_id].mean(0.0),
                     t_win[e.team].mean(0.0),
+                    gaps[e.driver_id],
+                    team_best[e.team],
+                    math.log(e.quali_position if e.quali_position else e.grid),
+                    d_q[e.driver_id].mean(Q_GAP_DEFAULT),
+                    t_q[e.team].mean(Q_GAP_DEFAULT),
                 ],
                 e.driver_id == winner,
             ))
@@ -71,6 +95,10 @@ def build_feature_table(races: list[Race], halflife: float = HALFLIFE):
             team_scores[e.team].append(s)
             if e.driver_id == winner:
                 team_won[e.team] = 1.0
+        for e in race.entries:
+            d_q[e.driver_id].update(gaps[e.driver_id], decay)
+        for team, g in team_best.items():
+            t_q[team].update(g, decay)
         for team, ss in team_scores.items():
             t_score[team].update(sum(ss) / len(ss), decay)
             t_win[team].update(team_won.get(team, 0.0), decay)
@@ -229,5 +257,7 @@ def default_models():
         Uniform(),
         GridPrior(),
         ConditionalLogit("form_only", ["team_score", "driver_score", "driver_win", "team_win"]),
-        ConditionalLogit("grid_plus_form", FEATURES),
+        ConditionalLogit("grid_plus_form", BASE_FEATURES),
+        ConditionalLogit("grid_form_qgap", BASE_FEATURES + ["q_gap", "team_q_gap"]),
+        ConditionalLogit("grid_form_quali", FEATURES),
     ]

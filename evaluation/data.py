@@ -15,6 +15,8 @@ class Entry:
     grid: int            # effective starting slot (pit-lane starts go to the back)
     finish_position: int | None  # None if not classified
     classified: bool
+    quali_position: int | None = None   # official qualifying classification (None if unknown)
+    q_gap: float | None = None          # best qualifying lap vs the fastest in the session, in % (None if no time)
 
 
 @dataclass
@@ -37,18 +39,58 @@ class Race:
         return None
 
 
+def parse_lap(text) -> float | None:
+    """'1:16.732' -> 76.732 seconds; blank/garbage -> None."""
+    text = str(text or "").strip()
+    if not text:
+        return None
+    try:
+        if ":" in text:
+            m, s = text.split(":", 1)
+            return int(m) * 60 + float(s)
+        return float(text)
+    except ValueError:
+        return None
+
+
+def load_qualifying(results_dir: Path) -> dict[tuple[int, int], dict[str, tuple[int | None, float | None]]]:
+    """(season, round) -> driver_id -> (quali_position, gap % to the session's fastest lap).
+
+    A driver's lap is their best time across Q1/Q2/Q3. Gaps are relative to the fastest
+    lap set by anyone in that session, so they are comparable across circuits.
+    """
+    out: dict[tuple[int, int], dict[str, tuple[int | None, float | None]]] = {}
+    raw: dict[tuple[int, int], list[tuple[str, int | None, float | None]]] = {}
+    for r in read_rows(Path(results_dir) / "qualifying.csv"):
+        laps = [t for t in (parse_lap(r.get(k)) for k in ("q1", "q2", "q3")) if t is not None]
+        pos = str(r.get("quali_position", "")).strip()
+        raw.setdefault((r["season"], r["round"]), []).append(
+            (r["driver_id"], int(pos) if pos.isdigit() else None, min(laps) if laps else None))
+    for key, rows in raw.items():
+        times = [t for _, _, t in rows if t is not None]
+        best = min(times) if times else None
+        out[key] = {
+            d: (pos, (t / best - 1.0) * 100.0 if (t is not None and best) else None)
+            for d, pos, t in rows
+        }
+    return out
+
+
 def load_races(results_dir: Path, min_entries: int = 10) -> list[Race]:
     """Races sorted chronologically. Races with no recorded winner are dropped."""
     grouped: dict[tuple[int, int], Race] = {}
+    quali = load_qualifying(results_dir)
     for r in read_rows(Path(results_dir) / "races.csv"):
         key = (r["season"], r["round"])
         race = grouped.setdefault(key, Race(r["season"], r["round"], r["race"], date=r.get("date", "")))
         fin = r["finish_position"]
+        qpos, qgap = quali.get(key, {}).get(r["driver_id"], (None, None))
         race.entries.append(Entry(
             driver=r["driver"], driver_id=r["driver_id"], team=r["team"],
             grid=int(r["grid"] or 0),
             finish_position=int(fin) if str(fin).strip() != "" else None,
             classified=str(r["classified"]) == "1",
+            quali_position=qpos, q_gap=qgap,
         ))
     races = []
     for key in sorted(grouped):
@@ -58,7 +100,7 @@ def load_races(results_dir: Path, min_entries: int = 10) -> list[Race]:
         n = len(race.entries)
         race.entries = [
             Entry(e.driver, e.driver_id, e.team, e.grid if e.grid > 0 else n + 1,
-                  e.finish_position, e.classified)
+                  e.finish_position, e.classified, e.quali_position, e.q_gap)
             for e in race.entries
         ]
         races.append(race)

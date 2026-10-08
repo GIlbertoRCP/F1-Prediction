@@ -8,10 +8,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from evaluation.data import Entry, Race, coverage
+from evaluation.data import Entry, Race, coverage, parse_lap, load_qualifying
 from evaluation.jolpica import parse_payload
 from evaluation.metrics import bootstrap_ci, calibration_table, score_race
-from evaluation.models import ConditionalLogit, FEATURES, GridPrior, build_feature_table, default_models
+from evaluation.models import BASE_FEATURES, ConditionalLogit, FEATURES, GridPrior, build_feature_table, default_models
 from evaluation.ranker import RankerModel, fit_beta, zscores
 from evaluation.run import evaluate_scored, load_scores
 from evaluation.walkforward import walk_forward
@@ -119,8 +119,51 @@ class NoLeakageTests(unittest.TestCase):
         table = build_feature_table(races)
         # first race: no history -> neutral defaults for every form feature
         for _, feats, _ in table[0]:
-            self.assertEqual(feats[1:3], [0.5, 0.5])
-            self.assertEqual(feats[3:], [0.0, 0.0])
+            self.assertEqual([feats[FEATURES.index(f)] for f in ("team_score", "driver_score")], [0.5, 0.5])
+            self.assertEqual([feats[FEATURES.index(f)] for f in ("driver_win", "team_win")], [0.0, 0.0])
+            self.assertEqual([feats[FEATURES.index(f)] for f in ("driver_q_form", "team_q_form")], [2.0, 2.0])
+
+
+class QualifyingFeatureTests(unittest.TestCase):
+    def test_parse_lap(self):
+        self.assertAlmostEqual(parse_lap("1:16.732"), 76.732)
+        self.assertAlmostEqual(parse_lap("59.5"), 59.5)
+        self.assertIsNone(parse_lap(""))
+        self.assertIsNone(parse_lap("abc"))
+
+    def test_gaps_relative_to_session_fastest_using_best_segment(self):
+        import tempfile, csv
+        with tempfile.TemporaryDirectory() as d:
+            with open(Path(d) / "qualifying.csv", "w", newline="") as f:
+                w = csv.writer(f)
+                w.writerow(["season", "round", "race", "date", "circuit", "driver", "driver_id", "team",
+                            "quali_position", "q1", "q2", "q3"])
+                w.writerow([2024, 1, "X", "d", "c", "AAA", "a", "t1", 1, "1:30.500", "1:30.200", "1:30.000"])
+                w.writerow([2024, 1, "X", "d", "c", "BBB", "b", "t2", 2, "1:31.000", "", ""])
+                w.writerow([2024, 1, "X", "d", "c", "CCC", "c", "t3", "", "", "", ""])
+            q = load_qualifying(Path(d))[(2024, 1)]
+        self.assertAlmostEqual(q["a"][1], 0.0)
+        self.assertAlmostEqual(q["b"][1], (91.0 / 90.0 - 1) * 100)
+        self.assertEqual(q["c"], (None, None))
+
+    def _with_gap(self, races, idx, driver, gap):
+        out = copy.deepcopy(races)
+        out[idx].entries = [
+            Entry(e.driver, e.driver_id, e.team, e.grid, e.finish_position, e.classified,
+                  e.quali_position, gap if e.driver_id == driver else e.q_gap)
+            for e in out[idx].entries]
+        return out
+
+    def test_quali_features_never_leak_backwards(self):
+        races = make_races(n_races=8)
+        base = build_feature_table(races)
+        changed = build_feature_table(self._with_gap(races, 4, "driver3", 0.01))
+        for i in range(4):                       # races before the change: identical
+            self.assertEqual(base[i], changed[i])
+        form = [FEATURES.index("driver_q_form"), FEATURES.index("team_q_form")]
+        for (d, fb, _), (_, fc, _) in zip(base[4], changed[4]):   # the race itself: form unchanged
+            self.assertEqual([fb[j] for j in form], [fc[j] for j in form])
+        self.assertNotEqual(base[5], changed[5])  # the next race sees it through the form features
 
 
 class ModelTests(unittest.TestCase):
@@ -135,14 +178,14 @@ class ModelTests(unittest.TestCase):
     def test_logit_learns_negative_grid_weight(self):
         races = make_races(n_races=80, pole_wins=0.7, seed=4)
         table = build_feature_table(races)
-        m = ConditionalLogit("t", FEATURES).fit(races, table)
+        m = ConditionalLogit("t", BASE_FEATURES).fit(races, table)
         self.assertLess(m.w[FEATURES.index("log_grid")], -0.2)
 
     def test_logit_fit_actually_maximises_likelihood(self):
         """Regression: an unguarded Newton solver once diverged to a likelihood worse than w=0."""
         races = make_races(n_races=60, pole_wins=0.6, seed=7)
         table = build_feature_table(races)
-        m = ConditionalLogit("t", FEATURES).fit(races, table)
+        m = ConditionalLogit("t", BASE_FEATURES).fit(races, table)
         groups = [rows for rows in table if any(r[2] for r in rows)]
         Z = [([m._x(r[1]) for r in rows], [r[2] for r in rows].index(True)) for rows in groups]
         f = lambda w: m._penalised_loglik(Z, w)

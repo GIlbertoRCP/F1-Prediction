@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import math
 
-from .models import ConditionalLogit, FEATURES
+from .models import BASE_FEATURES, ConditionalLogit
 
 
 def zscores(scores: dict[str, float], drivers: list[str]) -> list[float] | None:
@@ -83,7 +83,7 @@ class RankerModel:
 
     @staticmethod
     def _make_base():
-        return ConditionalLogit("grid_plus_form", FEATURES)
+        return ConditionalLogit("grid_plus_form", BASE_FEATURES)
 
     def _base_logp(self, race, races_before, table_before, rows):
         """log P(win) from the grid+form baseline fitted only on races before `race`."""

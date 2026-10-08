@@ -79,7 +79,7 @@ def load_scores(path: Path, races):
     return scores, warnings
 
 
-BASELINES = ("uniform", "grid_prior", "form_only", "grid_plus_form")
+BASELINES = ("uniform", "grid_prior", "form_only", "grid_plus_form", "grid_form_qgap", "grid_form_quali")
 
 
 def evaluate_scored(races, table, scores_by_label: dict, min_scored: int):
@@ -207,6 +207,15 @@ def build_report(races, results, min_train, seed) -> str:
             verdict = "better" if hi < 0 else ("worse" if lo > 0 else "not distinguishable")
             out.append(f"- `{name}`: {d:+.3f} [{lo:+.3f}, {hi:+.3f}] → **{verdict}**")
         out.append("")
+    quali = [n for n in ("grid_form_qgap", "grid_form_quali") if n in results]
+    if quali and "grid_plus_form" in results:
+        out.append("## Does qualifying pace help? Paired log-loss difference vs `grid_plus_form` (negative = better)\n")
+        base = [s.logloss for s in results["grid_plus_form"]]
+        for name in quali:
+            d, (lo, hi) = paired_diff_ci([s.logloss for s in results[name]], base, seed=seed)
+            verdict = "better" if hi < 0 else ("worse" if lo > 0 else "not distinguishable")
+            out.append(f"- `{name}`: {d:+.3f} [{lo:+.3f}, {hi:+.3f}] → **{verdict}**")
+        out.append("\nTwo qualifying variants were tried, so the better-looking one is mildly flattered by selection.\n")
     best = min(summ, key=lambda n: summ[n]["logloss"][0])
     out.append(f"## Calibration of `{best}` (pooled over all drivers)\n")
     out.append("| Predicted bucket | Driver-races | Mean predicted | Observed win rate |")
