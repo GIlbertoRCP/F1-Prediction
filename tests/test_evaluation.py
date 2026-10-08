@@ -12,6 +12,8 @@ from evaluation.data import Entry, Race, coverage
 from evaluation.jolpica import parse_payload
 from evaluation.metrics import bootstrap_ci, calibration_table, score_race
 from evaluation.models import ConditionalLogit, FEATURES, GridPrior, build_feature_table, default_models
+from evaluation.ranker import RankerModel, fit_beta, zscores
+from evaluation.run import evaluate_scored, load_scores
 from evaluation.walkforward import walk_forward
 
 
@@ -190,6 +192,90 @@ class ExternalPredictionTests(unittest.TestCase):
         self.assertEqual(len(res["uniform"]), 20)            # all models scored on the same races
         pole_hit = sum(s.top1 for s in res["oracle"]) / 20
         self.assertGreater(pole_hit, 0.5)
+
+
+
+def make_scores(races, informative: bool, seed=3):
+    """Synthetic ranker output per race: informative scores favour the true winner, otherwise pure noise."""
+    rng = random.Random(seed)
+    out = {}
+    for r in races:
+        out[r.key] = {
+            e.driver_id: rng.gauss(0, 1) + (2.5 if informative and e.driver_id == r.winner_id else 0.0)
+            for e in r.entries
+        }
+    return out
+
+
+class RankerTests(unittest.TestCase):
+    def test_zscores_fill_missing_with_worst(self):
+        z = zscores({"a": 3.0, "b": 1.0, "c": 2.0}, ["a", "b", "c", "d"])
+        self.assertAlmostEqual(sum(z[:3]), 0.0)
+        self.assertEqual(z[3], min(z[:3]))
+
+    def test_fit_beta_recovers_positive_signal_and_shrinks_noise(self):
+        races = make_races(n_races=80, pole_wins=0.4, seed=11)
+        for informative, check in ((True, lambda b: b > 0.8), (False, lambda b: abs(b) < 0.5)):
+            sc = make_scores(races, informative)
+            groups = []
+            for r in races:
+                drivers = [e.driver_id for e in r.entries]
+                groups.append(([0.0] * len(drivers), zscores(sc[r.key], drivers), drivers.index(r.winner_id)))
+            self.assertTrue(check(fit_beta(groups)), f"informative={informative}")
+
+    def test_stacked_model_improves_when_scores_informative_and_does_no_harm_when_noise(self):
+        races = make_races(n_races=70, pole_wins=0.5, seed=5)
+        table = build_feature_table(races)
+        for informative in (True, False):
+            res, betas = evaluate_scored(races, table, make_scores(races, informative), min_scored=20)
+            base = sum(s.logloss for s in res["grid_plus_form"]) / len(res["grid_plus_form"])
+            stacked = sum(s.logloss for s in res["grid_form_plus_ranker"]) / len(res["grid_form_plus_ranker"])
+            if informative:
+                self.assertLess(stacked, base - 0.3)
+            else:
+                self.assertLess(stacked, base + 0.1)   # shrinkage keeps noise from hurting much
+
+    def test_ranker_predictions_do_not_leak_the_future(self):
+        races = make_races(n_races=45, seed=9)
+        sc = make_scores(races, informative=True)
+        t = 35
+
+        def predict(rs, scores):
+            tb = build_feature_table(rs)
+            out = {}
+            for stack in (False, True):
+                m = RankerModel("x", scores, stack_on_baseline=stack).fit(rs[:t], tb[:t])
+                out[stack] = m.predict(rs[t], tb[t])
+            return out
+
+        base = predict(races, sc)
+        altered = copy.deepcopy(races)
+        sc2 = copy.deepcopy(sc)
+        for r in altered[t:]:                         # rewrite the target race and everything after it
+            n = len(r.entries)
+            r.entries = [Entry(e.driver, e.driver_id, e.team, e.grid, n - e.finish_position + 1, True) for e in r.entries]
+        for r in altered[t + 1:]:                     # future scores change too
+            sc2[r.key] = {d: -v for d, v in sc2[r.key].items()}
+        changed = predict(altered, sc2)
+        for stack in (False, True):
+            for d, p in base[stack].items():
+                self.assertAlmostEqual(p, changed[stack][d], places=12, msg=f"stack={stack} leaked for {d}")
+
+    def test_load_scores_maps_codes_and_warns_on_unknown_drivers(self):
+        import csv
+        import tempfile
+        races = make_races(n_races=3)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "scores.csv"
+            with open(path, "w", newline="") as f:
+                w = csv.writer(f)
+                w.writerow(["season", "round", "driver", "rank_score"])
+                for e in races[0].entries:
+                    w.writerow([races[0].season, races[0].round, e.driver, 1.0])
+                w.writerow([races[0].season, races[0].round, "ZZZ", 0.5])
+            scores, warns = load_scores(path, races)
+        self.assertEqual(len(scores[races[0].key]), len(races[0].entries))
+        self.assertEqual(len(warns), 1)
 
 
 if __name__ == "__main__":

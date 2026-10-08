@@ -55,6 +55,16 @@ python3 -m unittest discover -s tests     # run the tests
 
 `--predictions` expects a CSV with columns `season, round, driver_id, win_prob`. Baselines: uniform, a grid-slot prior ("the pole sitter wins"), team/driver form only, and grid plus form.
 
+### Backtesting the XGBRanker model
+
+```bash
+uv run python scripts/export_model_scores.py --rounds 2     # smoke test: one race
+uv run python scripts/export_model_scores.py                # all completed 2026 races (resumable)
+python3 -m evaluation.run --scores data/model_scores/xgb_ranker_2026.csv
+```
+
+The export runs the same code path as the dashboard (`train_and_predict_for_race`) with the pickled-model cache and slow diagnostics switched off, so each race is predicted by a model trained on earlier races only. The report then scores the model's rank scores alone (`ranker_only`) and stacked on the grid+form baseline (`grid_form_plus_ranker`, which answers "do the telemetry features add anything?"). A second table covers only races after `--freeze-date` (default 2026-06-17, when the model code was last edited), i.e. races the hand-set constants could not have been tuned on. The model's power-unit and upgrade priors are 2026-specific, so only 2026 races are backtested.
+
 ---
 
 ## Feature Engineering Library — f1_fe.py

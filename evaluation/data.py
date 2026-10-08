@@ -23,6 +23,7 @@ class Race:
     round: int
     name: str
     entries: list[Entry] = field(default_factory=list)
+    date: str = ""   # ISO date, e.g. 2026-05-03
 
     @property
     def key(self) -> tuple[int, int]:
@@ -41,7 +42,7 @@ def load_races(results_dir: Path, min_entries: int = 10) -> list[Race]:
     grouped: dict[tuple[int, int], Race] = {}
     for r in read_rows(Path(results_dir) / "races.csv"):
         key = (r["season"], r["round"])
-        race = grouped.setdefault(key, Race(r["season"], r["round"], r["race"]))
+        race = grouped.setdefault(key, Race(r["season"], r["round"], r["race"], date=r.get("date", "")))
         fin = r["finish_position"]
         race.entries.append(Entry(
             driver=r["driver"], driver_id=r["driver_id"], team=r["team"],

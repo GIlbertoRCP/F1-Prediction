@@ -1175,10 +1175,13 @@ def ablation_study(race_cache: list[dict], feature_cols: list[str]) -> None:
 # ─────────────────────────────────────────────────────────────────────────────
 # 11. DYNAMIC EXECUTION INTERFACE (GET OR TRAIN)
 # ─────────────────────────────────────────────────────────────────────────────
-def train_and_predict_for_race(year: int, gp: str) -> pd.DataFrame:
+def train_and_predict_for_race(year: int, gp: str, use_cache: bool = True, diagnostics: bool = True) -> pd.DataFrame:
     """
     Orchestrates dynamic model retrieval/training and runs predictions.
     Saves and loads trained models from cache to ensure performance.
+
+    use_cache=False  -> never load or save the per-race pickled model (always retrain; used for backtests).
+    diagnostics=False -> skip the slow LOO-CV / ablation printouts (they do not affect the prediction).
     """
     update_progress("preparing", "Initializing neural model setup...", 5)
     
@@ -1212,7 +1215,7 @@ def train_and_predict_for_race(year: int, gp: str) -> pd.DataFrame:
         is_sprint = False
 
     # Try loading cached model
-    if os.path.exists(model_path):
+    if use_cache and os.path.exists(model_path):
         print(f"[f1_model] Loading cached model for {gp_clean} {year} from disk...")
         try:
             with open(model_path, "rb") as f:
@@ -1321,28 +1324,30 @@ def train_and_predict_for_race(year: int, gp: str) -> pd.DataFrame:
             best_upgrade_sigma, best_anchor_weight = calibrate_params(race_cache, available_features, gp_clean)
 
         # Print diagnostics
-        print("\n=== RUNNING DIAGNOSTIC CV EVALUATIONS ===")
-        evaluate_loo_cv(race_cache, available_features)
-        ablation_study(race_cache, available_features)
+        if diagnostics:
+            print("\n=== RUNNING DIAGNOSTIC CV EVALUATIONS ===")
+            evaluate_loo_cv(race_cache, available_features)
+            ablation_study(race_cache, available_features)
 
         # Model training
         update_progress("training", "Fitting XGBoost pairwise ranking model...", 85)
         model, final_cols = train_model(df_train, available_features)
         
-        # Cache to disk
-        print(f"[f1_model] Saving trained model to {model_path}...")
-        try:
-            with open(model_path, "wb") as f:
-                pickle.dump({
-                    "model": model,
-                    "final_cols": final_cols,
-                    "features": available_features,
-                    "best_upgrade_sigma": best_upgrade_sigma,
-                    "best_anchor_weight": best_anchor_weight,
-                    "best_sprint_sigma": best_sprint_sigma
-                }, f)
-        except Exception as e:
-            print(f"[f1_model] Failed to cache model: {e}")
+        if use_cache:
+            # Cache to disk
+            print(f"[f1_model] Saving trained model to {model_path}...")
+            try:
+                with open(model_path, "wb") as f:
+                    pickle.dump({
+                        "model": model,
+                        "final_cols": final_cols,
+                        "features": available_features,
+                        "best_upgrade_sigma": best_upgrade_sigma,
+                        "best_anchor_weight": best_anchor_weight,
+                        "best_sprint_sigma": best_sprint_sigma
+                    }, f)
+            except Exception as e:
+                print(f"[f1_model] Failed to cache model: {e}")
 
     # Build features for inference target GP
     update_progress("inference", f"Building features for {gp_clean} {year}...", 90)
