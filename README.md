@@ -23,8 +23,12 @@ f1/
 │   │   ├── MonteCarlo.jsx     # Stochastic race outcome simulator
 │   │   └── RaceTimeline.jsx   # Live Race Control events log
 │   └── Dockerfile.frontend    # Docker config for the frontend
-├── miami/
-│   └── miami_model.py         # Dedicated Miami 2026 prediction script
+├── evaluation/                # Walk-forward winner-prediction evaluation (stdlib only)
+├── scripts/                   # fetch_results.py, extract_cached_results.py
+├── data/results/              # Race / qualifying / sprint results (CSV)
+├── reports/baselines.md       # Latest baseline evaluation report
+├── tests/                     # Unit tests (python3 -m unittest discover -s tests)
+├── legacy/miami/              # Old per-session Miami scripts (kept for reference)
 ├── circuit_profiles.json      # Dynamic track characteristics database
 ├── team_mappings.json         # Constructor → PU score & works team flags
 ├── f1_cache/                  # FastF1 local telemetry cache (auto-populated)
@@ -35,6 +39,21 @@ f1/
 ├── .python-version            # Pinned interpreter: 3.13
 └── README.md
 ```
+
+---
+
+## Evaluation: does the model beat simple baselines?
+
+Predictions are scored **walk-forward**: every race is predicted using only earlier races, so nothing leaks from the future (this is unit-tested). Metrics are how often the top pick wins, where the actual winner ranked, log loss / Brier score for the win probabilities, and calibration, with bootstrap confidence intervals.
+
+```bash
+python3 scripts/fetch_results.py          # one-off: download 2018 to now (needs internet, no dependencies)
+python3 -m evaluation.run                 # baselines -> reports/baselines.md
+python3 -m evaluation.run --predictions my_model.csv   # also score your own model
+python3 -m unittest discover -s tests     # run the tests
+```
+
+`--predictions` expects a CSV with columns `season, round, driver_id, win_prob`. Baselines: uniform, a grid-slot prior ("the pole sitter wins"), team/driver form only, and grid plus form.
 
 ---
 
@@ -672,7 +691,7 @@ Open [http://localhost:5173](http://localhost:5173) in your web browser.
 If you only want to run the terminal-based Miami 2026 prediction script:
 
 ```bash
-uv run python miami/miami_model.py
+uv run python legacy/miami/miami_model.py
 ```
 
 > **FastF1 Cache**: Session data is automatically fetched from Ergast/OpenF1 APIs on the first run and cached in `.f1_cache/`. Subsequent runs load from disk and are **5-10× faster**.

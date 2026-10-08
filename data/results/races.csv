@@ -1,0 +1,794 @@
+season,round,race,date,circuit,driver,driver_id,team,grid,finish_position,classified,status,points
+2023,18,United States Grand Prix,2023-10-22,americas,ALB,albon,williams,15,9,1,Finished,2
+2023,18,United States Grand Prix,2023-10-22,americas,ALO,alonso,aston_martin,19,,0,Retired,0
+2023,18,United States Grand Prix,2023-10-22,americas,BOT,bottas,alfa,13,12,1,Finished,0
+2023,18,United States Grand Prix,2023-10-22,americas,GAS,gasly,alpine,7,6,1,Finished,8
+2023,18,United States Grand Prix,2023-10-22,americas,HAM,hamilton,mercedes,3,19,1,Disqualified,0
+2023,18,United States Grand Prix,2023-10-22,americas,HUL,hulkenberg,haas,18,11,1,Finished,0
+2023,18,United States Grand Prix,2023-10-22,americas,MAG,kevin_magnussen,haas,17,14,1,Lapped,0
+2023,18,United States Grand Prix,2023-10-22,americas,LEC,leclerc,ferrari,1,20,1,Disqualified,0
+2023,18,United States Grand Prix,2023-10-22,americas,VER,max_verstappen,red_bull,6,1,1,Finished,25
+2023,18,United States Grand Prix,2023-10-22,americas,NOR,norris,mclaren,2,2,1,Finished,18
+2023,18,United States Grand Prix,2023-10-22,americas,OCO,ocon,alpine,8,,0,Retired,0
+2023,18,United States Grand Prix,2023-10-22,americas,PER,perez,red_bull,9,4,1,Finished,12
+2023,18,United States Grand Prix,2023-10-22,americas,PIA,piastri,mclaren,10,,0,Retired,0
+2023,18,United States Grand Prix,2023-10-22,americas,RIC,ricciardo,alphatauri,14,15,1,Lapped,0
+2023,18,United States Grand Prix,2023-10-22,americas,RUS,russell,mercedes,5,5,1,Finished,10
+2023,18,United States Grand Prix,2023-10-22,americas,SAI,sainz,ferrari,4,3,1,Finished,15
+2023,18,United States Grand Prix,2023-10-22,americas,SAR,sargeant,williams,16,10,1,Finished,1
+2023,18,United States Grand Prix,2023-10-22,americas,STR,stroll,aston_martin,20,7,1,Finished,6
+2023,18,United States Grand Prix,2023-10-22,americas,TSU,tsunoda,alphatauri,11,8,1,Finished,5
+2023,18,United States Grand Prix,2023-10-22,americas,ZHO,zhou,alfa,12,13,1,Lapped,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,ALB,albon,williams,14,9,1,Finished,2
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,ALO,alonso,aston_martin,13,,0,Withdrew,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,BOT,bottas,alfa,9,15,1,Finished,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,GAS,gasly,alpine,11,11,1,Finished,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,HAM,hamilton,mercedes,6,2,1,Finished,19
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,HUL,hulkenberg,haas,12,13,1,Finished,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,MAG,kevin_magnussen,haas,16,,0,Accident,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,LEC,leclerc,ferrari,1,3,1,Finished,15
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,VER,max_verstappen,red_bull,3,1,1,Finished,25
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,NOR,norris,mclaren,17,5,1,Finished,10
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,OCO,ocon,alpine,15,10,1,Finished,1
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,PER,perez,red_bull,5,,0,Collision damage,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,PIA,piastri,mclaren,7,8,1,Finished,4
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,RIC,ricciardo,alphatauri,4,7,1,Finished,6
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,RUS,russell,mercedes,8,6,1,Finished,8
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,SAI,sainz,ferrari,2,4,1,Finished,12
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,SAR,sargeant,williams,19,16,1,Retired,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,STR,stroll,aston_martin,0,17,1,Collision damage,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,TSU,tsunoda,alphatauri,18,12,1,Finished,0
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,ZHO,zhou,alfa,10,14,1,Finished,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,ALB,albon,williams,13,,0,Retired,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,ALO,alonso,aston_martin,4,3,1,Finished,15
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,BOT,bottas,alfa,18,,0,Retired,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,GAS,gasly,alpine,15,7,1,Finished,6
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,HAM,hamilton,mercedes,5,8,1,Finished,4
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,HUL,hulkenberg,haas,11,12,1,Lapped,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,MAG,kevin_magnussen,haas,12,,0,Retired,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,LEC,leclerc,ferrari,2,,0,Did not start,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,VER,max_verstappen,red_bull,1,1,1,Finished,25
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,NOR,norris,mclaren,6,2,1,Finished,19
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,OCO,ocon,alpine,14,10,1,Lapped,1
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,PER,perez,red_bull,9,4,1,Finished,12
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,PIA,piastri,mclaren,10,14,1,Lapped,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,RIC,ricciardo,alphatauri,17,13,1,Lapped,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,RUS,russell,mercedes,8,,0,Retired,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,SAI,sainz,ferrari,7,6,1,Finished,8
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,SAR,sargeant,williams,19,11,1,Lapped,0
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,STR,stroll,aston_martin,3,5,1,Finished,10
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,TSU,tsunoda,alphatauri,16,9,1,Finished,2
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,ZHO,zhou,alfa,20,,0,Retired,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,ALB,albon,williams,5,12,1,Finished,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,ALO,alonso,aston_martin,9,9,1,Finished,2
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,BOT,bottas,alfa,7,17,1,Finished,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,GAS,gasly,alpine,4,11,1,Finished,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,HAM,hamilton,mercedes,10,7,1,Finished,6
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,HUL,hulkenberg,haas,13,19,1,Retired,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,MAG,kevin_magnussen,haas,8,13,1,Finished,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,LEC,leclerc,ferrari,1,2,1,Finished,18
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,VER,max_verstappen,red_bull,2,1,1,Finished,25
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,NOR,norris,mclaren,15,,0,Retired,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,OCO,ocon,alpine,16,4,1,Finished,12
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,PER,perez,red_bull,11,3,1,Finished,15
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,PIA,piastri,mclaren,18,10,1,Finished,2
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,RIC,ricciardo,alphatauri,14,14,1,Finished,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,RUS,russell,mercedes,3,8,1,Finished,4
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,SAI,sainz,ferrari,12,6,1,Finished,8
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,SAR,sargeant,williams,6,16,1,Finished,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,STR,stroll,aston_martin,19,5,1,Finished,10
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,TSU,tsunoda,alphatauri,20,18,1,Retired,0
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,ZHO,zhou,alfa,17,15,1,Finished,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,ALB,albon,williams,14,14,1,Finished,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,ALO,alonso,aston_martin,7,7,1,Finished,6
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,BOT,bottas,alfa,18,19,1,Lapped,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,GAS,gasly,alpine,10,13,1,Finished,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,HAM,hamilton,mercedes,11,9,1,Finished,2
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,HUL,hulkenberg,haas,8,15,1,Finished,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,MAG,kevin_magnussen,haas,17,20,1,Lapped,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,LEC,leclerc,ferrari,2,2,1,Finished,18
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,VER,max_verstappen,red_bull,1,1,1,Finished,26
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,NOR,norris,mclaren,5,5,1,Finished,10
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,OCO,ocon,alpine,12,12,1,Finished,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,PER,perez,red_bull,9,4,1,Finished,12
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,PIA,piastri,mclaren,3,6,1,Finished,8
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,RIC,ricciardo,alphatauri,15,11,1,Finished,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,RUS,russell,mercedes,4,3,1,Finished,15
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,SAI,sainz,ferrari,16,18,1,Retired,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,SAR,sargeant,williams,20,16,1,Finished,0
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,STR,stroll,aston_martin,13,10,1,Finished,1
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,TSU,tsunoda,alphatauri,6,8,1,Finished,4
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,ZHO,zhou,alfa,19,17,1,Finished,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,ALB,albon,williams,13,15,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,ALO,alonso,aston_martin,6,9,1,Finished,2
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,BOT,bottas,sauber,16,19,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,GAS,gasly,alpine,20,18,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,HAM,hamilton,mercedes,9,7,1,Finished,6
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,HUL,hulkenberg,haas,10,16,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,MAG,kevin_magnussen,haas,15,12,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,LEC,leclerc,ferrari,2,4,1,Finished,12
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,VER,max_verstappen,red_bull,1,1,1,Finished,26
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,NOR,norris,mclaren,7,6,1,Finished,8
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,OCO,ocon,alpine,19,17,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,PER,perez,red_bull,5,2,1,Finished,18
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,PIA,piastri,mclaren,8,8,1,Finished,4
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,RIC,ricciardo,rb,14,13,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,RUS,russell,mercedes,3,5,1,Finished,10
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,SAI,sainz,ferrari,4,3,1,Finished,15
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,SAR,sargeant,williams,18,20,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,STR,stroll,aston_martin,12,10,1,Finished,1
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,TSU,tsunoda,rb,11,14,1,Lapped,0
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,ZHO,zhou,sauber,17,11,1,Lapped,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,ALB,albon,williams,12,11,1,Finished,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,ALO,alonso,aston_martin,4,5,1,Finished,10
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,BEA,bearman,ferrari,11,7,1,Finished,6
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,BOT,bottas,sauber,16,17,1,Lapped,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,GAS,gasly,alpine,18,,0,Retired,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,HAM,hamilton,mercedes,8,9,1,Finished,2
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,HUL,hulkenberg,haas,15,10,1,Finished,1
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,MAG,kevin_magnussen,haas,13,12,1,Finished,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,LEC,leclerc,ferrari,2,3,1,Finished,16
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,VER,max_verstappen,red_bull,1,1,1,Finished,25
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,NOR,norris,mclaren,6,8,1,Finished,4
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,OCO,ocon,alpine,17,13,1,Lapped,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,PER,perez,red_bull,3,2,1,Finished,18
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,PIA,piastri,mclaren,5,4,1,Finished,12
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,RIC,ricciardo,rb,14,16,1,Lapped,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,RUS,russell,mercedes,7,6,1,Finished,8
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,SAR,sargeant,williams,19,14,1,Lapped,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,STR,stroll,aston_martin,10,,0,Retired,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,TSU,tsunoda,rb,9,15,1,Lapped,0
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,ZHO,zhou,sauber,20,18,1,Lapped,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,ALB,albon,williams,12,11,1,Lapped,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,ALO,alonso,aston_martin,10,8,1,Finished,4
+2024,3,Australian Grand Prix,2024-03-24,albert_park,BOT,bottas,sauber,13,14,1,Lapped,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,GAS,gasly,alpine,17,13,1,Lapped,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,HAM,hamilton,mercedes,11,,0,Retired,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,HUL,hulkenberg,haas,16,9,1,Finished,2
+2024,3,Australian Grand Prix,2024-03-24,albert_park,MAG,kevin_magnussen,haas,14,10,1,Lapped,1
+2024,3,Australian Grand Prix,2024-03-24,albert_park,LEC,leclerc,ferrari,4,2,1,Finished,19
+2024,3,Australian Grand Prix,2024-03-24,albert_park,VER,max_verstappen,red_bull,1,,0,Retired,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,NOR,norris,mclaren,3,3,1,Finished,15
+2024,3,Australian Grand Prix,2024-03-24,albert_park,OCO,ocon,alpine,15,16,1,Lapped,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,PER,perez,red_bull,6,5,1,Finished,10
+2024,3,Australian Grand Prix,2024-03-24,albert_park,PIA,piastri,mclaren,5,4,1,Finished,12
+2024,3,Australian Grand Prix,2024-03-24,albert_park,RIC,ricciardo,rb,18,12,1,Lapped,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,RUS,russell,mercedes,7,17,1,Retired,0
+2024,3,Australian Grand Prix,2024-03-24,albert_park,SAI,sainz,ferrari,2,1,1,Finished,25
+2024,3,Australian Grand Prix,2024-03-24,albert_park,STR,stroll,aston_martin,9,6,1,Finished,8
+2024,3,Australian Grand Prix,2024-03-24,albert_park,TSU,tsunoda,rb,8,7,1,Finished,6
+2024,3,Australian Grand Prix,2024-03-24,albert_park,ZHO,zhou,sauber,19,15,1,Lapped,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,ALB,albon,williams,14,,0,Retired,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,ALO,alonso,aston_martin,5,6,1,Finished,8
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,BOT,bottas,sauber,13,14,1,Lapped,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,GAS,gasly,alpine,17,16,1,Lapped,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,HAM,hamilton,mercedes,7,9,1,Finished,2
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,HUL,hulkenberg,haas,12,11,1,Lapped,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,MAG,kevin_magnussen,haas,18,13,1,Lapped,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,LEC,leclerc,ferrari,8,4,1,Finished,12
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,VER,max_verstappen,red_bull,1,1,1,Finished,26
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,NOR,norris,mclaren,3,5,1,Finished,10
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,OCO,ocon,alpine,15,15,1,Lapped,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,PER,perez,red_bull,2,2,1,Finished,18
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,PIA,piastri,mclaren,6,8,1,Finished,4
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,RIC,ricciardo,rb,11,,0,Retired,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,RUS,russell,mercedes,9,7,1,Finished,6
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,SAI,sainz,ferrari,4,3,1,Finished,15
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,SAR,sargeant,williams,19,17,1,Lapped,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,STR,stroll,aston_martin,16,12,1,Lapped,0
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,TSU,tsunoda,rb,10,10,1,Lapped,1
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,ZHO,zhou,sauber,20,,0,Retired,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,ALB,albon,williams,14,12,1,Finished,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,ALO,alonso,aston_martin,3,7,1,Finished,7
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,BOT,bottas,sauber,10,,0,Retired,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,GAS,gasly,alpine,15,13,1,Finished,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,HAM,hamilton,mercedes,18,9,1,Finished,2
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,HUL,hulkenberg,haas,9,10,1,Finished,1
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,MAG,kevin_magnussen,haas,17,16,1,Finished,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,LEC,leclerc,ferrari,6,4,1,Finished,12
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,VER,max_verstappen,red_bull,1,1,1,Finished,25
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,NOR,norris,mclaren,4,2,1,Finished,18
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,OCO,ocon,alpine,13,11,1,Finished,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,PER,perez,red_bull,2,3,1,Finished,15
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,PIA,piastri,mclaren,5,8,1,Finished,4
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,RIC,ricciardo,rb,12,,0,Retired,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,RUS,russell,mercedes,8,6,1,Finished,8
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,SAI,sainz,ferrari,7,5,1,Finished,10
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,SAR,sargeant,williams,20,17,1,Finished,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,STR,stroll,aston_martin,11,15,1,Finished,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,TSU,tsunoda,rb,19,,0,Retired,0
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,ZHO,zhou,sauber,16,14,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,ALB,albon,williams,14,18,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,ALO,alonso,aston_martin,15,9,1,Finished,2
+2024,6,Miami Grand Prix,2024-05-05,miami,BOT,bottas,sauber,16,16,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,GAS,gasly,alpine,12,12,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,HAM,hamilton,mercedes,8,6,1,Finished,8
+2024,6,Miami Grand Prix,2024-05-05,miami,HUL,hulkenberg,haas,9,11,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,MAG,kevin_magnussen,haas,18,19,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,LEC,leclerc,ferrari,2,3,1,Finished,15
+2024,6,Miami Grand Prix,2024-05-05,miami,VER,max_verstappen,red_bull,1,2,1,Finished,18
+2024,6,Miami Grand Prix,2024-05-05,miami,NOR,norris,mclaren,5,1,1,Finished,25
+2024,6,Miami Grand Prix,2024-05-05,miami,OCO,ocon,alpine,13,10,1,Finished,1
+2024,6,Miami Grand Prix,2024-05-05,miami,PER,perez,red_bull,4,4,1,Finished,12
+2024,6,Miami Grand Prix,2024-05-05,miami,PIA,piastri,mclaren,6,13,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,RIC,ricciardo,rb,20,15,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,RUS,russell,mercedes,7,8,1,Finished,4
+2024,6,Miami Grand Prix,2024-05-05,miami,SAI,sainz,ferrari,3,5,1,Finished,10
+2024,6,Miami Grand Prix,2024-05-05,miami,SAR,sargeant,williams,17,,0,Retired,0
+2024,6,Miami Grand Prix,2024-05-05,miami,STR,stroll,aston_martin,11,17,1,Finished,0
+2024,6,Miami Grand Prix,2024-05-05,miami,TSU,tsunoda,rb,10,7,1,Finished,6
+2024,6,Miami Grand Prix,2024-05-05,miami,ZHO,zhou,sauber,19,14,1,Finished,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,ALB,albon,williams,14,,0,Retired,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,ALO,alonso,aston_martin,20,19,1,Lapped,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,BOT,bottas,sauber,16,18,1,Lapped,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,GAS,gasly,alpine,15,16,1,Lapped,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,HAM,hamilton,mercedes,8,6,1,Finished,8
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,HUL,hulkenberg,haas,10,11,1,Lapped,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,MAG,kevin_magnussen,haas,18,12,1,Lapped,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,LEC,leclerc,ferrari,3,3,1,Finished,15
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,VER,max_verstappen,red_bull,1,1,1,Finished,25
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,NOR,norris,mclaren,2,2,1,Finished,18
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,OCO,ocon,alpine,12,14,1,Lapped,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,PER,perez,red_bull,11,8,1,Finished,4
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,PIA,piastri,mclaren,5,4,1,Finished,12
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,RIC,ricciardo,rb,9,13,1,Lapped,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,RUS,russell,mercedes,6,7,1,Finished,7
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,SAI,sainz,ferrari,4,5,1,Finished,10
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,SAR,sargeant,williams,19,17,1,Lapped,0
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,STR,stroll,aston_martin,13,9,1,Finished,2
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,TSU,tsunoda,rb,7,10,1,Lapped,1
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,ZHO,zhou,sauber,17,15,1,Lapped,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,ALB,albon,williams,9,9,1,Lapped,2
+2024,8,Monaco Grand Prix,2024-05-26,monaco,ALO,alonso,aston_martin,14,11,1,Lapped,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,BOT,bottas,sauber,17,13,1,Lapped,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,GAS,gasly,alpine,10,10,1,Lapped,1
+2024,8,Monaco Grand Prix,2024-05-26,monaco,HAM,hamilton,mercedes,7,7,1,Finished,7
+2024,8,Monaco Grand Prix,2024-05-26,monaco,HUL,hulkenberg,haas,19,,0,Retired,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,MAG,kevin_magnussen,haas,20,,0,Retired,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,LEC,leclerc,ferrari,1,1,1,Finished,25
+2024,8,Monaco Grand Prix,2024-05-26,monaco,VER,max_verstappen,red_bull,6,6,1,Finished,8
+2024,8,Monaco Grand Prix,2024-05-26,monaco,NOR,norris,mclaren,4,4,1,Finished,12
+2024,8,Monaco Grand Prix,2024-05-26,monaco,OCO,ocon,alpine,11,,0,Retired,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,PER,perez,red_bull,16,,0,Retired,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,PIA,piastri,mclaren,2,2,1,Finished,18
+2024,8,Monaco Grand Prix,2024-05-26,monaco,RIC,ricciardo,rb,12,12,1,Lapped,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,RUS,russell,mercedes,5,5,1,Finished,10
+2024,8,Monaco Grand Prix,2024-05-26,monaco,SAI,sainz,ferrari,3,3,1,Finished,15
+2024,8,Monaco Grand Prix,2024-05-26,monaco,SAR,sargeant,williams,15,15,1,Lapped,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,STR,stroll,aston_martin,13,14,1,Lapped,0
+2024,8,Monaco Grand Prix,2024-05-26,monaco,TSU,tsunoda,rb,8,8,1,Lapped,4
+2024,8,Monaco Grand Prix,2024-05-26,monaco,ZHO,zhou,sauber,18,16,1,Lapped,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,ALB,albon,williams,10,,0,Retired,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,ALO,alonso,aston_martin,6,6,1,Finished,8
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,BOT,bottas,sauber,19,13,1,Finished,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,GAS,gasly,alpine,15,9,1,Finished,2
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,HAM,hamilton,mercedes,7,4,1,Finished,13
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,HUL,hulkenberg,haas,17,11,1,Finished,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,MAG,kevin_magnussen,haas,14,12,1,Finished,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,LEC,leclerc,ferrari,11,,0,Retired,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,VER,max_verstappen,red_bull,2,1,1,Finished,25
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,NOR,norris,mclaren,3,2,1,Finished,18
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,OCO,ocon,alpine,18,10,1,Finished,1
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,PER,perez,red_bull,16,,0,Retired,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,PIA,piastri,mclaren,4,5,1,Finished,10
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,RIC,ricciardo,rb,5,8,1,Finished,4
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,RUS,russell,mercedes,1,3,1,Finished,15
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,SAI,sainz,ferrari,12,,0,Retired,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,SAR,sargeant,williams,13,,0,Retired,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,STR,stroll,aston_martin,9,7,1,Finished,6
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,TSU,tsunoda,rb,8,14,1,Finished,0
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,ZHO,zhou,sauber,20,15,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,ALB,albon,williams,20,18,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,ALO,alonso,aston_martin,10,12,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,BOT,bottas,sauber,12,16,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,GAS,gasly,alpine,7,9,1,Finished,2
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,HAM,hamilton,mercedes,3,3,1,Finished,15
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,HUL,hulkenberg,haas,13,11,1,Finished,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,MAG,kevin_magnussen,haas,16,17,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,LEC,leclerc,ferrari,5,5,1,Finished,10
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,VER,max_verstappen,red_bull,2,1,1,Finished,25
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,NOR,norris,mclaren,1,2,1,Finished,19
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,OCO,ocon,alpine,8,10,1,Finished,1
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,PER,perez,red_bull,11,8,1,Finished,4
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,PIA,piastri,mclaren,9,7,1,Finished,6
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,RIC,ricciardo,rb,18,15,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,RUS,russell,mercedes,4,4,1,Finished,12
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,SAI,sainz,ferrari,6,6,1,Finished,8
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,SAR,sargeant,williams,19,20,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,STR,stroll,aston_martin,14,14,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,TSU,tsunoda,rb,17,19,1,Lapped,0
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,ZHO,zhou,sauber,15,13,1,Lapped,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,ALB,albon,williams,16,15,1,Lapped,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,ALO,alonso,aston_martin,15,18,1,Lapped,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,BOT,bottas,sauber,18,16,1,Lapped,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,GAS,gasly,alpine,13,10,1,Finished,1
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,HAM,hamilton,mercedes,5,4,1,Finished,12
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,HUL,hulkenberg,haas,9,6,1,Finished,8
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,MAG,kevin_magnussen,haas,12,8,1,Finished,4
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,LEC,leclerc,ferrari,6,11,1,Finished,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,VER,max_verstappen,red_bull,1,5,1,Finished,10
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,NOR,norris,mclaren,2,20,1,Lapped,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,OCO,ocon,alpine,10,12,1,Finished,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,PER,perez,red_bull,8,7,1,Finished,6
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,PIA,piastri,mclaren,7,2,1,Finished,18
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,RIC,ricciardo,rb,11,9,1,Finished,2
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,RUS,russell,mercedes,3,1,1,Finished,25
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,SAI,sainz,ferrari,4,3,1,Finished,15
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,SAR,sargeant,williams,19,19,1,Lapped,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,STR,stroll,aston_martin,17,13,1,Lapped,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,TSU,tsunoda,rb,14,14,1,Lapped,0
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,ZHO,zhou,sauber,20,17,1,Lapped,0
+2024,12,British Grand Prix,2024-07-07,silverstone,ALB,albon,williams,9,9,1,Finished,2
+2024,12,British Grand Prix,2024-07-07,silverstone,ALO,alonso,aston_martin,10,8,1,Finished,4
+2024,12,British Grand Prix,2024-07-07,silverstone,BOT,bottas,sauber,16,15,1,Lapped,0
+2024,12,British Grand Prix,2024-07-07,silverstone,GAS,gasly,alpine,19,,0,Did not start,0
+2024,12,British Grand Prix,2024-07-07,silverstone,HAM,hamilton,mercedes,2,1,1,Finished,25
+2024,12,British Grand Prix,2024-07-07,silverstone,HUL,hulkenberg,haas,6,6,1,Finished,8
+2024,12,British Grand Prix,2024-07-07,silverstone,MAG,kevin_magnussen,haas,17,12,1,Finished,0
+2024,12,British Grand Prix,2024-07-07,silverstone,LEC,leclerc,ferrari,11,14,1,Lapped,0
+2024,12,British Grand Prix,2024-07-07,silverstone,VER,max_verstappen,red_bull,4,2,1,Finished,18
+2024,12,British Grand Prix,2024-07-07,silverstone,NOR,norris,mclaren,3,3,1,Finished,15
+2024,12,British Grand Prix,2024-07-07,silverstone,OCO,ocon,alpine,18,16,1,Lapped,0
+2024,12,British Grand Prix,2024-07-07,silverstone,PER,perez,red_bull,20,17,1,Lapped,0
+2024,12,British Grand Prix,2024-07-07,silverstone,PIA,piastri,mclaren,5,4,1,Finished,12
+2024,12,British Grand Prix,2024-07-07,silverstone,RIC,ricciardo,rb,15,13,1,Lapped,0
+2024,12,British Grand Prix,2024-07-07,silverstone,RUS,russell,mercedes,1,,0,Retired,0
+2024,12,British Grand Prix,2024-07-07,silverstone,SAI,sainz,ferrari,7,5,1,Finished,11
+2024,12,British Grand Prix,2024-07-07,silverstone,SAR,sargeant,williams,12,11,1,Finished,0
+2024,12,British Grand Prix,2024-07-07,silverstone,STR,stroll,aston_martin,8,7,1,Finished,6
+2024,12,British Grand Prix,2024-07-07,silverstone,TSU,tsunoda,rb,13,10,1,Finished,1
+2024,12,British Grand Prix,2024-07-07,silverstone,ZHO,zhou,sauber,14,18,1,Lapped,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,ALB,albon,williams,13,14,1,Lapped,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,ALO,alonso,aston_martin,7,11,1,Finished,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,BOT,bottas,sauber,12,16,1,Lapped,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,GAS,gasly,alpine,20,,0,Retired,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,HAM,hamilton,mercedes,5,3,1,Finished,15
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,HUL,hulkenberg,haas,11,13,1,Lapped,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,MAG,kevin_magnussen,haas,15,15,1,Lapped,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,LEC,leclerc,ferrari,6,4,1,Finished,12
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,VER,max_verstappen,red_bull,3,5,1,Finished,10
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,NOR,norris,mclaren,1,2,1,Finished,18
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,OCO,ocon,alpine,19,18,1,Lapped,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,PER,perez,red_bull,16,7,1,Finished,6
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,PIA,piastri,mclaren,2,1,1,Finished,25
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,RIC,ricciardo,rb,9,12,1,Lapped,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,RUS,russell,mercedes,17,8,1,Finished,5
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,SAI,sainz,ferrari,4,6,1,Finished,8
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,SAR,sargeant,williams,14,17,1,Lapped,0
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,STR,stroll,aston_martin,8,10,1,Finished,1
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,TSU,tsunoda,rb,10,9,1,Finished,2
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,ZHO,zhou,sauber,18,19,1,Lapped,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,ALB,albon,williams,9,,0,Retired,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,ALO,alonso,aston_martin,13,,0,Retired,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,BOT,bottas,sauber,15,14,1,Lapped,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,COL,colapinto,williams,16,12,1,Lapped,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,GAS,gasly,alpine,8,10,1,Lapped,1
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,HAM,hamilton,mercedes,6,4,1,Finished,12
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,HUL,hulkenberg,haas,10,9,1,Lapped,2
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,MAG,kevin_magnussen,haas,7,7,1,Finished,6
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,LAW,lawson,rb,12,16,1,Lapped,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,LEC,leclerc,ferrari,4,3,1,Finished,16
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,VER,max_verstappen,red_bull,2,6,1,Finished,8
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,NOR,norris,mclaren,3,2,1,Finished,18
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,OCO,ocon,alpine,0,13,1,Lapped,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,PER,perez,red_bull,18,17,1,Lapped,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,PIA,piastri,mclaren,17,8,1,Finished,4
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,RUS,russell,mercedes,5,5,1,Finished,10
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,SAI,sainz,ferrari,1,1,1,Finished,25
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,STR,stroll,aston_martin,14,11,1,Lapped,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,TSU,tsunoda,rb,11,,0,Retired,0
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,ZHO,zhou,sauber,19,15,1,Lapped,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,ALB,albon,williams,7,,0,Did not start,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,ALO,alonso,aston_martin,9,14,1,Finished,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,BEA,bearman,haas,15,12,1,Finished,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,BOT,bottas,sauber,11,13,1,Finished,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,COL,colapinto,williams,16,,0,Retired,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,GAS,gasly,alpine,13,3,1,Finished,15
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,HAM,hamilton,mercedes,14,10,1,Finished,1
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,HUL,hulkenberg,haas,18,,0,Disqualified,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,LAW,lawson,rb,5,9,1,Finished,2
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,LEC,leclerc,ferrari,6,5,1,Finished,10
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,VER,max_verstappen,red_bull,17,1,1,Finished,26
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,NOR,norris,mclaren,1,6,1,Finished,8
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,OCO,ocon,alpine,4,2,1,Finished,18
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,PER,perez,red_bull,12,11,1,Finished,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,PIA,piastri,mclaren,8,8,1,Finished,4
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,RUS,russell,mercedes,2,4,1,Finished,12
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,SAI,sainz,ferrari,20,,0,Retired,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,STR,stroll,aston_martin,10,,0,Did not start,0
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,TSU,tsunoda,rb,3,7,1,Finished,6
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,ZHO,zhou,sauber,19,15,1,Finished,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,ALB,albon,williams,17,,0,Retired,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,ALO,alonso,aston_martin,16,11,1,Finished,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,BOT,bottas,sauber,19,18,1,Lapped,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,COL,colapinto,williams,20,14,1,Finished,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,GAS,gasly,alpine,3,,0,Retired,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,HAM,hamilton,mercedes,10,2,1,Finished,18
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,HUL,hulkenberg,haas,9,8,1,Finished,4
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,MAG,kevin_magnussen,haas,12,12,1,Finished,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,LAW,lawson,rb,14,16,1,Finished,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,LEC,leclerc,ferrari,4,4,1,Finished,12
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,VER,max_verstappen,red_bull,5,5,1,Finished,10
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,NOR,norris,mclaren,6,6,1,Finished,9
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,OCO,ocon,alpine,11,17,1,Lapped,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,PER,perez,red_bull,15,10,1,Finished,1
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,PIA,piastri,mclaren,8,7,1,Finished,6
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,RUS,russell,mercedes,1,1,1,Finished,25
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,SAI,sainz,ferrari,2,3,1,Finished,15
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,STR,stroll,aston_martin,18,15,1,Finished,0
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,TSU,tsunoda,rb,7,9,1,Finished,2
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,ZHO,zhou,sauber,13,13,1,Finished,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,ALB,albon,williams,16,15,1,Lapped,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,ALO,alonso,aston_martin,8,7,1,Finished,6
+2024,23,Qatar Grand Prix,2024-12-01,losail,BOT,bottas,sauber,13,11,1,Finished,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,COL,colapinto,williams,19,,0,Retired,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,GAS,gasly,alpine,11,5,1,Finished,10
+2024,23,Qatar Grand Prix,2024-12-01,losail,HAM,hamilton,mercedes,6,12,1,Finished,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,HUL,hulkenberg,haas,18,,0,Retired,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,MAG,kevin_magnussen,haas,10,9,1,Finished,2
+2024,23,Qatar Grand Prix,2024-12-01,losail,LAW,lawson,rb,17,14,1,Finished,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,LEC,leclerc,ferrari,5,2,1,Finished,18
+2024,23,Qatar Grand Prix,2024-12-01,losail,VER,max_verstappen,red_bull,2,1,1,Finished,25
+2024,23,Qatar Grand Prix,2024-12-01,losail,NOR,norris,mclaren,3,10,1,Finished,2
+2024,23,Qatar Grand Prix,2024-12-01,losail,OCO,ocon,alpine,20,,0,Retired,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,PER,perez,red_bull,9,,0,Retired,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,PIA,piastri,mclaren,4,3,1,Finished,15
+2024,23,Qatar Grand Prix,2024-12-01,losail,RUS,russell,mercedes,1,4,1,Finished,12
+2024,23,Qatar Grand Prix,2024-12-01,losail,SAI,sainz,ferrari,7,6,1,Finished,8
+2024,23,Qatar Grand Prix,2024-12-01,losail,STR,stroll,aston_martin,15,,0,Retired,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,TSU,tsunoda,rb,14,13,1,Finished,0
+2024,23,Qatar Grand Prix,2024-12-01,losail,ZHO,zhou,sauber,12,8,1,Finished,4
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,ALB,albon,williams,18,11,1,Lapped,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,ALO,alonso,aston_martin,8,9,1,Finished,2
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,BOT,bottas,sauber,9,,0,Retired,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,COL,colapinto,williams,20,,0,Retired,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,DOO,doohan,alpine,17,15,1,Lapped,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,GAS,gasly,alpine,5,7,1,Finished,6
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,HAM,hamilton,mercedes,16,4,1,Finished,12
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,HUL,hulkenberg,haas,7,8,1,Finished,4
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,MAG,kevin_magnussen,haas,14,16,1,Lapped,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,LAW,lawson,rb,12,17,1,Retired,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,LEC,leclerc,ferrari,19,3,1,Finished,15
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,VER,max_verstappen,red_bull,4,6,1,Finished,8
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,NOR,norris,mclaren,1,1,1,Finished,25
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,PER,perez,red_bull,10,,0,Retired,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,PIA,piastri,mclaren,2,10,1,Finished,1
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,RUS,russell,mercedes,6,5,1,Finished,10
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,SAI,sainz,ferrari,3,2,1,Finished,18
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,STR,stroll,aston_martin,13,14,1,Lapped,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,TSU,tsunoda,rb,11,12,1,Lapped,0
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,ZHO,zhou,sauber,15,13,1,Lapped,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,ALB,albon,williams,6,5,1,Finished,10
+2025,1,Australian Grand Prix,2025-03-16,albert_park,ALO,alonso,aston_martin,12,,0,Retired,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,ANT,antonelli,mercedes,16,4,1,Finished,12
+2025,1,Australian Grand Prix,2025-03-16,albert_park,BEA,bearman,haas,20,14,1,Finished,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,BOR,bortoleto,sauber,15,,0,Retired,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,DOO,doohan,alpine,14,,0,Retired,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,GAS,gasly,alpine,9,11,1,Finished,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,HAD,hadjar,rb,11,,0,Retired,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,HAM,hamilton,ferrari,8,10,1,Finished,1
+2025,1,Australian Grand Prix,2025-03-16,albert_park,HUL,hulkenberg,sauber,17,7,1,Finished,6
+2025,1,Australian Grand Prix,2025-03-16,albert_park,LAW,lawson,red_bull,18,,0,Retired,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,LEC,leclerc,ferrari,7,8,1,Finished,4
+2025,1,Australian Grand Prix,2025-03-16,albert_park,VER,max_verstappen,red_bull,3,2,1,Finished,18
+2025,1,Australian Grand Prix,2025-03-16,albert_park,NOR,norris,mclaren,1,1,1,Finished,25
+2025,1,Australian Grand Prix,2025-03-16,albert_park,OCO,ocon,haas,19,13,1,Finished,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,PIA,piastri,mclaren,2,9,1,Finished,2
+2025,1,Australian Grand Prix,2025-03-16,albert_park,RUS,russell,mercedes,4,3,1,Finished,15
+2025,1,Australian Grand Prix,2025-03-16,albert_park,SAI,sainz,williams,10,,0,Retired,0
+2025,1,Australian Grand Prix,2025-03-16,albert_park,STR,stroll,aston_martin,13,6,1,Finished,8
+2025,1,Australian Grand Prix,2025-03-16,albert_park,TSU,tsunoda,rb,5,12,1,Finished,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,ALB,albon,williams,10,7,1,Finished,6
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,ALO,alonso,aston_martin,13,,0,Retired,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,ANT,antonelli,mercedes,8,6,1,Finished,8
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,BEA,bearman,haas,17,8,1,Finished,4
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,BOR,bortoleto,sauber,19,14,1,Lapped,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,DOO,doohan,alpine,18,13,1,Finished,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,GAS,gasly,alpine,16,,0,Disqualified,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,HAD,hadjar,rb,7,11,1,Finished,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,HAM,hamilton,ferrari,5,,0,Disqualified,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,HUL,hulkenberg,sauber,12,15,1,Lapped,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,LAW,lawson,red_bull,20,12,1,Finished,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,LEC,leclerc,ferrari,6,,0,Disqualified,0
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,VER,max_verstappen,red_bull,4,4,1,Finished,12
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,NOR,norris,mclaren,3,2,1,Finished,18
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,OCO,ocon,haas,11,5,1,Finished,10
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,PIA,piastri,mclaren,1,1,1,Finished,25
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,RUS,russell,mercedes,2,3,1,Finished,15
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,SAI,sainz,williams,15,10,1,Finished,1
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,STR,stroll,aston_martin,14,9,1,Finished,2
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,TSU,tsunoda,rb,9,16,1,Lapped,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,ALB,albon,williams,9,9,1,Finished,2
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,ALO,alonso,aston_martin,12,11,1,Finished,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,ANT,antonelli,mercedes,6,6,1,Finished,8
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,BEA,bearman,haas,10,10,1,Finished,1
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,BOR,bortoleto,sauber,17,19,1,Finished,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,DOO,doohan,alpine,19,15,1,Finished,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,GAS,gasly,alpine,11,13,1,Finished,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,HAD,hadjar,rb,7,8,1,Finished,4
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,HAM,hamilton,ferrari,8,7,1,Finished,6
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,HUL,hulkenberg,sauber,16,16,1,Finished,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,LAW,lawson,rb,13,17,1,Finished,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,LEC,leclerc,ferrari,4,4,1,Finished,12
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,VER,max_verstappen,red_bull,1,1,1,Finished,25
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,NOR,norris,mclaren,2,2,1,Finished,18
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,OCO,ocon,haas,18,18,1,Finished,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,PIA,piastri,mclaren,3,3,1,Finished,15
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,RUS,russell,mercedes,5,5,1,Finished,10
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,SAI,sainz,williams,15,14,1,Finished,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,STR,stroll,aston_martin,20,20,1,Lapped,0
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,TSU,tsunoda,red_bull,14,12,1,Finished,0
+2025,6,Miami Grand Prix,2025-05-04,miami,ALB,albon,williams,7,5,1,Finished,10
+2025,6,Miami Grand Prix,2025-05-04,miami,ALO,alonso,aston_martin,17,15,1,Lapped,0
+2025,6,Miami Grand Prix,2025-05-04,miami,ANT,antonelli,mercedes,3,6,1,Finished,8
+2025,6,Miami Grand Prix,2025-05-04,miami,BEA,bearman,haas,19,,0,Retired,0
+2025,6,Miami Grand Prix,2025-05-04,miami,BOR,bortoleto,sauber,13,,0,Retired,0
+2025,6,Miami Grand Prix,2025-05-04,miami,DOO,doohan,alpine,14,,0,Retired,0
+2025,6,Miami Grand Prix,2025-05-04,miami,GAS,gasly,alpine,20,13,1,Finished,0
+2025,6,Miami Grand Prix,2025-05-04,miami,HAD,hadjar,rb,11,11,1,Finished,0
+2025,6,Miami Grand Prix,2025-05-04,miami,HAM,hamilton,ferrari,12,8,1,Finished,4
+2025,6,Miami Grand Prix,2025-05-04,miami,HUL,hulkenberg,sauber,16,14,1,Lapped,0
+2025,6,Miami Grand Prix,2025-05-04,miami,LAW,lawson,rb,15,,0,Retired,0
+2025,6,Miami Grand Prix,2025-05-04,miami,LEC,leclerc,ferrari,8,7,1,Finished,6
+2025,6,Miami Grand Prix,2025-05-04,miami,VER,max_verstappen,red_bull,1,4,1,Finished,12
+2025,6,Miami Grand Prix,2025-05-04,miami,NOR,norris,mclaren,2,2,1,Finished,18
+2025,6,Miami Grand Prix,2025-05-04,miami,OCO,ocon,haas,9,12,1,Finished,0
+2025,6,Miami Grand Prix,2025-05-04,miami,PIA,piastri,mclaren,4,1,1,Finished,25
+2025,6,Miami Grand Prix,2025-05-04,miami,RUS,russell,mercedes,5,3,1,Finished,15
+2025,6,Miami Grand Prix,2025-05-04,miami,SAI,sainz,williams,6,9,1,Finished,2
+2025,6,Miami Grand Prix,2025-05-04,miami,STR,stroll,aston_martin,18,16,1,Lapped,0
+2025,6,Miami Grand Prix,2025-05-04,miami,TSU,tsunoda,red_bull,10,10,1,Finished,1
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,ALB,albon,williams,17,12,1,Lapped,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,ALO,alonso,aston_martin,14,,0,Retired,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,ANT,antonelli,mercedes,6,6,1,Finished,8
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,BEA,bearman,haas,9,4,1,Finished,12
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,BOR,bortoleto,sauber,16,10,1,Finished,1
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,COL,colapinto,alpine,20,16,1,Lapped,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,GAS,gasly,alpine,18,15,1,Lapped,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,HAD,hadjar,rb,8,13,1,Lapped,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,HAM,hamilton,ferrari,3,8,1,Finished,4
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,HUL,hulkenberg,sauber,13,,0,Retired,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,LAW,lawson,rb,15,,0,Retired,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,LEC,leclerc,ferrari,2,2,1,Finished,18
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,VER,max_verstappen,red_bull,5,3,1,Finished,15
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,NOR,norris,mclaren,1,1,1,Finished,25
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,OCO,ocon,haas,11,9,1,Finished,2
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,PIA,piastri,mclaren,7,5,1,Finished,10
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,RUS,russell,mercedes,4,7,1,Finished,6
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,SAI,sainz,williams,12,17,1,Retired,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,STR,stroll,aston_martin,19,14,1,Lapped,0
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,TSU,tsunoda,red_bull,10,11,1,Finished,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,ALB,albon,williams,12,11,1,Finished,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,ALO,alonso,aston_martin,11,14,1,Finished,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,ANT,antonelli,mercedes,2,2,1,Finished,18
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,BEA,bearman,haas,8,6,1,Finished,8
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,BOR,bortoleto,sauber,18,,0,Retired,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,COL,colapinto,alpine,16,15,1,Finished,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,GAS,gasly,alpine,9,10,1,Finished,1
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,HAD,hadjar,rb,5,8,1,Finished,4
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,HAM,hamilton,ferrari,13,,0,Retired,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,HUL,hulkenberg,sauber,10,9,1,Finished,2
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,LAW,lawson,rb,7,7,1,Finished,6
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,LEC,leclerc,ferrari,3,,0,Retired,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,VER,max_verstappen,red_bull,19,3,1,Finished,15
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,NOR,norris,mclaren,1,1,1,Finished,25
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,OCO,ocon,haas,20,12,1,Finished,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,PIA,piastri,mclaren,4,5,1,Finished,10
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,RUS,russell,mercedes,6,4,1,Finished,12
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,SAI,sainz,williams,15,13,1,Finished,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,STR,stroll,aston_martin,14,16,1,Finished,0
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,TSU,tsunoda,red_bull,17,17,1,Finished,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,ALB,albon,williams,16,,0,Retired,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,ALO,alonso,aston_martin,7,11,1,Finished,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,ANT,antonelli,mercedes,17,3,1,Finished,15
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,BEA,bearman,haas,14,10,1,Finished,1
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,BOR,bortoleto,sauber,18,,0,Retired,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,COL,colapinto,alpine,15,15,1,Lapped,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,GAS,gasly,alpine,10,13,1,Finished,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,HAD,hadjar,rb,8,6,1,Finished,8
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,HAM,hamilton,ferrari,19,8,1,Finished,4
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,HUL,hulkenberg,sauber,11,7,1,Finished,6
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,LAW,lawson,rb,6,14,1,Lapped,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,LEC,leclerc,ferrari,9,4,1,Finished,12
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,VER,max_verstappen,red_bull,2,1,1,Finished,25
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,NOR,norris,mclaren,1,,0,Disqualified,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,OCO,ocon,haas,13,9,1,Finished,2
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,PIA,piastri,mclaren,5,,0,Disqualified,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,RUS,russell,mercedes,4,2,1,Finished,18
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,SAI,sainz,williams,3,5,1,Finished,10
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,STR,stroll,aston_martin,12,,0,Retired,0
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,TSU,tsunoda,red_bull,20,12,1,Finished,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,ALB,albon,williams,14,11,1,Finished,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,ALO,alonso,aston_martin,8,7,1,Finished,6
+2025,23,Qatar Grand Prix,2025-11-30,losail,ANT,antonelli,mercedes,5,5,1,Finished,10
+2025,23,Qatar Grand Prix,2025-11-30,losail,BEA,bearman,haas,13,,0,Retired,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,BOR,bortoleto,sauber,19,13,1,Finished,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,COL,colapinto,alpine,20,14,1,Lapped,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,GAS,gasly,alpine,9,16,1,Lapped,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,HAD,hadjar,rb,6,18,1,Retired,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,HAM,hamilton,ferrari,17,12,1,Finished,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,HUL,hulkenberg,sauber,11,,0,Retired,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,LAW,lawson,rb,12,9,1,Finished,2
+2025,23,Qatar Grand Prix,2025-11-30,losail,LEC,leclerc,ferrari,10,8,1,Finished,4
+2025,23,Qatar Grand Prix,2025-11-30,losail,VER,max_verstappen,red_bull,3,1,1,Finished,25
+2025,23,Qatar Grand Prix,2025-11-30,losail,NOR,norris,mclaren,2,4,1,Finished,12
+2025,23,Qatar Grand Prix,2025-11-30,losail,OCO,ocon,haas,16,15,1,Lapped,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,PIA,piastri,mclaren,1,2,1,Finished,18
+2025,23,Qatar Grand Prix,2025-11-30,losail,RUS,russell,mercedes,4,6,1,Finished,8
+2025,23,Qatar Grand Prix,2025-11-30,losail,SAI,sainz,williams,7,3,1,Finished,15
+2025,23,Qatar Grand Prix,2025-11-30,losail,STR,stroll,aston_martin,18,17,1,Retired,0
+2025,23,Qatar Grand Prix,2025-11-30,losail,TSU,tsunoda,red_bull,15,10,1,Finished,1
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,ALB,albon,williams,17,16,1,Finished,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,ALO,alonso,aston_martin,6,6,1,Finished,8
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,ANT,antonelli,mercedes,14,15,1,Finished,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,BEA,bearman,haas,11,12,1,Finished,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,BOR,bortoleto,sauber,7,11,1,Finished,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,COL,colapinto,alpine,20,20,1,Lapped,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,GAS,gasly,alpine,19,19,1,Lapped,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,HAD,hadjar,rb,9,17,1,Lapped,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,HAM,hamilton,ferrari,16,8,1,Finished,4
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,HUL,hulkenberg,sauber,18,9,1,Finished,2
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,LAW,lawson,rb,13,18,1,Lapped,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,LEC,leclerc,ferrari,5,4,1,Finished,12
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,VER,max_verstappen,red_bull,1,1,1,Finished,25
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,NOR,norris,mclaren,2,3,1,Finished,15
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,OCO,ocon,haas,8,7,1,Finished,6
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,PIA,piastri,mclaren,3,2,1,Finished,18
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,RUS,russell,mercedes,4,5,1,Finished,10
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,SAI,sainz,williams,12,13,1,Finished,0
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,STR,stroll,aston_martin,15,10,1,Finished,1
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,TSU,tsunoda,red_bull,10,14,1,Finished,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,ALB,albon,williams,15,12,1,Lapped,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,ALO,alonso,aston_martin,17,,0,Retired,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,ANT,antonelli,mercedes,2,2,1,Finished,18
+2026,1,Australian Grand Prix,2026-03-08,albert_park,LIN,arvid_lindblad,rb,9,8,1,Lapped,4
+2026,1,Australian Grand Prix,2026-03-08,albert_park,BEA,bearman,haas,12,7,1,Lapped,6
+2026,1,Australian Grand Prix,2026-03-08,albert_park,BOR,bortoleto,audi,10,9,1,Lapped,2
+2026,1,Australian Grand Prix,2026-03-08,albert_park,BOT,bottas,cadillac,19,,0,Retired,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,COL,colapinto,alpine,16,14,1,Lapped,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,GAS,gasly,alpine,14,10,1,Lapped,1
+2026,1,Australian Grand Prix,2026-03-08,albert_park,HAD,hadjar,red_bull,3,,0,Retired,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,HAM,hamilton,ferrari,7,4,1,Finished,12
+2026,1,Australian Grand Prix,2026-03-08,albert_park,HUL,hulkenberg,audi,11,,0,Did not start,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,LAW,lawson,rb,8,13,1,Lapped,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,LEC,leclerc,ferrari,4,3,1,Finished,15
+2026,1,Australian Grand Prix,2026-03-08,albert_park,VER,max_verstappen,red_bull,20,6,1,Finished,8
+2026,1,Australian Grand Prix,2026-03-08,albert_park,NOR,norris,mclaren,6,5,1,Finished,10
+2026,1,Australian Grand Prix,2026-03-08,albert_park,OCO,ocon,haas,13,11,1,Lapped,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,PER,perez,cadillac,18,16,1,Lapped,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,PIA,piastri,mclaren,5,,0,Did not start,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,RUS,russell,mercedes,1,1,1,Finished,25
+2026,1,Australian Grand Prix,2026-03-08,albert_park,SAI,sainz,williams,21,15,1,Lapped,0
+2026,1,Australian Grand Prix,2026-03-08,albert_park,STR,stroll,aston_martin,22,,0,Lapped,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,ALB,albon,williams,22,,0,Did not start,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,ALO,alonso,aston_martin,18,,0,Retired,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,ANT,antonelli,mercedes,1,1,1,Finished,25
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,LIN,arvid_lindblad,rb,15,12,1,Lapped,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,BEA,bearman,haas,10,5,1,Finished,10
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,BOR,bortoleto,audi,16,,0,Did not start,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,BOT,bottas,cadillac,19,13,1,Lapped,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,COL,colapinto,alpine,12,10,1,Lapped,1
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,GAS,gasly,alpine,7,6,1,Finished,8
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,HAD,hadjar,red_bull,9,8,1,Finished,4
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,HAM,hamilton,ferrari,3,3,1,Finished,15
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,HUL,hulkenberg,audi,11,11,1,Lapped,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,LAW,lawson,rb,14,7,1,Finished,6
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,LEC,leclerc,ferrari,4,4,1,Finished,12
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,VER,max_verstappen,red_bull,8,,0,Retired,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,NOR,norris,mclaren,6,,0,Did not start,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,OCO,ocon,haas,13,14,1,Lapped,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,PER,perez,cadillac,21,15,1,Lapped,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,PIA,piastri,mclaren,5,,0,Did not start,0
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,RUS,russell,mercedes,2,2,1,Finished,18
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,SAI,sainz,williams,17,9,1,Lapped,2
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,STR,stroll,aston_martin,20,,0,Retired,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,ALB,albon,williams,17,20,1,Lapped,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,ALO,alonso,aston_martin,21,18,1,Lapped,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,ANT,antonelli,mercedes,1,1,1,Finished,25
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,LIN,arvid_lindblad,rb,10,14,1,Finished,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,BEA,bearman,haas,18,,0,Retired,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,BOR,bortoleto,audi,9,13,1,Finished,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,BOT,bottas,cadillac,20,19,1,Lapped,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,COL,colapinto,alpine,15,16,1,Finished,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,GAS,gasly,alpine,7,7,1,Finished,6
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,HAD,hadjar,red_bull,8,12,1,Finished,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,HAM,hamilton,ferrari,6,6,1,Finished,8
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,HUL,hulkenberg,audi,13,11,1,Finished,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,LAW,lawson,rb,14,9,1,Finished,2
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,LEC,leclerc,ferrari,4,3,1,Finished,15
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,VER,max_verstappen,red_bull,11,8,1,Finished,4
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,NOR,norris,mclaren,5,5,1,Finished,10
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,OCO,ocon,haas,12,10,1,Finished,1
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,PER,perez,cadillac,19,17,1,Finished,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,PIA,piastri,mclaren,3,2,1,Finished,18
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,RUS,russell,mercedes,2,4,1,Finished,12
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,SAI,sainz,williams,16,15,1,Finished,0
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,STR,stroll,aston_martin,22,,0,Retired,0
+2026,4,Miami Grand Prix,2026-05-03,miami,ALB,albon,williams,15,10,1,Finished,1
+2026,4,Miami Grand Prix,2026-05-03,miami,ALO,alonso,aston_martin,17,15,1,Lapped,0
+2026,4,Miami Grand Prix,2026-05-03,miami,ANT,antonelli,mercedes,1,1,1,Finished,25
+2026,4,Miami Grand Prix,2026-05-03,miami,LIN,arvid_lindblad,rb,16,14,1,Lapped,0
+2026,4,Miami Grand Prix,2026-05-03,miami,BEA,bearman,haas,12,11,1,Lapped,0
+2026,4,Miami Grand Prix,2026-05-03,miami,BOR,bortoleto,audi,21,12,1,Lapped,0
+2026,4,Miami Grand Prix,2026-05-03,miami,BOT,bottas,cadillac,19,18,1,Lapped,0
+2026,4,Miami Grand Prix,2026-05-03,miami,COL,colapinto,alpine,8,7,1,Finished,6
+2026,4,Miami Grand Prix,2026-05-03,miami,GAS,gasly,alpine,9,,0,Retired,0
+2026,4,Miami Grand Prix,2026-05-03,miami,HAD,hadjar,red_bull,22,,0,Retired,0
+2026,4,Miami Grand Prix,2026-05-03,miami,HAM,hamilton,ferrari,6,6,1,Finished,8
+2026,4,Miami Grand Prix,2026-05-03,miami,HUL,hulkenberg,audi,10,,0,Retired,0
+2026,4,Miami Grand Prix,2026-05-03,miami,LAW,lawson,rb,11,,0,Retired,0
+2026,4,Miami Grand Prix,2026-05-03,miami,LEC,leclerc,ferrari,3,8,1,Finished,4
+2026,4,Miami Grand Prix,2026-05-03,miami,VER,max_verstappen,red_bull,2,5,1,Finished,10
+2026,4,Miami Grand Prix,2026-05-03,miami,NOR,norris,mclaren,4,2,1,Finished,18
+2026,4,Miami Grand Prix,2026-05-03,miami,OCO,ocon,haas,14,13,1,Lapped,0
+2026,4,Miami Grand Prix,2026-05-03,miami,PER,perez,cadillac,20,16,1,Lapped,0
+2026,4,Miami Grand Prix,2026-05-03,miami,PIA,piastri,mclaren,7,3,1,Finished,15
+2026,4,Miami Grand Prix,2026-05-03,miami,RUS,russell,mercedes,5,4,1,Finished,12
+2026,4,Miami Grand Prix,2026-05-03,miami,SAI,sainz,williams,13,9,1,Finished,2
+2026,4,Miami Grand Prix,2026-05-03,miami,STR,stroll,aston_martin,18,17,1,Lapped,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,ALB,albon,williams,18,,0,Retired,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,ALO,alonso,aston_martin,19,,0,Retired,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,ANT,antonelli,mercedes,2,1,1,Finished,25
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,LIN,arvid_lindblad,rb,9,,0,Did not start,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,BEA,bearman,haas,16,10,1,Lapped,1
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,BOR,bortoleto,audi,13,13,1,Lapped,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,BOT,bottas,cadillac,21,16,1,Lapped,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,COL,colapinto,alpine,10,6,1,Lapped,8
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,GAS,gasly,alpine,14,8,1,Lapped,4
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,HAD,hadjar,red_bull,7,5,1,Lapped,10
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,HAM,hamilton,ferrari,5,2,1,Finished,18
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,HUL,hulkenberg,audi,11,12,1,Lapped,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,LAW,lawson,rb,12,7,1,Lapped,6
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,LEC,leclerc,ferrari,8,4,1,Finished,12
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,VER,max_verstappen,red_bull,6,3,1,Finished,15
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,NOR,norris,mclaren,3,,0,Retired,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,OCO,ocon,haas,17,14,1,Lapped,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,PER,perez,cadillac,20,,0,Retired,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,PIA,piastri,mclaren,4,11,1,Lapped,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,RUS,russell,mercedes,1,,0,Retired,0
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,SAI,sainz,williams,15,9,1,Lapped,2
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,STR,stroll,aston_martin,22,15,1,Lapped,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,ALB,albon,williams,11,8,1,Finished,4
+2026,6,Monaco Grand Prix,2026-06-07,monaco,ALO,alonso,aston_martin,21,10,1,Finished,1
+2026,6,Monaco Grand Prix,2026-06-07,monaco,ANT,antonelli,mercedes,1,1,1,Finished,25
+2026,6,Monaco Grand Prix,2026-06-07,monaco,LIN,arvid_lindblad,rb,15,7,1,Finished,6
+2026,6,Monaco Grand Prix,2026-06-07,monaco,BEA,bearman,haas,19,,0,Retired,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,BOR,bortoleto,audi,16,11,1,Finished,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,BOT,bottas,cadillac,20,,0,Retired,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,COL,colapinto,alpine,14,14,1,Finished,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,GAS,gasly,alpine,9,3,1,Finished,15
+2026,6,Monaco Grand Prix,2026-06-07,monaco,HAD,hadjar,red_bull,5,4,1,Finished,12
+2026,6,Monaco Grand Prix,2026-06-07,monaco,HAM,hamilton,ferrari,3,2,1,Finished,18
+2026,6,Monaco Grand Prix,2026-06-07,monaco,HUL,hulkenberg,audi,13,13,1,Finished,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,LAW,lawson,rb,10,6,1,Finished,8
+2026,6,Monaco Grand Prix,2026-06-07,monaco,LEC,leclerc,ferrari,4,,0,Retired,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,VER,max_verstappen,red_bull,2,,0,Retired,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,NOR,norris,mclaren,8,,0,Retired,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,OCO,ocon,haas,17,9,1,Finished,2
+2026,6,Monaco Grand Prix,2026-06-07,monaco,PER,perez,cadillac,18,15,1,Finished,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,PIA,piastri,mclaren,7,5,1,Finished,10
+2026,6,Monaco Grand Prix,2026-06-07,monaco,RUS,russell,mercedes,6,12,1,Finished,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,SAI,sainz,williams,12,16,1,Retired,0
+2026,6,Monaco Grand Prix,2026-06-07,monaco,STR,stroll,aston_martin,22,,0,Retired,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,ALB,albon,williams,18,,0,Lapped,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,ALO,alonso,aston_martin,22,,0,Retired,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,ANT,antonelli,mercedes,3,16,1,Retired,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,LIN,arvid_lindblad,rb,11,9,1,Lapped,2
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,BEA,bearman,haas,15,17,1,Retired,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,BOR,bortoleto,audi,12,11,1,Lapped,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,BOT,bottas,cadillac,20,,0,Retired,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,COL,colapinto,alpine,13,10,1,Lapped,1
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,GAS,gasly,alpine,14,7,1,Lapped,6
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,HAD,hadjar,red_bull,6,6,1,Lapped,8
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,HAM,hamilton,ferrari,2,1,1,Finished,25
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,HUL,hulkenberg,audi,9,,0,Retired,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,LAW,lawson,rb,8,8,1,Lapped,4
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,LEC,leclerc,ferrari,10,15,1,Retired,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,VER,max_verstappen,red_bull,5,4,1,Finished,12
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,NOR,norris,mclaren,4,3,1,Finished,15
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,OCO,ocon,haas,17,13,1,Lapped,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,PER,perez,cadillac,19,14,1,Lapped,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,PIA,piastri,mclaren,7,5,1,Finished,10
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,RUS,russell,mercedes,1,2,1,Finished,18
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,SAI,sainz,williams,16,12,1,Lapped,0
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,STR,stroll,aston_martin,21,,0,Retired,0

@@ -1,0 +1,810 @@
+season,round,race,date,circuit,driver,driver_id,team,quali_position,q1,q2,q3
+2023,18,United States Grand Prix,2023-10-22,americas,ALB,albon,williams,18,1:36.315,,
+2023,18,United States Grand Prix,2023-10-22,americas,ALO,alonso,aston_martin,17,1:36.268,,
+2023,18,United States Grand Prix,2023-10-22,americas,BOT,bottas,alfa,13,1:36.082,1:35.858,
+2023,18,United States Grand Prix,2023-10-22,americas,GAS,gasly,alpine,7,1:36.158,1:35.496,1:35.089
+2023,18,United States Grand Prix,2023-10-22,americas,HAM,hamilton,mercedes,3,1:35.091,1:35.240,1:34.862
+2023,18,United States Grand Prix,2023-10-22,americas,HUL,hulkenberg,haas,16,1:36.235,,
+2023,18,United States Grand Prix,2023-10-22,americas,MAG,kevin_magnussen,haas,14,1:36.009,1:35.880,
+2023,18,United States Grand Prix,2023-10-22,americas,LEC,leclerc,ferrari,1,1:36.061,1:35.004,1:34.723
+2023,18,United States Grand Prix,2023-10-22,americas,VER,max_verstappen,red_bull,6,1:35.346,1:35.008,1:35.081
+2023,18,United States Grand Prix,2023-10-22,americas,NOR,norris,mclaren,2,1:35.110,1:35.441,1:34.853
+2023,18,United States Grand Prix,2023-10-22,americas,OCO,ocon,alpine,8,1:36.131,1:35.413,1:35.154
+2023,18,United States Grand Prix,2023-10-22,americas,PER,perez,red_bull,9,1:35.989,1:35.679,1:35.173
+2023,18,United States Grand Prix,2023-10-22,americas,PIA,piastri,mclaren,10,1:36.064,1:35.576,1:35.467
+2023,18,United States Grand Prix,2023-10-22,americas,RIC,ricciardo,alphatauri,15,1:36.213,1:35.974,
+2023,18,United States Grand Prix,2023-10-22,americas,RUS,russell,mercedes,5,1:36.165,1:35.606,1:35.079
+2023,18,United States Grand Prix,2023-10-22,americas,SAI,sainz,ferrari,4,1:35.824,1:35.302,1:34.945
+2023,18,United States Grand Prix,2023-10-22,americas,SAR,sargeant,williams,20,1:36.827,,
+2023,18,United States Grand Prix,2023-10-22,americas,STR,stroll,aston_martin,19,1:36.589,,
+2023,18,United States Grand Prix,2023-10-22,americas,TSU,tsunoda,alphatauri,11,1:35.913,1:35.697,
+2023,18,United States Grand Prix,2023-10-22,americas,ZHO,zhou,alfa,12,1:36.052,1:35.698,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,ALB,albon,williams,14,1:18.828,1:19.147,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,ALO,alonso,aston_martin,13,1:18.848,1:18.738,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,BOT,bottas,alfa,9,1:18.429,1:18.016,1:18.032
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,GAS,gasly,alpine,11,1:18.945,1:18.521,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,HAM,hamilton,mercedes,6,1:18.677,1:17.571,1:17.454
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,HUL,hulkenberg,haas,12,1:18.969,1:18.524,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,MAG,kevin_magnussen,haas,17,1:19.163,,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,LEC,leclerc,ferrari,1,1:18.401,1:17.901,1:17.166
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,VER,max_verstappen,red_bull,3,1:18.099,1:17.625,1:17.263
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,NOR,norris,mclaren,19,1:21.554,,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,OCO,ocon,alpine,16,1:19.080,,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,PER,perez,red_bull,5,1:18.553,1:18.124,1:17.423
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,PIA,piastri,mclaren,7,1:18.241,1:17.874,1:17.623
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,RIC,ricciardo,alphatauri,4,1:18.341,1:17.706,1:17.382
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,RUS,russell,mercedes,8,1:18.893,1:17.673,1:17.674
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,SAI,sainz,ferrari,2,1:18.755,1:18.382,1:17.233
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,SAR,sargeant,williams,20,,,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,STR,stroll,aston_martin,18,1:19.227,,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,TSU,tsunoda,alphatauri,15,1:18.890,,
+2023,19,Mexico City Grand Prix,2023-10-29,rodriguez,ZHO,zhou,alfa,10,1:19.016,1:18.440,1:18.050
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,ALB,albon,williams,15,1:10.621,1:10.840,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,ALO,alonso,aston_martin,4,1:10.557,1:10.237,1:11.387
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,BOT,bottas,alfa,18,1:10.955,,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,GAS,gasly,alpine,13,1:10.793,1:10.567,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,HAM,hamilton,mercedes,5,1:10.604,1:10.266,1:11.469
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,HUL,hulkenberg,haas,11,1:10.475,1:10.547,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,MAG,kevin_magnussen,haas,14,1:10.602,1:10.723,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,LEC,leclerc,ferrari,2,1:10.472,1:10.303,1:11.021
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,VER,max_verstappen,red_bull,1,1:10.436,1:10.162,1:10.727
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,NOR,norris,mclaren,7,1:10.623,1:10.021,1:11.987
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,OCO,ocon,alpine,12,1:10.763,1:10.562,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,PER,perez,red_bull,9,1:10.668,1:10.219,1:12.321
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,PIA,piastri,mclaren,10,1:10.519,1:10.330,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,RIC,ricciardo,alphatauri,17,1:10.843,,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,RUS,russell,mercedes,6,1:10.340,1:10.316,1:11.590
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,SAI,sainz,ferrari,8,1:10.624,1:10.254,1:11.989
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,SAR,sargeant,williams,19,1:11.035,,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,STR,stroll,aston_martin,3,1:10.551,1:10.375,1:11.344
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,TSU,tsunoda,alphatauri,16,1:10.837,,
+2023,20,São Paulo Grand Prix,2023-11-05,interlagos,ZHO,zhou,alfa,20,1:11.275,,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,ALB,albon,williams,6,1:34.634,1:33.588,1:33.323
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,ALO,alonso,aston_martin,10,1:34.422,1:33.617,1:33.555
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,BOT,bottas,alfa,8,1:34.305,1:33.809,1:33.525
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,GAS,gasly,alpine,5,1:34.272,1:33.494,1:33.239
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,HAM,hamilton,mercedes,11,1:34.307,1:33.837,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,HUL,hulkenberg,haas,13,1:34.265,1:33.979,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,MAG,kevin_magnussen,haas,9,1:34.337,1:33.664,1:33.537
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,LEC,leclerc,ferrari,1,1:33.617,1:32.775,1:32.726
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,VER,max_verstappen,red_bull,3,1:34.190,1:33.572,1:33.104
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,NOR,norris,mclaren,16,1:34.703,,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,OCO,ocon,alpine,17,1:34.834,,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,PER,perez,red_bull,12,1:34.574,1:33.855,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,PIA,piastri,mclaren,19,1:34.850,,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,RIC,ricciardo,alphatauri,15,1:34.683,1:34.308,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,RUS,russell,mercedes,4,1:34.137,1:33.351,1:33.112
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,SAI,sainz,ferrari,2,1:33.851,1:33.338,1:32.770
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,SAR,sargeant,williams,7,1:34.525,1:33.733,1:33.513
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,STR,stroll,aston_martin,14,1:34.504,1:34.199,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,TSU,tsunoda,alphatauri,20,1:36.447,,
+2023,21,Las Vegas Grand Prix,2023-11-19,vegas,ZHO,zhou,alfa,18,1:34.849,,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,ALB,albon,williams,14,1:24.298,1:24.439,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,ALO,alonso,aston_martin,7,1:24.501,1:24.131,1:24.084
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,BOT,bottas,alfa,18,1:24.788,,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,GAS,gasly,alpine,10,1:24.600,1:24.078,1:24.548
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,HAM,hamilton,mercedes,11,1:24.437,1:24.359,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,HUL,hulkenberg,haas,8,1:24.425,1:24.213,1:24.108
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,MAG,kevin_magnussen,haas,17,1:24.764,,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,LEC,leclerc,ferrari,2,1:24.459,1:23.969,1:23.584
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,VER,max_verstappen,red_bull,1,1:24.160,1:23.740,1:23.445
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,NOR,norris,mclaren,5,1:24.368,1:23.920,1:23.816
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,OCO,ocon,alpine,12,1:24.565,1:24.391,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,PER,perez,red_bull,9,1:24.209,1:24.116,1:24.171
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,PIA,piastri,mclaren,3,1:24.487,1:24.278,1:23.782
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,RIC,ricciardo,alphatauri,15,1:24.461,1:24.442,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,RUS,russell,mercedes,4,1:24.337,1:24.013,1:23.788
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,SAI,sainz,ferrari,16,1:24.738,,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,SAR,sargeant,williams,20,,,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,STR,stroll,aston_martin,13,1:24.405,1:24.422,
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,TSU,tsunoda,alphatauri,6,1:24.286,1:24.207,1:23.968
+2023,22,Abu Dhabi Grand Prix,2023-11-26,yas_marina,ZHO,zhou,alfa,19,1:25.159,,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,ALB,albon,williams,13,1:30.397,1:30.221,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,ALO,alonso,aston_martin,6,1:30.179,1:29.801,1:29.542
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,BOT,bottas,sauber,16,1:30.756,,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,GAS,gasly,alpine,20,1:30.948,,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,HAM,hamilton,mercedes,9,1:30.451,1:29.718,1:29.710
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,HUL,hulkenberg,haas,10,1:30.566,1:29.851,1:30.502
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,MAG,kevin_magnussen,haas,15,1:30.646,1:30.529,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,LEC,leclerc,ferrari,2,1:30.243,1:29.165,1:29.407
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,VER,max_verstappen,red_bull,1,1:30.031,1:29.374,1:29.179
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,NOR,norris,mclaren,7,1:30.143,1:29.941,1:29.614
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,OCO,ocon,alpine,19,1:30.793,,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,PER,perez,red_bull,5,1:30.221,1:29.932,1:29.537
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,PIA,piastri,mclaren,8,1:30.531,1:30.122,1:29.683
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,RIC,ricciardo,rb,14,1:30.562,1:30.278,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,RUS,russell,mercedes,3,1:30.350,1:29.922,1:29.485
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,SAI,sainz,ferrari,4,1:29.909,1:29.573,1:29.507
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,SAR,sargeant,williams,18,1:30.770,,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,STR,stroll,aston_martin,12,1:29.965,1:30.200,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,TSU,tsunoda,rb,11,1:30.481,1:30.129,
+2024,1,Bahrain Grand Prix,2024-03-02,bahrain,ZHO,zhou,sauber,17,1:30.757,,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,ALB,albon,williams,12,1:29.107,1:28.980,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,ALO,alonso,aston_martin,4,1:28.706,1:28.122,1:27.846
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,BEA,bearman,ferrari,11,1:28.984,1:28.642,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,BOT,bottas,sauber,16,1:29.179,,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,GAS,gasly,alpine,18,1:29.479,,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,HAM,hamilton,mercedes,8,1:28.994,1:28.606,1:28.460
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,HUL,hulkenberg,haas,15,1:29.055,,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,MAG,kevin_magnussen,haas,13,1:29.069,1:29.020,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,LEC,leclerc,ferrari,2,1:28.318,1:28.112,1:27.791
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,VER,max_verstappen,red_bull,1,1:28.171,1:28.033,1:27.472
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,NOR,norris,mclaren,6,1:28.805,1:28.479,1:28.132
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,OCO,ocon,alpine,17,1:29.475,,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,PER,perez,red_bull,3,1:28.638,1:28.467,1:27.807
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,PIA,piastri,mclaren,5,1:28.755,1:28.343,1:28.089
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,RIC,ricciardo,rb,14,1:29.065,1:29.025,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,RUS,russell,mercedes,7,1:28.749,1:28.448,1:28.316
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,SAR,sargeant,williams,19,1:29.526,,
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,STR,stroll,aston_martin,10,1:28.250,1:28.578,1:28.572
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,TSU,tsunoda,rb,9,1:28.988,1:28.564,1:28.547
+2024,2,Saudi Arabian Grand Prix,2024-03-09,jeddah,ZHO,zhou,sauber,20,,,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,ALB,albon,williams,12,1:17.130,1:17.167,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,ALO,alonso,aston_martin,10,1:16.991,1:16.710,1:17.552
+2024,3,Australian Grand Prix,2024-03-24,albert_park,BOT,bottas,sauber,13,1:17.543,1:17.340,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,GAS,gasly,alpine,17,1:17.982,,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,HAM,hamilton,mercedes,11,1:17.499,1:16.960,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,HUL,hulkenberg,haas,16,1:17.976,,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,MAG,kevin_magnussen,haas,14,1:17.709,1:17.427,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,LEC,leclerc,ferrari,5,1:16.984,1:16.304,1:16.435
+2024,3,Australian Grand Prix,2024-03-24,albert_park,VER,max_verstappen,red_bull,1,1:16.819,1:16.387,1:15.915
+2024,3,Australian Grand Prix,2024-03-24,albert_park,NOR,norris,mclaren,4,1:17.430,1:16.750,1:16.315
+2024,3,Australian Grand Prix,2024-03-24,albert_park,OCO,ocon,alpine,15,1:17.617,1:17.697,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,PER,perez,red_bull,3,1:16.805,1:16.631,1:16.274
+2024,3,Australian Grand Prix,2024-03-24,albert_park,PIA,piastri,mclaren,6,1:17.369,1:16.601,1:16.572
+2024,3,Australian Grand Prix,2024-03-24,albert_park,RIC,ricciardo,rb,18,1:18.085,,
+2024,3,Australian Grand Prix,2024-03-24,albert_park,RUS,russell,mercedes,7,1:17.062,1:16.901,1:16.724
+2024,3,Australian Grand Prix,2024-03-24,albert_park,SAI,sainz,ferrari,2,1:16.731,1:16.189,1:16.185
+2024,3,Australian Grand Prix,2024-03-24,albert_park,STR,stroll,aston_martin,9,1:17.376,1:16.780,1:17.072
+2024,3,Australian Grand Prix,2024-03-24,albert_park,TSU,tsunoda,rb,8,1:17.356,1:16.791,1:16.788
+2024,3,Australian Grand Prix,2024-03-24,albert_park,ZHO,zhou,sauber,19,1:18.188,,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,ALB,albon,williams,14,1:29.963,1:29.714,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,ALO,alonso,aston_martin,5,1:29.254,1:29.082,1:28.686
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,BOT,bottas,sauber,13,1:29.602,1:29.593,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,GAS,gasly,alpine,17,1:30.119,,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,HAM,hamilton,mercedes,7,1:29.661,1:28.887,1:28.766
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,HUL,hulkenberg,haas,12,1:29.821,1:29.494,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,MAG,kevin_magnussen,haas,18,1:30.131,,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,LEC,leclerc,ferrari,8,1:29.338,1:29.196,1:28.786
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,VER,max_verstappen,red_bull,1,1:28.866,1:28.740,1:28.197
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,NOR,norris,mclaren,3,1:29.536,1:28.940,1:28.489
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,OCO,ocon,alpine,15,1:29.811,1:29.816,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,PER,perez,red_bull,2,1:29.303,1:28.752,1:28.263
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,PIA,piastri,mclaren,6,1:29.425,1:29.148,1:28.760
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,RIC,ricciardo,rb,11,1:29.727,1:29.472,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,RUS,russell,mercedes,9,1:29.799,1:29.140,1:29.008
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,SAI,sainz,ferrari,4,1:29.513,1:29.099,1:28.682
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,SAR,sargeant,williams,19,1:30.139,,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,STR,stroll,aston_martin,16,1:30.024,,
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,TSU,tsunoda,rb,10,1:29.775,1:29.417,1:29.413
+2024,4,Japanese Grand Prix,2024-04-07,suzuka,ZHO,zhou,sauber,20,1:30.143,,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,ALB,albon,williams,14,1:35.384,1:35.241,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,ALO,alonso,aston_martin,3,1:35.116,1:34.652,1:34.148
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,BOT,bottas,sauber,10,1:35.169,1:34.769,1:34.665
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,GAS,gasly,alpine,15,1:35.287,1:35.463,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,HAM,hamilton,mercedes,18,1:35.573,,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,HUL,hulkenberg,haas,9,1:35.068,1:34.667,1:34.604
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,MAG,kevin_magnussen,haas,17,1:35.516,,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,LEC,leclerc,ferrari,6,1:34.797,1:34.399,1:34.289
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,VER,max_verstappen,red_bull,1,1:34.742,1:33.794,1:33.660
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,NOR,norris,mclaren,4,1:34.842,1:34.460,1:34.165
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,OCO,ocon,alpine,13,1:35.356,1:35.223,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,PER,perez,red_bull,2,1:35.457,1:34.026,1:33.982
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,PIA,piastri,mclaren,5,1:35.014,1:34.659,1:34.273
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,RIC,ricciardo,rb,12,1:35.443,1:34.934,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,RUS,russell,mercedes,8,1:35.084,1:34.609,1:34.433
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,SAI,sainz,ferrari,7,1:34.970,1:34.368,1:34.297
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,SAR,sargeant,williams,20,1:36.358,,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,STR,stroll,aston_martin,11,1:35.334,1:34.838,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,TSU,tsunoda,rb,19,1:35.746,,
+2024,5,Chinese Grand Prix,2024-04-21,shanghai,ZHO,zhou,sauber,16,1:35.505,,
+2024,6,Miami Grand Prix,2024-05-05,miami,ALB,albon,williams,14,1:28.343,1:28.413,
+2024,6,Miami Grand Prix,2024-05-05,miami,ALO,alonso,aston_martin,15,1:28.453,1:28.427,
+2024,6,Miami Grand Prix,2024-05-05,miami,BOT,bottas,sauber,16,1:28.463,,
+2024,6,Miami Grand Prix,2024-05-05,miami,GAS,gasly,alpine,12,1:27.976,1:28.324,
+2024,6,Miami Grand Prix,2024-05-05,miami,HAM,hamilton,mercedes,8,1:28.167,1:27.697,1:28.107
+2024,6,Miami Grand Prix,2024-05-05,miami,HUL,hulkenberg,haas,9,1:28.383,1:28.200,1:28.146
+2024,6,Miami Grand Prix,2024-05-05,miami,MAG,kevin_magnussen,haas,19,1:28.619,,
+2024,6,Miami Grand Prix,2024-05-05,miami,LEC,leclerc,ferrari,2,1:28.081,1:27.533,1:27.382
+2024,6,Miami Grand Prix,2024-05-05,miami,VER,max_verstappen,red_bull,1,1:27.689,1:27.566,1:27.241
+2024,6,Miami Grand Prix,2024-05-05,miami,NOR,norris,mclaren,5,1:27.913,1:27.871,1:27.594
+2024,6,Miami Grand Prix,2024-05-05,miami,OCO,ocon,alpine,13,1:28.209,1:28.371,
+2024,6,Miami Grand Prix,2024-05-05,miami,PER,perez,red_bull,4,1:27.772,1:27.839,1:27.460
+2024,6,Miami Grand Prix,2024-05-05,miami,PIA,piastri,mclaren,6,1:28.032,1:27.721,1:27.675
+2024,6,Miami Grand Prix,2024-05-05,miami,RIC,ricciardo,rb,18,1:28.617,,
+2024,6,Miami Grand Prix,2024-05-05,miami,RUS,russell,mercedes,7,1:28.159,1:28.095,1:28.067
+2024,6,Miami Grand Prix,2024-05-05,miami,SAI,sainz,ferrari,3,1:27.937,1:27.941,1:27.455
+2024,6,Miami Grand Prix,2024-05-05,miami,SAR,sargeant,williams,17,1:28.487,,
+2024,6,Miami Grand Prix,2024-05-05,miami,STR,stroll,aston_martin,11,1:28.177,1:28.222,
+2024,6,Miami Grand Prix,2024-05-05,miami,TSU,tsunoda,rb,10,1:28.324,1:28.167,1:28.192
+2024,6,Miami Grand Prix,2024-05-05,miami,ZHO,zhou,sauber,20,1:28.824,,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,ALB,albon,williams,14,1:16.524,1:16.200,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,ALO,alonso,aston_martin,19,1:16.917,,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,BOT,bottas,sauber,16,1:16.626,,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,GAS,gasly,alpine,15,1:16.015,1:16.381,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,HAM,hamilton,mercedes,8,1:16.604,1:15.677,1:15.504
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,HUL,hulkenberg,haas,10,1:15.841,1:15.569,1:15.980
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,MAG,kevin_magnussen,haas,18,1:16.854,,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,LEC,leclerc,ferrari,4,1:15.823,1:15.328,1:14.970
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,VER,max_verstappen,red_bull,1,1:15.762,1:15.176,1:14.746
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,NOR,norris,mclaren,3,1:15.915,1:15.371,1:14.837
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,OCO,ocon,alpine,12,1:16.361,1:15.906,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,PER,perez,red_bull,11,1:16.404,1:15.706,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,PIA,piastri,mclaren,2,1:15.940,1:15.407,1:14.820
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,RIC,ricciardo,rb,9,1:16.060,1:15.691,1:15.674
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,RUS,russell,mercedes,6,1:16.107,1:15.671,1:15.234
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,SAI,sainz,ferrari,5,1:16.015,1:15.512,1:15.233
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,SAR,sargeant,williams,20,,,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,STR,stroll,aston_martin,13,1:16.458,1:15.992,
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,TSU,tsunoda,rb,7,1:15.894,1:15.358,1:15.465
+2024,7,Emilia Romagna Grand Prix,2024-05-19,imola,ZHO,zhou,sauber,17,1:16.834,,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,ALB,albon,williams,9,1:11.623,1:11.216,1:10.948
+2024,8,Monaco Grand Prix,2024-05-26,monaco,ALO,alonso,aston_martin,14,1:12.019,,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,BOT,bottas,sauber,17,1:12.512,,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,GAS,gasly,alpine,10,1:11.714,1:10.896,1:11.311
+2024,8,Monaco Grand Prix,2024-05-26,monaco,HAM,hamilton,mercedes,7,1:11.528,1:11.056,1:10.621
+2024,8,Monaco Grand Prix,2024-05-26,monaco,HUL,hulkenberg,haas,14,1:11.876,1:11.440,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,MAG,kevin_magnussen,haas,15,1:11.832,1:11.725,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,LEC,leclerc,ferrari,1,1:11.584,1:10.825,1:10.270
+2024,8,Monaco Grand Prix,2024-05-26,monaco,VER,max_verstappen,red_bull,6,1:11.711,1:10.745,1:10.567
+2024,8,Monaco Grand Prix,2024-05-26,monaco,NOR,norris,mclaren,4,1:11.760,1:10.732,1:10.542
+2024,8,Monaco Grand Prix,2024-05-26,monaco,OCO,ocon,alpine,11,1:11.887,1:11.285,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,PER,perez,red_bull,16,1:12.060,,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,PIA,piastri,mclaren,2,1:11.500,1:10.756,1:10.424
+2024,8,Monaco Grand Prix,2024-05-26,monaco,RIC,ricciardo,rb,12,1:11.785,1:11.482,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,RUS,russell,mercedes,5,1:11.492,1:10.929,1:10.543
+2024,8,Monaco Grand Prix,2024-05-26,monaco,SAI,sainz,ferrari,3,1:11.543,1:11.075,1:10.518
+2024,8,Monaco Grand Prix,2024-05-26,monaco,SAR,sargeant,williams,15,1:12.020,,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,STR,stroll,aston_martin,13,1:11.728,1:11.563,
+2024,8,Monaco Grand Prix,2024-05-26,monaco,TSU,tsunoda,rb,8,1:11.852,1:11.106,1:10.858
+2024,8,Monaco Grand Prix,2024-05-26,monaco,ZHO,zhou,sauber,18,1:13.028,,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,ALB,albon,williams,10,1:12.896,1:12.485,1:12.796
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,ALO,alonso,aston_martin,6,1:13.117,1:12.635,1:12.228
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,BOT,bottas,sauber,17,1:13.366,,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,GAS,gasly,alpine,15,1:13.289,1:12.940,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,HAM,hamilton,mercedes,7,1:12.851,1:11.979,1:12.280
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,HUL,hulkenberg,haas,19,1:13.978,,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,MAG,kevin_magnussen,haas,14,1:13.217,1:12.916,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,LEC,leclerc,ferrari,11,1:13.107,1:12.691,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,VER,max_verstappen,red_bull,2,1:12.360,1:12.549,1:12.000
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,NOR,norris,mclaren,3,1:12.959,1:12.201,1:12.021
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,OCO,ocon,alpine,18,1:13.435,,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,PER,perez,red_bull,16,1:13.326,,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,PIA,piastri,mclaren,4,1:12.907,1:12.462,1:12.103
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,RIC,ricciardo,rb,5,1:13.240,1:12.572,1:12.178
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,RUS,russell,mercedes,1,1:13.013,1:11.742,1:12.000
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,SAI,sainz,ferrari,12,1:13.038,1:12.728,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,SAR,sargeant,williams,13,1:13.063,1:12.736,
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,STR,stroll,aston_martin,9,1:13.088,1:12.659,1:12.701
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,TSU,tsunoda,rb,8,1:12.748,1:12.303,1:12.414
+2024,9,Canadian Grand Prix,2024-06-09,villeneuve,ZHO,zhou,sauber,20,1:14.292,,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,ALB,albon,williams,19,1:13.153,,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,ALO,alonso,aston_martin,11,1:12.505,1:12.128,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,BOT,bottas,sauber,12,1:12.758,1:12.227,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,GAS,gasly,alpine,7,1:12.651,1:12.079,1:11.857
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,HAM,hamilton,mercedes,3,1:12.143,1:11.792,1:11.701
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,HUL,hulkenberg,haas,13,1:12.708,1:12.310,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,MAG,kevin_magnussen,haas,16,1:12.937,,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,LEC,leclerc,ferrari,5,1:12.257,1:12.038,1:11.731
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,VER,max_verstappen,red_bull,2,1:12.306,1:11.653,1:11.403
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,NOR,norris,mclaren,1,1:12.386,1:11.872,1:11.383
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,OCO,ocon,alpine,9,1:12.691,1:12.109,1:12.125
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,PER,perez,red_bull,8,1:12.477,1:12.054,1:12.061
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,PIA,piastri,mclaren,10,1:12.460,1:12.011,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,RIC,ricciardo,rb,18,1:13.075,,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,RUS,russell,mercedes,4,1:12.456,1:11.812,1:11.703
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,SAI,sainz,ferrari,6,1:12.403,1:11.874,1:11.736
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,SAR,sargeant,williams,20,1:13.509,,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,STR,stroll,aston_martin,14,1:12.881,1:12.372,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,TSU,tsunoda,rb,17,1:12.985,,
+2024,10,Spanish Grand Prix,2024-06-23,catalunya,ZHO,zhou,sauber,15,1:12.880,1:12.738,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,ALB,albon,williams,16,1:05.736,,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,ALO,alonso,aston_martin,15,1:05.656,1:05.639,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,BOT,bottas,sauber,18,1:05.847,,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,GAS,gasly,alpine,13,1:05.598,1:05.359,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,HAM,hamilton,mercedes,5,1:05.541,1:05.053,1:04.903
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,HUL,hulkenberg,haas,9,1:05.596,1:05.262,1:05.385
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,MAG,kevin_magnussen,haas,12,1:05.508,1:05.347,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,LEC,leclerc,ferrari,6,1:05.509,1:05.104,1:05.044
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,VER,max_verstappen,red_bull,1,1:05.336,1:04.469,1:04.314
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,NOR,norris,mclaren,2,1:05.450,1:05.103,1:04.718
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,OCO,ocon,alpine,10,1:05.574,1:05.274,1:05.883
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,PER,perez,red_bull,8,1:05.587,1:05.144,1:05.202
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,PIA,piastri,mclaren,7,1:05.311,1:05.070,1:05.048
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,RIC,ricciardo,rb,11,1:05.569,1:05.289,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,RUS,russell,mercedes,3,1:05.585,1:05.016,1:04.840
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,SAI,sainz,ferrari,4,1:05.263,1:05.016,1:04.851
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,SAR,sargeant,williams,19,1:05.856,,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,STR,stroll,aston_martin,17,1:05.819,,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,TSU,tsunoda,rb,14,1:05.563,1:05.412,
+2024,11,Austrian Grand Prix,2024-06-30,red_bull_ring,ZHO,zhou,sauber,20,1:06.061,,
+2024,12,British Grand Prix,2024-07-07,silverstone,ALB,albon,williams,9,1:31.135,1:26.933,1:26.640
+2024,12,British Grand Prix,2024-07-07,silverstone,ALO,alonso,aston_martin,10,1:31.264,1:26.730,1:26.917
+2024,12,British Grand Prix,2024-07-07,silverstone,BOT,bottas,sauber,16,1:32.431,,
+2024,12,British Grand Prix,2024-07-07,silverstone,GAS,gasly,alpine,20,1:39.804,,
+2024,12,British Grand Prix,2024-07-07,silverstone,HAM,hamilton,mercedes,2,1:29.547,1:26.770,1:25.990
+2024,12,British Grand Prix,2024-07-07,silverstone,HUL,hulkenberg,haas,6,1:31.929,1:26.847,1:26.338
+2024,12,British Grand Prix,2024-07-07,silverstone,MAG,kevin_magnussen,haas,17,1:32.905,,
+2024,12,British Grand Prix,2024-07-07,silverstone,LEC,leclerc,ferrari,11,1:30.496,1:27.097,
+2024,12,British Grand Prix,2024-07-07,silverstone,VER,max_verstappen,red_bull,4,1:31.342,1:26.796,1:26.203
+2024,12,British Grand Prix,2024-07-07,silverstone,NOR,norris,mclaren,3,1:31.596,1:26.559,1:26.030
+2024,12,British Grand Prix,2024-07-07,silverstone,OCO,ocon,alpine,18,1:34.557,,
+2024,12,British Grand Prix,2024-07-07,silverstone,PER,perez,red_bull,19,1:38.348,,
+2024,12,British Grand Prix,2024-07-07,silverstone,PIA,piastri,mclaren,5,1:30.895,1:26.733,1:26.237
+2024,12,British Grand Prix,2024-07-07,silverstone,RIC,ricciardo,rb,15,1:31.291,1:27.949,
+2024,12,British Grand Prix,2024-07-07,silverstone,RUS,russell,mercedes,1,1:30.106,1:26.723,1:25.819
+2024,12,British Grand Prix,2024-07-07,silverstone,SAI,sainz,ferrari,7,1:30.557,1:26.843,1:26.509
+2024,12,British Grand Prix,2024-07-07,silverstone,SAR,sargeant,williams,12,1:31.608,1:27.175,
+2024,12,British Grand Prix,2024-07-07,silverstone,STR,stroll,aston_martin,8,1:31.410,1:26.938,1:26.585
+2024,12,British Grand Prix,2024-07-07,silverstone,TSU,tsunoda,rb,13,1:30.994,1:27.269,
+2024,12,British Grand Prix,2024-07-07,silverstone,ZHO,zhou,sauber,14,1:31.190,1:27.867,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,ALB,albon,williams,13,1:17.280,1:16.429,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,ALO,alonso,aston_martin,7,1:17.624,1:16.117,1:16.043
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,BOT,bottas,sauber,12,1:17.487,1:16.384,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,GAS,gasly,alpine,20,1:18.166,,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,HAM,hamilton,mercedes,5,1:17.087,1:16.307,1:15.854
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,HUL,hulkenberg,haas,11,1:17.362,1:16.317,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,MAG,kevin_magnussen,haas,15,1:17.851,1:16.548,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,LEC,leclerc,ferrari,6,1:17.437,1:15.891,1:15.905
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,VER,max_verstappen,red_bull,3,1:17.087,1:15.770,1:15.273
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,NOR,norris,mclaren,1,1:17.755,1:15.540,1:15.227
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,OCO,ocon,alpine,19,1:18.049,,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,PER,perez,red_bull,16,1:17.886,,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,PIA,piastri,mclaren,2,1:17.504,1:15.785,1:15.249
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,RIC,ricciardo,rb,9,1:17.050,1:16.202,1:16.447
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,RUS,russell,mercedes,17,1:17.968,,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,SAI,sainz,ferrari,4,1:17.244,1:15.885,1:15.696
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,SAR,sargeant,williams,14,1:17.770,1:16.543,
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,STR,stroll,aston_martin,8,1:17.405,1:16.075,1:16.244
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,TSU,tsunoda,rb,10,1:17.436,1:16.121,1:16.477
+2024,13,Hungarian Grand Prix,2024-07-21,hungaroring,ZHO,zhou,sauber,18,1:18.037,,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,ALB,albon,williams,9,1:17.189,1:16.988,1:17.065
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,ALO,alonso,aston_martin,13,1:17.307,1:17.168,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,BOT,bottas,sauber,15,1:17.393,1:17.817,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,COL,colapinto,williams,16,1:17.558,,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,GAS,gasly,alpine,8,1:17.149,1:17.048,1:16.892
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,HAM,hamilton,mercedes,6,1:17.306,1:16.973,1:16.651
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,HUL,hulkenberg,haas,10,1:17.186,1:16.995,1:17.365
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,MAG,kevin_magnussen,haas,7,1:17.125,1:17.003,1:16.886
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,LAW,lawson,rb,12,1:17.380,1:17.162,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,LEC,leclerc,ferrari,4,1:16.972,1:16.641,1:16.265
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,VER,max_verstappen,red_bull,2,1:16.803,1:16.514,1:16.171
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,NOR,norris,mclaren,3,1:16.505,1:16.301,1:16.260
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,OCO,ocon,alpine,19,1:17.617,,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,PER,perez,red_bull,18,1:17.611,,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,PIA,piastri,mclaren,17,1:17.597,,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,RUS,russell,mercedes,5,1:17.194,1:16.937,1:16.356
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,SAI,sainz,ferrari,1,1:16.778,1:16.515,1:15.946
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,STR,stroll,aston_martin,14,1:17.407,1:17.294,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,TSU,tsunoda,rb,11,1:17.182,1:17.129,
+2024,20,Mexico City Grand Prix,2024-10-27,rodriguez,ZHO,zhou,sauber,20,1:18.072,,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,ALB,albon,williams,7,1:29.072,1:24.657,1:24.657
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,ALO,alonso,aston_martin,9,1:30.207,1:28.998,1:28.998
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,BEA,bearman,haas,17,1:31.229,,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,BOT,bottas,sauber,11,1:30.633,1:26.472,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,COL,colapinto,williams,18,1:31.270,,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,GAS,gasly,alpine,15,1:29.420,1:29.614,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,HAM,hamilton,mercedes,16,1:31.150,,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,HUL,hulkenberg,haas,19,1:31.623,,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,LAW,lawson,rb,5,1:30.758,1:25.654,1:24.484
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,LEC,leclerc,ferrari,6,1:29.839,1:26.097,1:24.525
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,VER,max_verstappen,red_bull,12,1:28.522,1:27.771,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,NOR,norris,mclaren,1,1:30.944,1:24.844,1:23.405
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,OCO,ocon,alpine,4,1:29.171,1:26.206,1:24.475
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,PER,perez,red_bull,13,1:30.035,1:28.158,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,PIA,piastri,mclaren,8,1:30.114,1:24.686,1:24.686
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,RUS,russell,mercedes,2,1:29.121,1:26.307,1:23.578
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,SAI,sainz,ferrari,14,1:30.303,1:29.406,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,STR,stroll,aston_martin,10,1:30.580,1:26.334,
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,TSU,tsunoda,rb,3,1:29.172,1:26.464,1:24.111
+2024,21,São Paulo Grand Prix,2024-11-03,interlagos,ZHO,zhou,sauber,20,1:32.263,,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,ALB,albon,williams,18,1:34.425,,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,ALO,alonso,aston_martin,17,1:34.258,,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,BOT,bottas,sauber,19,1:34.430,,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,COL,colapinto,williams,14,1:33.746,1:33.749,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,GAS,gasly,alpine,3,1:33.691,1:32.879,1:32.664
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,HAM,hamilton,mercedes,10,1:33.225,1:32.567,1:48.106
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,HUL,hulkenberg,haas,9,1:33.920,1:33.114,1:33.062
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,MAG,kevin_magnussen,haas,12,1:33.991,1:33.297,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,LAW,lawson,rb,15,1:34.087,1:34.257,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,LEC,leclerc,ferrari,4,1:33.446,1:33.016,1:32.783
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,VER,max_verstappen,red_bull,5,1:33.299,1:33.085,1:32.797
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,NOR,norris,mclaren,6,1:33.592,1:33.099,1:33.008
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,OCO,ocon,alpine,11,1:33.968,1:33.221,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,PER,perez,red_bull,16,1:34.155,,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,PIA,piastri,mclaren,8,1:33.450,1:33.024,1:33.033
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,RUS,russell,mercedes,1,1:33.186,1:32.779,1:32.312
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,SAI,sainz,ferrari,2,1:33.484,1:32.711,1:32.410
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,STR,stroll,aston_martin,20,1:34.484,,
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,TSU,tsunoda,rb,7,1:33.789,1:33.089,1:33.029
+2024,22,Las Vegas Grand Prix,2024-11-23,vegas,ZHO,zhou,sauber,13,1:34.079,1:33.566,
+2024,23,Qatar Grand Prix,2024-12-01,losail,ALB,albon,williams,16,1:22.390,,
+2024,23,Qatar Grand Prix,2024-12-01,losail,ALO,alonso,aston_martin,8,1:21.608,1:21.208,1:21.251
+2024,23,Qatar Grand Prix,2024-12-01,losail,BOT,bottas,sauber,13,1:21.927,1:21.731,
+2024,23,Qatar Grand Prix,2024-12-01,losail,COL,colapinto,williams,19,1:22.594,,
+2024,23,Qatar Grand Prix,2024-12-01,losail,GAS,gasly,alpine,11,1:21.843,1:21.437,
+2024,23,Qatar Grand Prix,2024-12-01,losail,HAM,hamilton,mercedes,6,1:21.637,1:21.095,1:21.011
+2024,23,Qatar Grand Prix,2024-12-01,losail,HUL,hulkenberg,haas,18,1:22.442,,
+2024,23,Qatar Grand Prix,2024-12-01,losail,MAG,kevin_magnussen,haas,10,1:21.891,1:21.387,1:21.500
+2024,23,Qatar Grand Prix,2024-12-01,losail,LAW,lawson,rb,17,1:22.411,,
+2024,23,Qatar Grand Prix,2024-12-01,losail,LEC,leclerc,ferrari,5,1:21.278,1:21.000,1:20.852
+2024,23,Qatar Grand Prix,2024-12-01,losail,VER,max_verstappen,red_bull,1,1:21.579,1:20.687,1:20.520
+2024,23,Qatar Grand Prix,2024-12-01,losail,NOR,norris,mclaren,3,1:21.578,1:20.983,1:20.772
+2024,23,Qatar Grand Prix,2024-12-01,losail,OCO,ocon,alpine,20,1:22.714,,
+2024,23,Qatar Grand Prix,2024-12-01,losail,PER,perez,red_bull,9,1:21.675,1:21.425,1:21.425
+2024,23,Qatar Grand Prix,2024-12-01,losail,PIA,piastri,mclaren,4,1:21.821,1:21.121,1:20.829
+2024,23,Qatar Grand Prix,2024-12-01,losail,RUS,russell,mercedes,2,1:21.241,1:21.069,1:20.575
+2024,23,Qatar Grand Prix,2024-12-01,losail,SAI,sainz,ferrari,7,1:21.447,1:21.199,1:21.041
+2024,23,Qatar Grand Prix,2024-12-01,losail,STR,stroll,aston_martin,15,1:22.011,1:21.911,
+2024,23,Qatar Grand Prix,2024-12-01,losail,TSU,tsunoda,rb,14,1:22.364,1:21.771,
+2024,23,Qatar Grand Prix,2024-12-01,losail,ZHO,zhou,sauber,12,1:22.103,1:21.501,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,ALB,albon,williams,16,1:23.821,,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,ALO,alonso,aston_martin,8,1:23.794,1:23.268,1:23.196
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,BOT,bottas,sauber,9,1:23.481,1:23.341,1:23.204
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,COL,colapinto,williams,19,1:23.912,,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,DOO,doohan,alpine,20,1:24.105,,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,GAS,gasly,alpine,6,1:23.548,1:23.086,1:22.984
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,HAM,hamilton,mercedes,18,1:23.887,,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,HUL,hulkenberg,haas,4,1:23.722,1:23.040,1:22.886
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,MAG,kevin_magnussen,haas,15,1:23.632,1:23.877,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,LAW,lawson,rb,12,1:23.733,1:23.472,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,LEC,leclerc,ferrari,14,1:23.302,1:23.833,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,VER,max_verstappen,red_bull,5,1:23.516,1:22.998,1:22.945
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,NOR,norris,mclaren,1,1:23.682,1:23.098,1:22.595
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,PER,perez,red_bull,10,1:23.559,1:23.379,1:23.264
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,PIA,piastri,mclaren,2,1:23.640,1:23.199,1:22.804
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,RUS,russell,mercedes,7,1:23.678,1:23.283,1:23.132
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,SAI,sainz,ferrari,3,1:23.487,1:22.985,1:22.824
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,STR,stroll,aston_martin,13,1:23.729,1:23.784,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,TSU,tsunoda,rb,11,1:23.735,1:23.419,
+2024,24,Abu Dhabi Grand Prix,2024-12-08,yas_marina,ZHO,zhou,sauber,17,1:23.880,,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,ALB,albon,williams,6,1:16.245,1:16.017,1:15.737
+2025,1,Australian Grand Prix,2025-03-16,albert_park,ALO,alonso,aston_martin,12,1:16.288,1:16.453,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,ANT,antonelli,mercedes,16,1:16.525,,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,BEA,bearman,haas,20,,,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,BOR,bortoleto,sauber,15,1:16.516,1:17.520,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,DOO,doohan,alpine,14,1:16.315,1:16.863,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,GAS,gasly,alpine,9,1:16.328,1:16.112,1:15.980
+2025,1,Australian Grand Prix,2025-03-16,albert_park,HAD,hadjar,rb,11,1:16.354,1:16.175,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,HAM,hamilton,ferrari,8,1:16.213,1:15.919,1:15.973
+2025,1,Australian Grand Prix,2025-03-16,albert_park,HUL,hulkenberg,sauber,17,1:16.579,,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,LAW,lawson,red_bull,18,1:17.094,,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,LEC,leclerc,ferrari,7,1:16.029,1:15.827,1:15.755
+2025,1,Australian Grand Prix,2025-03-16,albert_park,VER,max_verstappen,red_bull,3,1:16.018,1:15.565,1:15.481
+2025,1,Australian Grand Prix,2025-03-16,albert_park,NOR,norris,mclaren,1,1:15.912,1:15.415,1:15.096
+2025,1,Australian Grand Prix,2025-03-16,albert_park,OCO,ocon,haas,19,1:17.147,,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,PIA,piastri,mclaren,2,1:16.062,1:15.468,1:15.180
+2025,1,Australian Grand Prix,2025-03-16,albert_park,RUS,russell,mercedes,4,1:15.971,1:15.798,1:15.546
+2025,1,Australian Grand Prix,2025-03-16,albert_park,SAI,sainz,williams,10,1:16.360,1:15.931,1:16.062
+2025,1,Australian Grand Prix,2025-03-16,albert_park,STR,stroll,aston_martin,13,1:16.369,1:16.483,
+2025,1,Australian Grand Prix,2025-03-16,albert_park,TSU,tsunoda,rb,5,1:16.225,1:16.009,1:15.670
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,ALB,albon,williams,10,1:31.503,1:31.595,1:31.706
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,ALO,alonso,aston_martin,13,1:31.719,1:31.688,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,ANT,antonelli,mercedes,8,1:31.676,1:31.590,1:31.103
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,BEA,bearman,haas,17,1:32.018,,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,BOR,bortoleto,sauber,19,1:32.141,,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,DOO,doohan,alpine,18,1:32.092,,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,GAS,gasly,alpine,16,1:31.992,,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,HAD,hadjar,rb,7,1:31.162,1:31.253,1:31.079
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,HAM,hamilton,ferrari,5,1:31.690,1:31.501,1:30.927
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,HUL,hulkenberg,sauber,12,1:31.921,1:31.632,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,LAW,lawson,red_bull,20,1:32.174,,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,LEC,leclerc,ferrari,6,1:31.579,1:31.450,1:31.021
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,VER,max_verstappen,red_bull,4,1:31.424,1:31.142,1:30.817
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,NOR,norris,mclaren,3,1:30.983,1:30.787,1:30.793
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,OCO,ocon,haas,11,1:31.876,1:31.625,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,PIA,piastri,mclaren,1,1:31.591,1:31.200,1:30.641
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,RUS,russell,mercedes,2,1:31.295,1:31.307,1:30.723
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,SAI,sainz,williams,15,1:31.628,1:31.840,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,STR,stroll,aston_martin,14,1:31.923,1:31.773,
+2025,2,Chinese Grand Prix,2025-03-23,shanghai,TSU,tsunoda,rb,9,1:31.238,1:31.260,1:31.638
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,ALB,albon,williams,9,1:28.218,1:27.783,1:27.615
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,ALO,alonso,aston_martin,13,1:28.337,1:27.897,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,ANT,antonelli,mercedes,6,1:27.968,1:27.639,1:27.555
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,BEA,bearman,haas,10,1:28.228,1:27.711,1:27.867
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,BOR,bortoleto,sauber,17,1:28.622,,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,DOO,doohan,alpine,19,1:28.877,,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,GAS,gasly,alpine,11,1:28.186,1:27.822,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,HAD,hadjar,rb,7,1:28.278,1:27.775,1:27.569
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,HAM,hamilton,ferrari,8,1:27.942,1:27.610,1:27.610
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,HUL,hulkenberg,sauber,16,1:28.570,,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,LAW,lawson,rb,14,1:28.554,1:27.906,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,LEC,leclerc,ferrari,4,1:27.920,1:27.555,1:27.299
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,VER,max_verstappen,red_bull,1,1:27.943,1:27.502,1:26.983
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,NOR,norris,mclaren,2,1:27.845,1:27.146,1:26.995
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,OCO,ocon,haas,18,1:28.696,,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,PIA,piastri,mclaren,3,1:27.687,1:27.507,1:27.027
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,RUS,russell,mercedes,5,1:27.843,1:27.400,1:27.318
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,SAI,sainz,williams,12,1:28.209,1:27.836,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,STR,stroll,aston_martin,20,1:29.271,,
+2025,3,Japanese Grand Prix,2025-04-06,suzuka,TSU,tsunoda,red_bull,15,1:27.967,1:28.000,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,ALB,albon,williams,15,1:32.040,,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,ALO,alonso,aston_martin,13,1:31.634,1:31.886,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,ANT,antonelli,mercedes,4,1:31.415,1:30.716,1:30.213
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,BEA,bearman,haas,20,1:32.373,,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,BOR,bortoleto,sauber,18,1:32.186,,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,DOO,doohan,alpine,11,1:31.414,1:31.245,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,GAS,gasly,alpine,5,1:31.462,1:30.643,1:30.216
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,HAD,hadjar,rb,12,1:31.591,1:31.271,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,HAM,hamilton,ferrari,9,1:31.219,1:31.009,1:30.772
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,HUL,hulkenberg,sauber,16,1:32.067,,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,LAW,lawson,rb,17,1:32.165,,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,LEC,leclerc,ferrari,3,1:31.454,1:30.724,1:30.175
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,VER,max_verstappen,red_bull,7,1:31.303,1:31.019,1:30.423
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,NOR,norris,mclaren,6,1:31.107,1:30.560,1:30.267
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,OCO,ocon,haas,14,1:31.594,,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,PIA,piastri,mclaren,1,1:31.392,1:30.454,1:29.841
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,RUS,russell,mercedes,2,1:31.494,1:30.664,1:30.009
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,SAI,sainz,williams,8,1:31.591,1:30.844,1:30.680
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,STR,stroll,aston_martin,19,1:32.283,,
+2025,4,Bahrain Grand Prix,2025-04-13,bahrain,TSU,tsunoda,red_bull,10,1:31.751,1:31.228,1:31.303
+2025,6,Miami Grand Prix,2025-05-04,miami,ALB,albon,williams,7,1:27.042,1:26.855,1:26.682
+2025,6,Miami Grand Prix,2025-05-04,miami,ALO,alonso,aston_martin,17,1:27.604,,
+2025,6,Miami Grand Prix,2025-05-04,miami,ANT,antonelli,mercedes,3,1:27.077,1:26.606,1:26.271
+2025,6,Miami Grand Prix,2025-05-04,miami,BEA,bearman,haas,20,1:27.999,,
+2025,6,Miami Grand Prix,2025-05-04,miami,BOR,bortoleto,sauber,13,1:27.343,1:27.151,
+2025,6,Miami Grand Prix,2025-05-04,miami,DOO,doohan,alpine,14,1:27.422,1:27.186,
+2025,6,Miami Grand Prix,2025-05-04,miami,GAS,gasly,alpine,18,1:27.710,,
+2025,6,Miami Grand Prix,2025-05-04,miami,HAD,hadjar,rb,11,1:27.301,1:26.987,
+2025,6,Miami Grand Prix,2025-05-04,miami,HAM,hamilton,ferrari,12,1:27.279,1:27.006,
+2025,6,Miami Grand Prix,2025-05-04,miami,HUL,hulkenberg,sauber,16,1:27.473,,
+2025,6,Miami Grand Prix,2025-05-04,miami,LAW,lawson,rb,15,1:27.444,1:27.363,
+2025,6,Miami Grand Prix,2025-05-04,miami,LEC,leclerc,ferrari,8,1:27.417,1:26.948,1:26.754
+2025,6,Miami Grand Prix,2025-05-04,miami,VER,max_verstappen,red_bull,1,1:26.870,1:26.643,1:26.204
+2025,6,Miami Grand Prix,2025-05-04,miami,NOR,norris,mclaren,2,1:26.955,1:26.499,1:26.269
+2025,6,Miami Grand Prix,2025-05-04,miami,OCO,ocon,haas,9,1:27.450,1:26.967,1:26.824
+2025,6,Miami Grand Prix,2025-05-04,miami,PIA,piastri,mclaren,4,1:27.006,1:26.269,1:26.375
+2025,6,Miami Grand Prix,2025-05-04,miami,RUS,russell,mercedes,5,1:27.014,1:26.575,1:26.385
+2025,6,Miami Grand Prix,2025-05-04,miami,SAI,sainz,williams,6,1:27.098,1:26.847,1:26.569
+2025,6,Miami Grand Prix,2025-05-04,miami,STR,stroll,aston_martin,19,1:27.830,,
+2025,6,Miami Grand Prix,2025-05-04,miami,TSU,tsunoda,red_bull,10,1:27.298,1:26.959,1:26.943
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,ALB,albon,williams,17,1:17.490,,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,ALO,alonso,aston_martin,14,1:17.232,1:17.103,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,ANT,antonelli,mercedes,6,1:17.291,1:16.773,1:16.118
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,BEA,bearman,haas,10,1:17.040,1:16.787,1:16.460
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,BOR,bortoleto,sauber,16,1:17.412,,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,COL,colapinto,alpine,20,1:17.670,,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,GAS,gasly,alpine,18,1:17.546,,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,HAD,hadjar,rb,9,1:16.733,1:16.804,1:16.252
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,HAM,hamilton,ferrari,3,1:16.736,1:16.458,1:15.938
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,HUL,hulkenberg,sauber,13,1:17.251,1:17.016,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,LAW,lawson,rb,15,1:16.961,1:18.072,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,LEC,leclerc,ferrari,2,1:17.024,1:16.658,1:15.848
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,VER,max_verstappen,red_bull,5,1:17.076,1:16.605,1:16.070
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,NOR,norris,mclaren,1,1:16.899,1:16.252,1:15.586
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,OCO,ocon,haas,12,1:16.948,1:16.837,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,PIA,piastri,mclaren,8,1:17.158,1:16.737,1:16.174
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,RUS,russell,mercedes,4,1:16.895,1:16.537,1:16.034
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,SAI,sainz,williams,7,1:17.171,1:16.607,1:16.172
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,STR,stroll,aston_martin,19,1:17.606,,
+2025,20,Mexico City Grand Prix,2025-10-26,rodriguez,TSU,tsunoda,red_bull,11,1:17.234,1:16.816,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,ALB,albon,williams,12,1:10.115,1:10.053,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,ALO,alonso,aston_martin,11,1:10.181,1:10.001,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,ANT,antonelli,mercedes,2,1:10.192,1:09.774,1:09.685
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,BEA,bearman,haas,8,1:09.891,1:09.755,1:09.977
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,COL,colapinto,alpine,18,1:10.632,,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,GAS,gasly,alpine,9,1:09.885,1:09.857,1:10.002
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,HAD,hadjar,rb,5,1:10.083,1:09.970,1:09.931
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,HAM,hamilton,ferrari,13,1:10.016,1:10.100,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,HUL,hulkenberg,sauber,10,1:10.337,1:09.985,1:10.039
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,LAW,lawson,rb,7,1:10.108,1:09.950,1:09.962
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,LEC,leclerc,ferrari,3,1:09.934,1:09.801,1:09.805
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,VER,max_verstappen,red_bull,16,1:10.403,,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,NOR,norris,mclaren,1,1:09.656,1:09.616,1:09.511
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,OCO,ocon,haas,17,1:10.438,,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,PIA,piastri,mclaren,4,1:09.928,1:09.835,1:09.886
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,RUS,russell,mercedes,6,1:09.935,1:09.880,1:09.942
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,SAI,sainz,williams,15,1:10.184,1:10.472,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,STR,stroll,aston_martin,14,1:10.041,1:10.161,
+2025,21,São Paulo Grand Prix,2025-11-09,interlagos,TSU,tsunoda,red_bull,19,1:10.711,,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,ALB,albon,williams,16,1:56.220,,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,ALO,alonso,aston_martin,7,1:53.739,1:51.865,1:49.466
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,ANT,antonelli,mercedes,17,1:56.314,,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,BEA,bearman,haas,14,1:56.016,1:53.094,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,BOR,bortoleto,sauber,18,1:56.674,,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,COL,colapinto,alpine,15,1:54.847,1:53.683,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,GAS,gasly,alpine,10,1:54.432,1:51.760,1:51.540
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,HAD,hadjar,rb,8,1:55.613,1:51.120,1:49.554
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,HAM,hamilton,ferrari,20,1:57.115,,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,HUL,hulkenberg,sauber,11,1:54.555,1:52.781,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,LAW,lawson,rb,6,1:54.828,1:51.621,1:49.062
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,LEC,leclerc,ferrari,9,1:54.814,1:51.952,1:49.872
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,VER,max_verstappen,red_bull,2,1:53.458,1:51.593,1:48.257
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,NOR,norris,mclaren,1,1:55.473,1:51.379,1:47.934
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,OCO,ocon,haas,13,1:54.635,1:52.987,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,PIA,piastri,mclaren,5,1:54.544,1:52.126,1:48.961
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,RUS,russell,mercedes,4,1:53.144,1:50.935,1:48.803
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,SAI,sainz,williams,3,1:54.873,1:51.144,1:48.296
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,STR,stroll,aston_martin,12,1:54.416,1:52.850,
+2025,22,Las Vegas Grand Prix,2025-11-23,vegas,TSU,tsunoda,red_bull,19,1:56.798,,
+2025,23,Qatar Grand Prix,2025-11-30,losail,ALB,albon,williams,15,1:20.629,1:20.629,
+2025,23,Qatar Grand Prix,2025-11-30,losail,ALO,alonso,aston_martin,8,1:20.598,1:20.219,1:20.418
+2025,23,Qatar Grand Prix,2025-11-30,losail,ANT,antonelli,mercedes,5,1:20.576,1:20.084,1:19.846
+2025,23,Qatar Grand Prix,2025-11-30,losail,BEA,bearman,haas,13,1:20.548,1:20.438,
+2025,23,Qatar Grand Prix,2025-11-30,losail,BOR,bortoleto,sauber,14,1:20.653,1:20.534,
+2025,23,Qatar Grand Prix,2025-11-30,losail,COL,colapinto,alpine,20,1:21.137,,
+2025,23,Qatar Grand Prix,2025-11-30,losail,GAS,gasly,alpine,9,1:20.681,1:20.324,1:20.477
+2025,23,Qatar Grand Prix,2025-11-30,losail,HAD,hadjar,rb,6,1:20.603,1:20.350,1:20.114
+2025,23,Qatar Grand Prix,2025-11-30,losail,HAM,hamilton,ferrari,18,1:20.907,,
+2025,23,Qatar Grand Prix,2025-11-30,losail,HUL,hulkenberg,sauber,11,1:20.630,1:20.353,
+2025,23,Qatar Grand Prix,2025-11-30,losail,LAW,lawson,rb,12,1:20.539,1:20.433,
+2025,23,Qatar Grand Prix,2025-11-30,losail,LEC,leclerc,ferrari,10,1:20.564,1:20.343,1:20.561
+2025,23,Qatar Grand Prix,2025-11-30,losail,VER,max_verstappen,red_bull,3,1:20.472,1:19.985,1:19.651
+2025,23,Qatar Grand Prix,2025-11-30,losail,NOR,norris,mclaren,2,1:20.157,1:19.861,1:19.495
+2025,23,Qatar Grand Prix,2025-11-30,losail,OCO,ocon,haas,17,1:20.864,,
+2025,23,Qatar Grand Prix,2025-11-30,losail,PIA,piastri,mclaren,1,1:20.234,1:19.650,1:19.387
+2025,23,Qatar Grand Prix,2025-11-30,losail,RUS,russell,mercedes,4,1:20.074,1:20.186,1:19.662
+2025,23,Qatar Grand Prix,2025-11-30,losail,SAI,sainz,williams,7,1:20.520,1:20.251,1:20.287
+2025,23,Qatar Grand Prix,2025-11-30,losail,STR,stroll,aston_martin,19,1:21.058,,
+2025,23,Qatar Grand Prix,2025-11-30,losail,TSU,tsunoda,red_bull,16,1:20.761,,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,ALB,albon,williams,17,1:23.416,,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,ALO,alonso,aston_martin,6,1:23.071,1:22.861,1:22.902
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,ANT,antonelli,mercedes,14,1:22.894,1:23.080,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,BEA,bearman,haas,11,1:23.254,1:23.041,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,BOR,bortoleto,sauber,7,1:23.374,1:22.874,1:22.904
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,COL,colapinto,alpine,20,1:23.890,,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,GAS,gasly,alpine,19,1:23.468,,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,HAD,hadjar,rb,9,1:23.373,1:22.997,1:23.072
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,HAM,hamilton,ferrari,16,1:23.394,,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,HUL,hulkenberg,sauber,18,1:23.450,,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,LAW,lawson,rb,13,1:23.265,1:23.077,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,LEC,leclerc,ferrari,5,1:23.163,1:22.948,1:22.730
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,VER,max_verstappen,red_bull,1,1:22.877,1:22.752,1:22.207
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,NOR,norris,mclaren,2,1:23.178,1:22.804,1:22.408
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,OCO,ocon,haas,8,1:23.334,1:23.023,1:22.913
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,PIA,piastri,mclaren,3,1:22.605,1:23.021,1:22.437
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,RUS,russell,mercedes,4,1:23.247,1:22.730,1:22.645
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,SAI,sainz,williams,12,1:23.187,1:23.042,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,STR,stroll,aston_martin,15,1:23.316,1:23.097,
+2025,24,Abu Dhabi Grand Prix,2025-12-07,yas_marina,TSU,tsunoda,red_bull,10,1:23.386,1:23.034,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,ALB,albon,williams,15,1:21.051,1:20.941,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,ALO,alonso,aston_martin,17,1:21.969,,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,ANT,antonelli,mercedes,2,1:20.120,1:19.435,1:18.811
+2026,1,Australian Grand Prix,2026-03-08,albert_park,LIN,arvid_lindblad,rb,9,1:20.409,1:19.971,1:21.247
+2026,1,Australian Grand Prix,2026-03-08,albert_park,BEA,bearman,haas,12,1:21.247,1:20.311,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,BOR,bortoleto,audi,10,1:20.495,1:20.221,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,BOT,bottas,cadillac,19,1:23.244,,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,COL,colapinto,alpine,16,1:21.200,1:21.270,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,GAS,gasly,alpine,14,1:21.138,1:20.501,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,HAD,hadjar,red_bull,3,1:20.023,1:19.653,1:19.303
+2026,1,Australian Grand Prix,2026-03-08,albert_park,HAM,hamilton,ferrari,7,1:19.811,1:19.921,1:19.478
+2026,1,Australian Grand Prix,2026-03-08,albert_park,HUL,hulkenberg,audi,11,1:21.024,1:20.303,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,LAW,lawson,rb,8,1:20.491,1:20.144,1:19.994
+2026,1,Australian Grand Prix,2026-03-08,albert_park,LEC,leclerc,ferrari,4,1:20.226,1:19.357,1:19.327
+2026,1,Australian Grand Prix,2026-03-08,albert_park,NOR,norris,mclaren,6,1:20.010,1:19.882,1:19.475
+2026,1,Australian Grand Prix,2026-03-08,albert_park,OCO,ocon,haas,13,1:20.759,1:20.491,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,PER,perez,cadillac,18,1:22.605,,
+2026,1,Australian Grand Prix,2026-03-08,albert_park,PIA,piastri,mclaren,5,1:19.664,1:19.525,1:19.380
+2026,1,Australian Grand Prix,2026-03-08,albert_park,RUS,russell,mercedes,1,1:19.507,1:18.934,1:18.518
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,ALB,albon,williams,18,1:34.772,,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,ALO,alonso,aston_martin,19,1:35.203,,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,ANT,antonelli,mercedes,1,1:33.305,1:32.443,1:32.064
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,LIN,arvid_lindblad,rb,15,1:33.906,1:33.784,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,BEA,bearman,haas,10,1:33.687,1:33.197,1:33.292
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,BOR,bortoleto,audi,16,1:33.549,1:33.965,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,BOT,bottas,cadillac,20,1:35.436,,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,COL,colapinto,alpine,12,1:33.634,1:33.357,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,GAS,gasly,alpine,7,1:33.788,1:33.003,1:32.873
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,HAD,hadjar,red_bull,9,1:33.632,1:33.352,1:33.121
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,HAM,hamilton,ferrari,3,1:33.522,1:32.567,1:32.415
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,HUL,hulkenberg,audi,11,1:34.116,1:33.354,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,LAW,lawson,rb,14,1:34.139,1:33.765,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,LEC,leclerc,ferrari,4,1:33.175,1:32.486,1:32.428
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,VER,max_verstappen,red_bull,8,1:33.417,1:33.098,1:33.002
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,NOR,norris,mclaren,6,1:33.535,1:32.910,1:32.608
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,OCO,ocon,haas,13,1:33.974,1:33.538,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,PER,perez,cadillac,22,1:36.906,,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,PIA,piastri,mclaren,5,1:33.590,1:33.130,1:32.550
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,RUS,russell,mercedes,2,1:33.262,1:32.523,1:32.286
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,SAI,sainz,williams,17,1:34.317,,
+2026,2,Chinese Grand Prix,2026-03-15,shanghai,STR,stroll,aston_martin,21,1:35.995,,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,ALB,albon,williams,17,1:31.088,,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,ALO,alonso,aston_martin,21,1:32.646,,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,ANT,antonelli,mercedes,1,1:30.035,1:29.048,1:28.778
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,LIN,arvid_lindblad,rb,10,1:30.781,1:30.109,1:30.319
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,BEA,bearman,haas,18,1:31.090,,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,BOR,bortoleto,audi,9,1:30.359,1:29.990,1:30.274
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,BOT,bottas,cadillac,20,1:32.330,,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,COL,colapinto,alpine,15,1:30.931,1:30.627,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,GAS,gasly,alpine,7,1:30.584,1:29.874,1:29.691
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,HAD,hadjar,red_bull,8,1:30.662,1:30.104,1:29.978
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,HAM,hamilton,ferrari,6,1:30.309,1:29.589,1:29.567
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,HUL,hulkenberg,audi,13,1:30.358,1:30.387,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,LAW,lawson,rb,14,1:30.657,1:30.495,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,LEC,leclerc,ferrari,4,1:29.915,1:29.303,1:29.405
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,VER,max_verstappen,red_bull,11,1:30.519,1:30.262,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,NOR,norris,mclaren,5,1:30.401,1:29.795,1:29.409
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,OCO,ocon,haas,12,1:30.915,1:30.309,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,PER,perez,cadillac,19,1:32.206,,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,PIA,piastri,mclaren,3,1:30.200,1:29.451,1:29.132
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,RUS,russell,mercedes,2,1:29.967,1:29.686,1:29.076
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,SAI,sainz,williams,16,1:30.927,1:31.033,
+2026,3,Japanese Grand Prix,2026-03-29,suzuka,STR,stroll,aston_martin,22,1:32.920,,
+2026,4,Miami Grand Prix,2026-05-03,miami,ALB,albon,williams,15,1:29.720,1:29.946,
+2026,4,Miami Grand Prix,2026-05-03,miami,ALO,alonso,aston_martin,17,1:31.098,,
+2026,4,Miami Grand Prix,2026-05-03,miami,ANT,antonelli,mercedes,1,1:28.653,1:28.289,1:27.798
+2026,4,Miami Grand Prix,2026-05-03,miami,LIN,arvid_lindblad,rb,16,1:30.133,,
+2026,4,Miami Grand Prix,2026-05-03,miami,BEA,bearman,haas,12,1:29.340,1:29.567,
+2026,4,Miami Grand Prix,2026-05-03,miami,BOR,bortoleto,audi,21,1:33.737,,
+2026,4,Miami Grand Prix,2026-05-03,miami,BOT,bottas,cadillac,19,1:31.629,,
+2026,4,Miami Grand Prix,2026-05-03,miami,COL,colapinto,alpine,8,1:29.584,1:28.975,1:28.762
+2026,4,Miami Grand Prix,2026-05-03,miami,GAS,gasly,alpine,9,1:29.914,1:29.070,1:28.810
+2026,4,Miami Grand Prix,2026-05-03,miami,HAD,hadjar,red_bull,22,,1:28.941,1:28.789
+2026,4,Miami Grand Prix,2026-05-03,miami,HAM,hamilton,ferrari,6,1:29.483,1:28.477,1:28.319
+2026,4,Miami Grand Prix,2026-05-03,miami,HUL,hulkenberg,audi,10,1:29.645,1:29.439,
+2026,4,Miami Grand Prix,2026-05-03,miami,LAW,lawson,rb,11,1:29.595,1:29.499,
+2026,4,Miami Grand Prix,2026-05-03,miami,LEC,leclerc,ferrari,3,1:28.938,1:28.315,1:28.143
+2026,4,Miami Grand Prix,2026-05-03,miami,VER,max_verstappen,red_bull,2,1:29.099,1:28.116,1:27.964
+2026,4,Miami Grand Prix,2026-05-03,miami,NOR,norris,mclaren,4,1:29.183,1:28.920,1:28.183
+2026,4,Miami Grand Prix,2026-05-03,miami,OCO,ocon,haas,14,1:29.838,1:29.772,
+2026,4,Miami Grand Prix,2026-05-03,miami,PER,perez,cadillac,20,1:31.967,,
+2026,4,Miami Grand Prix,2026-05-03,miami,PIA,piastri,mclaren,7,1:29.920,1:28.332,1:28.500
+2026,4,Miami Grand Prix,2026-05-03,miami,RUS,russell,mercedes,5,1:29.492,1:28.477,1:28.197
+2026,4,Miami Grand Prix,2026-05-03,miami,SAI,sainz,williams,13,1:29.540,1:29.568,
+2026,4,Miami Grand Prix,2026-05-03,miami,STR,stroll,aston_martin,18,1:31.164,,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,ALB,albon,williams,18,1:14.851,,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,ALO,alonso,aston_martin,19,1:15.196,,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,ANT,antonelli,mercedes,2,1:13.380,1:13.076,1:12.646
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,LIN,arvid_lindblad,rb,9,1:13.895,1:13.548,1:13.280
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,BEA,bearman,haas,16,1:14.449,1:14.416,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,BOR,bortoleto,audi,13,1:14.775,1:14.071,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,BOT,bottas,cadillac,22,1:16.272,,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,COL,colapinto,alpine,10,1:14.466,1:13.857,1:13.697
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,GAS,gasly,alpine,14,1:14.698,1:14.187,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,HAD,hadjar,red_bull,7,1:13.654,1:12.975,1:12.935
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,HAM,hamilton,ferrari,5,1:13.767,1:13.041,1:12.868
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,HUL,hulkenberg,audi,11,1:14.562,1:13.886,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,LAW,lawson,rb,12,1:14.346,1:13.897,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,LEC,leclerc,ferrari,8,1:13.825,1:13.496,1:12.976
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,VER,max_verstappen,red_bull,6,1:14.067,1:13.479,1:12.907
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,NOR,norris,mclaren,3,1:13.503,1:13.049,1:12.729
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,OCO,ocon,haas,17,1:14.845,,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,PER,perez,cadillac,20,1:15.429,,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,PIA,piastri,mclaren,4,1:13.559,1:13.285,1:12.781
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,RUS,russell,mercedes,1,1:13.953,1:13.079,1:12.578
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,SAI,sainz,williams,15,1:14.276,1:14.273,
+2026,5,Canadian Grand Prix,2026-05-24,villeneuve,STR,stroll,aston_martin,21,1:16.195,,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,ALB,albon,williams,11,1:14.321,1:13.787,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,ALO,alonso,aston_martin,21,1:15.349,,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,ANT,antonelli,mercedes,1,1:13.599,1:12.704,1:12.051
+2026,6,Monaco Grand Prix,2026-06-07,monaco,LIN,arvid_lindblad,rb,15,1:14.685,1:14.248,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,BEA,bearman,haas,19,1:14.814,,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,BOR,bortoleto,audi,16,1:14.683,,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,BOT,bottas,cadillac,20,1:15.283,,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,COL,colapinto,alpine,14,1:14.573,1:13.995,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,GAS,gasly,alpine,9,1:14.469,1:13.762,1:13.226
+2026,6,Monaco Grand Prix,2026-06-07,monaco,HAD,hadjar,red_bull,5,1:14.408,1:12.722,1:12.434
+2026,6,Monaco Grand Prix,2026-06-07,monaco,HAM,hamilton,ferrari,3,1:13.777,1:12.934,1:12.279
+2026,6,Monaco Grand Prix,2026-06-07,monaco,HUL,hulkenberg,audi,13,1:13.923,1:13.902,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,LAW,lawson,rb,10,1:14.498,1:13.471,1:13.412
+2026,6,Monaco Grand Prix,2026-06-07,monaco,LEC,leclerc,ferrari,4,1:13.293,1:12.774,1:12.351
+2026,6,Monaco Grand Prix,2026-06-07,monaco,VER,max_verstappen,red_bull,2,1:13.490,1:12.499,1:12.094
+2026,6,Monaco Grand Prix,2026-06-07,monaco,NOR,norris,mclaren,8,1:13.630,1:12.919,1:12.765
+2026,6,Monaco Grand Prix,2026-06-07,monaco,OCO,ocon,haas,17,1:14.722,,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,PER,perez,cadillac,18,1:14.747,,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,PIA,piastri,mclaren,7,1:14.159,1:12.983,1:12.624
+2026,6,Monaco Grand Prix,2026-06-07,monaco,RUS,russell,mercedes,6,1:14.214,1:13.238,1:12.445
+2026,6,Monaco Grand Prix,2026-06-07,monaco,SAI,sainz,williams,12,1:14.348,1:13.815,
+2026,6,Monaco Grand Prix,2026-06-07,monaco,STR,stroll,aston_martin,22,1:16.061,,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,ALB,albon,williams,18,1:17.424,,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,ALO,alonso,aston_martin,22,1:18.815,,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,ANT,antonelli,mercedes,3,1:15.977,1:15.295,1:14.998
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,LIN,arvid_lindblad,rb,11,1:16.425,1:15.840,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,BEA,bearman,haas,15,1:16.571,1:16.389,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,BOR,bortoleto,audi,12,1:16.616,1:16.001,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,BOT,bottas,cadillac,20,1:17.757,,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,COL,colapinto,alpine,13,1:16.590,1:16.191,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,GAS,gasly,alpine,14,1:16.599,1:16.261,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,HAD,hadjar,red_bull,6,1:16.427,1:15.754,1:15.077
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,HAM,hamilton,ferrari,2,1:15.625,1:15.418,1:14.743
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,HUL,hulkenberg,audi,9,1:16.066,1:15.768,1:16.657
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,LAW,lawson,rb,8,1:16.673,1:15.585,1:16.542
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,LEC,leclerc,ferrari,10,1:15.964,1:15.281,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,VER,max_verstappen,red_bull,5,1:16.352,1:15.484,1:15.021
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,NOR,norris,mclaren,4,1:16.287,1:15.361,1:15.001
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,OCO,ocon,haas,17,1:17.073,,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,PER,perez,cadillac,19,1:17.545,,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,PIA,piastri,mclaren,7,1:16.138,1:15.518,1:15.090
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,RUS,russell,mercedes,1,1:15.717,1:15.228,1:14.679
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,SAI,sainz,williams,16,1:16.881,1:17.827,
+2026,7,Barcelona Grand Prix,2026-06-14,catalunya,STR,stroll,aston_martin,21,1:18.758,,
