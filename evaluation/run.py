@@ -212,6 +212,12 @@ def main():
     args = ap.parse_args()
 
     races = load_races(args.results_dir)
+    for flag, path, hint in (
+        ("--scores", args.scores, "Create it first with: uv run python scripts/export_model_scores.py"),
+        ("--predictions", args.predictions, ""),
+    ):
+        if path and not path.exists():
+            raise SystemExit(f"{flag} file not found: {path}. {hint}".strip())
     if len(races) <= args.min_train + 5:
         raise SystemExit(f"Only {len(races)} races found in {args.results_dir}; need more than {args.min_train + 5}.")
     external = load_external(args.predictions, races) if args.predictions else None
