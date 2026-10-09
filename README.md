@@ -2,7 +2,7 @@
 
 **Calibrated Formula 1 race-winner probabilities, with a public track record that can't be quietly edited.**
 
-[Live site](https://gilbertorcp.github.io/F1-Prediction/) (available once GitHub Pages is enabled for this repo) · [Model card](MODEL_CARD.md) · [Evaluation reports](reports/)
+[Live site](https://gilbertorcp.github.io/F1-Prediction/) · [Model card](MODEL_CARD.md) · [Evaluation reports](reports/)
 
 Most F1 prediction projects show a pick and a screenshot of a good race. This one is built around the harder
 question: *when it says 30%, does that happen about 30% of the time?* Every forecast is frozen before the lights
