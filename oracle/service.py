@@ -10,6 +10,7 @@ from evaluation.data import Race, load_races
 from evaluation.models import GridPrior
 from evaluation.metrics import bootstrap_ci, calibration_table, mean, score_race
 from . import engine, store
+from .circuits import circuit_lookup
 from .schedule import next_race, read_schedule
 
 LIVE_FILE = "live.jsonl"
@@ -103,12 +104,14 @@ def build_bundle(results_dir: Path, pred_dir: Path, now: dt.datetime | None = No
 
     # current forecast: the newest live record whose race has no result yet
     schedule = read_schedule(results_dir / "schedule.csv")
+    circuits = circuit_lookup(results_dir)
     today = now.date().isoformat()
     pending = [r for r in live if (r["season"], r["round"]) not in by_key]
     forecast = {"status": "none", "next_race": next_race(schedule, today)}
     if pending:
         rec = max(pending, key=lambda r: (r["season"], r["round"]))
-        forecast = {"status": "open", "race": {k: rec[k] for k in ("season", "round", "race", "date")},
+        forecast = {"status": "open", "race": {**{k: rec[k] for k in ("season", "round", "race", "date")},
+                                               "circuit": circuits.get((rec["season"], rec["round"]))},
                     "made_at": rec["made_at"], "grid_source": rec["grid_source"],
                     "model": rec["model"], "model_version": rec["model_version"],
                     "hash": rec["hash"], "predictions": rec["predictions"], "simulator": rec.get("simulator"),
@@ -130,6 +133,7 @@ def build_bundle(results_dir: Path, pred_dir: Path, now: dt.datetime | None = No
                                      "grid": e.grid} for e in fin]}
         race_pages[f"{key[0]}-{key[1]}"] = {
             "season": key[0], "round": key[1], "race": rec["race"], "date": rec["date"],
+            "circuit": circuits.get(key),
             "kind": rec["kind"], "made_at": rec.get("made_at"), "grid_source": rec["grid_source"],
             "predictions": rec["predictions"], "result": result, "simulator": rec.get("simulator"),
         }

@@ -7,15 +7,16 @@
 <meta name="description" content="Calibrated win probabilities for every Formula 1 race, frozen before the start and scored in public.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d1320'/%3E%3Crect x='6' y='7' width='20' height='4' fill='%23fff'/%3E%3Crect x='6' y='14' width='13' height='4' fill='%23fff'/%3E%3Crect x='6' y='21' width='7' height='4' fill='%23d4213d'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0b0e'/%3E%3Cpath d='M5 26h6l2-10H7zM13 26h6l4-20h-6zM21 26h6l2-14h-6z' fill='%23e10600'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="#forecast">Winner Oracle</a>
+  <a class="brand" href="#forecast"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Winner Oracle</a>
   <nav aria-label="Sections">
     <a href="#forecast">Forecast</a>
+    <a href="#championship">Championship</a>
     <a href="#sim">Simulator</a>
     <a href="#standings">Standings</a>
     <a href="#h2h">Head to head</a>
@@ -24,6 +25,7 @@
     <a href="#method">Method</a>
   </nav>
 </header>
+<div class="stripe" aria-hidden="true"></div>
 
 <main>
   <section id="forecast" class="hero" aria-live="polite">
@@ -33,6 +35,11 @@
   <section id="picks" class="block" hidden>
     <h2>Your picks against the Oracle</h2>
     <div id="picks-body"></div>
+  </section>
+
+  <section id="championship" class="block" hidden>
+    <h2>Championship</h2>
+    <div id="champ-body"><p class="loading">Loading…</p></div>
   </section>
 
   <section id="sim" class="block">

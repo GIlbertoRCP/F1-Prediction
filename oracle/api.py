@@ -70,5 +70,15 @@ def race(season: int, round: int):
     return page
 
 
+@app.get("/api/championship")
+def championship_outlook():
+    """Title odds from the season simulation (rebuilt by `python -m oracle.publish`)."""
+    path = SITE_DIR / "data" / "championship.json"
+    if not path.exists():
+        raise HTTPException(404, "run python -m oracle.publish first")
+    import json
+    return json.loads(path.read_text())
+
+
 if SITE_DIR.exists():
     app.mount("/", StaticFiles(directory=SITE_DIR, html=True), name="site")

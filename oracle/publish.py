@@ -14,6 +14,7 @@ from pathlib import Path
 
 from evaluation.data import load_races
 from . import engine, store
+from . import championship
 from .schedule import read_schedule
 from .h2h import build_h2h
 from .service import BACKTEST_FILE, LIVE_FILE, build_bundle
@@ -113,12 +114,20 @@ def main(argv=None) -> int:
     print(f"backtest: {n} forecasts (re)computed")
     for msg in freeze_live(races, results_dir, pred_dir, now):
         print(msg)
+    last = races[-1]
+    sprints = championship.load_sprint_points(results_dir)
+    msg = championship.freeze_live(races, sprints, read_schedule(results_dir / "schedule.csv"), pred_dir, now,
+                                   last.season, last.round)
+    if msg:
+        print(msg)
     bundle = build_bundle(results_dir, pred_dir, now)
     write_site_data(bundle, out, races, results_dir)
+    outlook = championship.build(races, results_dir, pred_dir, ROOT / "data" / "championship_history.json", now)
+    (out / "data" / "championship.json").write_text(json.dumps(outlook, separators=(",", ":")))
     ok = bundle["meta"]["live_log"]
     print(f"live log: {ok['detail']}")
     print(f"site data written to {out}/data")
-    return 0 if ok["chain_ok"] else 1
+    return 0 if ok["chain_ok"] and outlook["live"]["chain_ok"] else 1
 
 
 if __name__ == "__main__":

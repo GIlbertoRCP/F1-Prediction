@@ -59,6 +59,14 @@ uv run uvicorn oracle.api:app --port 8000        # or: JSON API plus the same pa
 - The API serves `/api/forecast`, `/api/track-record`, `/api/races`, `/api/races/{season}/{round}` and `/api/health`.
 - Commit `data/predictions/live.jsonl` after each run: the git history is a second, independent timestamp.
 
+### Championship simulation
+
+`evaluation/season.py` plays out the rest of a season (races and sprints left, from the calendar) thousands of times from a form-only model and counts who takes the drivers' and constructors' titles. `python3 -m evaluation.season_eval` replays 2021–2025 round by round, writes `reports/championship.md` and `data/championship_history.json`, and is how its one fitted number (`TAU`, allowed pace drift) was chosen. `oracle/championship.py` builds `site/data/championship.json` and logs each live forecast to `data/predictions/championship_live.jsonl` (same hash chain as the race log).
+
+### Circuit outlines
+
+`uv run python scripts/extract_circuits.py` draws each circuit from real car positions (one fast qualifying lap from FastF1) into `site/data/circuits.json`. Resumable; the site shows no map for circuits that are missing.
+
 ### Does practice pace help? (the telemetry test)
 
 Practice sessions finish before qualifying, so their pace is legitimately known before any grid exists. `scripts/extract_practice_features.py` turns FastF1 practice laps into one row per driver per weekend (best clean-lap gap, same-compound long-run gap) in `data/telemetry/practice_features.csv`; it is resumable and logs failures to `errors.log`. `python3 -m evaluation.telemetry_eval --out reports/telemetry.md` then scores every model on the identical races with paired log-loss differences, and also tests a pre-qualifying forecast. Nothing is claimed until that report exists from real data.

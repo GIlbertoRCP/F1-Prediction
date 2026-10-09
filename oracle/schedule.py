@@ -4,7 +4,7 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-FIELDS = ["season", "round", "race", "circuit", "date", "time", "quali_date", "quali_time"]
+FIELDS = ["season", "round", "race", "circuit", "date", "time", "quali_date", "quali_time", "sprint"]
 
 
 def parse_schedule(payload: dict) -> list[dict]:
@@ -15,6 +15,7 @@ def parse_schedule(payload: dict) -> list[dict]:
             "season": int(r["season"]), "round": int(r["round"]), "race": r["raceName"],
             "circuit": r["Circuit"]["circuitId"], "date": r["date"], "time": r.get("time", ""),
             "quali_date": q.get("date", ""), "quali_time": q.get("time", ""),
+            "sprint": "1" if r.get("Sprint") else "",
         })
     return rows
 

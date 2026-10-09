@@ -3,15 +3,18 @@ import { utilities, simulate, summarize } from "./sim.js";
 import { compare, teammatePairs } from "./h2h.js";
 import { driverStandings, teamStandings } from "./standings.js";
 import { lineChart } from "./linechart.js";
+import { circuitFigure } from "./circuits.js";
 
 const TEAM_COLOURS = {
-  red_bull: "#1e41ff", mercedes: "#00a79d", ferrari: "#dc0000", mclaren: "#ff8000",
-  aston_martin: "#006f62", alpine: "#ff87bc", williams: "#00a0de", rb: "#6692ff",
-  alphatauri: "#4e7c9b", toro_rosso: "#4e7c9b", haas: "#9b6fd0", sauber: "#52e252",
-  alfa: "#a42134", audi: "#b0102a", cadillac: "#222a35", renault: "#ffd800",
+  red_bull: "#4a6bff", mercedes: "#27d1c0", ferrari: "#ef1a2d", mclaren: "#ff8000",
+  aston_martin: "#2aa58f", alpine: "#ff87bc", williams: "#3ab4ee", rb: "#7da0ff",
+  alphatauri: "#7aa6c6", toro_rosso: "#7aa6c6", haas: "#b58ae6", sauber: "#52e252",
+  alfa: "#d8465c", audi: "#e0334f", cadillac: "#9aa5b8", renault: "#ffd800",
   racing_point: "#f596c8", force_india: "#f596c8",
 };
 const colour = (team) => TEAM_COLOURS[team] || "#8a8f98";
+const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let CIRCUITS = null;
 
 const pageCache = {};
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -26,13 +29,13 @@ const fmtStamp = (iso) =>
 const ordinal = (n) => { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
 
 /* ---------- the timing tower ---------- */
-function tower(predictions, { winnerId = null, limit = 10, animate = false } = {}) {
+function tower(predictions, { winnerId = null, limit = 10, animate = false, hold = false } = {}) {
   const ol = document.createElement("ol");
   ol.className = "tower" + (animate ? " animate" : "");
   const max = Math.max(...predictions.map((p) => p.p));
   const draw = (rows) => {
     ol.innerHTML = rows.map((p, i) => `
-      <li class="${i === 0 ? "lead" : ""} ${p.driver_id === winnerId ? "winner" : ""}">
+      <li class="${i === 0 ? "lead" : ""} ${p.driver_id === winnerId ? "winner" : ""}" style="--team:${colour(p.team)}">
         <span class="rk">${i + 1}</span>
         <span class="tick" style="background:${colour(p.team)}"></span>
         <span class="code" title="${esc(p.driver_id.replace(/_/g, " "))}">${esc(p.driver)}</span>
@@ -42,42 +45,76 @@ function tower(predictions, { winnerId = null, limit = 10, animate = false } = {
       </li>`).join("");
     const fills = ol.querySelectorAll(".fill");
     const set = () => fills.forEach((f) => (f.style.width = f.dataset.w + "%"));
+    ol._set = set;
+    if (hold) return;
     animate ? requestAnimationFrame(() => requestAnimationFrame(set)) : set();
   };
   let rows = predictions.slice(0, limit);
   if (winnerId && !rows.some((r) => r.driver_id === winnerId)) rows = rows.concat(predictions.filter((r) => r.driver_id === winnerId));
   draw(rows);
   const wrap = document.createElement("div");
+  wrap.release = () => ol._set();
   wrap.append(ol);
   if (predictions.length > rows.length) {
     const btn = document.createElement("button");
     btn.className = "more";
     btn.textContent = `Show all ${predictions.length} drivers`;
-    btn.onclick = () => { draw(predictions); btn.remove(); };
+    btn.onclick = () => { hold = false; draw(predictions); btn.remove(); };
     wrap.append(btn);
   }
   return wrap;
 }
 
 /* ---------- hero ---------- */
+const mapFor = (circuit, caption) => circuitFigure(CIRCUITS, circuit, caption);
+
+// Five red lights, then lights out: the bars on the tower grow as the lights go out.
+function startLights(el, onGo) {
+  const lights = el.querySelector(".lights");
+  const done = () => { lights.classList.add("done"); lights.querySelectorAll(".light").forEach((l) => l.classList.remove("on")); onGo(); };
+  if (!lights || reduceMotion()) { lights?.classList.add("done"); onGo(); return; }
+  const bulbs = [...lights.querySelectorAll(".light")];
+  let i = 0, timer = null, finished = false;
+  const finish = () => { if (finished) return; finished = true; clearTimeout(timer); window.removeEventListener("pointerdown", finish); window.removeEventListener("keydown", finish); done(); };
+  const step = () => {
+    if (i < bulbs.length) { bulbs[i++].classList.add("on"); timer = setTimeout(step, 260); }
+    else timer = setTimeout(finish, 650);
+  };
+  window.addEventListener("pointerdown", finish, { once: true });
+  window.addEventListener("keydown", finish, { once: true });
+  timer = setTimeout(step, 250);
+}
+
 async function renderHero(forecast, record) {
   const el = $("#forecast");
   if (forecast.status === "open") {
     const r = forecast.race;
+    const map = mapFor(r.circuit, "Start/finish in red");
     el.innerHTML = `
-      <h1>${esc(r.race)}</h1>
-      <p class="sub"><span class="tag live">Live</span><strong>${esc(forecast.predictions[0].driver)}</strong> is the favourite at ${whole(forecast.predictions[0].p)}.
-      Race day is ${fmtDate(r.date)}.</p>
-      <span class="stamp">Frozen ${fmtStamp(forecast.made_at)} from the qualifying grid. Fingerprint <code>${forecast.hash.slice(0, 12)}</code></span>`;
-    el.append(tower(forecast.predictions, { animate: true }));
+      <div class="hero-top ${map ? "" : "nomap"}">
+        <div>
+          <div class="lights" aria-hidden="true">${'<span class="light"></span>'.repeat(5)}</div>
+          <h1>${esc(r.race)}</h1>
+          <p class="sub"><span class="tag">Live</span><strong>${esc(forecast.predictions[0].driver)}</strong> is the favourite at ${whole(forecast.predictions[0].p)}.
+          Race day is ${fmtDate(r.date)}.</p>
+          <span class="stamp">Frozen ${fmtStamp(forecast.made_at)} from the qualifying grid. Fingerprint <code>${forecast.hash.slice(0, 12)}</code></span>
+        </div>
+        ${map}
+      </div>`;
+    const t = tower(forecast.predictions, { animate: true, hold: true });
+    el.append(t);
     el.append(pickPanel(forecast, record));
+    startLights(el, () => t.release());
     return;
   }
   const next = forecast.next_race;
+  const nextMap = next ? mapFor(next.circuit, "") : "";
   el.innerHTML = next
-    ? `<h1>Next forecast opens after qualifying</h1>
-       <p class="sub">The <strong>${esc(next.race)}</strong> is on ${fmtDate(next.date)}${next.quali_date ? `; qualifying is ${fmtDate(next.quali_date)}` : ""}. The forecast needs the starting grid, so it appears as soon as qualifying finishes.</p>`
-    : `<h1>No race to forecast right now</h1>
+    ? `<div class="hero-top ${nextMap ? "" : "nomap"}"><div>
+         <h1>Next forecast opens after qualifying</h1>
+         <p class="sub">The <strong>${esc(next.race)}</strong> is on ${fmtDate(next.date)}${next.quali_date ? `; qualifying is ${fmtDate(next.quali_date)}` : ""}. The forecast needs the starting grid, so it appears as soon as qualifying finishes.</p>
+       </div>${nextMap}</div>`
+    : `<h1 class="calm">No race to forecast right now</h1>
        <p class="sub">Forecasts open after qualifying for each Grand Prix. Below is the most recent race, so you can see what a forecast looks like and how it did.</p>`;
   const last = record.latest;
   if (!last) return;
@@ -175,7 +212,12 @@ function renderRecord(tr) {
     <td>${whole(v.avg_winner_prob)}</td><td>${v.logloss.mean.toFixed(2)}</td></tr>`).join("");
   el.innerHTML = `
     ${live}
-    <p class="lede">In ${b.n} replayed races, the driver we rated most likely won <b>${whole(b.top1.mean)}</b> of the time, and the winner was in our top three <b>${whole(b.top3.mean)}</b> of the time.</p>
+    <div class="tiles">
+      <div class="tile"><span class="v">${whole(b.top1.mean)}</span><span class="l">top pick won, over ${b.n} replayed races (the pole sitter won ${whole(b.pole_top1)})</span></div>
+      <div class="tile"><span class="v">${whole(b.top3.mean)}</span><span class="l">of the time the winner was in our top three</span></div>
+      <div class="tile ${tr.reference && b.logloss.mean < tr.reference.slot_prior_logloss ? "good" : ""}"><span class="v">${b.logloss.mean.toFixed(2)}</span><span class="l">log loss (lower is better)${tr.reference ? `; the starting slot alone scores ${tr.reference.slot_prior_logloss.toFixed(2)}, a random guess ${b.uniform_logloss.toFixed(2)}` : ""}</span></div>
+      <div class="tile ${l.n ? "good" : "warn"}"><span class="v">${l.n}</span><span class="l">live races scored so far${l.n ? "" : "; the first live forecast is scored after its race"}</span></div>
+    </div>
     <p class="fine">Picking the pole sitter wins ${whole(b.pole_top1)}, so for a single best guess the model is no better than pole. What it adds is the odds for everyone else: on average we gave the eventual winner ${whole(b.avg_winner_prob)}, where a random guess gives about ${whole(random)}.</p>
     <div class="two">
       <div>
@@ -431,16 +473,126 @@ async function renderStandings() {
   draw();
 }
 
+/* ---------- championship ---------- */
+function rangeRow(r, i, axisMax, label, cls = "") {
+  const at = (v) => `${Math.min(100, (v / axisMax) * 100).toFixed(2)}%`;
+  return `<li class="${cls}" style="--team:${colour(r.team)}">
+    <span class="rk">${i + 1}</span><span class="tick" style="background:${colour(r.team)}"></span>
+    <span class="code" title="${esc(label)}">${esc(label)}</span>
+    <span class="pts num">${fmtPts(r.points)} pts</span>
+    <span class="range" role="img" aria-label="${esc(label)}: ${fmtPts(r.points)} points now; most likely finish between ${Math.round(r.p10)} and ${Math.round(r.p90)}">
+      <span class="axis"></span>
+      <span class="span" style="left:${at(r.p10)};width:calc(${at(r.p90)} - ${at(r.p10)})"></span>
+      <span class="now" style="left:${at(r.points)}"></span>
+      <span class="mid" style="left:${at(r.p50)}"></span>
+    </span>
+    <span class="pct num">${pct(r.title)}</span></li>`;
+}
+
+async function renderChampionship() {
+  const sec = $("#championship");
+  let data;
+  try { data = await getJSON("data/championship.json"); } catch { return; }
+  const cur = data.current;
+  if (!cur) return;
+  sec.hidden = false;
+  const el = $("#champ-body");
+  const played = cur.after_round;
+  const total = played + cur.remaining.length;
+  let kind = "d";
+  el.innerHTML = `
+    <p class="lede-line" id="ch-lede"></p>
+    <div class="simbar">
+      <span class="seg" role="group" aria-label="Championship">
+        <button type="button" id="ch-d" aria-pressed="true">Drivers</button>
+        <button type="button" id="ch-c" aria-pressed="false">Constructors</button>
+      </span>
+    </div>
+    <div id="ch-tower"></div>
+    <p class="legend-note"><span><i style="background:var(--ink);width:3px;height:12px"></i>points now</span>
+      <span><i style="background:var(--bar-soft);opacity:.7"></i>80% range for the final total</span>
+      <span><i style="background:var(--slate);width:3px;height:12px"></i>middle outcome</span></p>
+    <h3>Races left</h3>
+    <ul class="remain" id="ch-left"></ul>
+    <h3>How the odds moved</h3>
+    <div class="simbar"><label class="select">Season <select id="ch-season"></select></label></div>
+    <p class="fine" id="ch-note"></p>
+    <div id="ch-chart"></div>
+    <h3>How far to trust it</h3>
+    <div id="ch-trust"></div>`;
+  $("#ch-left").innerHTML = cur.remaining.map((r) =>
+    `<li><b>R${r.round}</b> ${esc(r.race.replace(/ Grand Prix$/, " GP"))}${r.sprint ? '<span class="s" title="Sprint weekend">Sprint</span>' : ""}</li>`).join("");
+
+  const drawTower = () => {
+    const rows = kind === "d" ? cur.drivers.filter((d) => d.racing) : cur.teams;
+    const shown = rows.slice(0, 10);
+    const axisMax = Math.max(...shown.map((r) => r.p90)) * 1.03;
+    const label = (r) => (kind === "d" ? r.code : teamName(r.team));
+    const lead = rows[0];
+    const second = rows[1];
+    $("#ch-lede").innerHTML = `After round ${played} of ${total}, <b>${esc(label(lead))}</b> has a <b>${pct(lead.title)}</b> chance of the ${cur.season} ${kind === "d" ? "drivers'" : "constructors'"} title${second && second.title >= 0.005 ? `; ${esc(label(second))} is next at ${pct(second.title)}` : ""}. ${cur.remaining.length} race${cur.remaining.length === 1 ? "" : "s"} to go.`;
+    $("#ch-tower").innerHTML = `<ol class="tower title ${kind === "c" ? "teams" : ""}">${shown.map((r, i) => rangeRow(r, i, axisMax, label(r), r.title < 0.005 && i > 0 ? "dim" : "")).join("")}</ol>`;
+  };
+  const setKind = (k) => { kind = k; $("#ch-d").setAttribute("aria-pressed", String(k === "d")); $("#ch-c").setAttribute("aria-pressed", String(k === "c")); drawTower(); };
+  $("#ch-d").onclick = () => setKind("d");
+  $("#ch-c").onclick = () => setKind("c");
+  drawTower();
+
+  // how the odds moved: this season so far, and past seasons replayed round by round
+  const seasons = { [`${cur.season}`]: { label: `${cur.season} so far`, cutoffs: data.replay?.cutoffs || [], live: true } };
+  for (const [y, v] of Object.entries(data.backtest?.seasons || {})) if (!seasons[y]) seasons[y] = { label: `${y}`, cutoffs: v.cutoffs, total: v.total_rounds };
+  const keys = Object.keys(seasons).sort((a, b) => b - a);
+  $("#ch-season").innerHTML = keys.map((k) => `<option value="${k}">${seasons[k].label}</option>`).join("");
+  const drawChart = () => {
+    const sx = seasons[$("#ch-season").value];
+    const cuts = sx.cutoffs;
+    if (cuts.length < 2) { $("#ch-chart").textContent = "Not enough rounds yet to draw this."; $("#ch-note").textContent = ""; return; }
+    const last = cuts[cuts.length - 1];
+    const peak = {};
+    cuts.forEach((c) => c.drivers.forEach((d) => { peak[d.code] = Math.max(peak[d.code] || 0, d.title); }));
+    const team = {};
+    cuts.forEach((c) => c.drivers.forEach((d) => { team[d.code] = d.team; }));
+    const finalT = Object.fromEntries(last.drivers.map((d) => [d.code, d.title]));
+    const codes = Object.keys(peak).filter((c) => peak[c] >= 0.08).sort((a, b) => (finalT[b] || 0) - (finalT[a] || 0) || peak[b] - peak[a]).slice(0, 5);
+    const picked = codes.length ? codes : last.drivers.slice(0, 3).map((d) => d.code);
+    const seen = {};
+    const series = picked.map((code) => {
+      const dash = seen[team[code]] ? "7 5" : null;
+      seen[team[code]] = true;
+      return { name: code, color: colour(team[code]), dash, values: cuts.map((c) => Math.round((c.drivers.find((d) => d.code === code)?.title || 0) * 1000) / 10) };
+    });
+    lineChart($("#ch-chart"), series, cuts.map((c) => String(c.after)), { unit: "title chance", firstIsData: true, yMax: 100, fmt: (v) => `${Number.isInteger(v) ? v : v.toFixed(1)}%` });
+    $("#ch-note").textContent = sx.live
+      ? "Each point is the title chance using only the results up to that round. This replay is recomputed with every update; the live log below records forecasts as they were made."
+      : `A replay: each point uses only the results up to that round, never the rest of ${$("#ch-season").value}. ${last.champion_actual ? `${last.champion_actual} went on to win the title.` : ""}`;
+  };
+  $("#ch-season").onchange = drawChart;
+  drawChart();
+
+  const b = data.backtest?.summary;
+  const live = data.live;
+  const first = data.backtest?.seasons_tested?.[0], lastY = data.backtest?.seasons_tested?.slice(-1)[0];
+  el.querySelector("#ch-trust").innerHTML = `
+    ${b ? `<p>We replayed ${first}–${lastY} at every round, ${b.cutoffs} times in all. Expected final points were off by ${b.mae.toFixed(1)} on average, against ${b.straight_line_mae.toFixed(1)} for simply extending each driver's current points rate.</p>
+    <p>For the title itself, the chance given to the eventual champion scored ${b.title_logloss.toFixed(2)} (log loss, lower is better), against ${b.rival_title_logloss.toFixed(2)} for a plain projection whose noise level was picked in hindsight. That is a small edge, and five seasons means only five champions, so the title odds are the least certain number on this page.</p>
+    <p class="fine">One number, how far a team's pace may drift during a season, was chosen so the 80% ranges above held the real final total ${whole(b.coverage80)} of the time on those same seasons. That check is a fit, not an independent test, and the comparisons above were made on the same seasons too, so treat them as slightly flattering.</p>` : ""}
+    <p class="fine">The simulation knows each team's recent form and the races and sprints left. It does not know about upgrades, penalties or injuries; it allows for pace drifting during the season, sized from past seasons. Details are in <code>reports/championship.md</code>.</p>
+    <div class="livebox"><p><b>Live log: ${live.records} championship forecast${live.records === 1 ? "" : "s"} frozen.</b> ${live.chain_ok ? "The chain is intact." : "The chain is broken."}</p>
+      ${live.log.length ? `<p>${live.log.slice(-3).map((r) => `After round ${r.after_round}: ${esc(r.leader)} ${pct(r.leader_title)}, frozen ${fmtStamp(r.made_at)}`).join(". ")}.</p>` : "<p>Each forecast is logged after a race, before the next one starts.</p>"}</div>`;
+}
+
 /* ---------- boot ---------- */
 (async function main() {
   try {
     const [meta, forecast, record, index] = await Promise.all([
       getJSON("data/meta.json"), getJSON("data/forecast.json"), getJSON("data/track_record.json"), getJSON("data/races.json"),
     ]);
+    CIRCUITS = await getJSON("data/circuits.json").catch(() => null);
     await renderHero(forecast, record);
     renderRecord(record);
     renderRaces(index, record);
     renderPicks(record);
+    renderChampionship().catch((e) => console.error(e));
     renderSim(index, forecast);
     renderStandings().catch((e) => { console.error(e); $("#standings-body").textContent = "Standings data is not available."; });
     renderH2H().catch((e) => { console.error(e); $("#h2h-body").textContent = "Head-to-head data is not available."; });

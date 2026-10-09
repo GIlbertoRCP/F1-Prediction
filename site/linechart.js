@@ -20,13 +20,14 @@ const html = (tag, cls, text, parent) => {
 /**
  * series: [{name, color, dash, values: [y at x=0..n]}]; xLabels: label for each x (index 0 = start).
  */
-export function lineChart(container, series, xLabels, { unit = "points" } = {}) {
+export function lineChart(container, series, xLabels, { unit = "points", firstIsData = false, fmt = null, yMax = null, xTitle = "After round" } = {}) {
+  const show1 = fmt || ((v) => (Number.isInteger(v) ? String(v) : v.toFixed(1)));
   container.textContent = "";
   const W = 1000, H = 360, m = { l: 48, r: 64, t: 12, b: 30 };
   const n = xLabels.length - 1;
-  const ymax = Math.max(1, ...series.flatMap((s) => s.values));
+  const ymax = yMax || Math.max(1, ...series.flatMap((s) => s.values));
   const step = [10, 20, 25, 50, 100, 200, 250, 500].find((s) => ymax / s <= 6) || 500;
-  const top = Math.ceil(ymax / step) * step;
+  const top = yMax || Math.ceil(ymax / step) * step;
   const x = (i) => m.l + (i / n) * (W - m.l - m.r);
   const y = (v) => H - m.b - (v / top) * (H - m.t - m.b);
 
@@ -47,11 +48,11 @@ export function lineChart(container, series, xLabels, { unit = "points" } = {}) 
   for (let v = 0; v <= top; v += step) {
     el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: "var(--rule)", "stroke-width": 1 }, svg);
     const t = el("text", { x: m.l - 8, y: y(v) + 4, "text-anchor": "end", class: "lc-tick" }, svg);
-    t.textContent = v;
+    t.textContent = show1(v);
   }
   const every = Math.ceil(n / 12);
   xLabels.forEach((lab, i) => {
-    if (i === 0 || (i % every && i !== n)) return;
+    if ((i === 0 && !firstIsData) || (i % every && i !== n)) return;
     const t = el("text", { x: x(i), y: H - 8, "text-anchor": "middle", class: "lc-tick" }, svg);
     t.textContent = lab;
   });
@@ -65,6 +66,10 @@ export function lineChart(container, series, xLabels, { unit = "points" } = {}) 
   // direct labels on the four leaders, nudged apart
   const ends = series.slice(0, 4).map((s) => ({ s, y: y(s.values[n]) })).sort((a, b) => a.y - b.y);
   for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
+  const floor = H - m.b + 2;
+  for (let i = ends.length - 1; i >= 0; i--) {                 // keep the labels inside the chart
+    if (ends[i].y > floor - (ends.length - 1 - i) * 14) ends[i].y = floor - (ends.length - 1 - i) * 14;
+  }
   ends.forEach((e) => {
     const t = el("text", { x: x(n) + 8, y: e.y + 4, class: "lc-end" }, svg);
     t.textContent = e.s.name;
@@ -84,7 +89,7 @@ export function lineChart(container, series, xLabels, { unit = "points" } = {}) 
       const k = el("svg", { width: 16, height: 8, "aria-hidden": "true" });
       el("line", { x1: 1, x2: 15, y1: 4, y2: 4, stroke: s.color, "stroke-width": 2.5, "stroke-linecap": "round", ...(s.dash ? { "stroke-dasharray": s.dash } : {}) }, k);
       row.append(k);
-      html("b", "num", Number.isInteger(v) ? String(v) : v.toFixed(1), row);
+      html("b", "num", show1(v), row);
       html("span", null, s.name, row);
     });
     tip.hidden = false;
@@ -110,13 +115,13 @@ export function lineChart(container, series, xLabels, { unit = "points" } = {}) 
   const wrapT = html("div", "tablewrap", null, details);
   const table = html("table", null, null, wrapT);
   const head = html("tr", null, null, html("thead", null, null, table));
-  html("th", null, "After round", head);
+  html("th", null, xTitle, head);
   series.forEach((s) => html("th", null, s.name, head));
   const body = html("tbody", null, null, table);
   xLabels.forEach((lab, i) => {
-    if (i === 0) return;
+    if (i === 0 && !firstIsData) return;
     const tr = html("tr", null, null, body);
     html("td", null, lab, tr);
-    series.forEach((s) => html("td", "num", Number.isInteger(s.values[i]) ? String(s.values[i]) : s.values[i].toFixed(1), tr));
+    series.forEach((s) => html("td", "num", show1(s.values[i]), tr));
   });
 }
