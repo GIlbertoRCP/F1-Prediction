@@ -82,11 +82,11 @@ def freeze_live(races, results_dir: Path, pred_dir: Path, now: dt.datetime) -> l
     return messages
 
 
-def write_site_data(bundle: dict, out_dir: Path, races=None) -> None:
+def write_site_data(bundle: dict, out_dir: Path, races=None, results_dir: Path | None = None) -> None:
     data = out_dir / "data"
     if races is not None:
         data.mkdir(parents=True, exist_ok=True)
-        (data / "h2h.json").write_text(json.dumps(build_h2h(races), separators=(",", ":")))
+        (data / "h2h.json").write_text(json.dumps(build_h2h(races, results_dir), separators=(",", ":")))
     (data / "races").mkdir(parents=True, exist_ok=True)
     for name in ("meta", "forecast", "track_record"):
         (data / f"{name}.json").write_text(json.dumps(bundle[name], indent=1))
@@ -114,7 +114,7 @@ def main(argv=None) -> int:
     for msg in freeze_live(races, results_dir, pred_dir, now):
         print(msg)
     bundle = build_bundle(results_dir, pred_dir, now)
-    write_site_data(bundle, out, races)
+    write_site_data(bundle, out, races, results_dir)
     ok = bundle["meta"]["live_log"]
     print(f"live log: {ok['detail']}")
     print(f"site data written to {out}/data")

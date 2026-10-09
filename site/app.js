@@ -1,11 +1,13 @@
 import { loadPicks, savePick, tally } from "./picks.js";
 import { utilities, simulate, summarize } from "./sim.js";
 import { compare, teammatePairs } from "./h2h.js";
+import { driverStandings, teamStandings } from "./standings.js";
+import { lineChart } from "./linechart.js";
 
 const TEAM_COLOURS = {
   red_bull: "#1e41ff", mercedes: "#00a79d", ferrari: "#dc0000", mclaren: "#ff8000",
   aston_martin: "#006f62", alpine: "#ff87bc", williams: "#00a0de", rb: "#6692ff",
-  alphatauri: "#4e7c9b", toro_rosso: "#4e7c9b", haas: "#8a8f98", sauber: "#52e252",
+  alphatauri: "#4e7c9b", toro_rosso: "#4e7c9b", haas: "#9b6fd0", sauber: "#52e252",
   alfa: "#a42134", audi: "#b0102a", cadillac: "#222a35", renault: "#ffd800",
   racing_point: "#f596c8", force_india: "#f596c8",
 };
@@ -378,6 +380,57 @@ async function renderH2H() {
   draw();
 }
 
+/* ---------- standings ---------- */
+const TEAM_NAMES = { mclaren: "McLaren", rb: "Racing Bulls", alphatauri: "AlphaTauri", toro_rosso: "Toro Rosso", alfa: "Alfa Romeo",
+  haas: "Haas", sauber: "Sauber", audi: "Audi", cadillac: "Cadillac", racing_point: "Racing Point", force_india: "Force India" };
+const teamName = (t) => TEAM_NAMES[t] || t.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+const fmtPts = (v) => (Number.isInteger(v) ? String(v) : v.toFixed(1));
+
+async function renderStandings() {
+  const el = $("#standings-body");
+  const data = await getJSON("data/h2h.json");
+  const years = Object.keys(data).sort((a, b) => b - a);
+  el.innerHTML = `
+    <div class="simbar">
+      <label class="select">Season <select id="st-year">${years.map((y) => `<option>${y}</option>`).join("")}</select></label>
+      <span class="seg" role="group" aria-label="Championship">
+        <button type="button" id="st-d" aria-pressed="true">Drivers</button>
+        <button type="button" id="st-c" aria-pressed="false">Constructors</button>
+      </span>
+    </div>
+    <p class="fine" id="st-note"></p>
+    <div id="st-chart"></div>
+    <div id="st-table"></div>`;
+  let kind = "d";
+  const draw = () => {
+    const year = $("#st-year").value, season = data[year];
+    const rounds = season.rounds.length;
+    const rows = kind === "d" ? driverStandings(season) : teamStandings(season);
+    const nPlayed = rounds;
+    $("#st-note").textContent = `After ${nPlayed} round${nPlayed === 1 ? "" : "s"}${season.rounds[nPlayed - 1] ? `, ${season.rounds[nPlayed - 1].race}` : ""}. Race points plus sprint points.`;
+    // chart: five leaders; a team's second driver gets a dashed line
+    const seen = {};
+    const series = rows.slice(0, 5).map((r) => {
+      const dash = kind === "d" && seen[r.team] ? "7 5" : null;
+      seen[r.team] = true;
+      return { name: kind === "d" ? r.code : teamName(r.team), color: colour(r.team), dash, values: r.cumulative };
+    });
+    lineChart($("#st-chart"), series, [""].concat(season.rounds.map((r) => String(r.round))), { unit: "points" });
+    $("#st-table").innerHTML = `<div class="tablewrap"><table class="simtable"><thead><tr>
+      <th>Pos</th><th>${kind === "d" ? "Driver" : "Team"}</th>${kind === "d" ? '<th class="tl">Team</th>' : ""}<th>Points</th><th>Wins</th>${kind === "d" ? "<th>Podiums</th>" : ""}</tr></thead>
+      <tbody>${rows.map((r, i) => `<tr><td class="num">${i + 1}</td>
+        <td><span class="tick inline" style="background:${colour(r.team)}"></span><b>${esc(kind === "d" ? r.code : teamName(r.team))}</b></td>
+        ${kind === "d" ? `<td class="tl">${esc(teamName(r.team))}</td>` : ""}
+        <td class="num">${fmtPts(r.points)}</td><td class="num">${r.wins}</td>${kind === "d" ? `<td class="num">${r.podiums}</td>` : ""}</tr>`).join("")}</tbody></table></div>
+      <p class="fine">${kind === "d" ? "Equal points are split by best finishes, as in the championship rules." : "Constructors' points count every car, so a team that changed drivers keeps all the points its cars scored."}</p>`;
+  };
+  $("#st-year").onchange = draw;
+  const setKind = (k) => { kind = k; $("#st-d").setAttribute("aria-pressed", String(k === "d")); $("#st-c").setAttribute("aria-pressed", String(k === "c")); draw(); };
+  $("#st-d").onclick = () => setKind("d");
+  $("#st-c").onclick = () => setKind("c");
+  draw();
+}
+
 /* ---------- boot ---------- */
 (async function main() {
   try {
@@ -389,6 +442,7 @@ async function renderH2H() {
     renderRaces(index, record);
     renderPicks(record);
     renderSim(index, forecast);
+    renderStandings().catch((e) => { console.error(e); $("#standings-body").textContent = "Standings data is not available."; });
     renderH2H().catch((e) => { console.error(e); $("#h2h-body").textContent = "Head-to-head data is not available."; });
     const through = meta.data_through;
     $("#foot-meta").textContent =

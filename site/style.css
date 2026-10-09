@@ -126,6 +126,29 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter) 3rem; }
 .simtable th[scope="row"] { text-align: left; font-weight: 500; color: var(--slate); }
 .block h3 + .tablewrap, .block h3 + div { margin-top: .4rem; }
 
+/* standings and charts */
+.seg { display: inline-flex; border: 1.5px solid var(--ink); }
+.seg button { font: inherit; padding: .35rem .9rem; background: transparent; color: var(--ink); border: 0; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button + button { border-left: 1.5px solid var(--ink); }
+.lc-legend { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: .6rem 0 .3rem; }
+.lc-key { display: inline-flex; align-items: center; gap: .45rem; font-size: .95rem; }
+.lc-wrap { position: relative; }
+svg.lc { display: block; width: 100%; height: auto; background: var(--panel); border: 1px solid var(--rule); touch-action: pan-y; }
+svg.lc text { font-family: inherit; fill: var(--slate); }
+.lc-tick { font-size: 12px; }
+.lc-end { font-size: 13px; font-weight: 700; fill: var(--ink) !important; }
+.lc-tip { position: absolute; top: 8px; min-width: 9rem; padding: .5rem .7rem; background: var(--panel); border: 1px solid var(--ink); font-size: .92rem; pointer-events: none; }
+.lc-tip-head { color: var(--slate); margin-bottom: .2rem; }
+.lc-tip-row { display: flex; align-items: center; gap: .5rem; }
+.lc-tip-row b { min-width: 3ch; text-align: right; }
+.lc-table { margin: .8rem 0 1.4rem; }
+.lc-table summary { cursor: pointer; color: var(--slate); }
+.lc-table table { margin-top: .6rem; }
+.lc-table th:first-child, .lc-table td:first-child { text-align: left; }
+#st-table { margin-top: 1.4rem; }
+#st-table th:nth-child(2), #st-table td:nth-child(2), #st-table .tl { text-align: left; }
+
 /* blocks */
 .block { padding: 3rem 0; border-top: 2px solid var(--ink); }
 .block h2 { margin: 0 0 1rem; font-stretch: 70%; font-weight: 800; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1; }
