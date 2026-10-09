@@ -15,18 +15,18 @@
    "hi": 0.9425287356321839
   },
   "logloss": {
-   "mean": 1.2351059418096648,
+   "mean": 1.2351059418096655,
    "lo": 1.090287080266265,
-   "hi": 1.3946647895346571
+   "hi": 1.3946647895346573
   },
   "brier": {
-   "mean": 0.5744581579234714,
-   "lo": 0.5104883100107381,
-   "hi": 0.6439703251764113
+   "mean": 0.574458157923471,
+   "lo": 0.5104883100107379,
+   "hi": 0.6439703251764111
   },
-  "avg_winner_prob": 0.4113682182668966,
+  "avg_winner_prob": 0.4113682182668964,
   "pole_top1": 0.5402298850574713,
-  "uniform_logloss": 3.0039068499223456
+  "uniform_logloss": 3.003906849922348
  },
  "by_season": {
   "2018": {
@@ -44,7 +44,7 @@
    "logloss": {
     "mean": 1.039590319226704,
     "lo": 0.5017400044039103,
-    "hi": 1.6921397118535204
+    "hi": 1.6921397118535202
    },
    "brier": {
     "mean": 0.49955727245835124,
@@ -70,10 +70,10 @@
    "logloss": {
     "mean": 1.4007384513040482,
     "lo": 1.100422840452384,
-    "hi": 1.743802836354421
+    "hi": 1.7438028363544205
    },
    "brier": {
-    "mean": 0.7009354153412135,
+    "mean": 0.7009354153412134,
     "lo": 0.5571042863550071,
     "hi": 0.8532993338225054
    },
@@ -95,12 +95,12 @@
    },
    "logloss": {
     "mean": 1.3008498118937901,
-    "lo": 0.6901477700930114,
-    "hi": 2.0942149365476346
+    "lo": 0.6901477700930116,
+    "hi": 2.094214936547635
    },
    "brier": {
     "mean": 0.5358057220075063,
-    "lo": 0.2939791754910375,
+    "lo": 0.2939791754910376,
     "hi": 0.7979981794285866
    },
    "avg_winner_prob": 0.4574600069750027,
@@ -122,12 +122,12 @@
    "logloss": {
     "mean": 1.4876978715531934,
     "lo": 0.9869179201652258,
-    "hi": 2.1637581127437726
+    "hi": 2.163758112743773
    },
    "brier": {
     "mean": 0.6465996019796223,
-    "lo": 0.46860183950053697,
-    "hi": 0.8504392843270012
+    "lo": 0.4686018395005371,
+    "hi": 0.8504392843270014
    },
    "avg_winner_prob": 0.35532693464774723,
    "pole_top1": 0.5,
@@ -146,14 +146,14 @@
     "hi": 0.9090909090909091
    },
    "logloss": {
-    "mean": 1.3662200694443893,
-    "lo": 1.0437533073788183,
+    "mean": 1.3662200694443896,
+    "lo": 1.0437533073788186,
     "hi": 1.738135593351693
    },
    "brier": {
-    "mean": 0.6502762319812214,
+    "mean": 0.6502762319812215,
     "lo": 0.48887067527234457,
-    "hi": 0.8161461852077998
+    "hi": 0.8161461852078002
    },
    "avg_winner_prob": 0.34932638136147,
    "pole_top1": 0.45454545454545453,
@@ -172,16 +172,16 @@
     "hi": 1.0
    },
    "logloss": {
-    "mean": 0.5125052702389291,
-    "lo": 0.2728961713553802,
+    "mean": 0.5125052702389293,
+    "lo": 0.27289617135538025,
     "hi": 0.7928617549828046
    },
    "brier": {
-    "mean": 0.228277994632514,
-    "lo": 0.08995456483003378,
+    "mean": 0.22827799463251408,
+    "lo": 0.0899545648300338,
     "hi": 0.3893748338076874
    },
-   "avg_winner_prob": 0.6897706762235545,
+   "avg_winner_prob": 0.6897706762235544,
    "pole_top1": 0.6363636363636364,
    "uniform_logloss": 2.995732273553991
   },
@@ -198,14 +198,14 @@
     "hi": 0.9583333333333334
    },
    "logloss": {
-    "mean": 1.5846496775048367,
+    "mean": 1.584649677504836,
     "lo": 1.0983860467403608,
-    "hi": 2.104291435783558
+    "hi": 2.1042914357835576
    },
    "brier": {
     "mean": 0.715236201241058,
-    "lo": 0.5016903410715876,
-    "hi": 0.9366962875738829
+    "lo": 0.5016903410715875,
+    "hi": 0.936696287573883
    },
    "avg_winner_prob": 0.3665561788975913,
    "pole_top1": 0.4583333333333333,
@@ -224,16 +224,16 @@
     "hi": 1.0
    },
    "logloss": {
-    "mean": 1.0435787412242206,
+    "mean": 1.0435787412242208,
     "lo": 0.8619949889217352,
-    "hi": 1.2564446437276986
+    "hi": 1.2564446437276988
    },
    "brier": {
     "mean": 0.5456822254766299,
     "lo": 0.4270785228025699,
     "hi": 0.683790752043958
    },
-   "avg_winner_prob": 0.3955939329631075,
+   "avg_winner_prob": 0.39559393296310746,
    "pole_top1": 0.6666666666666666,
    "uniform_logloss": 2.9935950529545097
   },
@@ -250,18 +250,18 @@
     "hi": 1.0
    },
    "logloss": {
-    "mean": 1.250134061452593,
+    "mean": 1.2501340614525933,
     "lo": 0.908868873762677,
-    "hi": 1.689933930058709
+    "hi": 1.6899339300587093
    },
    "brier": {
-    "mean": 0.5821630235851488,
-    "lo": 0.43708274608857023,
+    "mean": 0.5821630235851487,
+    "lo": 0.4370827460885701,
     "hi": 0.7442168936268786
    },
-   "avg_winner_prob": 0.35460801231468825,
+   "avg_winner_prob": 0.3546080123146883,
    "pole_top1": 0.6875,
-   "uniform_logloss": 3.091042453358315
+   "uniform_logloss": 3.091042453358316
   }
  },
  "calibration": [
@@ -283,7 +283,7 @@
    "lo": 0.05,
    "hi": 0.1,
    "n": 201,
-   "predicted": 0.0701840895844849,
+   "predicted": 0.07018408958448488,
    "observed": 0.05970149253731343
   },
   {
@@ -311,12 +311,12 @@
    "lo": 0.5,
    "hi": 1.0,
    "n": 85,
-   "predicted": 0.7053730882938554,
+   "predicted": 0.7053730882938553,
    "observed": 0.7058823529411765
   }
  ],
  "reference": {
-  "slot_prior_logloss": 1.5317081312857783
+  "slot_prior_logloss": 1.5317081312857779
  },
  "latest": {
   "season": 2026,
@@ -333,7 +333,7 @@
   "hit": true,
   "top3": true,
   "logloss": 0.8668137090951137,
-  "brier": 0.41665177126404085,
+  "brier": 0.41665177126404096,
   "pole_hit": true
  },
  "races": [
@@ -347,11 +347,11 @@
    "pick_p": 0.396957,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.3969577939155879,
+   "p_winner": 0.39695779391558783,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.9239253165017212,
+   "logloss": 0.9239253165017213,
    "brier": 0.438244914501905,
    "pole_hit": false
   },
@@ -401,12 +401,12 @@
    "pick_p": 0.287749,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.19316519316519312,
+   "p_winner": 0.19316519316519318,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 1.6442095330348594,
-   "brier": 0.8078223666419255,
+   "logloss": 1.6442095330348592,
+   "brier": 0.8078223666419253,
    "pole_hit": false
   },
   {
@@ -424,7 +424,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.49434450335154084,
-   "brier": 0.19724757262494796,
+   "brier": 0.19724757262494794,
    "pole_hit": true
   },
   {
@@ -442,7 +442,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.4213292813065537,
-   "brier": 0.14211174237399996,
+   "brier": 0.14211174237399998,
    "pole_hit": true
   },
   {
@@ -460,7 +460,7 @@
    "hit": false,
    "top3": false,
    "logloss": 3.6772671387857705,
-   "brier": 1.4074546609279999,
+   "brier": 1.407454660928,
    "pole_hit": false
   },
   {
@@ -478,7 +478,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.8283260224666944,
-   "brier": 0.9019520180724647,
+   "brier": 0.9019520180724646,
    "pole_hit": false
   },
   {
@@ -514,7 +514,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.4919270246455891,
-   "brier": 0.7926945406821262,
+   "brier": 0.7926945406821261,
    "pole_hit": true
   },
   {
@@ -527,12 +527,12 @@
    "pick_p": 0.356975,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.2972755945511892,
+   "p_winner": 0.2972755945511891,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.2130956426564943,
-   "brier": 0.6582248958769507,
+   "logloss": 1.2130956426564945,
+   "brier": 0.6582248958769505,
    "pole_hit": false
   },
   {
@@ -568,7 +568,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.0568255986510608,
-   "brier": 0.664501379816095,
+   "brier": 0.6645013798160953,
    "pole_hit": false
   },
   {
@@ -581,12 +581,12 @@
    "pick_p": 0.729722,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.7297227297227297,
+   "p_winner": 0.7297227297227298,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.31509063928808995,
-   "brier": 0.09020464051719085,
+   "logloss": 0.3150906392880898,
+   "brier": 0.09020464051719079,
    "pole_hit": true
   },
   {
@@ -604,7 +604,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.7002173759924741,
-   "brier": 0.8555548869713707,
+   "brier": 0.8555548869713706,
    "pole_hit": false
   },
   {
@@ -640,7 +640,7 @@
    "hit": false,
    "top3": true,
    "logloss": 2.0128002329505623,
-   "brier": 1.2974264526039998,
+   "brier": 1.297426452604,
    "pole_hit": false
   },
   {
@@ -658,7 +658,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.5827911129503582,
-   "brier": 0.9432574579760002,
+   "brier": 0.9432574579760001,
    "pole_hit": false
   },
   {
@@ -676,7 +676,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.4361128517802244,
-   "brier": 0.7458502390140604,
+   "brier": 0.7458502390140606,
    "pole_hit": true
   },
   {
@@ -694,7 +694,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.0589157661290691,
-   "brier": 0.6166379707474418,
+   "brier": 0.6166379707474419,
    "pole_hit": true
   },
   {
@@ -707,12 +707,12 @@
    "pick_p": 0.389536,
    "winner": "VET",
    "winner_id": "vettel",
-   "p_winner": 0.07922407922407924,
+   "p_winner": 0.07922407922407923,
    "rank": 3,
    "hit": false,
    "top3": true,
    "logloss": 2.5354749957626352,
-   "brier": 1.1430100522309612,
+   "brier": 1.1430100522309614,
    "pole_hit": false
   },
   {
@@ -725,12 +725,12 @@
    "pick_p": 0.376991,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.3769910000000001,
+   "p_winner": 0.376991,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.9755339644981281,
-   "brier": 0.5413562858259998,
+   "logloss": 0.9755339644981282,
+   "brier": 0.5413562858259999,
    "pole_hit": false
   },
   {
@@ -748,7 +748,7 @@
    "hit": false,
    "top3": false,
    "logloss": 2.3716662541809894,
-   "brier": 1.0285686191402095,
+   "brier": 1.0285686191402097,
    "pole_hit": false
   },
   {
@@ -761,12 +761,12 @@
    "pick_p": 0.396101,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.24692824692824691,
+   "p_winner": 0.24692824692824694,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.3986574828231615,
-   "brier": 0.7571839011230451,
+   "logloss": 1.3986574828231613,
+   "brier": 0.7571839011230449,
    "pole_hit": false
   },
   {
@@ -784,7 +784,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.8909491117210021,
-   "brier": 0.4226764541604926,
+   "brier": 0.4226764541604927,
    "pole_hit": true
   },
   {
@@ -797,12 +797,12 @@
    "pick_p": 0.3692,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.3692007384014769,
+   "p_winner": 0.3692007384014768,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.9964147763514397,
-   "brier": 0.5086094544637836,
+   "logloss": 0.9964147763514399,
+   "brier": 0.5086094544637834,
    "pole_hit": true
   },
   {
@@ -820,7 +820,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.41803628275663285,
-   "brier": 0.14871125379134364,
+   "brier": 0.14871125379134367,
    "pole_hit": true
   },
   {
@@ -833,12 +833,12 @@
    "pick_p": 0.426393,
    "winner": "BOT",
    "winner_id": "bottas",
-   "p_winner": 0.4263934263934265,
+   "p_winner": 0.4263934263934264,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.8523928227750734,
-   "brier": 0.41545191989742425,
+   "logloss": 0.8523928227750736,
+   "brier": 0.4154519198974244,
    "pole_hit": true
   },
   {
@@ -851,12 +851,12 @@
    "pick_p": 0.702806,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.702806702806703,
+   "p_winner": 0.7028067028067028,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.35267338542568344,
-   "brier": 0.10786833339255883,
+   "logloss": 0.3526733854256837,
+   "brier": 0.10786833339255894,
    "pole_hit": true
   },
   {
@@ -869,12 +869,12 @@
    "pick_p": 0.723912,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.7239112760887239,
+   "p_winner": 0.723911276088724,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.32308644094467726,
-   "brier": 0.10309975797038098,
+   "logloss": 0.3230864409446771,
+   "brier": 0.10309975797038093,
    "pole_hit": true
   },
   {
@@ -887,12 +887,12 @@
    "pick_p": 0.713057,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.7130562869437131,
+   "p_winner": 0.713056286943713,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.33819491786366596,
-   "brier": 0.1078223260052401,
+   "logloss": 0.3381949178636661,
+   "brier": 0.10782232600524017,
    "pole_hit": true
   },
   {
@@ -910,7 +910,7 @@
    "hit": false,
    "top3": true,
    "logloss": 2.552277979541792,
-   "brier": 1.1932779970540002,
+   "brier": 1.193277997054,
    "pole_hit": false
   },
   {
@@ -928,7 +928,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.3382303812521238,
-   "brier": 0.10435900282800002,
+   "brier": 0.10435900282800001,
    "pole_hit": true
   },
   {
@@ -941,12 +941,12 @@
    "pick_p": 0.72949,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.7294921884765655,
+   "p_winner": 0.7294921884765654,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.3154066191279436,
-   "brier": 0.0937726864332746,
+   "logloss": 0.31540661912794377,
+   "brier": 0.09377268643327467,
    "pole_hit": true
   },
   {
@@ -977,12 +977,12 @@
    "pick_p": 0.712439,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.7124389999999999,
+   "p_winner": 0.712439,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.33906098453950995,
-   "brier": 0.10251332851800002,
+   "logloss": 0.33906098453950984,
+   "brier": 0.10251332851799998,
    "pole_hit": true
   },
   {
@@ -995,11 +995,11 @@
    "pick_p": 0.762525,
    "winner": "BOT",
    "winner_id": "bottas",
-   "p_winner": 0.0667139332860667,
+   "p_winner": 0.06671393328606672,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 2.70734145303247,
+   "logloss": 2.7073414530324698,
    "brier": 1.460313893904752,
    "pole_hit": false
   },
@@ -1013,12 +1013,12 @@
    "pick_p": 0.45452,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.35781592655222044,
+   "p_winner": 0.35781592655222033,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.0277365964548462,
-   "brier": 0.6258115379991397,
+   "logloss": 1.0277365964548464,
+   "brier": 0.6258115379991398,
    "pole_hit": false
   },
   {
@@ -1031,12 +1031,12 @@
    "pick_p": 0.727977,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.7279777279777279,
+   "p_winner": 0.727977727977728,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.31748482469062683,
-   "brier": 0.09021889633370252,
+   "logloss": 0.31748482469062667,
+   "brier": 0.09021889633370245,
    "pole_hit": true
   },
   {
@@ -1049,12 +1049,12 @@
    "pick_p": 0.454059,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.4540590000000001,
+   "p_winner": 0.454059,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.7895281334371949,
-   "brier": 0.4136673016699999,
+   "logloss": 0.7895281334371951,
+   "brier": 0.41366730167000004,
    "pole_hit": false
   },
   {
@@ -1072,7 +1072,7 @@
    "hit": true,
    "top3": true,
    "logloss": 1.2253803187648211,
-   "brier": 0.5822068099739998,
+   "brier": 0.5822068099739999,
    "pole_hit": false
   },
   {
@@ -1090,7 +1090,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.22313205133433467,
-   "brier": 0.04785515634848512,
+   "brier": 0.047855156348485126,
    "pole_hit": true
   },
   {
@@ -1103,12 +1103,12 @@
    "pick_p": 0.497702,
    "winner": "PER",
    "winner_id": "perez",
-   "p_winner": 0.05255089489821019,
+   "p_winner": 0.0525508948982102,
    "rank": 4,
    "hit": false,
    "top3": false,
    "logloss": 2.945973152342517,
-   "brier": 1.1862011626086044,
+   "brier": 1.1862011626086049,
    "pole_hit": false
   },
   {
@@ -1121,12 +1121,12 @@
    "pick_p": 0.498301,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.2224425551148898,
+   "p_winner": 0.22244255511488975,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.5030863899687668,
-   "brier": 0.8678616209520449,
+   "logloss": 1.503086389968767,
+   "brier": 0.8678616209520447,
    "pole_hit": true
   },
   {
@@ -1139,12 +1139,12 @@
    "pick_p": 0.564114,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.5641139999999999,
+   "p_winner": 0.564114,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.572498920249547,
-   "brier": 0.25894356508800004,
+   "logloss": 0.5724989202495468,
+   "brier": 0.258943565088,
    "pole_hit": false
   },
   {
@@ -1157,12 +1157,12 @@
    "pick_p": 0.822445,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.048378096756193506,
+   "p_winner": 0.04837809675619351,
    "rank": 3,
    "hit": false,
    "top3": true,
    "logloss": 3.028708114049197,
-   "brier": 1.5856188965212434,
+   "brier": 1.5856188965212437,
    "pole_hit": false
   },
   {
@@ -1180,7 +1180,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.5535912161244819,
-   "brier": 0.22390433154043923,
+   "brier": 0.2239043315404392,
    "pole_hit": false
   },
   {
@@ -1198,7 +1198,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.2567035054852371,
-   "brier": 0.06520121394459491,
+   "brier": 0.06520121394459495,
    "pole_hit": true
   },
   {
@@ -1211,11 +1211,11 @@
    "pick_p": 0.291726,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.2917257082742917,
+   "p_winner": 0.29172570827429173,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 1.2319412734094901,
+   "logloss": 1.23194127340949,
    "brier": 0.6198910592772616,
    "pole_hit": false
   },
@@ -1229,7 +1229,7 @@
    "pick_p": 0.526877,
    "winner": "PER",
    "winner_id": "perez",
-   "p_winner": 0.02984697015302985,
+   "p_winner": 0.029846970153029843,
    "rank": 5,
    "hit": false,
    "top3": false,
@@ -1270,7 +1270,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.9423498401946835,
-   "brier": 0.5103185582059999,
+   "brier": 0.5103185582060001,
    "pole_hit": true
   },
   {
@@ -1283,12 +1283,12 @@
    "pick_p": 0.481079,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.48107899999999987,
+   "p_winner": 0.481079,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.7317237811982383,
-   "brier": 0.3346841368080002,
+   "logloss": 0.7317237811982381,
+   "brier": 0.33468413680799997,
    "pole_hit": true
   },
   {
@@ -1301,12 +1301,12 @@
    "pick_p": 0.462322,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.33469666530333475,
+   "p_winner": 0.3346966653033347,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.0945306340551983,
-   "brier": 0.6639981692789975,
+   "logloss": 1.0945306340551986,
+   "brier": 0.6639981692789974,
    "pole_hit": false
   },
   {
@@ -1324,7 +1324,7 @@
    "hit": false,
    "top3": false,
    "logloss": 5.794254377820277,
-   "brier": 1.5497537475580003,
+   "brier": 1.549753747558,
    "pole_hit": false
   },
   {
@@ -1378,7 +1378,7 @@
    "hit": false,
    "top3": true,
    "logloss": 2.0934116570401735,
-   "brier": 1.0444350488348582,
+   "brier": 1.044435048834858,
    "pole_hit": false
   },
   {
@@ -1391,12 +1391,12 @@
    "pick_p": 0.404141,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.17432900000000004,
+   "p_winner": 0.174329,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 1.7468109604908122,
-   "brier": 0.8982995672119996,
+   "logloss": 1.7468109604908124,
+   "brier": 0.898299567212,
    "pole_hit": false
   },
   {
@@ -1409,12 +1409,12 @@
    "pick_p": 0.410867,
    "winner": "BOT",
    "winner_id": "bottas",
-   "p_winner": 0.4108674108674108,
+   "p_winner": 0.41086741086741085,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.8894847178287318,
-   "brier": 0.41815109139576456,
+   "logloss": 0.8894847178287317,
+   "brier": 0.4181510913957647,
    "pole_hit": true
   },
   {
@@ -1427,11 +1427,11 @@
    "pick_p": 0.434724,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.43472400000000005,
+   "p_winner": 0.434724,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.8330439320214404,
+   "logloss": 0.8330439320214406,
    "brier": 0.416125071762,
    "pole_hit": true
   },
@@ -1468,7 +1468,7 @@
    "hit": false,
    "top3": false,
    "logloss": 3.0393926228939065,
-   "brier": 1.1405436730475131,
+   "brier": 1.1405436730475134,
    "pole_hit": false
   },
   {
@@ -1504,7 +1504,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.4486727585439066,
-   "brier": 0.16207032761800008,
+   "brier": 0.162070327618,
    "pole_hit": true
   },
   {
@@ -1517,11 +1517,11 @@
    "pick_p": 0.530646,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.530646,
+   "p_winner": 0.5306460000000001,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.633660146727902,
+   "logloss": 0.6336601467279018,
    "brier": 0.310059727974,
    "pole_hit": true
   },
@@ -1535,12 +1535,12 @@
    "pick_p": 0.328528,
    "winner": "LEC",
    "winner_id": "leclerc",
-   "p_winner": 0.322027322027322,
+   "p_winner": 0.32202732202732204,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.1331188860208448,
-   "brier": 0.5999884735203469,
+   "logloss": 1.1331188860208445,
+   "brier": 0.5999884735203471,
    "pole_hit": true
   },
   {
@@ -1558,7 +1558,7 @@
    "hit": false,
    "top3": false,
    "logloss": 2.0182882371689614,
-   "brier": 0.9123259362666056,
+   "brier": 0.9123259362666055,
    "pole_hit": false
   },
   {
@@ -1576,7 +1576,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.7065151482983997,
-   "brier": 0.32942528867624804,
+   "brier": 0.32942528867624793,
    "pole_hit": true
   },
   {
@@ -1589,12 +1589,12 @@
    "pick_p": 0.473049,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.47304900000000016,
+   "p_winner": 0.473049,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.7485563017753617,
-   "brier": 0.3625714349699999,
+   "logloss": 0.748556301775362,
+   "brier": 0.36257143496999994,
    "pole_hit": true
   },
   {
@@ -1612,7 +1612,7 @@
    "hit": false,
    "top3": true,
    "logloss": 2.0050531799870774,
-   "brier": 1.089771655500221,
+   "brier": 1.0897716555002213,
    "pole_hit": false
   },
   {
@@ -1630,7 +1630,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.442076720779806,
-   "brier": 0.8799894494020186,
+   "brier": 0.8799894494020187,
    "pole_hit": false
   },
   {
@@ -1648,7 +1648,7 @@
    "hit": false,
    "top3": false,
    "logloss": 2.8973540776550752,
-   "brier": 1.1658200128419995,
+   "brier": 1.165820012842,
    "pole_hit": false
   },
   {
@@ -1661,12 +1661,12 @@
    "pick_p": 0.456823,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.19171580828419177,
+   "p_winner": 0.19171580828419174,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.651741168667507,
-   "brier": 0.8879786171978774,
+   "logloss": 1.6517411686675072,
+   "brier": 0.8879786171978776,
    "pole_hit": false
   },
   {
@@ -1679,12 +1679,12 @@
    "pick_p": 0.721509,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.7215082784917217,
+   "p_winner": 0.7215082784917215,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.32641142683303703,
-   "brier": 0.09347022444145753,
+   "logloss": 0.3264114268330373,
+   "brier": 0.09347022444145765,
    "pole_hit": true
   },
   {
@@ -1697,12 +1697,12 @@
    "pick_p": 0.405703,
    "winner": "SAI",
    "winner_id": "sainz",
-   "p_winner": 0.27272027272027266,
+   "p_winner": 0.27272027272027277,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.2993086511519896,
-   "brier": 0.7144080713954284,
+   "logloss": 1.2993086511519891,
+   "brier": 0.7144080713954283,
    "pole_hit": true
   },
   {
@@ -1733,12 +1733,12 @@
    "pick_p": 0.363101,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.3354113354113354,
+   "p_winner": 0.33541133541133544,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.0923976334696237,
-   "brier": 0.5968501939457908,
+   "logloss": 1.0923976334696235,
+   "brier": 0.596850193945791,
    "pole_hit": false
   },
   {
@@ -1774,7 +1774,7 @@
    "hit": false,
    "top3": false,
    "logloss": 2.7390621071358328,
-   "brier": 1.0847687189594772,
+   "brier": 1.0847687189594775,
    "pole_hit": false
   },
   {
@@ -1805,11 +1805,11 @@
    "pick_p": 0.386354,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.1898388101611899,
+   "p_winner": 0.18983881016118986,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 1.6615799344617657,
+   "logloss": 1.6615799344617659,
    "brier": 0.8586190438610536,
    "pole_hit": false
   },
@@ -1823,12 +1823,12 @@
    "pick_p": 0.379167,
    "winner": "PER",
    "winner_id": "perez",
-   "p_winner": 0.10487120974241948,
+   "p_winner": 0.1048712097424195,
    "rank": 4,
    "hit": false,
    "top3": false,
    "logloss": 2.255022255563763,
-   "brier": 1.0116137312828786,
+   "brier": 1.0116137312828788,
    "pole_hit": false
   },
   {
@@ -1846,7 +1846,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.3319070728563104,
-   "brier": 0.09619442380199997,
+   "brier": 0.09619442380199998,
    "pole_hit": true
   },
   {
@@ -1859,12 +1859,12 @@
    "pick_p": 0.556589,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.5565901131802262,
+   "p_winner": 0.5565901131802264,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.5859261929294843,
-   "brier": 0.24753190136661546,
+   "logloss": 0.5859261929294839,
+   "brier": 0.24753190136661526,
    "pole_hit": false
   },
   {
@@ -1877,12 +1877,12 @@
    "pick_p": 0.777824,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.7778247778247779,
+   "p_winner": 0.7778247778247778,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.25125400147478505,
-   "brier": 0.05926654852103774,
+   "logloss": 0.25125400147478516,
+   "brier": 0.0592665485210378,
    "pole_hit": true
   },
   {
@@ -1895,12 +1895,12 @@
    "pick_p": 0.416328,
    "winner": "RUS",
    "winner_id": "russell",
-   "p_winner": 0.24692075307924688,
+   "p_winner": 0.24692075307924694,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.3986878315694402,
-   "brier": 0.775609094243036,
+   "logloss": 1.39868783156944,
+   "brier": 0.7756090942430358,
    "pole_hit": true
   },
   {
@@ -1913,12 +1913,12 @@
    "pick_p": 0.743642,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.7436420000000001,
+   "p_winner": 0.743642,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.29619554275033594,
-   "brier": 0.07843179210199994,
+   "logloss": 0.2961955427503361,
+   "brier": 0.07843179210199999,
    "pole_hit": true
   },
   {
@@ -1936,7 +1936,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.25550046742183546,
-   "brier": 0.06137107589209041,
+   "brier": 0.0613710758920904,
    "pole_hit": true
   },
   {
@@ -1967,12 +1967,12 @@
    "pick_p": 0.793803,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.7938030000000001,
+   "p_winner": 0.793803,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.2309199593508198,
-   "brier": 0.05346389254999994,
+   "logloss": 0.23091995935081994,
+   "brier": 0.05346389254999998,
    "pole_hit": true
   },
   {
@@ -1985,12 +1985,12 @@
    "pick_p": 0.617466,
    "winner": "PER",
    "winner_id": "perez",
-   "p_winner": 0.10419710419710418,
+   "p_winner": 0.10419710419710419,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 2.2614709408637816,
-   "brier": 1.2095792856713614,
+   "logloss": 2.261470940863781,
+   "brier": 1.2095792856713619,
    "pole_hit": false
   },
   {
@@ -2003,12 +2003,12 @@
    "pick_p": 0.648002,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.12183900000000002,
+   "p_winner": 0.121839,
    "rank": 2,
    "hit": false,
    "top3": true,
    "logloss": 2.105054777914139,
-   "brier": 1.2004163377200001,
+   "brier": 1.20041633772,
    "pole_hit": false
   },
   {
@@ -2021,12 +2021,12 @@
    "pick_p": 0.855816,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.8558160000000001,
+   "p_winner": 0.855816,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.15569987921718836,
-   "brier": 0.023759797765999957,
+   "logloss": 0.1556998792171885,
+   "brier": 0.023759797765999992,
    "pole_hit": true
   },
   {
@@ -2080,7 +2080,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.14416980152478706,
-   "brier": 0.021221950933718866,
+   "brier": 0.021221950933718862,
    "pole_hit": true
   },
   {
@@ -2111,12 +2111,12 @@
    "pick_p": 0.674704,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.6747040000000001,
+   "p_winner": 0.674704,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.3934812028054892,
-   "brier": 0.15695054390399993,
+   "logloss": 0.39348120280548937,
+   "brier": 0.156950543904,
    "pole_hit": false
   },
   {
@@ -2134,7 +2134,7 @@
    "hit": true,
    "top3": true,
    "logloss": 1.0370402912764272,
-   "brier": 0.5166595240285318,
+   "brier": 0.5166595240285314,
    "pole_hit": false
   },
   {
@@ -2170,7 +2170,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.23777334027908872,
-   "brier": 0.054131291517261884,
+   "brier": 0.05413129151726189,
    "pole_hit": false
   },
   {
@@ -2183,12 +2183,12 @@
    "pick_p": 0.34293,
    "winner": "SAI",
    "winner_id": "sainz",
-   "p_winner": 0.24226224226224224,
+   "p_winner": 0.24226224226224227,
    "rank": 2,
    "hit": false,
    "top3": true,
    "logloss": 1.4177344938338938,
-   "brier": 0.7220942769298315,
+   "brier": 0.7220942769298319,
    "pole_hit": true
   },
   {
@@ -2201,12 +2201,12 @@
    "pick_p": 0.895577,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.8955761044238955,
+   "p_winner": 0.8955761044238956,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.11028807569444005,
-   "brier": 0.012363242661502339,
+   "logloss": 0.11028807569443992,
+   "brier": 0.012363242661502316,
    "pole_hit": true
   },
   {
@@ -2219,12 +2219,12 @@
    "pick_p": 0.890853,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.890853890853891,
+   "p_winner": 0.8908538908538909,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.11557484828703021,
-   "brier": 0.014144200454386737,
+   "logloss": 0.11557484828703034,
+   "brier": 0.014144200454386758,
    "pole_hit": true
   },
   {
@@ -2237,12 +2237,12 @@
    "pick_p": 0.406996,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.4069955930044071,
+   "p_winner": 0.40699559300440696,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.8989529215971651,
-   "brier": 0.44034840247875445,
+   "logloss": 0.8989529215971653,
+   "brier": 0.4403484024787548,
    "pole_hit": false
   },
   {
@@ -2260,7 +2260,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.35643211628089755,
-   "brier": 0.11172996188000005,
+   "brier": 0.11172996188000002,
    "pole_hit": false
   },
   {
@@ -2291,12 +2291,12 @@
    "pick_p": 0.847528,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.8475280000000002,
+   "p_winner": 0.847528,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.16543140192520314,
-   "brier": 0.02939294574999995,
+   "logloss": 0.1654314019252034,
+   "brier": 0.029392945750000014,
    "pole_hit": false
   },
   {
@@ -2314,7 +2314,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.06400619777752342,
-   "brier": 0.0044292027487436375,
+   "brier": 0.00442920274874364,
    "pole_hit": true
   },
   {
@@ -2332,7 +2332,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.07344849734734926,
-   "brier": 0.005791468023999997,
+   "brier": 0.005791468023999998,
    "pole_hit": true
   },
   {
@@ -2350,7 +2350,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.07383600913901538,
-   "brier": 0.0060154887620000016,
+   "brier": 0.006015488762000002,
    "pole_hit": true
   },
   {
@@ -2363,12 +2363,12 @@
    "pick_p": 0.929988,
    "winner": "SAI",
    "winner_id": "sainz",
-   "p_winner": 0.020147020147020144,
+   "p_winner": 0.020147020147020148,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 3.904698885047865,
-   "brier": 1.8253923827149396,
+   "logloss": 3.9046988850478646,
+   "brier": 1.8253923827149399,
    "pole_hit": false
   },
   {
@@ -2386,7 +2386,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.1712510614801116,
-   "brier": 0.029694222790000006,
+   "brier": 0.02969422279000001,
    "pole_hit": true
   },
   {
@@ -2404,7 +2404,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.15147759172277203,
-   "brier": 0.023826482417011352,
+   "brier": 0.02382648241701136,
    "pole_hit": true
   },
   {
@@ -2417,12 +2417,12 @@
    "pick_p": 0.856253,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.014753999999999996,
+   "p_winner": 0.014754,
    "rank": 5,
    "hit": false,
    "top3": false,
-   "logloss": 4.216241046520027,
-   "brier": 1.7078217186619995,
+   "logloss": 4.216241046520026,
+   "brier": 1.707821718662,
    "pole_hit": false
   },
   {
@@ -2453,11 +2453,11 @@
    "pick_p": 0.359001,
    "winner": "LEC",
    "winner_id": "leclerc",
-   "p_winner": 0.359001359001359,
+   "p_winner": 0.35900135900135904,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 1.0244291049819174,
+   "logloss": 1.0244291049819172,
    "brier": 0.5242096579987918,
    "pole_hit": true
   },
@@ -2489,12 +2489,12 @@
    "pick_p": 0.528909,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.5289090000000001,
+   "p_winner": 0.528909,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.6369388846057465,
-   "brier": 0.32603644583199987,
+   "logloss": 0.6369388846057468,
+   "brier": 0.32603644583200003,
    "pole_hit": false
   },
   {
@@ -2507,12 +2507,12 @@
    "pick_p": 0.803033,
    "winner": "RUS",
    "winner_id": "russell",
-   "p_winner": 0.02729594540810919,
+   "p_winner": 0.027295945408109184,
    "rank": 3,
    "hit": false,
    "top3": true,
    "logloss": 3.6010171076708684,
-   "brier": 1.6007174619817492,
+   "brier": 1.600717461981749,
    "pole_hit": false
   },
   {
@@ -2525,12 +2525,12 @@
    "pick_p": 0.335304,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.11047222094444188,
+   "p_winner": 0.1104722209444419,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 2.2029911837970872,
-   "brier": 1.025729239668856,
+   "logloss": 2.202991183797087,
+   "brier": 1.0257292396688558,
    "pole_hit": false
   },
   {
@@ -2543,12 +2543,12 @@
    "pick_p": 0.368001,
    "winner": "PIA",
    "winner_id": "piastri",
-   "p_winner": 0.12187387812612183,
+   "p_winner": 0.12187387812612188,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 2.1047685548254935,
-   "brier": 1.0285995265339187,
+   "logloss": 2.104768554825493,
+   "brier": 1.0285995265339183,
    "pole_hit": false
   },
   {
@@ -2579,12 +2579,12 @@
    "pick_p": 0.410482,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.34561334561334567,
+   "p_winner": 0.3456133456133456,
    "rank": 2,
    "hit": false,
    "top3": true,
    "logloss": 1.06243462701845,
-   "brier": 0.6109862153258195,
+   "brier": 0.6109862153258196,
    "pole_hit": true
   },
   {
@@ -2597,12 +2597,12 @@
    "pick_p": 0.489751,
    "winner": "LEC",
    "winner_id": "leclerc",
-   "p_winner": 0.05945099999999998,
+   "p_winner": 0.059451,
    "rank": 4,
    "hit": false,
    "top3": false,
    "logloss": 2.8226028351289516,
-   "brier": 1.1749437450139995,
+   "brier": 1.174943745014,
    "pole_hit": false
   },
   {
@@ -2615,12 +2615,12 @@
    "pick_p": 0.419006,
    "winner": "PIA",
    "winner_id": "piastri",
-   "p_winner": 0.2283414566829133,
+   "p_winner": 0.22834145668291336,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.4769131533073687,
-   "brier": 0.7979809158604715,
+   "logloss": 1.4769131533073685,
+   "brier": 0.7979809158604716,
    "pole_hit": false
   },
   {
@@ -2638,7 +2638,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.7988667610328277,
-   "brier": 0.39930067818695697,
+   "brier": 0.399300678186957,
    "pole_hit": true
   },
   {
@@ -2656,7 +2656,7 @@
    "hit": false,
    "top3": false,
    "logloss": 2.7434474254520755,
-   "brier": 1.2127314567969765,
+   "brier": 1.2127314567969762,
    "pole_hit": false
   },
   {
@@ -2669,12 +2669,12 @@
    "pick_p": 0.331942,
    "winner": "SAI",
    "winner_id": "sainz",
-   "p_winner": 0.2521275042550085,
+   "p_winner": 0.25212750425500846,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.3778203501640955,
-   "brier": 0.7217195890514692,
+   "logloss": 1.3778203501640958,
+   "brier": 0.7217195890514695,
    "pole_hit": true
   },
   {
@@ -2687,11 +2687,11 @@
    "pick_p": 0.691143,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.02481397518602481,
+   "p_winner": 0.024813975186024816,
    "rank": 5,
    "hit": false,
    "top3": false,
-   "logloss": 3.6963482689609575,
+   "logloss": 3.696348268960957,
    "brier": 1.4463652694700146,
    "pole_hit": false
   },
@@ -2728,7 +2728,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.234057511497906,
-   "brier": 0.6326728236919997,
+   "brier": 0.632672823692,
    "pole_hit": false
   },
   {
@@ -2741,12 +2741,12 @@
    "pick_p": 0.4665,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.4665004665004666,
+   "p_winner": 0.4665004665004665,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.7624962586942383,
-   "brier": 0.35675445594655497,
+   "logloss": 0.7624962586942385,
+   "brier": 0.35675445594655514,
    "pole_hit": true
   },
   {
@@ -2759,12 +2759,12 @@
    "pick_p": 0.51553,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.5155300000000002,
+   "p_winner": 0.51553,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.6625597812921542,
-   "brier": 0.2900403128419999,
+   "logloss": 0.6625597812921544,
+   "brier": 0.29004031284199994,
    "pole_hit": true
   },
   {
@@ -2777,12 +2777,12 @@
    "pick_p": 0.324264,
    "winner": "PIA",
    "winner_id": "piastri",
-   "p_winner": 0.3242633514732971,
+   "p_winner": 0.32426335147329705,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 1.1261992801543692,
-   "brier": 0.5529689177141173,
+   "logloss": 1.1261992801543694,
+   "brier": 0.5529689177141172,
    "pole_hit": true
   },
   {
@@ -2795,12 +2795,12 @@
    "pick_p": 0.463524,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.4635240000000001,
+   "p_winner": 0.463524,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.7688971153814865,
-   "brier": 0.37457004793,
+   "logloss": 0.7688971153814868,
+   "brier": 0.3745700479299999,
    "pole_hit": true
   },
   {
@@ -2813,12 +2813,12 @@
    "pick_p": 0.475419,
    "winner": "PIA",
    "winner_id": "piastri",
-   "p_winner": 0.4754199508399016,
+   "p_winner": 0.4754199508399017,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.7435567585085455,
-   "brier": 0.32645825055569666,
+   "logloss": 0.7435567585085453,
+   "brier": 0.3264582505556964,
    "pole_hit": true
   },
   {
@@ -2831,12 +2831,12 @@
    "pick_p": 0.51559,
    "winner": "PIA",
    "winner_id": "piastri",
-   "p_winner": 0.22004000000000004,
+   "p_winner": 0.22004,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.5139459309748795,
-   "brier": 0.8903416514840002,
+   "logloss": 1.5139459309748797,
+   "brier": 0.8903416514839999,
    "pole_hit": false
   },
   {
@@ -2849,7 +2849,7 @@
    "pick_p": 0.453852,
    "winner": "PIA",
    "winner_id": "piastri",
-   "p_winner": 0.12265300000000003,
+   "p_winner": 0.122653,
    "rank": 3,
    "hit": false,
    "top3": true,
@@ -2867,12 +2867,12 @@
    "pick_p": 0.621483,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.1483722967445935,
+   "p_winner": 0.14837229674459348,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.9080306452943079,
-   "brier": 1.1280690126995387,
+   "logloss": 1.908030645294308,
+   "brier": 1.1280690126995385,
    "pole_hit": false
   },
   {
@@ -2885,12 +2885,12 @@
    "pick_p": 0.541283,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.5412835412835412,
+   "p_winner": 0.5412835412835413,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.6138120315466259,
-   "brier": 0.26956905231783523,
+   "logloss": 0.6138120315466257,
+   "brier": 0.26956905231783507,
    "pole_hit": true
   },
   {
@@ -2908,7 +2908,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.618327463180957,
-   "brier": 0.28892230157563786,
+   "brier": 0.28892230157563803,
    "pole_hit": true
   },
   {
@@ -2921,12 +2921,12 @@
    "pick_p": 0.296575,
    "winner": "RUS",
    "winner_id": "russell",
-   "p_winner": 0.29369541260917487,
+   "p_winner": 0.29369541260917476,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.2252120602077685,
-   "brier": 0.6406935325913067,
+   "logloss": 1.2252120602077687,
+   "brier": 0.6406935325913069,
    "pole_hit": true
   },
   {
@@ -2939,12 +2939,12 @@
    "pick_p": 0.472649,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.4726494726494726,
+   "p_winner": 0.47264947264947266,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.749401237842938,
-   "brier": 0.35340666214497096,
+   "logloss": 0.7494012378429379,
+   "brier": 0.35340666214497085,
    "pole_hit": true
   },
   {
@@ -2962,7 +2962,7 @@
    "hit": false,
    "top3": true,
    "logloss": 1.714833317729008,
-   "brier": 0.888869046106147,
+   "brier": 0.8888690461061469,
    "pole_hit": false
   },
   {
@@ -2975,12 +2975,12 @@
    "pick_p": 0.589071,
    "winner": "PIA",
    "winner_id": "piastri",
-   "p_winner": 0.26378799999999997,
+   "p_winner": 0.263788,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.3326095287404025,
-   "brier": 0.8950011158999998,
+   "logloss": 1.3326095287404023,
+   "brier": 0.8950011159,
    "pole_hit": false
   },
   {
@@ -2993,12 +2993,12 @@
    "pick_p": 0.391709,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.19898499999999994,
+   "p_winner": 0.198985,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 1.6145258339830473,
-   "brier": 0.8938076038919998,
+   "logloss": 1.6145258339830468,
+   "brier": 0.8938076038920001,
    "pole_hit": false
   },
   {
@@ -3016,7 +3016,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.498945461235413,
-   "brier": 0.23161785793748416,
+   "brier": 0.2316178579374842,
    "pole_hit": true
   },
   {
@@ -3029,11 +3029,11 @@
    "pick_p": 0.311641,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.27163200000000004,
+   "p_winner": 0.271632,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 1.3033070699138591,
+   "logloss": 1.3033070699138594,
    "brier": 0.714944667936,
    "pole_hit": true
   },
@@ -3065,12 +3065,12 @@
    "pick_p": 0.41826,
    "winner": "RUS",
    "winner_id": "russell",
-   "p_winner": 0.41825958174041833,
+   "p_winner": 0.4182595817404182,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.8716530302552745,
-   "brier": 0.4326277128621415,
+   "logloss": 0.8716530302552749,
+   "brier": 0.4326277128621417,
    "pole_hit": true
   },
   {
@@ -3088,7 +3088,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.7062546837364256,
-   "brier": 0.3299440474584904,
+   "brier": 0.3299440474584905,
    "pole_hit": true
   },
   {
@@ -3101,12 +3101,12 @@
    "pick_p": 0.586657,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.5866575866575867,
+   "p_winner": 0.5866575866575866,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.5333139570260282,
-   "brier": 0.2034621773561512,
+   "logloss": 0.5333139570260284,
+   "brier": 0.20346217735615132,
    "pole_hit": true
   },
   {
@@ -3137,12 +3137,12 @@
    "pick_p": 0.652859,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.19375461249077505,
+   "p_winner": 0.19375461249077502,
    "rank": 2,
    "hit": false,
    "top3": true,
    "logloss": 1.6411628046280484,
-   "brier": 1.0832423391543107,
+   "brier": 1.0832423391543105,
    "pole_hit": false
   },
   {
@@ -3155,12 +3155,12 @@
    "pick_p": 0.355193,
    "winner": "VER",
    "winner_id": "max_verstappen",
-   "p_winner": 0.2288884577769157,
+   "p_winner": 0.22888845777691558,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 1.4745204780354155,
-   "brier": 0.78780077284394,
+   "logloss": 1.474520478035416,
+   "brier": 0.7878007728439401,
    "pole_hit": false
   },
   {
@@ -3178,7 +3178,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.4022881694720397,
-   "brier": 0.14197663620090492,
+   "brier": 0.14197663620090498,
    "pole_hit": true
   },
   {
@@ -3209,11 +3209,11 @@
    "pick_p": 0.385293,
    "winner": "ANT",
    "winner_id": "antonelli",
-   "p_winner": 0.22884445768891534,
+   "p_winner": 0.22884445768891537,
    "rank": 2,
    "hit": false,
    "top3": true,
-   "logloss": 1.4747127302709406,
+   "logloss": 1.4747127302709404,
    "brier": 0.7699227880560726,
    "pole_hit": true
   },
@@ -3245,12 +3245,12 @@
    "pick_p": 0.416934,
    "winner": "ANT",
    "winner_id": "antonelli",
-   "p_winner": 0.4169339999999999,
+   "p_winner": 0.416934,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.8748273430911842,
-   "brier": 0.4214322982380002,
+   "logloss": 0.8748273430911839,
+   "brier": 0.42143229823799994,
    "pole_hit": true
   },
   {
@@ -3286,7 +3286,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.5645077340158505,
-   "brier": 0.23547278306999986,
+   "brier": 0.23547278306999997,
    "pole_hit": true
   },
   {
@@ -3299,11 +3299,11 @@
    "pick_p": 0.419934,
    "winner": "HAM",
    "winner_id": "hamilton",
-   "p_winner": 0.17760900000000002,
+   "p_winner": 0.177609,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 1.7281707740323602,
+   "logloss": 1.7281707740323604,
    "brier": 0.910945277732,
    "pole_hit": false
   },
@@ -3317,12 +3317,12 @@
    "pick_p": 0.469151,
    "winner": "RUS",
    "winner_id": "russell",
-   "p_winner": 0.46915193830387675,
+   "p_winner": 0.46915193830387664,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.7568286007319087,
-   "brier": 0.3345411713753472,
+   "logloss": 0.7568286007319089,
+   "brier": 0.3345411713753473,
    "pole_hit": true
   },
   {
@@ -3335,11 +3335,11 @@
    "pick_p": 0.581192,
    "winner": "LEC",
    "winner_id": "leclerc",
-   "p_winner": 0.09806209806209808,
+   "p_winner": 0.09806209806209805,
    "rank": 3,
    "hit": false,
    "top3": true,
-   "logloss": 2.322154347290422,
+   "logloss": 2.3221543472904225,
    "brier": 1.1744827932084119,
    "pole_hit": false
   },
@@ -3358,7 +3358,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.6937453582365465,
-   "brier": 0.300863279631678,
+   "brier": 0.3008632796316781,
    "pole_hit": true
   },
   {
@@ -3371,12 +3371,12 @@
    "pick_p": 0.379489,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.37948862051137955,
+   "p_winner": 0.37948862051137944,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.9689306680732865,
-   "brier": 0.45907621442311203,
+   "logloss": 0.9689306680732869,
+   "brier": 0.45907621442311214,
    "pole_hit": true
   },
   {
@@ -3389,12 +3389,12 @@
    "pick_p": 0.427087,
    "winner": "NOR",
    "winner_id": "norris",
-   "p_winner": 0.4270869999999999,
+   "p_winner": 0.427087,
    "rank": 1,
    "hit": true,
    "top3": true,
-   "logloss": 0.8507675394345291,
-   "brier": 0.3931810269520001,
+   "logloss": 0.8507675394345289,
+   "brier": 0.39318102695199997,
    "pole_hit": true
   },
   {
@@ -3407,12 +3407,12 @@
    "pick_p": 0.281121,
    "winner": "ANT",
    "winner_id": "antonelli",
-   "p_winner": 0.02359899999999999,
+   "p_winner": 0.023599,
    "rank": 8,
    "hit": false,
    "top3": false,
-   "logloss": 3.746550940729685,
-   "brier": 1.1258994159200004,
+   "logloss": 3.7465509407296844,
+   "brier": 1.12589941592,
    "pole_hit": false
   },
   {
@@ -3448,7 +3448,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.6592202291814392,
-   "brier": 0.2729591035099342,
+   "brier": 0.2729591035099341,
    "pole_hit": true
   },
   {
@@ -3466,7 +3466,7 @@
    "hit": true,
    "top3": true,
    "logloss": 0.8668137090951137,
-   "brier": 0.41665177126404085,
+   "brier": 0.41665177126404096,
    "pole_hit": true
   }
  ]
