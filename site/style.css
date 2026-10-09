@@ -116,6 +116,16 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter) 3rem; }
 .strip { display: inline-flex; width: 11rem; height: 1rem; background: transparent; border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); }
 .strip i { flex: 1; background: var(--bar); }
 
+/* head to head */
+.split { display: inline-flex; align-items: center; gap: .5rem; min-width: 11rem; }
+.split .bar { flex: 1; height: .7rem; background: var(--bar-soft); min-width: 4rem; }
+.split .bar i { display: block; height: 100%; background: var(--bar); }
+.split b { min-width: 2.2ch; font-weight: 700; }
+.split b:first-child { text-align: right; }
+.h2htable th, .h2htable td { text-align: left; }
+.simtable th[scope="row"] { text-align: left; font-weight: 500; color: var(--slate); }
+.block h3 + .tablewrap, .block h3 + div { margin-top: .4rem; }
+
 /* blocks */
 .block { padding: 3rem 0; border-top: 2px solid var(--ink); }
 .block h2 { margin: 0 0 1rem; font-stretch: 70%; font-weight: 800; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1; }

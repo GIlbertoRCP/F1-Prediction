@@ -15,6 +15,7 @@ from pathlib import Path
 from evaluation.data import load_races
 from . import engine, store
 from .schedule import read_schedule
+from .h2h import build_h2h
 from .service import BACKTEST_FILE, LIVE_FILE, build_bundle
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -81,8 +82,11 @@ def freeze_live(races, results_dir: Path, pred_dir: Path, now: dt.datetime) -> l
     return messages
 
 
-def write_site_data(bundle: dict, out_dir: Path) -> None:
+def write_site_data(bundle: dict, out_dir: Path, races=None) -> None:
     data = out_dir / "data"
+    if races is not None:
+        data.mkdir(parents=True, exist_ok=True)
+        (data / "h2h.json").write_text(json.dumps(build_h2h(races), separators=(",", ":")))
     (data / "races").mkdir(parents=True, exist_ok=True)
     for name in ("meta", "forecast", "track_record"):
         (data / f"{name}.json").write_text(json.dumps(bundle[name], indent=1))
@@ -110,7 +114,7 @@ def main(argv=None) -> int:
     for msg in freeze_live(races, results_dir, pred_dir, now):
         print(msg)
     bundle = build_bundle(results_dir, pred_dir, now)
-    write_site_data(bundle, out)
+    write_site_data(bundle, out, races)
     ok = bundle["meta"]["live_log"]
     print(f"live log: {ok['detail']}")
     print(f"site data written to {out}/data")

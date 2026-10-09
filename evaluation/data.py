@@ -1,7 +1,7 @@
 """Load race results into simple objects for evaluation."""
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 from .jolpica import read_rows
@@ -17,6 +17,7 @@ class Entry:
     classified: bool
     quali_position: int | None = None   # official qualifying classification (None if unknown)
     q_gap: float | None = None          # best qualifying lap vs the fastest in the session, in % (None if no time)
+    points: float = 0.0                 # championship points scored in the race
 
 
 @dataclass
@@ -90,7 +91,7 @@ def load_races(results_dir: Path, min_entries: int = 10) -> list[Race]:
             grid=int(r["grid"] or 0),
             finish_position=int(fin) if str(fin).strip() != "" else None,
             classified=str(r["classified"]) == "1",
-            quali_position=qpos, q_gap=qgap,
+            quali_position=qpos, q_gap=qgap, points=float(r.get("points") or 0),
         ))
     races = []
     for key in sorted(grouped):
@@ -99,8 +100,7 @@ def load_races(results_dir: Path, min_entries: int = 10) -> list[Race]:
             continue
         n = len(race.entries)
         race.entries = [
-            Entry(e.driver, e.driver_id, e.team, e.grid if e.grid > 0 else n + 1,
-                  e.finish_position, e.classified, e.quali_position, e.q_gap)
+            replace(e, grid=e.grid if e.grid > 0 else n + 1)
             for e in race.entries
         ]
         races.append(race)
