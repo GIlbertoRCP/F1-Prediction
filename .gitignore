@@ -23,3 +23,4 @@ log_*.txt
 
 # OS
 .DS_Store
+reports/.ordered_cache.jsonl

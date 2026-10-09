@@ -39,7 +39,7 @@ code { font-size: .92em; background: var(--panel); padding: .1em .35em; border-r
   max-width: 1120px; margin: 0 auto; padding: 18px var(--gutter);
 }
 .brand { font-stretch: 70%; font-weight: 800; font-size: 1.5rem; letter-spacing: .01em; text-decoration: none; }
-.top nav { display: flex; gap: 1.4rem; }
+.top nav { display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; }
 .top nav a { text-decoration: none; color: var(--slate); font-weight: 500; }
 .top nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 
@@ -100,6 +100,22 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter) 3rem; }
 .chip[aria-pressed="true"] .num { color: var(--paper); }
 [hidden] { display: none !important; }
 
+/* simulator */
+.simbar { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; margin: 1rem 0 1.4rem; }
+.simbar .more { margin: 0; }
+.simtable td, .simtable th { white-space: nowrap; }
+.simtable td:first-child b { vertical-align: middle; }
+.tick.inline { display: inline-block; width: 6px; height: 1.2rem; vertical-align: middle; margin-right: .5rem; }
+.simtable tr.isout { opacity: .55; }
+.simtable th:nth-child(2), .simtable td:nth-child(2) { text-align: left; }
+.simbar .select { flex-wrap: wrap; }
+.slot { width: 3.6rem; padding: .2rem .3rem; }
+.outbox { margin-left: .6rem; color: var(--slate); font-size: .9rem; }
+.num.up { color: var(--ink); font-weight: 700; }
+.num.down { color: var(--red); font-weight: 700; }
+.strip { display: inline-flex; width: 11rem; height: 1rem; background: transparent; border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); }
+.strip i { flex: 1; background: var(--bar); }
+
 /* blocks */
 .block { padding: 3rem 0; border-top: 2px solid var(--ink); }
 .block h2 { margin: 0 0 1rem; font-stretch: 70%; font-weight: 800; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1; }
@@ -129,7 +145,7 @@ svg.cal text { fill: var(--slate); font-size: 11px; font-family: inherit; }
 
 /* race list */
 .select { display: flex; align-items: center; gap: .6rem; color: var(--slate); font-weight: 500; }
-select { font: inherit; padding: .4rem .6rem; background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px; }
+select { max-width: 100%; font: inherit; padding: .4rem .6rem; background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px; }
 .race-list { list-style: none; margin: 1.2rem 0 0; padding: 0; border-top: 1px solid var(--rule); }
 .race-list > li { border-bottom: 1px solid var(--rule); }
 .race-row {

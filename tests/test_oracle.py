@@ -10,6 +10,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from evaluation.data import load_races
 from oracle import engine, store
+from evaluation.models import BASE_FEATURES, ConditionalLogit, build_feature_table
+from evaluation.ordered import ScaledPL, simulate_positions
 from oracle.schedule import next_race, parse_schedule
 from oracle.publish import backfill_backtest, freeze_live
 from oracle.service import LIVE_FILE, build_bundle
@@ -120,6 +122,44 @@ class ScheduleTests(unittest.TestCase):
         self.assertEqual(next_race(rows, "2026-10-08")["race"], "A GP")
         self.assertEqual(next_race(rows, "2026-10-19")["race"], "B GP")
         self.assertIsNone(next_race(rows, "2026-11-01"))
+
+
+class OrderedModelTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.races = load_races(REAL)[:80]
+        cls.table = build_feature_table(cls.races)
+        cls.model = ScaledPL("t").fit(cls.races[:70], cls.table[:70])
+
+    def test_win_odds_equal_the_winner_only_model(self):
+        base = ConditionalLogit("b", BASE_FEATURES).fit(self.races[:70], self.table[:70])
+        a = self.model.predict(self.races[70], self.table[70])
+        b = base.predict(self.races[70], self.table[70])
+        for d in a:
+            self.assertAlmostEqual(a[d], b[d], places=9)
+
+    def test_podium_odds_sum_to_three_and_scales_flatten_down_the_order(self):
+        u = self.model.utilities(self.table[70])
+        pod = self.model.podium_probs(u)
+        self.assertAlmostEqual(sum(pod.values()), 3.0, places=6)
+        wins = self.model.predict(self.races[70], self.table[70])
+        for d in u:
+            self.assertGreaterEqual(pod[d] + 1e-9, wins[d])      # podium is never less likely than a win
+        self.assertEqual(self.model.scales[0], 1.0)
+        self.assertLess(self.model.scales[-1], self.model.scales[1])
+
+    def test_simulation_agrees_with_exact_odds(self):
+        u = self.model.utilities(self.table[70])
+        n = 6000
+        counts, _ = simulate_positions(u, self.model.scales, n, seed=1)
+        pod = self.model.podium_probs(u)
+        for d in u:
+            self.assertLess(abs(sum(counts[d][:3]) / n - pod[d]), 0.03)
+
+    def test_features_for_the_simulator_are_exported(self):
+        detail = engine.forecast_detail(self.races[:70], self.races[70])
+        self.assertEqual(set(detail["features"]), {e.driver_id for e in self.races[70].entries})
+        self.assertEqual(len(detail["model"]["w"]), len(BASE_FEATURES))
 
 
 class BacktestTests(unittest.TestCase):

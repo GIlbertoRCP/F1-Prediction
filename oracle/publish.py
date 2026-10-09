@@ -35,13 +35,17 @@ def backfill_backtest(races, pred_dir: Path, force: bool = False) -> int:
     for i, race in enumerate(races):
         if race.key not in todo:
             continue
-        probs = engine.forecast(races[:i], race)
+        detail = engine.forecast_detail(races[:i], race)
+        probs = detail["probs"]
         existing[race.key] = {
             "season": race.season, "round": race.round, "race": race.name, "date": race.date,
             "kind": "backtest", "model": engine.MODEL_NAME, "model_version": version,
             "made_at": None, "grid_source": "race_grid", "train_races": i,
-            "predictions": engine.entries_payload(race, probs),
+            "predictions": engine.entries_payload(race, probs, detail["podium"]),
+            "simulator": {"model": detail["model"], "features": detail["features"]},
         }
+        if len(existing) % 25 == 0:      # checkpoint, so an interrupted run resumes
+            store.write_backtest(path, [existing[k] for k in sorted(existing)])
     store.write_backtest(path, [existing[k] for k in sorted(existing)])
     return len(missing)
 
@@ -63,12 +67,14 @@ def freeze_live(races, results_dir: Path, pred_dir: Path, now: dt.datetime) -> l
             messages.append(f"SKIPPED {label}: race has started; refusing to log a forecast after the fact "
                             "(refresh results with scripts/fetch_results.py)")
             continue
-        probs = engine.forecast(races, race)
+        detail = engine.forecast_detail(races, race)
+        probs = detail["probs"]
         record = {
             "season": race.season, "round": race.round, "race": race.name, "date": race.date,
             "kind": "live", "model": engine.MODEL_NAME, "model_version": engine.model_version(),
             "made_at": now.isoformat(timespec="seconds"), "grid_source": "qualifying",
-            "train_races": len(races), "predictions": engine.entries_payload(race, probs),
+            "train_races": len(races), "predictions": engine.entries_payload(race, probs, detail["podium"]),
+            "simulator": {"model": detail["model"], "features": detail["features"]},
         }
         added = store.append_live(pred_dir / LIVE_FILE, record)
         messages.append(f"{'FROZE' if added else 'kept existing'} forecast for {label}")

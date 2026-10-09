@@ -11,7 +11,11 @@ from pathlib import Path
 
 from evaluation.data import Entry, Race, parse_lap
 from evaluation.jolpica import read_rows
-from evaluation.models import BASE_FEATURES, ConditionalLogit, build_feature_table
+from evaluation.models import BASE_FEATURES, build_feature_table
+from evaluation.models import FEATURES as ALL_FEATURES
+from evaluation.ordered import ScaledPL
+
+FEATURES_INDEX = {f: i for i, f in enumerate(ALL_FEATURES)}
 
 MODEL_NAME = "grid_plus_form"
 MIN_TRAIN = 15
@@ -21,24 +25,40 @@ _ROOT = Path(__file__).resolve().parent.parent
 def model_version() -> str:
     """Short hash of the code that defines the model, stored with every prediction."""
     h = hashlib.sha256()
-    for rel in ("evaluation/models.py", "oracle/engine.py"):
+    for rel in ("evaluation/models.py", "evaluation/ordered.py", "oracle/engine.py"):
         h.update((_ROOT / rel).read_bytes())
     return h.hexdigest()[:10]
 
 
-def forecast(history: list[Race], race: Race) -> dict[str, float]:
-    """P(win) for each driver in `race`, using only `history` (races strictly before it)."""
+def forecast_detail(history: list[Race], race: Race) -> dict:
+    """Everything the product needs for one race, from `history` (races strictly before it) only:
+    win odds, exact podium odds, and the fitted parameters so a browser can re-run what-ifs."""
     if len(history) < MIN_TRAIN:
         raise ValueError(f"need at least {MIN_TRAIN} earlier races, got {len(history)}")
     table = build_feature_table(history + [race])
-    model = ConditionalLogit(MODEL_NAME, BASE_FEATURES).fit(history, table[:-1])
-    return model.predict(race, table[-1])
+    model = ScaledPL(MODEL_NAME, BASE_FEATURES).fit(history, table[:-1])
+    rows = table[-1]
+    u = model.utilities(rows)
+    base = model.base
+    idx = [FEATURES_INDEX[f] for f in BASE_FEATURES]
+    return {
+        "probs": model.predict(race, rows),
+        "podium": model.podium_probs(u),
+        "model": {"features": BASE_FEATURES, "mu": base.mu, "sd": base.sd, "w": base.w, "scales": model.scales},
+        "features": {r[0]: [r[1][i] for i in idx] for r in rows},
+    }
 
 
-def entries_payload(race: Race, probs: dict[str, float]) -> list[dict]:
+def forecast(history: list[Race], race: Race) -> dict[str, float]:
+    """P(win) for each driver in `race`, using only `history` (races strictly before it)."""
+    return forecast_detail(history, race)["probs"]
+
+
+def entries_payload(race: Race, probs: dict[str, float], podium: dict[str, float] | None = None) -> list[dict]:
     rows = [
         {"driver_id": e.driver_id, "driver": e.driver, "team": e.team, "grid": e.grid,
-         "p": round(probs[e.driver_id], 6)}
+         "p": round(probs[e.driver_id], 6),
+         **({"podium": round(podium[e.driver_id], 6)} if podium else {})}
         for e in race.entries
     ]
     return sorted(rows, key=lambda r: (-r["p"], r["driver_id"]))

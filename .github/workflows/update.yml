@@ -31,7 +31,9 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run tests
-        run: python -m unittest discover -s tests
+        run: |
+          python -m unittest discover -s tests
+          node --test tests/*.test.mjs
       - name: Fetch the current season
         if: github.event_name != 'push'
         run: python scripts/fetch_results.py --from "$(date -u +%Y)"

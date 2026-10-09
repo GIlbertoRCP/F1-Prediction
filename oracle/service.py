@@ -111,7 +111,7 @@ def build_bundle(results_dir: Path, pred_dir: Path, now: dt.datetime | None = No
         forecast = {"status": "open", "race": {k: rec[k] for k in ("season", "round", "race", "date")},
                     "made_at": rec["made_at"], "grid_source": rec["grid_source"],
                     "model": rec["model"], "model_version": rec["model_version"],
-                    "hash": rec["hash"], "predictions": rec["predictions"],
+                    "hash": rec["hash"], "predictions": rec["predictions"], "simulator": rec.get("simulator"),
                     "next_race": next_race(schedule, today)}
     latest = all_rows[-1] if all_rows else None
 
@@ -131,7 +131,7 @@ def build_bundle(results_dir: Path, pred_dir: Path, now: dt.datetime | None = No
         race_pages[f"{key[0]}-{key[1]}"] = {
             "season": key[0], "round": key[1], "race": rec["race"], "date": rec["date"],
             "kind": rec["kind"], "made_at": rec.get("made_at"), "grid_source": rec["grid_source"],
-            "predictions": rec["predictions"], "result": result,
+            "predictions": rec["predictions"], "result": result, "simulator": rec.get("simulator"),
         }
 
     return {

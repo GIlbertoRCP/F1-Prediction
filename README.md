@@ -55,6 +55,7 @@ uv run uvicorn oracle.api:app --port 8000        # or: JSON API plus the same pa
 
 - `oracle/engine.py` is the model (`grid_plus_form`, the backtest winner). `oracle/store.py` is the prediction log: `data/predictions/live.jsonl` is append-only and hash-chained (editing or deleting a record breaks the chain), `backtest.jsonl` holds clearly labelled replays.
 - `publish` refuses to log a forecast once the race has started, and never overwrites an existing live forecast.
+- `evaluation/ordered.py` extends the model to the whole finishing order (win odds unchanged; exact podium odds; Monte Carlo). `site/sim.js` runs it in the browser for the race simulator, and `tests/sim.test.mjs` checks it reproduces the Python numbers. `reports/ordered.md` shows how well podium and top-10 odds are calibrated, including the variants that did not work.
 - The API serves `/api/forecast`, `/api/track-record`, `/api/races`, `/api/races/{season}/{round}` and `/api/health`.
 - Commit `data/predictions/live.jsonl` after each run: the git history is a second, independent timestamp.
 
