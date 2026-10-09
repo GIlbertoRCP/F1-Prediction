@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Winner Oracle</title>
+<meta name="description" content="Calibrated win probabilities for every Formula 1 race, frozen before the start and scored in public.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d1320'/%3E%3Crect x='6' y='7' width='20' height='4' fill='%23fff'/%3E%3Crect x='6' y='14' width='13' height='4' fill='%23fff'/%3E%3Crect x='6' y='21' width='7' height='4' fill='%23d4213d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#forecast">Winner Oracle</a>
+  <nav aria-label="Sections">
+    <a href="#forecast">Forecast</a>
+    <a href="#record">Track record</a>
+    <a href="#races">Races</a>
+    <a href="#method">Method</a>
+  </nav>
+</header>
+
+<main>
+  <section id="forecast" class="hero" aria-live="polite">
+    <p class="loading">Loading the forecast…</p>
+  </section>
+
+  <section id="record" class="block">
+    <h2>Track record</h2>
+    <div id="record-body"><p class="loading">Loading…</p></div>
+  </section>
+
+  <section id="races" class="block">
+    <div class="block-head">
+      <h2>Every race</h2>
+      <label class="select">Season
+        <select id="season-filter"></select>
+      </label>
+    </div>
+    <ol id="race-list" class="race-list"></ol>
+  </section>
+
+  <section id="method" class="block prose">
+    <h2>How it works</h2>
+    <p>After qualifying, the model reads the starting grid and how each driver and team has finished in recent races. It turns that into a chance of winning for every driver, and the chances add up to 100%.</p>
+    <p>Forecasts are frozen before the lights go out. Each one is written to an append-only log where every record carries a fingerprint of the one before it, so changing an old forecast breaks the chain and shows up. The log is also committed to git, which gives it a second, independent timestamp.</p>
+    <p>Replays are different from live forecasts. A replay re-makes the forecast for a past race using only the races before it, so the model never sees the result. Replays use the final starting grid, including penalties. They are marked wherever they appear and counted separately from the live record.</p>
+    <p>The full evaluation, including the models that were tried and did not help, is in <code>reports/baselines.md</code>.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Not betting advice. Probabilities describe how often drivers in similar positions have won, not what will happen on Sunday.</p>
+  <p id="foot-meta"></p>
+</footer>
+<script src="app.js" type="module"></script>
+</body>
+</html>

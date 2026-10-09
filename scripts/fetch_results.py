@@ -21,6 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from evaluation.jolpica import FILENAMES, dedupe, parse_payload, read_rows, write_rows  # noqa: E402
+from oracle.schedule import parse_schedule, read_schedule, write_schedule  # noqa: E402
 
 BASE = "https://api.jolpi.ca/ergast/f1"
 OUT_DIR = ROOT / "data" / "results"
@@ -81,6 +82,17 @@ def main() -> None:
         merged = dedupe(existing + fetched)
         if merged:
             print(f"-> {write_rows(OUT_DIR, kind, merged).relative_to(ROOT)} ({len(merged)} rows)")
+    fetch_schedule(seasons)
+
+
+def fetch_schedule(seasons: list[int]) -> None:
+    rows = []
+    for season in seasons:
+        rows.extend(parse_schedule(get_json(f"{BASE}/{season}.json?limit={PAGE}")))
+        time.sleep(PAUSE)
+    existing = [r for r in read_schedule(OUT_DIR / "schedule.csv") if r["season"] not in seasons]
+    write_schedule(OUT_DIR / "schedule.csv", existing + rows)
+    print(f"-> data/results/schedule.csv ({len(existing) + len(rows)} races)")
 
 
 if __name__ == "__main__":

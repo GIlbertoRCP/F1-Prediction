@@ -42,6 +42,22 @@ f1/
 
 ---
 
+## Winner Oracle (the product)
+
+Calibrated win probabilities for each race, frozen before the start and scored in public.
+
+```bash
+python3 scripts/fetch_results.py --from 2026     # new results, qualifying, calendar (needs internet)
+python3 -m oracle.publish                        # freeze the forecast for the upcoming race, rebuild site/data
+cd site && python3 -m http.server 8000           # static front page at http://localhost:8000
+uv run uvicorn oracle.api:app --port 8000        # or: JSON API plus the same page
+```
+
+- `oracle/engine.py` is the model (`grid_plus_form`, the backtest winner). `oracle/store.py` is the prediction log: `data/predictions/live.jsonl` is append-only and hash-chained (editing or deleting a record breaks the chain), `backtest.jsonl` holds clearly labelled replays.
+- `publish` refuses to log a forecast once the race has started, and never overwrites an existing live forecast.
+- The API serves `/api/forecast`, `/api/track-record`, `/api/races`, `/api/races/{season}/{round}` and `/api/health`.
+- Commit `data/predictions/live.jsonl` after each run: the git history is a second, independent timestamp.
+
 ## Evaluation: does the model beat simple baselines?
 
 Predictions are scored **walk-forward**: every race is predicted using only earlier races, so nothing leaks from the future (this is unit-tested). Metrics are how often the top pick wins, where the actual winner ranked, log loss / Brier score for the win probabilities, and calibration, with bootstrap confidence intervals.
