@@ -1,0 +1,56 @@
+# Keeps the Oracle current without anyone running commands:
+#   fetch results -> freeze the forecast once qualifying is done -> rebuild site/data -> commit -> deploy.
+# Runs every three hours from Friday to Monday (UTC), which covers every qualifying session,
+# so a forecast is frozen within three hours of the grid being set. It never edits an existing
+# forecast (see oracle/store.py) and refuses to log one after the race has started.
+name: update-oracle
+
+on:
+  schedule:
+    - cron: "17 */3 * * 5,6,0,1"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["site/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: update-oracle
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run tests
+        run: python -m unittest discover -s tests
+      - name: Fetch the current season
+        if: github.event_name != 'push'
+        run: python scripts/fetch_results.py --from "$(date -u +%Y)"
+      - name: Freeze forecast and rebuild site data
+        run: python -m oracle.publish
+      - name: Commit changes
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "oracle-bot"
+          git config user.email "oracle-bot@users.noreply.github.com"
+          git add data/results data/predictions site/data
+          if git diff --cached --quiet; then
+            echo "nothing new"
+          else
+            git commit -m "Update results and forecasts $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4

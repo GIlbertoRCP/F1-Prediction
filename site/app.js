@@ -1,3 +1,5 @@
+import { loadPicks, savePick, tally } from "./picks.js";
+
 const TEAM_COLOURS = {
   red_bull: "#1e41ff", mercedes: "#00a79d", ferrari: "#dc0000", mclaren: "#ff8000",
   aston_martin: "#006f62", alpine: "#ff87bc", williams: "#00a0de", rb: "#6692ff",
@@ -7,6 +9,7 @@ const TEAM_COLOURS = {
 };
 const colour = (team) => TEAM_COLOURS[team] || "#8a8f98";
 
+const pageCache = {};
 const $ = (sel, root = document) => root.querySelector(sel);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const pct = (p) => (p < 0.005 ? "<1%" : p < 0.1 ? `${(p * 100).toFixed(1)}%` : `${Math.round(p * 100)}%`);
@@ -63,6 +66,7 @@ async function renderHero(forecast, record) {
       Race day is ${fmtDate(r.date)}.</p>
       <span class="stamp">Frozen ${fmtStamp(forecast.made_at)} from the qualifying grid. Fingerprint <code>${forecast.hash.slice(0, 12)}</code></span>`;
     el.append(tower(forecast.predictions, { animate: true }));
+    el.append(pickPanel(forecast, record));
     return;
   }
   const next = forecast.next_race;
@@ -88,9 +92,53 @@ async function renderHero(forecast, record) {
     </div>`);
 }
 
+/* ---------- your pick ---------- */
+function pickPanel(forecast, record) {
+  const key = `${forecast.race.season}-${forecast.race.round}`;
+  const box = document.createElement("div");
+  box.className = "pickbox";
+  const draw = () => {
+    const mine = loadPicks()[key]?.driver_id;
+    const oracle = forecast.predictions[0];
+    box.innerHTML = `
+      <h3>Who wins? Make your pick</h3>
+      <p class="fine">${mine
+        ? `You picked <b>${esc(forecast.predictions.find((p) => p.driver_id === mine)?.driver ?? mine)}</b>. The Oracle's favourite is ${esc(oracle.driver)}. You can change your pick until the race starts. It is saved in this browser only.`
+        : `The Oracle's favourite is ${esc(oracle.driver)}. Pick anyone; a correct pick scores 1 divided by the Oracle's chance for that driver, so longshots pay more.`}</p>
+      <div class="chips" role="group" aria-label="Pick the winner">
+        ${forecast.predictions.map((p) => `<button class="chip" type="button" data-id="${esc(p.driver_id)}" aria-pressed="${p.driver_id === mine}">
+          <span class="tick" style="background:${colour(p.team)}"></span><b>${esc(p.driver)}</b><span class="num">${pct(p.p)}</span></button>`).join("")}
+      </div>`;
+    box.querySelectorAll(".chip").forEach((b) => (b.onclick = () => { savePick(key, b.dataset.id); draw(); renderPicks(record); }));
+  };
+  draw();
+  return box;
+}
+
+async function renderPicks(record) {
+  const el = $("#picks");
+  const picks = loadPicks();
+  const settled = Object.fromEntries(record.races.map((r) => [`${r.season}-${r.round}`, r]));
+  const keys = Object.keys(picks).filter((k) => settled[k]);
+  if (!keys.length) { el.hidden = true; return; }
+  const pages = {};
+  await Promise.all(keys.map(async (k) => { pages[k] = pageCache[k] ||= await getJSON(`data/races/${k}.json`); }));
+  const t = tally(picks, settled, pages);
+  el.hidden = false;
+  const verdict = t.you.points > t.oracle.points ? "You are ahead of the Oracle." : t.you.points < t.oracle.points ? "The Oracle is ahead." : "You are level with the Oracle.";
+  $("#picks-body").innerHTML = `
+    <p class="lede">After ${t.you.n} race${t.you.n > 1 ? "s" : ""} you have <b>${t.you.points} points</b> and the Oracle's top pick has <b>${t.oracle.points}</b>. ${verdict}</p>
+    <p class="fine">You called ${t.you.wins} winner${t.you.wins === 1 ? "" : "s"}; the Oracle's top pick called ${t.oracle.wins}. Over many races, someone who picks in line with the Oracle's odds averages 1 point per race.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Race</th><th>Your pick</th><th>Winner</th><th>You</th><th>Oracle top pick</th></tr></thead>
+      <tbody>${t.rows.map((r) => `<tr><td>${esc(r.race)}</td><td>${esc(r.pick)} (${whole(r.pick_p)})</td><td>${esc(r.winner)}</td>
+        <td>${r.points}</td><td>${esc(r.oracle_pick)}: ${r.oracle_points}</td></tr>`).join("")}</tbody>
+    </table></div>`;
+}
+
 /* ---------- track record ---------- */
 function calibrationSVG(rows) {
-  const W = 380, M = 44, S = W - M - 16;
+  const W = 380, M = 56, S = W - M - 18;
   const x = (v) => M + v * S, y = (v) => W - M - v * S;
   const ticks = [0, 0.25, 0.5, 0.75, 1];
   const grid = ticks.map((t) => `
@@ -104,7 +152,7 @@ function calibrationSVG(rows) {
     <line x1="${x(0)}" y1="${y(0)}" x2="${x(1)}" y2="${y(1)}" stroke="var(--red)" stroke-width="1.5" stroke-dasharray="5 4"/>
     ${pts}
     <text x="${x(0.5)}" y="${W - 6}" text-anchor="middle">What we said</text>
-    <text transform="translate(12 ${y(0.5)}) rotate(-90)" text-anchor="middle">How often it happened</text>
+    <text transform="translate(13 ${y(0.5)}) rotate(-90)" text-anchor="middle">How often it happened</text>
   </svg>`;
 }
 
@@ -142,7 +190,6 @@ function renderRecord(tr) {
 }
 
 /* ---------- race browser ---------- */
-const pageCache = {};
 function renderRaces(index, tr) {
   const settled = Object.fromEntries(tr.races.map((r) => [`${r.season}-${r.round}`, r]));
   const sel = $("#season-filter");
@@ -206,6 +253,7 @@ function detail(page) {
     await renderHero(forecast, record);
     renderRecord(record);
     renderRaces(index, record);
+    renderPicks(record);
     const through = meta.data_through;
     $("#foot-meta").textContent =
       `Model ${meta.model} (version ${meta.model_version}). Results through ${through ? `${through.race}, ${fmtDate(through.date)}` : "n/a"}. ` +
