@@ -2,7 +2,7 @@
 
 **Calibrated Formula 1 race-winner probabilities, with a public track record that can't be quietly edited.**
 
-[Live site](https://gilbertorcp.github.io/F1-Prediction/) (available once GitHub Pages is enabled for this repo) · [Model card](MODEL_CARD.md) · [Evaluation reports](reports/)
+[Live site](https://gilbertorcp.github.io/F1-Prediction/) · [Model card](MODEL_CARD.md) · [Evaluation reports](reports/)
 
 Most F1 prediction projects show a pick and a screenshot of a good race. This one is built around the harder
 question: *when it says 30%, does that happen about 30% of the time?* Every forecast is frozen before the lights
@@ -13,6 +13,7 @@ Nobody has to run a script.
 
 ## What you can do on the site
 
+* **Early odds.** Between races the page shows clearly labelled provisional odds (recent form, then the sprint order on sprint weekends). They are not frozen or scored.
 * **Forecast.** After qualifying, win odds for every driver, frozen and fingerprinted. Make your own pick and
   compare your score against the model's (stored in your browser only).
 * **Race simulator.** Move the starting grid or take a driver out, and the race is re-run thousands of times in
