@@ -6,12 +6,15 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastf1>=3.8.3",
+    "pandas>=2.2.0",
+]
+
+[project.optional-dependencies]
+# only for the archived XGBRanker in archive/xgb_ranker
+archive = [
     "lightgbm>=4.6.0",
     "scikit-learn>=1.8.0",
     "scipy>=1.17.1",
     "xgboost>=3.2.0",
-    "fastapi>=0.115.0",
-    "uvicorn>=0.32.0",
-    "pandas>=2.2.0",
     "pyarrow>=15.0.0",
 ]

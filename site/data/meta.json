@@ -1,0 +1,16 @@
+{
+ "generated_at": "2026-10-09T02:57:12+00:00",
+ "model": "grid_plus_form",
+ "model_version": "f242f5dea0",
+ "data_through": {
+  "season": 2026,
+  "round": 16,
+  "race": "Bahrain Grand Prix in Malaysia",
+  "date": "2026-10-04"
+ },
+ "live_log": {
+  "records": 0,
+  "chain_ok": true,
+  "detail": "0 records, chain intact"
+ }
+}

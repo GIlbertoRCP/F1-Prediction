@@ -2,11 +2,25 @@
 __pycache__/
 *.pyc
 .venv/
-.f1_cache/
+.pytest_cache/
 
-# Node
+# Node (any depth)
 node_modules/
 dist/
 
+# Data caches and large artifacts (regenerable)
+.f1_cache/
+f1_cache/
+*.ff1pkl
+*.sqlite
+*.pkl
+*.parquet
+
+# Local scratch and logs
+_to_delete/
+*.log
+log_*.txt
+
 # OS
 .DS_Store
+reports/.ordered_cache.jsonl
