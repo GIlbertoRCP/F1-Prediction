@@ -11,6 +11,7 @@ Only practice sessions that start before the weekend's Qualifying session are us
 import argparse
 import csv
 import sys
+import time
 import traceback
 from pathlib import Path
 
@@ -20,6 +21,7 @@ from evaluation.practice import FIELDS, weekend_features  # noqa: E402
 
 OUT = ROOT / "data" / "telemetry" / "practice_features.csv"
 ERRORS = ROOT / "data" / "telemetry" / "errors.log"
+RATE_LIMIT_WAIT = 600   # seconds; FastF1's API allows a few hundred calls per hour
 
 
 def laps_to_records(laps) -> list[dict]:
@@ -86,27 +88,36 @@ def main():
                     print(f"limit reached ({new} weekends)")
                     return
                 label = f"{season} R{rnd} {event['EventName']}"
-                try:
-                    names = weekend_sessions(event)
-                    sessions = []
-                    for name in names:
-                        s = fastf1.get_session(season, rnd, name)
-                        s.load(laps=True, telemetry=False, weather=False, messages=False)
-                        sessions.append(laps_to_records(s.laps))
-                    feats = weekend_features(sessions)
-                    for d, v in sorted(feats.items()):
-                        w.writerow({"season": season, "round": rnd, "race": event["EventName"], "driver": d,
-                                    "team": v["team"], "fp_gap": f"{v['fp_gap']:.4f}",
-                                    "fp_long": "" if v["fp_long"] is None else f"{v['fp_long']:.4f}",
-                                    "fp_sessions": v["fp_sessions"], "fp_laps": v["fp_laps"]})
-                    f.flush()
-                    new += 1
-                    print(f"{label}: {len(feats)} drivers from {len(names)} practice sessions "
-                          f"({', '.join(names) or 'none before qualifying'})")
-                except Exception:   # a bad weekend must not stop a multi-hour run
-                    print(f"{label}: FAILED (see {ERRORS.name})", file=sys.stderr)
-                    with open(ERRORS, "a") as e:
-                        e.write(f"{label}\n{traceback.format_exc()}\n")
+                while True:
+                    try:
+                        names = weekend_sessions(event)
+                        sessions = []
+                        for name in names:
+                            s = fastf1.get_session(season, rnd, name)
+                            s.load(laps=True, telemetry=False, weather=False, messages=False)
+                            sessions.append(laps_to_records(s.laps))
+                        feats = weekend_features(sessions)
+                        for d, v in sorted(feats.items()):
+                            w.writerow({"season": season, "round": rnd, "race": event["EventName"], "driver": d,
+                                        "team": v["team"], "fp_gap": f"{v['fp_gap']:.4f}",
+                                        "fp_long": "" if v["fp_long"] is None else f"{v['fp_long']:.4f}",
+                                        "fp_sessions": v["fp_sessions"], "fp_laps": v["fp_laps"]})
+                        f.flush()
+                        new += 1
+                        print(f"{label}: {len(feats)} drivers from {len(names)} practice sessions "
+                              f"({', '.join(names) or 'none before qualifying'})")
+                        break
+                    except Exception as exc:
+                        if "RateLimit" in type(exc).__name__:
+                            # not a bad weekend, just too many calls this hour: wait and retry the same one
+                            print(f"{label}: API rate limit reached, waiting {RATE_LIMIT_WAIT // 60} min "
+                                  "(leave this running, or Ctrl-C and rerun later)", flush=True)
+                            time.sleep(RATE_LIMIT_WAIT)
+                            continue
+                        print(f"{label}: FAILED (see {ERRORS.name})", file=sys.stderr)
+                        with open(ERRORS, "a") as e:
+                            e.write(f"{label}\n{traceback.format_exc()}\n")
+                        break
     print(f"done: {new} new weekends")
 
 
