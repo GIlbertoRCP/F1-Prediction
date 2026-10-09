@@ -39,7 +39,7 @@ function tower(predictions, { winnerId = null, limit = 10, animate = false, hold
         <span class="rk">${i + 1}</span>
         <span class="tick" style="background:${colour(p.team)}"></span>
         <span class="code" title="${esc(p.driver_id.replace(/_/g, " "))}">${esc(p.driver)}</span>
-        <span class="grid">P${p.grid}</span>
+        <span class="grid">${p.grid ? "P" + p.grid : ""}</span>
         <span class="track"><span class="fill" data-w="${(p.p / max) * 100}"></span></span>
         <span class="pct num">${pct(p.p)}</span>
       </li>`).join("");
@@ -85,6 +85,23 @@ function startLights(el, onGo) {
   timer = setTimeout(step, 250);
 }
 
+// Early odds for the weekend, before qualifying exists. Not frozen, not scored, and labelled as such.
+function provisionalPanel(pv) {
+  const at = pv.stages.findIndex((s) => s.key === pv.stage);
+  const box = document.createElement("section");
+  box.className = "provisional";
+  box.innerHTML = `
+    <div class="prov-head">
+      <h2>Early odds <span class="tag soft">Provisional</span></h2>
+      <ol class="steps" aria-label="How these odds sharpen">
+        ${pv.stages.map((s, i) => `<li class="${i < at ? "done" : i === at ? "now" : ""}">${esc(s.label)}</li>`).join("")}
+      </ol>
+    </div>
+    <p class="prov-note">${esc(pv.note)} They are not frozen or scored, and the real forecast replaces them after qualifying.</p>`;
+  box.append(tower(pv.predictions, { animate: true }));
+  return box;
+}
+
 async function renderHero(forecast, record) {
   const el = $("#forecast");
   if (forecast.status === "open") {
@@ -116,6 +133,7 @@ async function renderHero(forecast, record) {
        </div>${nextMap}</div>`
     : `<h1 class="calm">No race to forecast right now</h1>
        <p class="sub">Forecasts open after qualifying for each Grand Prix. Below is the most recent race, so you can see what a forecast looks like and how it did.</p>`;
+  if (forecast.provisional) el.append(provisionalPanel(forecast.provisional));
   const last = record.latest;
   if (!last) return;
   const page = await getJSON(`data/races/${last.season}-${last.round}.json`);

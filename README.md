@@ -13,6 +13,7 @@ Nobody has to run a script.
 
 ## What you can do on the site
 
+* **Early odds.** Between races the page shows clearly labelled provisional odds (recent form, then the sprint order on sprint weekends). They are not frozen or scored.
 * **Forecast.** After qualifying, win odds for every driver, frozen and fingerprinted. Make your own pick and
   compare your score against the model's (stored in your browser only).
 * **Race simulator.** Move the starting grid or take a driver out, and the race is re-run thousands of times in

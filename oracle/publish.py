@@ -14,7 +14,7 @@ from pathlib import Path
 
 from evaluation.data import load_races
 from . import engine, store
-from . import championship
+from . import championship, provisional
 from .schedule import read_schedule
 from .h2h import build_h2h
 from .service import BACKTEST_FILE, LIVE_FILE, build_bundle
@@ -121,6 +121,13 @@ def main(argv=None) -> int:
     if msg:
         print(msg)
     bundle = build_bundle(results_dir, pred_dir, now)
+    if bundle["forecast"]["status"] == "none":
+        try:
+            prov = provisional.build(races, results_dir, bundle["forecast"].get("next_race"))
+            if prov:
+                bundle["forecast"]["provisional"] = prov
+        except Exception as exc:          # a missing extra must never stop the real forecast being published
+            print(f"provisional forecast skipped: {exc}")
     write_site_data(bundle, out, races, results_dir)
     outlook = championship.build(races, results_dir, pred_dir, ROOT / "data" / "championship_history.json", now)
     (out / "data" / "championship.json").write_text(json.dumps(outlook, separators=(",", ":")))
