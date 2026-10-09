@@ -59,6 +59,16 @@ uv run uvicorn oracle.api:app --port 8000        # or: JSON API plus the same pa
 - The API serves `/api/forecast`, `/api/track-record`, `/api/races`, `/api/races/{season}/{round}` and `/api/health`.
 - Commit `data/predictions/live.jsonl` after each run: the git history is a second, independent timestamp.
 
+### Does practice pace help? (the telemetry test)
+
+Practice sessions finish before qualifying, so their pace is legitimately known before any grid exists. `scripts/extract_practice_features.py` turns FastF1 practice laps into one row per driver per weekend (best clean-lap gap, same-compound long-run gap) in `data/telemetry/practice_features.csv`; it is resumable and logs failures to `errors.log`. `python3 -m evaluation.telemetry_eval --out reports/telemetry.md` then scores every model on the identical races with paired log-loss differences, and also tests a pre-qualifying forecast. Nothing is claimed until that report exists from real data.
+
+```bash
+uv run python scripts/extract_practice_features.py --from 2022 --to 2026 --limit 1   # smoke test
+uv run python scripts/extract_practice_features.py --from 2022 --to 2026             # full, resumable
+python3 -m evaluation.telemetry_eval --out reports/telemetry.md
+```
+
 ## Evaluation: does the model beat simple baselines?
 
 Predictions are scored **walk-forward**: every race is predicted using only earlier races, so nothing leaks from the future (this is unit-tested). Metrics are how often the top pick wins, where the actual winner ranked, log loss / Brier score for the win probabilities, and calibration, with bootstrap confidence intervals.

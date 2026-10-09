@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from evaluation.data import Entry, Race, coverage, parse_lap, load_qualifying
+from evaluation.practice import session_features, weekend_features
 from evaluation.jolpica import parse_payload
 from evaluation.metrics import bootstrap_ci, calibration_table, score_race
 from evaluation.models import BASE_FEATURES, ConditionalLogit, FEATURES, GridPrior, build_feature_table, default_models
@@ -164,6 +165,79 @@ class QualifyingFeatureTests(unittest.TestCase):
         for (d, fb, _), (_, fc, _) in zip(base[4], changed[4]):   # the race itself: form unchanged
             self.assertEqual([fb[j] for j in form], [fc[j] for j in form])
         self.assertNotEqual(base[5], changed[5])  # the next race sees it through the form features
+
+
+def lap(driver, t, compound="MEDIUM", stint=1, team="t", **kw):
+    return {"driver": driver, "team": team, "lap_time": t, "compound": compound, "stint": stint,
+            "in_lap": False, "out_lap": False, "track_clear": True, "deleted": False, **kw}
+
+
+class PracticeFeatureTests(unittest.TestCase):
+    def session(self, n_drivers=12):
+        laps = []
+        for i in range(n_drivers):
+            d = f"D{i}"
+            laps.append(lap(d, 90.0 + 0.1 * i, "SOFT", stint=1))                    # one quick lap
+            laps += [lap(d, 94.0 + 0.05 * i + 0.01 * k, "MEDIUM", stint=2) for k in range(6)]   # long run
+        return laps
+
+    def test_gaps_are_relative_to_the_fastest(self):
+        f = session_features(self.session())
+        self.assertAlmostEqual(f["D0"]["gap"], 0.0)
+        self.assertAlmostEqual(f["D5"]["gap"], (90.5 / 90.0 - 1) * 100, places=6)
+        self.assertAlmostEqual(f["D0"]["long"], 0.0)
+        self.assertGreater(f["D9"]["long"], f["D3"]["long"])
+
+    def test_bad_laps_are_ignored(self):
+        laps = self.session() + [lap("D0", 80.0, track_clear=False), lap("D0", 70.0, in_lap=True),
+                                 lap("D0", 60.0, out_lap=True), lap("D0", 50.0, deleted=True)]
+        self.assertAlmostEqual(session_features(laps)["D0"]["gap"], 0.0)   # none of the fake fast laps count
+
+    def test_thin_sessions_and_short_runs_are_skipped(self):
+        self.assertEqual(session_features(self.session(n_drivers=6)), {})
+        short = [lap(f"D{i}", 90 + i * 0.1, stint=1) for i in range(12)]   # no stint reaches 5 laps
+        self.assertTrue(all(v["long"] is None for v in session_features(short).values()))
+
+    def test_long_runs_compare_only_the_same_compound(self):
+        laps = []
+        for i in range(12):
+            laps.append(lap(f"D{i}", 90.0 + 0.1 * i, "SOFT", stint=1))
+            comp, base = ("SOFT", 93.0) if i < 6 else ("HARD", 95.0)     # hards are slower, but not 'worse'
+            laps += [lap(f"D{i}", base + 0.02 * i, comp, stint=2) for _ in range(6)]
+        f = session_features(laps)
+        self.assertLess(f["D6"]["long"], 0.1)       # fastest on hards is judged against hards, not softs
+
+    def test_weekend_takes_the_best_session_and_ignores_missing(self):
+        slow, fast = self.session(), [dict(l, lap_time=l["lap_time"] - 0.5) for l in self.session()]
+        w = weekend_features([slow, fast])
+        self.assertEqual(w["D0"]["fp_sessions"], 2)
+        self.assertAlmostEqual(w["D0"]["fp_gap"], 0.0)
+        self.assertEqual(weekend_features([]), {})
+
+
+class PracticeTableTests(unittest.TestCase):
+    def test_practice_features_do_not_leak_backwards_and_missing_is_filled(self):
+        from dataclasses import replace
+        races = make_races(n_races=8)
+        for r in races:
+            r.entries = [replace(e, fp_gap=0.1 * i, fp_long=None if i == 3 else 0.2 * i) for i, e in enumerate(r.entries)]
+        base = build_feature_table(races)
+        changed = copy.deepcopy(races)
+        changed[4].entries = [replace(e, fp_gap=4.0) for e in changed[4].entries]
+        alt = build_feature_table(changed)
+        for i in range(4):
+            self.assertEqual(base[i], alt[i])
+        gap, form = FEATURES.index("fp_gap"), FEATURES.index("driver_fp_form")
+        self.assertNotEqual([r[1][gap] for r in base[4]], [r[1][gap] for r in alt[4]])      # its own weekend sees it
+        self.assertEqual([r[1][form] for r in base[4]], [r[1][form] for r in alt[4]])       # but its form does not
+        self.assertNotEqual([r[1][form] for r in base[5]], [r[1][form] for r in alt[5]])    # the next race does
+        longi = FEATURES.index("fp_long")
+        import statistics
+        by_id = {r[0]: r[1][longi] for r in base[0]}
+        target = races[0].entries[3].driver_id
+        others = [v for d, v in by_id.items() if d != target]
+        self.assertAlmostEqual(by_id[target], statistics.median([0.2 * i for i in range(10) if i != 3]))   # field median
+        self.assertEqual(len(others), 9)
 
 
 class ModelTests(unittest.TestCase):

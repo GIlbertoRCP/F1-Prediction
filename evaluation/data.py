@@ -5,6 +5,7 @@ from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 from .jolpica import read_rows
+from .practice import read_practice
 
 
 @dataclass(frozen=True)
@@ -18,6 +19,8 @@ class Entry:
     quali_position: int | None = None   # official qualifying classification (None if unknown)
     q_gap: float | None = None          # best qualifying lap vs the fastest in the session, in % (None if no time)
     points: float = 0.0                 # championship points scored in the race
+    fp_gap: float | None = None         # best practice lap vs the fastest, % (practice before qualifying only)
+    fp_long: float | None = None        # long-run pace vs the best long run on the same tyre, %
 
 
 @dataclass
@@ -77,8 +80,11 @@ def load_qualifying(results_dir: Path) -> dict[tuple[int, int], dict[str, tuple[
     return out
 
 
-def load_races(results_dir: Path, min_entries: int = 10) -> list[Race]:
-    """Races sorted chronologically. Races with no recorded winner are dropped."""
+def load_races(results_dir: Path, min_entries: int = 10, practice_path: Path | None = None) -> list[Race]:
+    """Races sorted chronologically. Races with no recorded winner are dropped.
+
+    Practice pace features are attached when data/telemetry/practice_features.csv exists
+    (or `practice_path` is given)."""
     grouped: dict[tuple[int, int], Race] = {}
     quali = load_qualifying(results_dir)
     for r in read_rows(Path(results_dir) / "races.csv"):
@@ -104,6 +110,13 @@ def load_races(results_dir: Path, min_entries: int = 10) -> list[Race]:
             for e in race.entries
         ]
         races.append(race)
+    practice = read_practice(practice_path or Path(results_dir).parent / "telemetry" / "practice_features.csv")
+    if practice:
+        for race in races:
+            known = practice.get(race.key)
+            if known:
+                race.entries = [replace(e, fp_gap=known[e.driver][0], fp_long=known[e.driver][1])
+                                if e.driver in known else e for e in race.entries]
     return races
 
 

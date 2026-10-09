@@ -8,6 +8,7 @@ features for race t can never contain information from race t or later.
 from __future__ import annotations
 
 import math
+import statistics
 from collections import defaultdict
 
 from .data import Race
@@ -19,10 +20,16 @@ BASE_FEATURES = ["log_grid", "team_score", "driver_score", "driver_win", "team_w
 #   log_quali_pos  log of the qualifying classification (differs from the grid after penalties)
 #   driver_q_form / team_q_form  exponentially weighted gap over earlier weekends
 QUALI_FEATURES = ["q_gap", "team_q_gap", "log_quali_pos", "driver_q_form", "team_q_form"]
-FEATURES = BASE_FEATURES + QUALI_FEATURES
+# Practice pace (sessions before qualifying only; filled in when data/telemetry exists):
+#   fp_gap / team_fp_gap     best clean practice lap vs the fastest, driver and team's best car
+#   fp_long / team_fp_long   long-run pace vs the best long run on the same tyre
+#   driver_fp_form / team_fp_form  exponentially weighted fp_gap over earlier weekends
+PRACTICE_FEATURES = ["fp_gap", "team_fp_gap", "fp_long", "team_fp_long", "driver_fp_form", "team_fp_form"]
+FEATURES = BASE_FEATURES + QUALI_FEATURES + PRACTICE_FEATURES
 HALFLIFE = 6.0  # in appearances
 Q_GAP_CAP = 5.0       # percent; also used when a driver set no time
 Q_GAP_DEFAULT = 2.0   # form prior for a driver/team with no history
+FP_DEFAULT = 1.5      # practice gap used for a whole weekend with no practice data
 
 
 class _EW:
@@ -53,12 +60,24 @@ def _gap(entry) -> float:
     return Q_GAP_CAP if g is None else min(max(g, 0.0), Q_GAP_CAP)
 
 
+def _practice(race) -> tuple[dict, dict]:
+    """Per-driver practice gaps for one race with missing values filled from the same weekend:
+    a driver with no measurement gets the field's median; a weekend with none gets a constant."""
+    out = []
+    for attr in ("fp_gap", "fp_long"):
+        vals = {e.driver_id: getattr(e, attr) for e in race.entries if getattr(e, attr) is not None}
+        fill = statistics.median(vals.values()) if vals else FP_DEFAULT
+        out.append({e.driver_id: min(vals.get(e.driver_id, fill), Q_GAP_CAP) for e in race.entries})
+    return out[0], out[1]
+
+
 def build_feature_table(races: list[Race], halflife: float = HALFLIFE):
     """table[i] = list of (driver_id, feature_vector, won) for races[i], using races[:i] only."""
     decay = 0.5 ** (1.0 / halflife)
     d_score, d_win = defaultdict(_EW), defaultdict(_EW)
     t_score, t_win = defaultdict(_EW), defaultdict(_EW)
     d_q, t_q = defaultdict(_EW), defaultdict(_EW)
+    d_fp, t_fp = defaultdict(_EW), defaultdict(_EW)
     table = []
     for race in races:
         n = len(race.entries)
@@ -67,6 +86,11 @@ def build_feature_table(races: list[Race], halflife: float = HALFLIFE):
         team_best = {}
         for e in race.entries:
             team_best[e.team] = min(team_best.get(e.team, Q_GAP_CAP), gaps[e.driver_id])
+        fp_gap, fp_long = _practice(race)
+        team_fp, team_fpl = {}, {}
+        for e in race.entries:
+            team_fp[e.team] = min(team_fp.get(e.team, Q_GAP_CAP), fp_gap[e.driver_id])
+            team_fpl[e.team] = min(team_fpl.get(e.team, Q_GAP_CAP), fp_long[e.driver_id])
         rows = []
         for e in race.entries:
             rows.append((
@@ -82,6 +106,12 @@ def build_feature_table(races: list[Race], halflife: float = HALFLIFE):
                     math.log(e.quali_position if e.quali_position else e.grid),
                     d_q[e.driver_id].mean(Q_GAP_DEFAULT),
                     t_q[e.team].mean(Q_GAP_DEFAULT),
+                    fp_gap[e.driver_id],
+                    team_fp[e.team],
+                    fp_long[e.driver_id],
+                    team_fpl[e.team],
+                    d_fp[e.driver_id].mean(FP_DEFAULT),
+                    t_fp[e.team].mean(FP_DEFAULT),
                 ],
                 e.driver_id == winner,
             ))
@@ -99,6 +129,11 @@ def build_feature_table(races: list[Race], halflife: float = HALFLIFE):
             d_q[e.driver_id].update(gaps[e.driver_id], decay)
         for team, g in team_best.items():
             t_q[team].update(g, decay)
+        if any(e.fp_gap is not None for e in race.entries):      # only weekends that have practice data
+            for e in race.entries:
+                d_fp[e.driver_id].update(fp_gap[e.driver_id], decay)
+            for team, g in team_fp.items():
+                t_fp[team].update(g, decay)
         for team, ss in team_scores.items():
             t_score[team].update(sum(ss) / len(ss), decay)
             t_win[team].update(team_won.get(team, 0.0), decay)
