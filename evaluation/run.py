@@ -234,7 +234,7 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--predictions", type=Path, help="CSV of your own model's win probabilities")
     ap.add_argument("--scores", nargs="+", metavar="[LABEL=]CSV",
-                    help="CSV(s) of a ranker's raw scores (see scripts/export_model_scores.py). "
+                    help="CSV(s) of a ranker's raw scores (see archive/xgb_ranker/README.md). "
                          "Give several as label=path to compare variants on the same races.")
     ap.add_argument("--min-scored", type=int, default=4,
                     help="Scored races used only to fit the score->probability mapping before evaluating")
@@ -248,7 +248,7 @@ def main():
     for i, spec in enumerate(args.scores or []):
         label, _, path = spec.rpartition("=")
         score_files[label or ("ranker" if len(args.scores) == 1 else f"ranker{i + 1}")] = Path(path)
-    for flag, path, hint in [("--scores", p, "Create it first with: uv run python scripts/export_model_scores.py")
+    for flag, path, hint in [("--scores", p, "See archive/xgb_ranker/README.md")
                              for p in score_files.values()] + [("--predictions", args.predictions, "")]:
         if path and not path.exists():
             raise SystemExit(f"{flag} file not found: {path}. {hint}".strip())
