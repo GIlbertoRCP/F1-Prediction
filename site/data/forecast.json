@@ -10,5 +10,182 @@
   "quali_date": "2026-10-10",
   "quali_time": "13:00:00Z",
   "sprint": "1"
+ },
+ "provisional": {
+  "stage": "form",
+  "stages": [
+   {
+    "key": "form",
+    "label": "Recent form"
+   },
+   {
+    "key": "sprint",
+    "label": "Sprint order"
+   },
+   {
+    "key": "quali",
+    "label": "Qualifying"
+   }
+  ],
+  "note": "Built only from recent form, with no starting grid. In past tests the form-only favourite won about 4 races in 10, against about 55% once the grid is known, so treat these odds as a rough guide.",
+  "race": "Singapore Grand Prix",
+  "season": 2026,
+  "round": 17,
+  "predictions": [
+   {
+    "driver_id": "antonelli",
+    "driver": "ANT",
+    "team": "mercedes",
+    "grid": null,
+    "p": 0.319597
+   },
+   {
+    "driver_id": "max_verstappen",
+    "driver": "VER",
+    "team": "red_bull",
+    "grid": null,
+    "p": 0.273579
+   },
+   {
+    "driver_id": "russell",
+    "driver": "RUS",
+    "team": "mercedes",
+    "grid": null,
+    "p": 0.108708
+   },
+   {
+    "driver_id": "leclerc",
+    "driver": "LEC",
+    "team": "ferrari",
+    "grid": null,
+    "p": 0.079032
+   },
+   {
+    "driver_id": "hamilton",
+    "driver": "HAM",
+    "team": "ferrari",
+    "grid": null,
+    "p": 0.077367
+   },
+   {
+    "driver_id": "hadjar",
+    "driver": "HAD",
+    "team": "red_bull",
+    "grid": null,
+    "p": 0.04756
+   },
+   {
+    "driver_id": "norris",
+    "driver": "NOR",
+    "team": "mclaren",
+    "grid": null,
+    "p": 0.043424
+   },
+   {
+    "driver_id": "piastri",
+    "driver": "PIA",
+    "team": "mclaren",
+    "grid": null,
+    "p": 0.018631
+   },
+   {
+    "driver_id": "lawson",
+    "driver": "LAW",
+    "team": "rb",
+    "grid": null,
+    "p": 0.005442
+   },
+   {
+    "driver_id": "arvid_lindblad",
+    "driver": "LIN",
+    "team": "rb",
+    "grid": null,
+    "p": 0.004034
+   },
+   {
+    "driver_id": "gasly",
+    "driver": "GAS",
+    "team": "alpine",
+    "grid": null,
+    "p": 0.002565
+   },
+   {
+    "driver_id": "colapinto",
+    "driver": "COL",
+    "team": "alpine",
+    "grid": null,
+    "p": 0.002434
+   },
+   {
+    "driver_id": "alonso",
+    "driver": "ALO",
+    "team": "aston_martin",
+    "grid": null,
+    "p": 0.002049
+   },
+   {
+    "driver_id": "bearman",
+    "driver": "BEA",
+    "team": "haas",
+    "grid": null,
+    "p": 0.001953
+   },
+   {
+    "driver_id": "hulkenberg",
+    "driver": "HUL",
+    "team": "audi",
+    "grid": null,
+    "p": 0.001897
+   },
+   {
+    "driver_id": "ocon",
+    "driver": "OCO",
+    "team": "haas",
+    "grid": null,
+    "p": 0.00189
+   },
+   {
+    "driver_id": "sainz",
+    "driver": "SAI",
+    "team": "williams",
+    "grid": null,
+    "p": 0.001793
+   },
+   {
+    "driver_id": "bortoleto",
+    "driver": "BOR",
+    "team": "audi",
+    "grid": null,
+    "p": 0.001783
+   },
+   {
+    "driver_id": "albon",
+    "driver": "ALB",
+    "team": "williams",
+    "grid": null,
+    "p": 0.001608
+   },
+   {
+    "driver_id": "perez",
+    "driver": "PER",
+    "team": "cadillac",
+    "grid": null,
+    "p": 0.001606
+   },
+   {
+    "driver_id": "stroll",
+    "driver": "STR",
+    "team": "aston_martin",
+    "grid": null,
+    "p": 0.001606
+   },
+   {
+    "driver_id": "bottas",
+    "driver": "BOT",
+    "team": "cadillac",
+    "grid": null,
+    "p": 0.001441
+   }
+  ]
  }
 }
