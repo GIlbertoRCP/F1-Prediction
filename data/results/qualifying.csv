@@ -3801,3 +3801,25 @@ season,round,race,date,circuit,driver,driver_id,team,quali_position,q1,q2,q3
 2026,16,Bahrain Grand Prix in Malaysia,2026-10-04,sepang,RUS,russell,mercedes,8,1:37.264,1:36.245,1:35.871
 2026,16,Bahrain Grand Prix in Malaysia,2026-10-04,sepang,SAI,sainz,williams,13,1:37.651,1:37.527,
 2026,16,Bahrain Grand Prix in Malaysia,2026-10-04,sepang,STR,stroll,aston_martin,14,1:37.729,1:37.566,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,ALB,albon,williams,18,1:34.289,,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,ALO,alonso,aston_martin,17,1:34.223,,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,ANT,antonelli,mercedes,4,1:33.601,1:32.079,1:31.562
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,LIN,arvid_lindblad,rb,10,1:33.288,1:32.498,1:32.781
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,BEA,bearman,haas,12,1:33.356,1:32.908,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,BOR,bortoleto,audi,15,1:34.169,1:33.658,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,BOT,bottas,cadillac,21,1:35.984,,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,COL,colapinto,alpine,16,1:33.261,1:33.787,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,GAS,gasly,alpine,8,1:33.182,1:32.602,1:32.225
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,HAD,hadjar,red_bull,22,,,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,HAM,hamilton,ferrari,3,1:32.429,1:31.529,1:31.496
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,HUL,hulkenberg,audi,11,1:33.147,1:32.784,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,LAW,lawson,rb,9,1:32.885,1:32.319,1:32.369
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,LEC,leclerc,ferrari,2,1:32.774,1:31.953,1:31.427
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,VER,max_verstappen,red_bull,1,1:33.241,1:31.639,1:31.373
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,NOR,norris,mclaren,5,1:32.775,1:31.895,1:31.712
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,OCO,ocon,haas,13,1:33.803,1:33.323,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,PER,perez,cadillac,20,1:35.123,,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,PIA,piastri,mclaren,7,1:33.076,1:32.245,1:31.860
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,RUS,russell,mercedes,6,1:33.617,1:32.212,1:31.747
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,SAI,sainz,williams,14,1:33.774,1:33.526,
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,STR,stroll,aston_martin,19,1:34.946,,
