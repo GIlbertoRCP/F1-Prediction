@@ -37,6 +37,12 @@ jobs:
       - name: Fetch the current season
         if: github.event_name != 'push'
         run: python scripts/fetch_results.py --from "$(date -u +%Y)"
+      - name: Fallback grid from F1 timing data (only acts if the results API is late)
+        if: github.event_name != 'push'
+        continue-on-error: true
+        run: |
+          pip install "fastf1>=3.8.3"
+          python scripts/fetch_fastf1_grid.py
       - name: Freeze forecast and rebuild site data
         run: python -m oracle.publish
       - name: Commit changes
