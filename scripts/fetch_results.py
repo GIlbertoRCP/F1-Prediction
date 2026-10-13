@@ -11,6 +11,7 @@ Be polite: the public API rate-limits, so requests are spaced out and retried on
 """
 import argparse
 import datetime
+import http.client
 import json
 import sys
 import time
@@ -44,7 +45,8 @@ def get_json(url: str, retries: int = 6) -> dict:
                 delay *= 2
                 continue
             raise
-        except urllib.error.URLError:
+        except (urllib.error.URLError, http.client.IncompleteRead, ConnectionError, TimeoutError, json.JSONDecodeError):
+            # dropped or truncated responses happen on the public API; treat them like a 5xx
             if attempt < retries - 1:
                 time.sleep(delay)
                 delay *= 2

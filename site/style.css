@@ -302,3 +302,49 @@ select { max-width: 100%; font: inherit; padding: .4rem .6rem; background: var(-
 .steps li.now { color: #fff; background: var(--red); border-color: var(--red); }
 .prov-note { color: #ffffffa0; max-width: 62ch; margin: .75rem 0 1rem; }
 @media (max-width: 560px) { .steps { flex-wrap: wrap; font-size: .72rem; } .steps li { white-space: nowrap; } }
+.lastrace-sub { color: #ffffffa0; max-width: 62ch; margin: .5rem 0 1rem; }
+.lastrace-title .tag { font-size: .55em; vertical-align: .35em; margin-right: .6rem; }
+
+/* next race: header, countdown, weekend times */
+.eyebrow { margin: 0 0 .7rem; color: var(--slate); font-size: .95rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.eyebrow .s { color: var(--yellow); }
+.countdown { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .5rem; margin: 1.4rem 0 0; min-height: 3.6rem; }
+.cd-u { display: grid; justify-items: center; min-width: 3.6rem; padding: .35rem .5rem .3rem; background: var(--panel); border-top: 2px solid var(--red); }
+.cd-u b { font-family: var(--display); font-style: italic; font-weight: 800; font-size: 2.1rem; line-height: 1; }
+.cd-u small { color: var(--slate); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+.cd-label { align-self: center; margin-left: .4rem; color: var(--slate); font-size: 1rem; }
+.weekend { display: flex; flex-wrap: wrap; gap: .4rem 1.8rem; list-style: none; margin: 1.1rem 0 0; padding: 0; }
+.weekend li { display: grid; gap: .1rem; }
+.weekend span { color: var(--slate); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; }
+.weekend b { font-weight: 600; }
+.hero .weekend + .sub { font-size: 1rem; }
+
+/* why the favourite leads, and recent finishes on the tower */
+.why { margin: 1rem 0 0; max-width: 66ch; font-size: 1.1rem; line-height: 1.5; }
+.why b { font-weight: 700; }
+.provisional .prov-note { font-size: .92rem; }
+.form-key { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: 0; color: var(--slate); font-size: .8rem; }
+.form-key span { margin-right: .5rem; }
+.tower.withform li { grid-template-columns: 2.4rem 5px 4.6rem 8.6rem minmax(0, 1fr) 4.6rem; }
+.tower.withform li.lead { grid-template-columns: 2.4rem 5px 6.6rem 8.6rem minmax(0, 1fr) 6.4rem; }
+.form { display: flex; gap: 3px; }
+.form i, .form-key i {
+  display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; font-style: normal; font-size: .74rem; font-weight: 700;
+  background: var(--raised); color: var(--slate);
+}
+.form i.pd, .form-key i.pd { background: #2a2e38; color: var(--ink); }
+.form i.w, .form-key i.w { background: var(--purple); color: #fff; }
+.form i.out, .form-key i.out { background: transparent; color: var(--red-text); box-shadow: inset 0 0 0 1px #ff4a4055; }
+@media (max-width: 720px) {
+  .tower.withform li, .tower.withform li.lead { grid-template-columns: 1.9rem 5px 3.6rem minmax(0, 1fr) 3.6rem; }
+  .tower.withform .rk, .tower.withform .tick { grid-row: span 2; }
+  .tower.withform .form { grid-column: 3 / -1; grid-row: 2; padding-bottom: .2rem; }
+  .tower.withform li.lead .code { font-size: 2rem; }
+  .tower.withform li.lead .pct { font-size: 2.2rem; }
+  .cd-u { min-width: 3rem; } .cd-u b { font-size: 1.7rem; }
+}
+.callout .podium { display: flex; flex-wrap: wrap; gap: .4rem; margin: .8rem 0 .4rem; }
+.callout .podium span { padding: .2rem .6rem; background: var(--raised); border-left: 3px solid var(--team); color: var(--ink); }
+.callout .podium small { color: var(--slate); }
+.callout p + p { margin-top: .3rem; }
+.form-key b { display: inline-flex; align-items: center; gap: .3rem; margin-right: .5rem; font-weight: 400; white-space: nowrap; }

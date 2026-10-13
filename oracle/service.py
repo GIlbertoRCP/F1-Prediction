@@ -134,7 +134,7 @@ def build_bundle(results_dir: Path, pred_dir: Path, now: dt.datetime | None = No
         race_pages[f"{key[0]}-{key[1]}"] = {
             "season": key[0], "round": key[1], "race": rec["race"], "date": rec["date"],
             "circuit": circuits.get(key),
-            "kind": rec["kind"], "made_at": rec.get("made_at"), "grid_source": rec["grid_source"],
+            "kind": rec["kind"], "made_at": rec.get("made_at"), "grid_source": rec["grid_source"], "hash": rec.get("hash"),
             "predictions": rec["predictions"], "result": result, "simulator": rec.get("simulator"),
         }
 

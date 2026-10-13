@@ -3809,3 +3809,25 @@ season,round,race,date,circuit,driver,driver_id,team,grid,finish_position,classi
 2026,16,Bahrain Grand Prix in Malaysia,2026-10-04,sepang,RUS,russell,mercedes,7,20,1,Retired,0
 2026,16,Bahrain Grand Prix in Malaysia,2026-10-04,sepang,SAI,sainz,williams,13,17,1,Finished,0
 2026,16,Bahrain Grand Prix in Malaysia,2026-10-04,sepang,STR,stroll,aston_martin,14,12,1,Finished,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,ALB,albon,williams,16,18,1,Retired,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,ALO,alonso,aston_martin,20,16,1,Lapped,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,ANT,antonelli,mercedes,4,3,1,Finished,15
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,LIN,arvid_lindblad,rb,9,15,1,Lapped,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,BEA,bearman,haas,11,12,1,Lapped,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,BOR,bortoleto,audi,14,,0,Retired,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,BOT,bottas,cadillac,18,19,1,Lapped,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,COL,colapinto,alpine,15,,0,Retired,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,GAS,gasly,alpine,7,11,1,Lapped,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,HAD,hadjar,red_bull,22,10,1,Finished,1
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,HAM,hamilton,ferrari,3,6,1,Finished,8
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,HUL,hulkenberg,audi,10,8,1,Finished,4
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,LAW,lawson,rb,8,7,1,Finished,6
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,LEC,leclerc,ferrari,2,2,1,Finished,18
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,VER,max_verstappen,red_bull,1,1,1,Finished,25
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,NOR,norris,mclaren,5,4,1,Finished,12
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,OCO,ocon,haas,12,13,1,Lapped,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,PER,perez,cadillac,17,17,1,Lapped,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,PIA,piastri,mclaren,6,5,1,Finished,10
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,RUS,russell,mercedes,19,9,1,Finished,2
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,SAI,sainz,williams,13,14,1,Lapped,0
+2026,17,Singapore Grand Prix,2026-10-11,marina_bay,STR,stroll,aston_martin,21,,0,Retired,0

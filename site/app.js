@@ -12,6 +12,15 @@ const TEAM_COLOURS = {
   alfa: "#d8465c", audi: "#e0334f", cadillac: "#9aa5b8", renault: "#ffd800",
   racing_point: "#f596c8", force_india: "#f596c8",
 };
+const CIRCUIT_NAMES = {
+  albert_park: "Albert Park, Melbourne", shanghai: "Shanghai International Circuit", suzuka: "Suzuka", bahrain: "Bahrain International Circuit",
+  jeddah: "Jeddah Corniche Circuit", miami: "Miami International Autodrome", villeneuve: "Circuit Gilles Villeneuve, Montréal",
+  monaco: "Circuit de Monaco", catalunya: "Circuit de Barcelona-Catalunya", madring: "Madring, Madrid", red_bull_ring: "Red Bull Ring, Spielberg",
+  silverstone: "Silverstone", spa: "Spa-Francorchamps", hungaroring: "Hungaroring, Budapest", zandvoort: "Zandvoort",
+  monza: "Monza", baku: "Baku City Circuit", marina_bay: "Marina Bay, Singapore", sepang: "Sepang", americas: "Circuit of the Americas, Austin",
+  rodriguez: "Autódromo Hermanos Rodríguez, Mexico City", interlagos: "Interlagos, São Paulo", vegas: "Las Vegas Strip Circuit",
+  losail: "Lusail International Circuit", yas_marina: "Yas Marina, Abu Dhabi", imola: "Imola", istanbul: "Istanbul Park",
+};
 const colour = (team) => TEAM_COLOURS[team] || "#8a8f98";
 const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let CIRCUITS = null;
@@ -20,18 +29,30 @@ const pageCache = {};
 const $ = (sel, root = document) => root.querySelector(sel);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const pct = (p) => (p < 0.005 ? "<1%" : p < 0.1 ? `${(p * 100).toFixed(1)}%` : `${Math.round(p * 100)}%`);
+// Title odds sit near 0 or 1 late in a season, so they get a finer scale; a simulation never proves certainty.
+const titlePct = (p) => (p >= 0.995 ? `${Math.min(99.9, p * 100).toFixed(1)}%` : p >= 0.1 ? `${Math.round(p * 100)}%` : p >= 0.001 ? `${(p * 100).toFixed(1)}%` : "<0.1%");
+const shownTitle = (r) => (r.title >= 0.001 ? r.title : 0);   // odds that display as "<0.1%" rank by expected points
 const whole = (p) => `${Math.round(p * 100)}%`;
 const getJSON = (path) => fetch(path).then((r) => { if (!r.ok) throw new Error(`${path}: ${r.status}`); return r.json(); });
 const fmtDate = (iso, opts = { day: "numeric", month: "short", year: "numeric" }) =>
   new Date(iso.length === 10 ? `${iso}T12:00:00Z` : iso).toLocaleDateString("en-GB", { ...opts, timeZone: "UTC" });
+const toInstant = (date, time) => (date && time ? new Date(`${date}T${time.endsWith("Z") ? time : time + "Z"}`) : null);
+const fmtInstant = (d) => d.toLocaleString(undefined, { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZoneName: "short" });
+const finishLabel = (f) => (f == null ? "DNF" : `${ordinal(f)}`);
 const fmtStamp = (iso) =>
   new Date(iso).toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "UTC" }) + " UTC";
 const ordinal = (n) => { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
 
 /* ---------- the timing tower ---------- */
-function tower(predictions, { winnerId = null, limit = 10, animate = false, hold = false } = {}) {
+function formStrip(recent) {
+  if (!recent) return "";
+  const cells = recent.map((f) => `<i class="${f === 1 ? "w" : f != null && f <= 3 ? "pd" : f == null ? "out" : ""}" title="${finishLabel(f)}">${f == null ? "R" : f}</i>`).join("");
+  return `<span class="form" aria-label="Last ${recent.length} finishes: ${recent.map(finishLabel).join(", ")}">${cells}</span>`;
+}
+
+function tower(predictions, { winnerId = null, limit = 10, animate = false, hold = false, form = false } = {}) {
   const ol = document.createElement("ol");
-  ol.className = "tower" + (animate ? " animate" : "");
+  ol.className = "tower" + (animate ? " animate" : "") + (form ? " withform" : "");
   const max = Math.max(...predictions.map((p) => p.p));
   const draw = (rows) => {
     ol.innerHTML = rows.map((p, i) => `
@@ -39,7 +60,7 @@ function tower(predictions, { winnerId = null, limit = 10, animate = false, hold
         <span class="rk">${i + 1}</span>
         <span class="tick" style="background:${colour(p.team)}"></span>
         <span class="code" title="${esc(p.driver_id.replace(/_/g, " "))}">${esc(p.driver)}</span>
-        <span class="grid">${p.grid ? "P" + p.grid : ""}</span>
+        ${form ? formStrip(p.recent) : `<span class="grid">${p.grid ? "P" + p.grid : ""}</span>`}
         <span class="track"><span class="fill" data-w="${(p.p / max) * 100}"></span></span>
         <span class="pct num">${pct(p.p)}</span>
       </li>`).join("");
@@ -86,6 +107,26 @@ function startLights(el, onGo) {
 }
 
 // Early odds for the weekend, before qualifying exists. Not frozen, not scored, and labelled as such.
+function whyLine(rows) {
+  const [a, b] = rows;
+  const form = (r) => {
+    const rec = (r.recent || []).filter((f) => f != null);
+    if (!r.recent?.length) return "";
+    const wins = rec.filter((f) => f === 1).length, pods = rec.filter((f) => f <= 3).length;
+    const outs = r.recent.length - rec.length;
+    const avg = rec.length ? rec.reduce((x, y) => x + y, 0) / rec.length : null;
+    const parts = [];
+    if (wins) parts.push(`${wins} win${wins > 1 ? "s" : ""}`);
+    if (pods > wins) parts.push(`${pods} podium${pods > 1 ? "s" : ""}`);
+    if (avg != null) parts.push(`an average finish of ${avg.toFixed(1)}`);
+    if (outs) parts.push(`${outs} retirement${outs > 1 ? "s" : ""}`);
+    return parts.length ? ` In the last ${r.recent.length} races: ${parts.join(", ")}.` : "";
+  };
+  return `<b>${esc(a.driver)}</b> leads the early odds at <b>${pct(a.p)}</b>.${form(a)}
+    ${b ? `<b>${esc(b.driver)}</b> is next at ${pct(b.p)}.${form(b)}` : ""}
+    The odds weigh each driver's and each team's recent results, with the latest races counting most.`;
+}
+
 function provisionalPanel(pv) {
   const at = pv.stages.findIndex((s) => s.key === pv.stage);
   const box = document.createElement("section");
@@ -93,13 +134,29 @@ function provisionalPanel(pv) {
   box.innerHTML = `
     <div class="prov-head">
       <h2>Early odds <span class="tag soft">Provisional</span></h2>
-      <ol class="steps" aria-label="How these odds sharpen">
+      <ol class="steps" aria-label="How these odds sharpen over the weekend">
         ${pv.stages.map((s, i) => `<li class="${i < at ? "done" : i === at ? "now" : ""}">${esc(s.label)}</li>`).join("")}
       </ol>
     </div>
-    <p class="prov-note">${esc(pv.note)} They are not frozen or scored, and the real forecast replaces them after qualifying.</p>`;
-  box.append(tower(pv.predictions, { animate: true }));
+    <p class="why">${whyLine(pv.predictions)}</p>
+    <p class="prov-note">${esc(pv.note)} They are not frozen or scored, and the real forecast replaces them after qualifying.</p>
+    ${pv.stage === "form" ? `<p class="form-key" aria-hidden="true"><span>Last five finishes, oldest first</span><b><i class="w">1</i> win</b><b><i class="pd">3</i> podium</b><b><i class="out">R</i> retired</b></p>` : ""}`;
+  box.append(tower(pv.predictions, { animate: true, form: pv.stage === "form" }));
   return box;
+}
+
+// Ticks down to the next session; switches to a plain message once it has started.
+function countdown(el, target, label) {
+  if (!el || !target || isNaN(target)) return;
+  const tick = () => {
+    const ms = target - Date.now();
+    if (ms <= 0) { el.innerHTML = `<span class="cd-label">${esc(label)} is under way. The forecast follows once the grid is official.</span>`; return; }
+    const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, sec = Math.floor(ms / 1e3) % 60;
+    const unit = (v, u) => `<span class="cd-u"><b class="num">${String(v).padStart(2, "0")}</b><small>${u}</small></span>`;
+    el.innerHTML = `${unit(d, "days")}${unit(h, "hrs")}${unit(m, "min")}${unit(sec, "sec")}<span class="cd-label">until ${esc(label)}</span>`;
+    setTimeout(tick, 1000 - (Date.now() % 1000));
+  };
+  tick();
 }
 
 async function renderHero(forecast, record) {
@@ -126,20 +183,33 @@ async function renderHero(forecast, record) {
   }
   const next = forecast.next_race;
   const nextMap = next ? mapFor(next.circuit, "") : "";
+  const quali = next && toInstant(next.quali_date, next.quali_time);
+  const raceAt = next && toInstant(next.date, next.time);
+  const session = (name, at, date) => `<li><span>${name}</span><b>${esc(at && !isNaN(at) ? fmtInstant(at) : fmtDate(date))}</b></li>`;
   el.innerHTML = next
     ? `<div class="hero-top ${nextMap ? "" : "nomap"}"><div>
-         <h1>Next forecast opens after qualifying</h1>
-         <p class="sub">The <strong>${esc(next.race)}</strong> is on ${fmtDate(next.date)}${next.quali_date ? `; qualifying is ${fmtDate(next.quali_date)}` : ""}. The forecast needs the starting grid, so it appears as soon as qualifying finishes.</p>
+         <p class="eyebrow">Round ${next.round}${CIRCUIT_NAMES[next.circuit] ? ` · ${esc(CIRCUIT_NAMES[next.circuit])}` : ""}${next.sprint ? ' · <span class="s">Sprint weekend</span>' : ""}</p>
+         <h1>${esc(next.race)}</h1>
+         <div class="countdown" id="cd"></div>
+         <ul class="weekend">
+           ${next.quali_date ? session("Qualifying", quali, next.quali_date) : ""}
+           ${session("Race", raceAt, next.date)}
+         </ul>
+         <p class="sub">The official forecast needs the starting grid. It is frozen within a few hours of qualifying, then scored after the race. Times are shown in your time zone.</p>
        </div>${nextMap}</div>`
     : `<h1 class="calm">No race to forecast right now</h1>
        <p class="sub">Forecasts open after qualifying for each Grand Prix. Below is the most recent race, so you can see what a forecast looks like and how it did.</p>`;
+  if (next) countdown($("#cd", el), quali && quali > Date.now() ? quali : raceAt, quali && quali > Date.now() ? "qualifying" : "the race");
   if (forecast.provisional) el.append(provisionalPanel(forecast.provisional));
   const last = record.latest;
   if (!last) return;
   const page = await getJSON(`data/races/${last.season}-${last.round}.json`);
   const hit = last.hit;
   const winnerRow = page.predictions.find((p) => p.driver_id === last.winner_id);
-  el.insertAdjacentHTML("beforeend", `<h2 class="lastrace-title">${esc(last.race)}</h2>`);
+  el.insertAdjacentHTML("beforeend", `<h2 class="lastrace-title">${page.kind === "live" ? '<span class="tag">Scored</span>' : ""}${esc(last.race)}</h2>
+    <p class="lastrace-sub">${page.kind === "live"
+      ? `Last race. This forecast was frozen before the start (fingerprint <code>${esc((page.hash || "").slice(0, 12))}</code>) and is now part of the public track record.`
+      : "Last race. A replay made only from earlier races, so you can see how a forecast looks and how it did."}</p>`);
   el.append(tower(page.predictions, { winnerId: last.winner_id, animate: true }));
   el.insertAdjacentHTML("beforeend", `
     <div class="callout ${hit ? "" : "miss"}">
@@ -148,7 +218,17 @@ async function renderHero(forecast, record) {
         ? `We gave ${esc(last.winner)} ${whole(last.p_winner)} and ${esc(last.winner)} won.`
         : `We rated ${esc(last.pick)} at ${whole(last.pick_p)}. ${esc(last.winner)} won from ${ordinal(winnerRow.grid)} on the grid, a ${pct(last.p_winner)} chance in our forecast.`}
         ${page.kind === "backtest" ? " This is a replay made from earlier races only." : ""}</p>
+      ${podiumLine(page)}
     </div>`);
+}
+
+function podiumLine(page) {
+  const podium = (page.result?.finishers || []).slice(0, 3);
+  if (podium.length < 3) return "";
+  const top3 = new Set(page.predictions.slice(0, 3).map((p) => p.driver));
+  const hits = podium.filter((f) => top3.has(f.driver)).length;
+  return `<p class="podium">${podium.map((f) => `<span style="--team:${colour(f.team)}"><b>P${f.pos}</b> ${esc(f.driver)} <small>from P${f.grid}</small></span>`).join("")}</p>
+    <p>${hits === 3 ? "All three podium finishers were in our top three." : `${hits} of the 3 podium finishers ${hits === 1 ? "was" : "were"} in our top three.`}</p>`;
 }
 
 /* ---------- your pick ---------- */
@@ -504,7 +584,7 @@ function rangeRow(r, i, axisMax, label, cls = "") {
       <span class="now" style="left:${at(r.points)}"></span>
       <span class="mid" style="left:${at(r.p50)}"></span>
     </span>
-    <span class="pct num">${pct(r.title)}</span></li>`;
+    <span class="pct num">${titlePct(r.title)}</span></li>`;
 }
 
 async function renderChampionship() {
@@ -542,14 +622,15 @@ async function renderChampionship() {
     `<li><b>R${r.round}</b> ${esc(r.race.replace(/ Grand Prix$/, " GP"))}${r.sprint ? '<span class="s" title="Sprint weekend">Sprint</span>' : ""}</li>`).join("");
 
   const drawTower = () => {
-    const rows = kind === "d" ? cur.drivers.filter((d) => d.racing) : cur.teams;
+    const rows = (kind === "d" ? cur.drivers.filter((d) => d.racing) : cur.teams).slice()
+      .sort((a, b) => shownTitle(b) - shownTitle(a) || b.mean - a.mean);
     const shown = rows.slice(0, 10);
     const axisMax = Math.max(...shown.map((r) => r.p90)) * 1.03;
     const label = (r) => (kind === "d" ? r.code : teamName(r.team));
     const lead = rows[0];
     const second = rows[1];
-    $("#ch-lede").innerHTML = `After round ${played} of ${total}, <b>${esc(label(lead))}</b> has a <b>${pct(lead.title)}</b> chance of the ${cur.season} ${kind === "d" ? "drivers'" : "constructors'"} title${second && second.title >= 0.005 ? `; ${esc(label(second))} is next at ${pct(second.title)}` : ""}. ${cur.remaining.length} race${cur.remaining.length === 1 ? "" : "s"} to go.`;
-    $("#ch-tower").innerHTML = `<ol class="tower title ${kind === "c" ? "teams" : ""}">${shown.map((r, i) => rangeRow(r, i, axisMax, label(r), r.title < 0.005 && i > 0 ? "dim" : "")).join("")}</ol>`;
+    $("#ch-lede").innerHTML = `After round ${played} of ${total}, <b>${esc(label(lead))}</b> has a <b>${titlePct(lead.title)}</b> chance of the ${cur.season} ${kind === "d" ? "drivers'" : "constructors'"} title${second && second.title >= 0.001 ? `; ${esc(label(second))} is next at ${titlePct(second.title)}` : ""}. ${cur.remaining.length} race${cur.remaining.length === 1 ? "" : "s"} to go.`;
+    $("#ch-tower").innerHTML = `<ol class="tower title ${kind === "c" ? "teams" : ""}">${shown.map((r, i) => rangeRow(r, i, axisMax, label(r), r.title < 0.001 && i > 0 ? "dim" : "")).join("")}</ol>`;
   };
   const setKind = (k) => { kind = k; $("#ch-d").setAttribute("aria-pressed", String(k === "d")); $("#ch-c").setAttribute("aria-pressed", String(k === "c")); drawTower(); };
   $("#ch-d").onclick = () => setKind("d");
@@ -596,7 +677,7 @@ async function renderChampionship() {
     <p class="fine">One number, how far a team's pace may drift during a season, was chosen so the 80% ranges above held the real final total ${whole(b.coverage80)} of the time on those same seasons. That check is a fit, not an independent test, and the comparisons above were made on the same seasons too, so treat them as slightly flattering.</p>` : ""}
     <p class="fine">The simulation knows each team's recent form and the races and sprints left. It does not know about upgrades, penalties or injuries; it allows for pace drifting during the season, sized from past seasons. Details are in <code>reports/championship.md</code>.</p>
     <div class="livebox"><p><b>Live log: ${live.records} championship forecast${live.records === 1 ? "" : "s"} frozen.</b> ${live.chain_ok ? "The chain is intact." : "The chain is broken."}</p>
-      ${live.log.length ? `<p>${live.log.slice(-3).map((r) => `After round ${r.after_round}: ${esc(r.leader)} ${pct(r.leader_title)}, frozen ${fmtStamp(r.made_at)}`).join(". ")}.</p>` : "<p>Each forecast is logged after a race, before the next one starts.</p>"}</div>`;
+      ${live.log.length ? `<p>${live.log.slice(-3).map((r) => `After round ${r.after_round}: ${esc(r.leader)} ${titlePct(r.leader_title)}, frozen ${fmtStamp(r.made_at)}`).join(". ")}.</p>` : "<p>Each forecast is logged after a race, before the next one starts.</p>"}</div>`;
 }
 
 /* ---------- boot ---------- */
