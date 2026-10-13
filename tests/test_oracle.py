@@ -21,6 +21,27 @@ BEFORE_R16 = dt.datetime(2026, 10, 3, 12, tzinfo=dt.timezone.utc)
 AFTER_R16 = dt.datetime(2026, 10, 8, 12, tzinfo=dt.timezone.utc)
 
 
+def snapshot(dst: Path, last_round: int, keep_last_race_result: bool = True) -> Path:
+    """Copy the real results files as they stood after round `last_round` of 2026, so these tests keep
+    meaning the same thing as later races are added to the real data."""
+    dst.mkdir(parents=True, exist_ok=True)
+    for name in ("races.csv", "qualifying.csv", "sprints.csv", "schedule.csv"):
+        src = REAL / name
+        if not src.exists():
+            continue
+        with open(src, newline="") as f, open(dst / name, "w", newline="") as g:
+            rd = csv.DictReader(f)
+            w = csv.DictWriter(g, fieldnames=rd.fieldnames)
+            w.writeheader()
+            for r in rd:
+                key = (int(r["season"]), int(r["round"]))
+                if name == "schedule.csv" or key <= (2026, last_round):
+                    if name == "races.csv" and not keep_last_race_result and key == (2026, last_round):
+                        continue
+                    w.writerow(r)
+    return dst
+
+
 def record(rnd, p=0.5):
     return {"season": 2030, "round": rnd, "race": "X", "date": "2030-01-01", "kind": "live",
             "predictions": [{"driver_id": "a", "p": p}, {"driver_id": "b", "p": 1 - p}]}
@@ -57,12 +78,8 @@ class LiveFlowTests(unittest.TestCase):
         tmp = Path(self.tmp.name)
         self.pre = tmp / "pre"          # data as it was after qualifying for R16, before the race
         self.pre.mkdir()
-        shutil.copy(REAL / "qualifying.csv", self.pre)
-        with open(REAL / "races.csv", newline="") as f, open(self.pre / "races.csv", "w", newline="") as g:
-            rd = csv.DictReader(f)
-            w = csv.DictWriter(g, fieldnames=rd.fieldnames)
-            w.writeheader()
-            w.writerows(r for r in rd if not (r["season"] == "2026" and r["round"] == "16"))
+        snapshot(self.pre, 16, keep_last_race_result=False)
+        self.real = snapshot(tmp / "real", 16)       # everything through the R16 result
         self.pred = tmp / "pred"
 
     def test_freeze_uses_only_earlier_races_and_never_overwrites(self):
@@ -91,7 +108,7 @@ class LiveFlowTests(unittest.TestCase):
         open_bundle = build_bundle(self.pre, self.pred, BEFORE_R16)
         self.assertEqual(open_bundle["forecast"]["status"], "open")
         self.assertEqual(open_bundle["track_record"]["live"]["n"], 0)
-        done = build_bundle(REAL, self.pred, AFTER_R16)          # results now exist
+        done = build_bundle(self.real, self.pred, AFTER_R16)          # results now exist
         self.assertEqual(done["forecast"]["status"], "none")
         live = done["track_record"]["live"]
         self.assertEqual(live["n"], 1)
@@ -101,7 +118,7 @@ class LiveFlowTests(unittest.TestCase):
     def test_forecast_ignores_the_race_result(self):
         """Forecast for R16 must be identical whether or not R16's own result is in the history."""
         pre = load_races(self.pre)
-        full = load_races(REAL)
+        full = load_races(self.real)
         race_pre = engine.load_pending(self.pre, pre)[0]
         p1 = engine.forecast(pre, race_pre)
         p2 = engine.forecast(full[:-1], race_pre)

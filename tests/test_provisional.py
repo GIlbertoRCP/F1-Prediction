@@ -19,6 +19,18 @@ class ProvisionalTest(unittest.TestCase):
         self.assertAlmostEqual(sum(r["p"] for r in out["predictions"]), 1.0, places=3)
         self.assertTrue(all(r["grid"] is None for r in out["predictions"]))
 
+    def test_recent_form_and_stages(self):
+        nxt = {"season": 2030, "round": 1, "race": "Test GP", "date": "2030-01-01", "sprint": ""}
+        out = provisional.build(self.races, RESULTS, nxt)
+        self.assertEqual([s["key"] for s in out["stages"]], ["form", "quali"])   # no sprint step on a normal weekend
+        last = self.races[-1]
+        for row in out["predictions"]:
+            self.assertLessEqual(len(row["recent"]), 5)
+            e = next(e for e in last.entries if e.driver_id == row["driver_id"])
+            self.assertEqual(row["recent"][-1], e.finish_position if e.classified else None)
+        sprint = provisional.build(self.races, RESULTS, {**nxt, "sprint": "1"})
+        self.assertIn("sprint", [s["key"] for s in sprint["stages"]])
+
     def test_sprint_stage_uses_sprint_order(self):
         # replay a real past sprint weekend: only earlier races are visible
         import csv

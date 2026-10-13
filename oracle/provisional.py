@@ -40,6 +40,18 @@ def _sprint_grid(results_dir: Path, key: tuple[int, int]) -> dict[str, int]:
     return out
 
 
+def _recent(races: list[Race], driver_id: str, n: int = 5) -> list[int | None]:
+    """The driver's last `n` race finishes, oldest first; None marks a race they did not finish."""
+    out = []
+    for race in reversed(races):
+        e = next((e for e in race.entries if e.driver_id == driver_id), None)
+        if e is not None:
+            out.append(e.finish_position if e.classified else None)
+            if len(out) == n:
+                break
+    return out[::-1]
+
+
 def build(races: list[Race], results_dir: Path, nxt: dict | None) -> dict | None:
     """Provisional odds for the race described by the schedule row `nxt`, or None if we can't make them."""
     if not nxt or len(races) <= engine.MIN_TRAIN:
@@ -63,7 +75,8 @@ def build(races: list[Race], results_dir: Path, nxt: dict | None) -> dict | None
         stage = "form"
         shown = {}
     rows = [{"driver_id": e.driver_id, "driver": e.driver, "team": e.team,
-             "grid": shown.get(e.driver_id), "p": round(probs[e.driver_id], 6)} for e in lineup.entries]
+             "grid": shown.get(e.driver_id), "p": round(probs[e.driver_id], 6),
+             "recent": _recent(races, e.driver_id)} for e in lineup.entries]
     rows.sort(key=lambda r: (-r["p"], r["driver_id"]))
-    return {"stage": stage, "stages": [{"key": k, "label": l} for k, l in STAGES], "note": NOTES[stage],
+    return {"stage": stage, "stages": [{"key": k, "label": l} for k, l in STAGES if k != "sprint" or nxt.get("sprint")], "note": NOTES[stage],
             "race": nxt["race"], "season": key[0], "round": key[1], "predictions": rows}
