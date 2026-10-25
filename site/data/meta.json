@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-10-25T20:48:32+00:00",
+ "generated_at": "2026-10-25T23:14:42+00:00",
  "model": "grid_plus_form",
  "model_version": "f242f5dea0",
  "data_through": {
   "season": 2026,
-  "round": 17,
-  "race": "Singapore Grand Prix",
-  "date": "2026-10-11"
+  "round": 18,
+  "race": "United States Grand Prix",
+  "date": "2026-10-25"
  },
  "live_log": {
   "records": 1,

@@ -3831,3 +3831,25 @@ season,round,race,date,circuit,driver,driver_id,team,grid,finish_position,classi
 2026,17,Singapore Grand Prix,2026-10-11,marina_bay,RUS,russell,mercedes,19,9,1,Finished,2
 2026,17,Singapore Grand Prix,2026-10-11,marina_bay,SAI,sainz,williams,13,14,1,Lapped,0
 2026,17,Singapore Grand Prix,2026-10-11,marina_bay,STR,stroll,aston_martin,21,,0,Retired,0
+2026,18,United States Grand Prix,2026-10-25,americas,ALB,albon,williams,17,17,1,Lapped,0
+2026,18,United States Grand Prix,2026-10-25,americas,ALO,alonso,aston_martin,12,16,1,Lapped,0
+2026,18,United States Grand Prix,2026-10-25,americas,ANT,antonelli,mercedes,1,1,1,Finished,25
+2026,18,United States Grand Prix,2026-10-25,americas,LIN,arvid_lindblad,rb,14,12,1,Lapped,0
+2026,18,United States Grand Prix,2026-10-25,americas,BEA,bearman,haas,13,,0,Retired,0
+2026,18,United States Grand Prix,2026-10-25,americas,BOR,bortoleto,audi,21,13,1,Lapped,0
+2026,18,United States Grand Prix,2026-10-25,americas,BOT,bottas,cadillac,19,,0,Retired,0
+2026,18,United States Grand Prix,2026-10-25,americas,COL,colapinto,alpine,20,,0,Retired,0
+2026,18,United States Grand Prix,2026-10-25,americas,GAS,gasly,alpine,10,10,1,Finished,1
+2026,18,United States Grand Prix,2026-10-25,americas,HAD,hadjar,red_bull,3,6,1,Finished,8
+2026,18,United States Grand Prix,2026-10-25,americas,HAM,hamilton,ferrari,5,4,1,Finished,12
+2026,18,United States Grand Prix,2026-10-25,americas,HUL,hulkenberg,audi,11,11,1,Finished,0
+2026,18,United States Grand Prix,2026-10-25,americas,LAW,lawson,rb,9,9,1,Finished,2
+2026,18,United States Grand Prix,2026-10-25,americas,LEC,leclerc,ferrari,4,2,1,Finished,18
+2026,18,United States Grand Prix,2026-10-25,americas,VER,max_verstappen,red_bull,2,3,1,Finished,15
+2026,18,United States Grand Prix,2026-10-25,americas,NOR,norris,mclaren,8,5,1,Finished,10
+2026,18,United States Grand Prix,2026-10-25,americas,OCO,ocon,haas,15,14,1,Lapped,0
+2026,18,United States Grand Prix,2026-10-25,americas,PER,perez,cadillac,18,19,1,Lapped,0
+2026,18,United States Grand Prix,2026-10-25,americas,PIA,piastri,mclaren,7,7,1,Finished,6
+2026,18,United States Grand Prix,2026-10-25,americas,RUS,russell,mercedes,6,8,1,Finished,4
+2026,18,United States Grand Prix,2026-10-25,americas,SAI,sainz,williams,16,18,1,Lapped,0
+2026,18,United States Grand Prix,2026-10-25,americas,STR,stroll,aston_martin,22,15,1,Lapped,0
