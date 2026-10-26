@@ -2,12 +2,12 @@
  "status": "none",
  "next_race": {
   "season": 2026,
-  "round": 18,
-  "race": "United States Grand Prix",
-  "circuit": "americas",
-  "date": "2026-10-25",
+  "round": 19,
+  "race": "Mexico City Grand Prix",
+  "circuit": "rodriguez",
+  "date": "2026-11-01",
   "time": "20:00:00Z",
-  "quali_date": "2026-10-24",
+  "quali_date": "2026-10-31",
   "quali_time": "21:00:00Z",
   "sprint": ""
  },
@@ -24,9 +24,9 @@
    }
   ],
   "note": "Built only from recent form, with no starting grid. In past tests the form-only favourite won about 4 races in 10, against about 55% once the grid is known, so treat these odds as a rough guide.",
-  "race": "United States Grand Prix",
+  "race": "Mexico City Grand Prix",
   "season": 2026,
-  "round": 18,
+  "round": 19,
   "predictions": [
    {
     "driver_id": "antonelli",
