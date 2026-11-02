@@ -22,6 +22,8 @@ const html = (tag, cls, text, parent) => {
  */
 export function lineChart(container, series, xLabels, { unit = "points", firstIsData = false, fmt = null, yMax = null, xTitle = "After round" } = {}) {
   const show1 = fmt || ((v) => (Number.isInteger(v) ? String(v) : v.toFixed(1)));
+  const redraw = container.dataset.drawn === "1";     // only the first chart in a container sweeps in
+  container.dataset.drawn = "1";
   container.textContent = "";
   const W = 1000, H = 360, m = { l: 48, r: 64, t: 12, b: 30 };
   const n = xLabels.length - 1;
@@ -57,10 +59,12 @@ export function lineChart(container, series, xLabels, { unit = "points", firstIs
     t.textContent = lab;
   });
 
+  // the lines and their end labels sweep in left to right the first time the chart is on screen (see .lc-lines)
+  const lines = el("g", { class: "lc-lines" }, svg);
   series.forEach((s) => {
     const d = s.values.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join("");
     el("path", { d, fill: "none", stroke: s.color, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round",
-      ...(s.dash ? { "stroke-dasharray": s.dash } : {}) }, svg);
+      ...(s.dash ? { "stroke-dasharray": s.dash } : {}) }, lines);
   });
 
   // direct labels on the four leaders, nudged apart
@@ -71,9 +75,15 @@ export function lineChart(container, series, xLabels, { unit = "points", firstIs
     if (ends[i].y > floor - (ends.length - 1 - i) * 14) ends[i].y = floor - (ends.length - 1 - i) * 14;
   }
   ends.forEach((e) => {
-    const t = el("text", { x: x(n) + 8, y: e.y + 4, class: "lc-end" }, svg);
+    const t = el("text", { x: x(n) + 8, y: e.y + 4, class: "lc-end" }, lines);
     t.textContent = e.s.name;
   });
+
+  if (redraw || !("IntersectionObserver" in window)) svg.classList.add("in");
+  else {
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { svg.classList.add("in"); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(svg);
+  }
 
   const cross = el("line", { y1: m.t, y2: H - m.b, stroke: "var(--ink)", "stroke-width": 1, opacity: 0 }, svg);
   const tip = html("div", "lc-tip", null, wrap);
