@@ -42,3 +42,14 @@ export function teamStandings(season, upTo = season.rounds.length) {
     return { id: t.id, team: t.id, code: t.id, points: c, wins: t.wins, cumulative };
   }).sort((a, b) => b.points - a.points || b.wins - a.wins || a.id.localeCompare(b.id));
 }
+
+// Most points one driver (or one team, with both cars) can still score: a race win is 25, a sprint win 8.
+const MAX_LEFT = { d: { race: 25, sprint: 8 }, c: { race: 25 + 18, sprint: 8 + 7 } };
+
+/** The leader once nobody can catch them on points, else null. `rows` carry `points`; `remaining` the rounds left. */
+export function clinched(rows, remaining, kind = "d") {
+  if (rows.length < 2) return null;
+  const [lead, next] = rows.slice().sort((a, b) => b.points - a.points);
+  const left = remaining.reduce((s, r) => s + MAX_LEFT[kind].race + (r.sprint ? MAX_LEFT[kind].sprint : 0), 0);
+  return lead.points - next.points > left ? lead : null;
+}

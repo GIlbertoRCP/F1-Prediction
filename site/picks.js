@@ -1,6 +1,6 @@
-// Beat the Oracle: your pick for each race, stored only in this browser.
-// Scoring is fair-odds: a correct pick earns 1 / (the Oracle's chance for that driver), so a
-// favourite is worth little and a longshot a lot. Anyone who picks in line with the Oracle's odds
+// Beat Automata: your pick for each race, stored only in this browser.
+// Scoring is fair-odds: a correct pick earns 1 / (Automata's chance for that driver), so a
+// favourite is worth little and a longshot a lot. Anyone who picks in line with Automata's odds
 // averages exactly 1 point per race, and beating that takes real insight.
 const KEY = "winner-oracle:picks:v1";
 const MIN_P = 0.01;   // caps a single pick at 100 points
@@ -24,7 +24,7 @@ export function points(pCorrectPick) {
  * picks:   {raceKey: {driver_id}}
  * settled: {raceKey: row from track_record.races}   (only finished races)
  * pages:   {raceKey: race page with predictions}
- * Returns rows for finished races you picked, plus totals for you and for the Oracle's top pick
+ * Returns rows for finished races you picked, plus totals for you and for Automata's top pick
  * on the same races.
  */
 export function tally(picks, settled, pages) {

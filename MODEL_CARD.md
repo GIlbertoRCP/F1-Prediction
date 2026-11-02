@@ -1,4 +1,4 @@
-# Model card: F1 Winner Oracle
+# Model card: Automata F1
 
 A model card in the style of Mitchell et al. (2019). Every number below comes from a report in `reports/` that
 `python3 -m evaluation.run` (and the other evaluation scripts) regenerate from the data in `data/`. Nothing here is

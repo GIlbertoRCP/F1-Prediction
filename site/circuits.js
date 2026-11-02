@@ -9,7 +9,9 @@ export function circuitFigure(circuits, id, caption = "") {
   return `<figure class="circuit">
     <svg viewBox="${-pad} ${-pad} ${c.w + pad * 2} ${c.h + pad * 2}" role="img" aria-label="Outline of the circuit${caption ? `: ${caption}` : ""}">
       <path class="trk-bed" d="${c.d}"/>
-      <path class="trk" d="${c.d}"/>
+      <path class="trk" d="${c.d}" pathLength="100"/>
+      <path class="car-tail" d="${c.d}" pathLength="100"/>
+      <path class="car" d="${c.d}" pathLength="100"/>
       <rect class="sf" x="${sx - 9}" y="${sy - 26}" width="18" height="52" transform="rotate(0 ${sx} ${sy})"/>
     </svg>
     ${caption ? `<figcaption>${caption}</figcaption>` : ""}

@@ -1,7 +1,7 @@
 import { loadPicks, savePick, tally } from "./picks.js";
 import { utilities, simulate, summarize } from "./sim.js";
 import { compare, teammatePairs } from "./h2h.js";
-import { driverStandings, teamStandings } from "./standings.js";
+import { driverStandings, teamStandings, clinched } from "./standings.js";
 import { lineChart } from "./linechart.js";
 import { circuitFigure } from "./circuits.js";
 
@@ -242,8 +242,8 @@ function pickPanel(forecast, record) {
     box.innerHTML = `
       <h3>Who wins? Make your pick</h3>
       <p class="fine">${mine
-        ? `You picked <b>${esc(forecast.predictions.find((p) => p.driver_id === mine)?.driver ?? mine)}</b>. The Oracle's favourite is ${esc(oracle.driver)}. You can change your pick until the race starts. It is saved in this browser only.`
-        : `The Oracle's favourite is ${esc(oracle.driver)}. Pick anyone; a correct pick scores 1 divided by the Oracle's chance for that driver, so longshots pay more.`}</p>
+        ? `You picked <b>${esc(forecast.predictions.find((p) => p.driver_id === mine)?.driver ?? mine)}</b>. Automata's favourite is ${esc(oracle.driver)}. You can change your pick until the race starts. It is saved in this browser only.`
+        : `Automata's favourite is ${esc(oracle.driver)}. Pick anyone; a correct pick scores 1 divided by Automata's chance for that driver, so longshots pay more.`}</p>
       <div class="chips" role="group" aria-label="Pick the winner">
         ${forecast.predictions.map((p) => `<button class="chip" type="button" data-id="${esc(p.driver_id)}" aria-pressed="${p.driver_id === mine}">
           <span class="tick" style="background:${colour(p.team)}"></span><b>${esc(p.driver)}</b><span class="num">${pct(p.p)}</span></button>`).join("")}
@@ -264,12 +264,12 @@ async function renderPicks(record) {
   await Promise.all(keys.map(async (k) => { pages[k] = pageCache[k] ||= await getJSON(`data/races/${k}.json`); }));
   const t = tally(picks, settled, pages);
   el.hidden = false;
-  const verdict = t.you.points > t.oracle.points ? "You are ahead of the Oracle." : t.you.points < t.oracle.points ? "The Oracle is ahead." : "You are level with the Oracle.";
+  const verdict = t.you.points > t.oracle.points ? "You are ahead of Automata." : t.you.points < t.oracle.points ? "Automata is ahead." : "You are level with Automata.";
   $("#picks-body").innerHTML = `
-    <p class="lede">After ${t.you.n} race${t.you.n > 1 ? "s" : ""} you have <b>${t.you.points} points</b> and the Oracle's top pick has <b>${t.oracle.points}</b>. ${verdict}</p>
-    <p class="fine">You called ${t.you.wins} winner${t.you.wins === 1 ? "" : "s"}; the Oracle's top pick called ${t.oracle.wins}. Over many races, someone who picks in line with the Oracle's odds averages 1 point per race.</p>
+    <p class="lede">After ${t.you.n} race${t.you.n > 1 ? "s" : ""} you have <b>${t.you.points} points</b> and Automata's top pick has <b>${t.oracle.points}</b>. ${verdict}</p>
+    <p class="fine">You called ${t.you.wins} winner${t.you.wins === 1 ? "" : "s"}; Automata's top pick called ${t.oracle.wins}. Over many races, someone who picks in line with Automata's odds averages 1 point per race.</p>
     <div class="tablewrap"><table>
-      <thead><tr><th>Race</th><th>Your pick</th><th>Winner</th><th>You</th><th>Oracle top pick</th></tr></thead>
+      <thead><tr><th>Race</th><th>Your pick</th><th>Winner</th><th>You</th><th>Automata top pick</th></tr></thead>
       <tbody>${t.rows.map((r) => `<tr><td>${esc(r.race)}</td><td>${esc(r.pick)} (${whole(r.pick_p)})</td><td>${esc(r.winner)}</td>
         <td>${r.points}</td><td>${esc(r.oracle_pick)}: ${r.oracle_points}</td></tr>`).join("")}</tbody>
     </table></div>`;
@@ -572,7 +572,7 @@ async function renderStandings() {
 }
 
 /* ---------- championship ---------- */
-function rangeRow(r, i, axisMax, label, cls = "") {
+function rangeRow(r, i, axisMax, label, cls = "", pct = titlePct(r.title)) {
   const at = (v) => `${Math.min(100, (v / axisMax) * 100).toFixed(2)}%`;
   return `<li class="${cls}" style="--team:${colour(r.team)}">
     <span class="rk">${i + 1}</span><span class="tick" style="background:${colour(r.team)}"></span>
@@ -584,7 +584,7 @@ function rangeRow(r, i, axisMax, label, cls = "") {
       <span class="now" style="left:${at(r.points)}"></span>
       <span class="mid" style="left:${at(r.p50)}"></span>
     </span>
-    <span class="pct num">${titlePct(r.title)}</span></li>`;
+    <span class="pct num">${pct}</span></li>`;
 }
 
 async function renderChampionship() {
@@ -629,8 +629,15 @@ async function renderChampionship() {
     const label = (r) => (kind === "d" ? r.code : teamName(r.team));
     const lead = rows[0];
     const second = rows[1];
-    $("#ch-lede").innerHTML = `After round ${played} of ${total}, <b>${esc(label(lead))}</b> has a <b>${titlePct(lead.title)}</b> chance of the ${cur.season} ${kind === "d" ? "drivers'" : "constructors'"} title${second && second.title >= 0.001 ? `; ${esc(label(second))} is next at ${titlePct(second.title)}` : ""}. ${cur.remaining.length} race${cur.remaining.length === 1 ? "" : "s"} to go.`;
-    $("#ch-tower").innerHTML = `<ol class="tower title ${kind === "c" ? "teams" : ""}">${shown.map((r, i) => rangeRow(r, i, axisMax, label(r), r.title < 0.001 && i > 0 ? "dim" : "")).join("")}</ol>`;
+    const title = `${cur.season} ${kind === "d" ? "drivers'" : "constructors'"} title`;
+    const left = `${cur.remaining.length} race${cur.remaining.length === 1 ? "" : "s"} to go`;
+    // a title decided on points is a fact, not a 99.9% forecast: say so and drop the odds column
+    const champ = clinched(kind === "d" ? cur.drivers : cur.teams, cur.remaining, kind);
+    $("#ch-lede").innerHTML = champ
+      ? `<b>${esc(label(champ))}</b> has won the ${title}. Nobody can catch them on points${cur.remaining.length ? ` with ${left.replace(" to go", " left")}` : ""}; the ranges below are for the rest of the order.`
+      : `After round ${played} of ${total}, <b>${esc(label(lead))}</b> has a <b>${titlePct(lead.title)}</b> chance of the ${title}${second && second.title >= 0.001 ? `; ${esc(label(second))} is next at ${titlePct(second.title)}` : ""}. ${left}.`;
+    const pct = (r) => (!champ ? titlePct(r.title) : r === champ ? '<span class="champ">Champion</span>' : "");
+    $("#ch-tower").innerHTML = `<ol class="tower title ${kind === "c" ? "teams" : ""}">${shown.map((r, i) => rangeRow(r, i, axisMax, label(r), (champ ? r !== champ : r.title < 0.001 && i > 0) ? "dim" : "", pct(r))).join("")}</ol>`;
   };
   const setKind = (k) => { kind = k; $("#ch-d").setAttribute("aria-pressed", String(k === "d")); $("#ch-c").setAttribute("aria-pressed", String(k === "c")); drawTower(); };
   $("#ch-d").onclick = () => setKind("d");
