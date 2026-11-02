@@ -392,13 +392,13 @@
  },
  "next_race": {
   "season": 2026,
-  "round": 19,
-  "race": "Mexico City Grand Prix",
-  "circuit": "rodriguez",
-  "date": "2026-11-01",
-  "time": "20:00:00Z",
-  "quali_date": "2026-10-31",
-  "quali_time": "21:00:00Z",
+  "round": 20,
+  "race": "Brazilian Grand Prix",
+  "circuit": "interlagos",
+  "date": "2026-11-08",
+  "time": "17:00:00Z",
+  "quali_date": "2026-11-07",
+  "quali_time": "18:00:00Z",
   "sprint": ""
  }
 }
