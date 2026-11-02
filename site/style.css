@@ -376,3 +376,27 @@ select { max-width: 100%; font: inherit; padding: .4rem .6rem; background: var(-
 .fold[open] summary::before { transform: rotate(45deg); }
 .fold summary:hover { color: var(--ink); }
 .fold > :not(summary) { margin-top: .5rem; }
+
+/* motion: countdown digits drop in, sections rise in once, numbers count up, chart lines sweep in */
+.cd-u { overflow: hidden; }
+.cd-u b.flip { animation: cd-flip .35s cubic-bezier(.2, .8, .3, 1); }
+@keyframes cd-flip { from { transform: translateY(-60%); opacity: 0; } }
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease-out, transform .5s cubic-bezier(.2, .8, .3, 1); }
+.reveal.in { opacity: 1; transform: none; }
+.lc .lc-lines { clip-path: inset(0 100% 0 0); }
+.lc.in .lc-lines { clip-path: inset(0 0 0 0); transition: clip-path 1.2s cubic-bezier(.45, 0, .2, 1); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .lc .lc-lines, .lc.in .lc-lines { clip-path: none; transition: none; }
+}
+.remain li:has(a) { padding: 0; }
+.remain a { display: block; padding: .3rem .9rem .3rem .6rem; color: inherit; text-decoration: none; transition: background .15s; }
+.remain a:hover, .remain a:focus-visible { background: var(--raised); }
+.remain small { margin-left: .45rem; color: var(--slate); font-size: .75rem; }
+.remain a small::after { content: " ›"; color: var(--red-text); }
+.share-btn { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.1rem; padding: .45rem .9rem .45rem .7rem; background: transparent; border: 1px solid var(--rule); color: var(--ink); font: 600 .9rem var(--text); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: border-color .15s, background .15s; }
+.share-btn svg { width: 1.05rem; height: 1.05rem; color: var(--red-text); }
+.share-btn:hover, .share-btn:focus-visible { border-color: var(--slate); background: var(--panel); }
+.share-btn:disabled { opacity: .6; cursor: progress; }
+.hero .stamp + .share-btn { display: flex; width: fit-content; }
+.race-list li { scroll-margin-top: 4.5rem; }

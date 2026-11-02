@@ -4,6 +4,7 @@ import { compare, teammatePairs } from "./h2h.js";
 import { driverStandings, teamStandings, clinched } from "./standings.js";
 import { lineChart } from "./linechart.js";
 import { circuitFigure } from "./circuits.js";
+import { shareCard } from "./share.js";
 
 const TEAM_COLOURS = {
   red_bull: "#4a6bff", mercedes: "#27d1c0", ferrari: "#ef1a2d", mclaren: "#ff8000",
@@ -90,6 +91,25 @@ function tower(predictions, { winnerId = null, limit = 10, animate = false, hold
 
 /* ---------- hero ---------- */
 const mapFor = (circuit, caption) => circuitFigure(CIRCUITS, circuit, caption);
+const venue = (race) => `Round ${race.round}${CIRCUIT_NAMES[race.circuit] ? ` · ${CIRCUIT_NAMES[race.circuit]}` : ""}`;
+const SHARE_BTN = `<button type="button" class="share-btn"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13V3m0 0L6 7m4-4 4 4M4 11v5h12v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Share image</button>`;
+
+// Hooks the hero's share button to a picture of these odds.
+function bindShare(el, race, predictions, { tag, tagColour, footer }) {
+  const btn = $(".share-btn", el);
+  if (!btn) return;
+  btn.onclick = async () => {
+    btn.disabled = true;
+    try {
+      const how = await shareCard({
+        eyebrow: venue(race), title: race.race, tag, tagColour, circuit: CIRCUITS?.[race.circuit]?.d ? CIRCUITS[race.circuit] : null,
+        rows: predictions.slice(0, 5).map((p) => ({ code: p.driver, colour: colour(p.team), p: p.p, label: pct(p.p) })),
+        footer: `${footer} · ${location.host || "Automata F1"}`,
+      }, `automata-${race.season}-${race.round}.png`);
+      if (how === "downloaded") { btn.lastChild.textContent = "Saved"; setTimeout(() => (btn.lastChild.textContent = "Share image"), 1800); }
+    } finally { btn.disabled = false; }
+  };
+}
 
 // Five red lights, then lights out: the bars on the tower grow as the lights go out.
 function startLights(el, onGo) {
@@ -151,8 +171,16 @@ function countdown(el, target, label) {
     const ms = target - Date.now();
     if (ms <= 0) { el.innerHTML = `<span class="cd-label">${esc(label)} is under way. The forecast follows once the grid is official.</span>`; return; }
     const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, sec = Math.floor(ms / 1e3) % 60;
-    const unit = (v, u) => `<span class="cd-u"><b class="num">${String(v).padStart(2, "0")}</b><small>${u}</small></span>`;
-    el.innerHTML = `${unit(d, "days")}${unit(h, "hrs")}${unit(m, "min")}${unit(sec, "sec")}<span class="cd-label">until ${esc(label)}</span>`;
+    const unit = (u) => `<span class="cd-u"><b class="num"></b><small>${u}</small></span>`;
+    if (!el.querySelector(".cd-u")) el.innerHTML = `${unit("days")}${unit("hrs")}${unit("min")}${unit("sec")}<span class="cd-label">until ${esc(label)}</span>`;
+    // only the digits that changed are rewritten, and each one drops in
+    el.querySelectorAll(".cd-u b").forEach((b, i) => {
+      const v = String([d, h, m, sec][i]).padStart(2, "0");
+      if (b.textContent === v) return;
+      const first = !b.textContent;
+      b.textContent = v;
+      if (!first && !reduceMotion()) { b.classList.remove("flip"); void b.offsetWidth; b.classList.add("flip"); }
+    });
     setTimeout(tick, 1000 - (Date.now() % 1000));
   };
   tick();
@@ -171,6 +199,7 @@ async function renderHero(forecast, record) {
           <p class="sub"><span class="tag">Live</span><strong>${esc(forecast.predictions[0].driver)}</strong> is the favourite at ${whole(forecast.predictions[0].p)}.
           Race day is ${fmtDate(r.date)}.</p>
           <span class="stamp">Frozen ${fmtStamp(forecast.made_at)} from the qualifying grid. Fingerprint <code>${forecast.hash.slice(0, 12)}</code></span>
+          ${SHARE_BTN}
         </div>
         ${map}
       </div>`;
@@ -178,6 +207,7 @@ async function renderHero(forecast, record) {
     el.append(t);
     el.append(pickPanel(forecast, record));
     startLights(el, () => t.release());
+    bindShare(el, r, forecast.predictions, { tag: "LIVE FORECAST", tagColour: "#e10600", footer: `Frozen ${fmtStamp(forecast.made_at)} · fingerprint ${forecast.hash.slice(0, 12)}` });
     return;
   }
   const next = forecast.next_race;
@@ -187,7 +217,7 @@ async function renderHero(forecast, record) {
   const session = (name, at, date) => `<li><span>${name}</span><b>${esc(at && !isNaN(at) ? fmtInstant(at) : fmtDate(date))}</b></li>`;
   el.innerHTML = next
     ? `<div class="hero-top ${nextMap ? "" : "nomap"}"><div>
-         <p class="eyebrow">Round ${next.round}${CIRCUIT_NAMES[next.circuit] ? ` · ${esc(CIRCUIT_NAMES[next.circuit])}` : ""}${next.sprint ? ' · <span class="s">Sprint weekend</span>' : ""}</p>
+         <p class="eyebrow">${esc(venue(next))}${next.sprint ? ' · <span class="s">Sprint weekend</span>' : ""}</p>
          <h1>${esc(next.race)}</h1>
          <div class="countdown" id="cd"></div>
          <ul class="weekend">
@@ -195,11 +225,15 @@ async function renderHero(forecast, record) {
            ${session("Race", raceAt, next.date)}
          </ul>
          <p class="sub">The forecast locks after qualifying and is scored after the race. Times are in your time zone.</p>
+         ${forecast.provisional ? SHARE_BTN : ""}
        </div>${nextMap}</div>`
     : `<h1 class="calm">No race to forecast right now</h1>
        <p class="sub">Forecasts open after qualifying. Here is the last race and how it went.</p>`;
   if (next) countdown($("#cd", el), quali && quali > Date.now() ? quali : raceAt, quali && quali > Date.now() ? "qualifying" : "the race");
-  if (forecast.provisional) el.append(provisionalPanel(forecast.provisional));
+  if (forecast.provisional) {
+    el.append(provisionalPanel(forecast.provisional));
+    bindShare(el, next, forecast.provisional.predictions, { tag: "EARLY ODDS · PROVISIONAL", tagColour: "#ffd23f", footer: "Before qualifying, from recent form" });
+  }
   const last = record.latest;
   if (!last) return;
   const page = await getJSON(`data/races/${last.season}-${last.round}.json`);
@@ -345,6 +379,7 @@ function renderRaces(index, tr) {
     index.filter((r) => r.season === season).sort((a, b) => b.round - a.round).forEach((r) => {
       const s = settled[r.key];
       const li = document.createElement("li");
+      li.id = `race-${r.key}`;
       const call = s ? `${s.pick} ${whole(s.pick_p)}` : "Forecast open";
       const res = !s ? `<span class="res">Open</span>`
         : s.hit ? `<span class="res hit">Called it</span>` : `<span class="res miss">${esc(s.winner)} won</span>`;
@@ -366,6 +401,18 @@ function renderRaces(index, tr) {
   };
   sel.onchange = draw;
   draw();
+  // #race-2025-22 opens that race in the list, so other sections (and shared links) can point at a race
+  const openFromHash = () => {
+    const key = location.hash.match(/^#race-(\d{4}-\d+)$/)?.[1];
+    const race = key && index.find((x) => x.key === key);
+    if (!race) return;
+    if (sel.value !== String(race.season)) { sel.value = String(race.season); draw(); }
+    const li = document.getElementById(`race-${key}`), btn = li && $("button", li);
+    if (btn?.getAttribute("aria-expanded") === "false") btn.click();
+    li?.scrollIntoView({ block: "start" });
+  };
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
 }
 
 function detail(page) {
@@ -585,7 +632,7 @@ function rangeRow(r, i, axisMax, label, cls = "", pct = titlePct(r.title)) {
     <span class="pct num">${pct}</span></li>`;
 }
 
-async function renderChampionship() {
+async function renderChampionship(index) {
   const sec = $("#championship");
   let data;
   try { data = await getJSON("data/championship.json"); } catch { return; }
@@ -615,8 +662,14 @@ async function renderChampionship() {
     <p class="fine" id="ch-note"></p>
     <div id="ch-chart"></div>
     <div id="ch-trust"></div>`;
-  $("#ch-left").innerHTML = cur.remaining.map((r) =>
-    `<li><b>R${r.round}</b> ${esc(r.race.replace(/ Grand Prix$/, " GP"))}${r.sprint ? '<span class="s" title="Sprint weekend">Sprint</span>' : ""}</li>`).join("");
+  // each race left links to its forecast if it is next, else to the last time the series raced there
+  const lastHere = (race) => index.filter((x) => x.race === race && x.season < cur.season).sort((a, b) => b.season - a.season)[0];
+  $("#ch-left").innerHTML = cur.remaining.map((r, i) => {
+    const prev = i ? lastHere(r.race) : null;
+    const href = i === 0 ? "#forecast" : prev ? `#race-${prev.key}` : null;
+    const body = `<b>R${r.round}</b> ${esc(r.race.replace(/ Grand Prix$/, " GP"))}${r.sprint ? '<span class="s" title="Sprint weekend">Sprint</span>' : ""}${href ? `<small>${i === 0 ? "Next" : prev.season}</small>` : ""}`;
+    return `<li>${href ? `<a href="${href}" title="${i === 0 ? "The forecast for this race" : `How the ${prev.season} race here went`}">${body}</a>` : body}</li>`;
+  }).join("");
 
   const drawTower = () => {
     const rows = (kind === "d" ? cur.drivers.filter((d) => d.racing) : cur.teams).slice()
@@ -684,6 +737,35 @@ async function renderChampionship() {
       ${live.log.length ? `<p>${live.log.slice(-3).map((r) => `After round ${r.after_round}: ${esc(r.leader)} ${titlePct(r.leader_title)}, frozen ${fmtStamp(r.made_at)}`).join(". ")}.</p>` : "<p>Each forecast is logged after a race, before the next one starts.</p>"}</div>`, "How far to trust it");
 }
 
+/* ---------- motion ---------- */
+// Runs `fn` once, the first time `el` is on screen.
+function onceVisible(el, fn, threshold = 0.2) {
+  if (!("IntersectionObserver" in window)) { fn(); return; }
+  const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); fn(); } }, { threshold });
+  io.observe(el);
+}
+
+// Counts a number like "55%", "1.23" or "175" up from zero, keeping its decimals and suffix.
+function countUp(el, ms = 900) {
+  const m = el.textContent.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);
+  if (!m) return;
+  const [, pre, num, post] = m, end = Number(num), dp = (num.split(".")[1] || "").length;
+  el.setAttribute("aria-label", el.textContent);
+  const t0 = performance.now();
+  const frame = (t) => {
+    const k = Math.min(1, (t - t0) / ms), eased = 1 - (1 - k) ** 3;
+    el.textContent = `${pre}${(end * eased).toFixed(dp)}${post}`;
+    if (k < 1) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+}
+
+function motion() {
+  if (reduceMotion()) return;
+  document.querySelectorAll(".block").forEach((b) => { b.classList.add("reveal"); onceVisible(b, () => b.classList.add("in"), 0.05); });
+  document.querySelectorAll(".tile .v").forEach((v) => onceVisible(v, () => countUp(v), 0.6));
+}
+
 /* ---------- boot ---------- */
 (async function main() {
   try {
@@ -695,10 +777,11 @@ async function renderChampionship() {
     renderRecord(record);
     renderRaces(index, record);
     renderPicks(record);
-    renderChampionship().catch((e) => console.error(e));
+    renderChampionship(index).catch((e) => console.error(e));
     renderSim(index, forecast);
     renderStandings().catch((e) => { console.error(e); $("#standings-body").textContent = "Standings data is not available."; });
     renderH2H().catch((e) => { console.error(e); $("#h2h-body").textContent = "Head-to-head data is not available."; });
+    motion();
     const through = meta.data_through;
     $("#foot-meta").textContent =
       `Model ${meta.model} (version ${meta.model_version}). Results through ${through ? `${through.race}, ${fmtDate(through.date)}` : "n/a"}. ` +
