@@ -23,11 +23,10 @@ from . import engine
 STAGES = [("form", "Recent form"), ("sprint", "Sprint order"), ("quali", "Qualifying")]
 
 NOTES = {
-    "form": "Built only from recent form, with no starting grid. In past tests the form-only favourite won "
-            "about 4 races in 10, against about 55% once the grid is known, so treat these odds as a rough guide.",
-    "sprint": "Built from recent form plus the order the sprint started in, standing in for the real grid. "
-              "On 29 past sprint weekends this picked the winner as often as the real grid (41%), but its odds were "
-              "less reliable. Too few weekends to be sure it beats form alone.",
+    # Past tests: the form-only favourite won ~4 races in 10 (55% with the grid). On 29 sprint weekends the
+    # sprint grid picked the winner as often as the real grid (41%), but its odds were less reliable.
+    "form": "Recent form only, no grid yet, so a rough guide.",
+    "sprint": "Recent form plus the sprint grid, standing in for the real one.",
 }
 
 

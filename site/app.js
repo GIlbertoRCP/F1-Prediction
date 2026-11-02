@@ -41,6 +41,8 @@ const fmtInstant = (d) => d.toLocaleString(undefined, { weekday: "short", day: "
 const finishLabel = (f) => (f == null ? "DNF" : `${ordinal(f)}`);
 const fmtStamp = (iso) =>
   new Date(iso).toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "UTC" }) + " UTC";
+// Fine print that backs a number up but would crowd the page: one click away instead of always on screen.
+const more = (html, label = "How we know") => `<details class="fold"><summary>${label}</summary>${html}</details>`;
 const ordinal = (n) => { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
 
 /* ---------- the timing tower ---------- */
@@ -114,17 +116,14 @@ function whyLine(rows) {
     if (!r.recent?.length) return "";
     const wins = rec.filter((f) => f === 1).length, pods = rec.filter((f) => f <= 3).length;
     const outs = r.recent.length - rec.length;
-    const avg = rec.length ? rec.reduce((x, y) => x + y, 0) / rec.length : null;
     const parts = [];
     if (wins) parts.push(`${wins} win${wins > 1 ? "s" : ""}`);
     if (pods > wins) parts.push(`${pods} podium${pods > 1 ? "s" : ""}`);
-    if (avg != null) parts.push(`an average finish of ${avg.toFixed(1)}`);
     if (outs) parts.push(`${outs} retirement${outs > 1 ? "s" : ""}`);
-    return parts.length ? ` In the last ${r.recent.length} races: ${parts.join(", ")}.` : "";
+    return parts.length ? ` (${parts.join(", ")} in the last ${r.recent.length})` : "";
   };
-  return `<b>${esc(a.driver)}</b> leads the early odds at <b>${pct(a.p)}</b>.${form(a)}
-    ${b ? `<b>${esc(b.driver)}</b> is next at ${pct(b.p)}.${form(b)}` : ""}
-    The odds weigh each driver's and each team's recent results, with the latest races counting most.`;
+  return `<b>${esc(a.driver)}</b> leads at <b>${pct(a.p)}</b>${form(a)}.
+    ${b ? `<b>${esc(b.driver)}</b> next at ${pct(b.p)}${form(b)}.` : ""}`;
 }
 
 function provisionalPanel(pv) {
@@ -139,7 +138,7 @@ function provisionalPanel(pv) {
       </ol>
     </div>
     <p class="why">${whyLine(pv.predictions)}</p>
-    <p class="prov-note">${esc(pv.note)} They are not frozen or scored, and the real forecast replaces them after qualifying.</p>
+    <p class="prov-note">${esc(pv.note)} Not scored; the real forecast replaces them after qualifying.</p>
     ${pv.stage === "form" ? `<p class="form-key" aria-hidden="true"><span>Last five finishes, oldest first</span><b><i class="w">1</i> win</b><b><i class="pd">3</i> podium</b><b><i class="out">R</i> retired</b></p>` : ""}`;
   box.append(tower(pv.predictions, { animate: true, form: pv.stage === "form" }));
   return box;
@@ -195,10 +194,10 @@ async function renderHero(forecast, record) {
            ${next.quali_date ? session("Qualifying", quali, next.quali_date) : ""}
            ${session("Race", raceAt, next.date)}
          </ul>
-         <p class="sub">The official forecast needs the starting grid. It is frozen within a few hours of qualifying, then scored after the race. Times are shown in your time zone.</p>
+         <p class="sub">The forecast locks after qualifying and is scored after the race. Times are in your time zone.</p>
        </div>${nextMap}</div>`
     : `<h1 class="calm">No race to forecast right now</h1>
-       <p class="sub">Forecasts open after qualifying for each Grand Prix. Below is the most recent race, so you can see what a forecast looks like and how it did.</p>`;
+       <p class="sub">Forecasts open after qualifying. Here is the last race and how it went.</p>`;
   if (next) countdown($("#cd", el), quali && quali > Date.now() ? quali : raceAt, quali && quali > Date.now() ? "qualifying" : "the race");
   if (forecast.provisional) el.append(provisionalPanel(forecast.provisional));
   const last = record.latest;
@@ -208,8 +207,8 @@ async function renderHero(forecast, record) {
   const winnerRow = page.predictions.find((p) => p.driver_id === last.winner_id);
   el.insertAdjacentHTML("beforeend", `<h2 class="lastrace-title">${page.kind === "live" ? '<span class="tag">Scored</span>' : ""}${esc(last.race)}</h2>
     <p class="lastrace-sub">${page.kind === "live"
-      ? `Last race. This forecast was frozen before the start (fingerprint <code>${esc((page.hash || "").slice(0, 12))}</code>) and is now part of the public track record.`
-      : "Last race. A replay made only from earlier races, so you can see how a forecast looks and how it did."}</p>`);
+      ? `Last race. Frozen before the start, fingerprint <code>${esc((page.hash || "").slice(0, 12))}</code>.`
+      : "Last race. A replay made only from earlier races."}</p>`);
   el.append(tower(page.predictions, { winnerId: last.winner_id, animate: true }));
   el.insertAdjacentHTML("beforeend", `
     <div class="callout ${hit ? "" : "miss"}">
@@ -217,7 +216,7 @@ async function renderHero(forecast, record) {
       <p>${hit
         ? `We gave ${esc(last.winner)} ${whole(last.p_winner)} and ${esc(last.winner)} won.`
         : `We rated ${esc(last.pick)} at ${whole(last.pick_p)}. ${esc(last.winner)} won from ${ordinal(winnerRow.grid)} on the grid, a ${pct(last.p_winner)} chance in our forecast.`}
-        ${page.kind === "backtest" ? " This is a replay made from earlier races only." : ""}</p>
+        </p>
       ${podiumLine(page)}
     </div>`);
 }
@@ -242,8 +241,8 @@ function pickPanel(forecast, record) {
     box.innerHTML = `
       <h3>Who wins? Make your pick</h3>
       <p class="fine">${mine
-        ? `You picked <b>${esc(forecast.predictions.find((p) => p.driver_id === mine)?.driver ?? mine)}</b>. Automata's favourite is ${esc(oracle.driver)}. You can change your pick until the race starts. It is saved in this browser only.`
-        : `Automata's favourite is ${esc(oracle.driver)}. Pick anyone; a correct pick scores 1 divided by Automata's chance for that driver, so longshots pay more.`}</p>
+        ? `You picked <b>${esc(forecast.predictions.find((p) => p.driver_id === mine)?.driver ?? mine)}</b>; Automata's favourite is ${esc(oracle.driver)}. Change it any time before the start.`
+        : `Automata's favourite is ${esc(oracle.driver)}. Longshots pay more: a correct pick scores 1 ÷ Automata's chance.`}</p>
       <div class="chips" role="group" aria-label="Pick the winner">
         ${forecast.predictions.map((p) => `<button class="chip" type="button" data-id="${esc(p.driver_id)}" aria-pressed="${p.driver_id === mine}">
           <span class="tick" style="background:${colour(p.team)}"></span><b>${esc(p.driver)}</b><span class="num">${pct(p.p)}</span></button>`).join("")}
@@ -267,7 +266,7 @@ async function renderPicks(record) {
   const verdict = t.you.points > t.oracle.points ? "You are ahead of Automata." : t.you.points < t.oracle.points ? "Automata is ahead." : "You are level with Automata.";
   $("#picks-body").innerHTML = `
     <p class="lede">After ${t.you.n} race${t.you.n > 1 ? "s" : ""} you have <b>${t.you.points} points</b> and Automata's top pick has <b>${t.oracle.points}</b>. ${verdict}</p>
-    <p class="fine">You called ${t.you.wins} winner${t.you.wins === 1 ? "" : "s"}; Automata's top pick called ${t.oracle.wins}. Over many races, someone who picks in line with Automata's odds averages 1 point per race.</p>
+    <p class="fine">Winners called: you ${t.you.wins}, Automata ${t.oracle.wins}. Picks are saved in this browser only.</p>
     <div class="tablewrap"><table>
       <thead><tr><th>Race</th><th>Your pick</th><th>Winner</th><th>You</th><th>Automata top pick</th></tr></thead>
       <tbody>${t.rows.map((r) => `<tr><td>${esc(r.race)}</td><td>${esc(r.pick)} (${whole(r.pick_p)})</td><td>${esc(r.winner)}</td>
@@ -302,9 +301,9 @@ function renderRecord(tr) {
   const random = 1 / Math.exp(b.uniform_logloss);
   const live = l.n
     ? `<div class="livebox"><p><b>Live record: ${l.n} race${l.n > 1 ? "s" : ""}.</b> The favourite won ${Math.round(l.top1.mean * l.n)} of ${l.n}; we gave the winner ${whole(l.avg_winner_prob)} on average.</p>
-       <p>Only forecasts frozen before the race count here.</p></div>`
+       </div>`
     : `<div class="livebox"><p><b>Live record: no races scored yet.</b></p>
-       <p>Every number below comes from replays. Live forecasts are frozen after qualifying and scored once the race finishes; they will appear here, separately.</p></div>`;
+       <p>Everything below is from replays; live races will show here.</p></div>`;
   const seasons = Object.entries(tr.by_season).map(([s, v]) => `
     <tr><td>${s}</td><td>${v.n}</td><td>${whole(v.top1.mean)}</td><td>${whole(v.top3.mean)}</td>
     <td>${whole(v.avg_winner_prob)}</td><td>${v.logloss.mean.toFixed(2)}</td></tr>`).join("");
@@ -313,10 +312,11 @@ function renderRecord(tr) {
     <div class="tiles">
       <div class="tile"><span class="v">${whole(b.top1.mean)}</span><span class="l">top pick won, over ${b.n} replayed races (the pole sitter won ${whole(b.pole_top1)})</span></div>
       <div class="tile"><span class="v">${whole(b.top3.mean)}</span><span class="l">of the time the winner was in our top three</span></div>
-      <div class="tile ${tr.reference && b.logloss.mean < tr.reference.slot_prior_logloss ? "good" : ""}"><span class="v">${b.logloss.mean.toFixed(2)}</span><span class="l">log loss (lower is better)${tr.reference ? `; the starting slot alone scores ${tr.reference.slot_prior_logloss.toFixed(2)}, a random guess ${b.uniform_logloss.toFixed(2)}` : ""}</span></div>
-      <div class="tile ${l.n ? "good" : "warn"}"><span class="v">${l.n}</span><span class="l">live races scored so far${l.n ? "" : "; the first live forecast is scored after its race"}</span></div>
+      <div class="tile ${tr.reference && b.logloss.mean < tr.reference.slot_prior_logloss ? "good" : ""}"><span class="v">${b.logloss.mean.toFixed(2)}</span><span class="l">log loss, lower is better${tr.reference ? ` (grid slot alone: ${tr.reference.slot_prior_logloss.toFixed(2)})` : ""}</span></div>
+      <div class="tile ${l.n ? "good" : "warn"}"><span class="v">${l.n}</span><span class="l">live races scored</span></div>
     </div>
-    <p class="fine">Picking the pole sitter wins ${whole(b.pole_top1)}, so for a single best guess the model is no better than pole. What it adds is the odds for everyone else: on average we gave the eventual winner ${whole(b.avg_winner_prob)}, where a random guess gives about ${whole(random)}.</p>
+    ${more(`<p class="fine">Picking the pole sitter wins ${whole(b.pole_top1)}, so for a single best guess the model is no better than pole. What it adds is the odds for everyone else: on average we gave the eventual winner ${whole(b.avg_winner_prob)}, where a random guess gives about ${whole(random)}.</p>
+    <p class="fine">Log loss is lower when the winner was given a higher chance. A random guess scores ${b.uniform_logloss.toFixed(2)}${tr.reference ? `; always going by the starting slot scores ${tr.reference.slot_prior_logloss.toFixed(2)}; this model scores ${b.logloss.mean.toFixed(2)}` : ""}. Single seasons have few races, so treat their numbers as rough.</p>`)}
     <div class="two">
       <div>
         <h3>By season</h3>
@@ -324,11 +324,10 @@ function renderRecord(tr) {
           <thead><tr><th>Season</th><th>Races</th><th>Top pick won</th><th>Winner in top 3</th><th>Chance given to winner</th><th>Log loss</th></tr></thead>
           <tbody>${seasons}</tbody>
         </table></div>
-        <p class="fine">Log loss is lower when the winner was given a higher chance. A random guess scores ${b.uniform_logloss.toFixed(2)}${tr.reference ? `; always going by the starting slot scores ${tr.reference.slot_prior_logloss.toFixed(2)}; this model scores ${b.logloss.mean.toFixed(2)}` : ""}. Single seasons have few races, so treat their numbers as rough.</p>
       </div>
       <figure>
         ${calibrationSVG(tr.calibration)}
-        <figcaption>When we say 30%, it should happen about 30% of the time. Each circle groups driver-races where we gave a similar chance; sitting on the dashed line means the odds were honest.</figcaption>
+        <figcaption>When we say 30%, it should happen 30% of the time. On the dashed line means honest odds.</figcaption>
       </figure>
     </div>`;
 }
@@ -394,7 +393,7 @@ async function renderSim(index, forecast) {
   const open = forecast.status === "open" ? `${forecast.race.season}-${forecast.race.round}` : null;
   const keys = (open && !index.some((r) => r.key === open) ? [{ key: open, race: forecast.race.race, season: forecast.race.season }] : []).concat(index);
   el.innerHTML = `
-    <p class="fine">Change the starting grid or knock a driver out, and the model re-runs the race thousands of times. Everything runs in your browser using the same model as the forecast.</p>
+    <p class="fine">Change the grid or knock a driver out; the race re-runs thousands of times in your browser.</p>
     <div class="simbar">
       <label class="select">Race <select id="sim-race">${keys.map((r) => `<option value="${r.key}">${esc(r.season)} ${esc(r.race)}${r.key === open ? " (open forecast)" : ""}</option>`).join("")}</select></label>
       <label class="select">Simulated races <select id="sim-n"><option value="2000">2,000</option><option value="10000" selected>10,000</option><option value="50000">50,000</option></select></label>
@@ -438,7 +437,8 @@ async function renderSim(index, forecast) {
           <td><span class="strip" aria-hidden="true">${r.dist.map((q, i) => `<i style="opacity:${Math.sqrt(q).toFixed(2)}" title="P${i + 1}: ${(q * 100).toFixed(1)}%"></i>`).join("")}</span></td>
         </tr>`;
       }).join("")}</tbody></table></div>
-      <p class="fine">The strip runs from first place on the left to last on the right; darker means likelier. Win and podium odds are checked against history. Positions below third are rougher, so read the strip as a rough shape. See <code>reports/ordered.md</code>.</p>`;
+      <p class="fine">First to last, left to right; darker is likelier.</p>
+      ${more(`<p class="fine">Win and podium odds are checked against history. Positions below third are rougher, so read the strip as a rough shape. See <code>reports/ordered.md</code>.</p>`)}`;
     out.querySelectorAll(".slot").forEach((sel) => (sel.onchange = () => {
       const id = sel.dataset.id, target = Number(sel.value), old = grid[id];
       const other = Object.keys(grid).find((d) => d !== id && grid[d] === target);
@@ -468,7 +468,7 @@ async function renderH2H() {
   const data = await getJSON("data/h2h.json");
   const years = Object.keys(data).sort((a, b) => b - a);
   el.innerHTML = `
-    <p class="fine">Counted from real results: qualifying positions and race finishes in the rounds where both drivers took part. A retirement counts as finishing behind anyone who finished; if both retire, the race does not count for either.</p>
+    ${more(`<p class="fine">Counted from qualifying positions and race finishes in rounds where both drivers took part. A retirement counts as finishing behind anyone who finished; if both retire, the race does not count for either.</p>`, "How it's counted")}
     <div class="simbar"><label class="select">Season <select id="h2h-year">${years.map((y) => `<option>${y}</option>`).join("")}</select></label></div>
     <h3>Teammates</h3><div id="h2h-team"></div>
     <h3>Compare any two drivers</h3><div id="h2h-any"></div>`;
@@ -484,7 +484,7 @@ async function renderH2H() {
         <td><span class="tick inline" style="background:${colour(p.team)}"></span><b>${name(p.a)}</b> vs <b>${name(p.b)}</b></td>
         <td class="num">${p.sameTeam}</td>
         <td>${split(p.quali.a, p.quali.b)}</td><td>${split(p.race.a, p.race.b)}</td><td>${split(p.points.a, p.points.b, (v) => Math.round(v))}</td></tr>`).join("")}</tbody></table></div>
-      <p class="fine">Qualifying and race columns count rounds won by each driver. Points are race points only, not sprints.</p>`;
+      <p class="fine">Rounds won by each driver. Race points only, no sprints.</p>`;
     const ids = Object.keys(drv).sort((a, b) => drv[a].code.localeCompare(drv[b].code));
     const opts = (sel) => ids.map((id) => `<option value="${esc(id)}"${id === sel ? " selected" : ""}>${esc(drv[id].code)} (${esc(teamOf(id))})</option>`).join("");
     const first = pairs[0] || { a: ids[0], b: ids[1] };
@@ -507,11 +507,9 @@ async function renderH2H() {
         ${c.avgFinish ? row("Average finish (both finished)", split(c.avgFinish.a, c.avgFinish.b, one)) : ""}
         ${row("Retirements", split(c.dnf.a, c.dnf.b))}
         </tbody></table></div>
-        <p class="fine">${name(a)} is on the left, ${name(b)} on the right. ${c.sameTeam === c.together
-          ? "They were teammates in every one of these rounds."
-          : c.sameTeam === 0
-            ? "They were never teammates this season, so this mostly compares their cars."
-            : `They drove for the same team in ${c.sameTeam} of ${c.together} rounds, so part of this compares cars, not drivers.`}</p>`;
+        ${c.sameTeam === c.together ? "" : `<p class="fine">${c.sameTeam === 0
+            ? "Not teammates, so this mostly compares their cars."
+            : `Teammates in ${c.sameTeam} of ${c.together} rounds, so this partly compares cars.`}</p>`}`;
     };
     $("#h2h-a").onchange = show; $("#h2h-b").onchange = show;
     show();
@@ -562,7 +560,7 @@ async function renderStandings() {
         <td><span class="tick inline" style="background:${colour(r.team)}"></span><b>${esc(kind === "d" ? r.code : teamName(r.team))}</b></td>
         ${kind === "d" ? `<td class="tl">${esc(teamName(r.team))}</td>` : ""}
         <td class="num">${fmtPts(r.points)}</td><td class="num">${r.wins}</td>${kind === "d" ? `<td class="num">${r.podiums}</td>` : ""}</tr>`).join("")}</tbody></table></div>
-      <p class="fine">${kind === "d" ? "Equal points are split by best finishes, as in the championship rules." : "Constructors' points count every car, so a team that changed drivers keeps all the points its cars scored."}</p>`;
+      <p class="fine">${kind === "d" ? "Ties are split by best finishes." : "Every car's points count, whoever drove it."}</p>`;
   };
   $("#st-year").onchange = draw;
   const setKind = (k) => { kind = k; $("#st-d").setAttribute("aria-pressed", String(k === "d")); $("#st-c").setAttribute("aria-pressed", String(k === "c")); draw(); };
@@ -616,7 +614,6 @@ async function renderChampionship() {
     <div class="simbar"><label class="select">Season <select id="ch-season"></select></label></div>
     <p class="fine" id="ch-note"></p>
     <div id="ch-chart"></div>
-    <h3>How far to trust it</h3>
     <div id="ch-trust"></div>`;
   $("#ch-left").innerHTML = cur.remaining.map((r) =>
     `<li><b>R${r.round}</b> ${esc(r.race.replace(/ Grand Prix$/, " GP"))}${r.sprint ? '<span class="s" title="Sprint weekend">Sprint</span>' : ""}</li>`).join("");
@@ -634,7 +631,7 @@ async function renderChampionship() {
     // a title decided on points is a fact, not a 99.9% forecast: say so and drop the odds column
     const champ = clinched(kind === "d" ? cur.drivers : cur.teams, cur.remaining, kind);
     $("#ch-lede").innerHTML = champ
-      ? `<b>${esc(label(champ))}</b> has won the ${title}. Nobody can catch them on points${cur.remaining.length ? ` with ${left.replace(" to go", " left")}` : ""}; the ranges below are for the rest of the order.`
+      ? `<b>${esc(label(champ))}</b> has won the ${title}${cur.remaining.length ? `, with ${left.replace(" to go", " left")}` : ""}.`
       : `After round ${played} of ${total}, <b>${esc(label(lead))}</b> has a <b>${titlePct(lead.title)}</b> chance of the ${title}${second && second.title >= 0.001 ? `; ${esc(label(second))} is next at ${titlePct(second.title)}` : ""}. ${left}.`;
     const pct = (r) => (!champ ? titlePct(r.title) : r === champ ? '<span class="champ">Champion</span>' : "");
     $("#ch-tower").innerHTML = `<ol class="tower title ${kind === "c" ? "teams" : ""}">${shown.map((r, i) => rangeRow(r, i, axisMax, label(r), (champ ? r !== champ : r.title < 0.001 && i > 0) ? "dim" : "", pct(r))).join("")}</ol>`;
@@ -669,8 +666,8 @@ async function renderChampionship() {
     });
     lineChart($("#ch-chart"), series, cuts.map((c) => String(c.after)), { unit: "title chance", firstIsData: true, yMax: 100, fmt: (v) => `${Number.isInteger(v) ? v : v.toFixed(1)}%` });
     $("#ch-note").textContent = sx.live
-      ? "Each point is the title chance using only the results up to that round. This replay is recomputed with every update; the live log below records forecasts as they were made."
-      : `A replay: each point uses only the results up to that round, never the rest of ${$("#ch-season").value}. ${last.champion_actual ? `${last.champion_actual} went on to win the title.` : ""}`;
+      ? "Title chance at each round, using only results up to then."
+      : `A replay using only results up to each round.${last.champion_actual ? ` ${last.champion_actual} won the title.` : ""}`;
   };
   $("#ch-season").onchange = drawChart;
   drawChart();
@@ -678,13 +675,13 @@ async function renderChampionship() {
   const b = data.backtest?.summary;
   const live = data.live;
   const first = data.backtest?.seasons_tested?.[0], lastY = data.backtest?.seasons_tested?.slice(-1)[0];
-  el.querySelector("#ch-trust").innerHTML = `
+  el.querySelector("#ch-trust").innerHTML = more(`
     ${b ? `<p>We replayed ${first}–${lastY} at every round, ${b.cutoffs} times in all. Expected final points were off by ${b.mae.toFixed(1)} on average, against ${b.straight_line_mae.toFixed(1)} for simply extending each driver's current points rate.</p>
     <p>For the title itself, the chance given to the eventual champion scored ${b.title_logloss.toFixed(2)} (log loss, lower is better), against ${b.rival_title_logloss.toFixed(2)} for a plain projection whose noise level was picked in hindsight. That is a small edge, and five seasons means only five champions, so the title odds are the least certain number on this page.</p>
     <p class="fine">One number, how far a team's pace may drift during a season, was chosen so the 80% ranges above held the real final total ${whole(b.coverage80)} of the time on those same seasons. That check is a fit, not an independent test, and the comparisons above were made on the same seasons too, so treat them as slightly flattering.</p>` : ""}
     <p class="fine">The simulation knows each team's recent form and the races and sprints left. It does not know about upgrades, penalties or injuries; it allows for pace drifting during the season, sized from past seasons. Details are in <code>reports/championship.md</code>.</p>
     <div class="livebox"><p><b>Live log: ${live.records} championship forecast${live.records === 1 ? "" : "s"} frozen.</b> ${live.chain_ok ? "The chain is intact." : "The chain is broken."}</p>
-      ${live.log.length ? `<p>${live.log.slice(-3).map((r) => `After round ${r.after_round}: ${esc(r.leader)} ${titlePct(r.leader_title)}, frozen ${fmtStamp(r.made_at)}`).join(". ")}.</p>` : "<p>Each forecast is logged after a race, before the next one starts.</p>"}</div>`;
+      ${live.log.length ? `<p>${live.log.slice(-3).map((r) => `After round ${r.after_round}: ${esc(r.leader)} ${titlePct(r.leader_title)}, frozen ${fmtStamp(r.made_at)}`).join(". ")}.</p>` : "<p>Each forecast is logged after a race, before the next one starts.</p>"}</div>`, "How far to trust it");
 }
 
 /* ---------- boot ---------- */
