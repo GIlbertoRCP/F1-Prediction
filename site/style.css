@@ -77,6 +77,18 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter) 3rem; }
 .circuit .trk { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; opacity: .92; }
 .circuit .trk-bed { fill: none; stroke: var(--rule); stroke-width: 20; stroke-linejoin: round; stroke-linecap: round; }
 .circuit .sf { fill: var(--red); }
+/* The outline is stored in racing order from the start/finish line (pathLength 100), so the track draws in from
+   the line and a car with a fading tail laps it the way the race goes. Negative dashoffset moves a dash forward. */
+.circuit .trk { stroke-dasharray: 100 100; animation: trk-draw 1.1s cubic-bezier(.45, 0, .2, 1) both; }
+.circuit .trk-bed { animation: trk-fade .5s ease-out both; }
+.circuit .sf { animation: trk-fade .25s ease-out both; }
+.circuit .car, .circuit .car-tail { fill: none; stroke-linecap: round; opacity: 0; animation: car-lap 5s linear 1.1s infinite, trk-fade .4s ease-out 1.1s forwards; }
+.circuit .car { stroke: var(--red); stroke-width: 9; stroke-dasharray: 1.2 98.8; filter: drop-shadow(0 0 4px rgba(225, 6, 0, .8)); }
+.circuit .car-tail { stroke: var(--red); stroke-opacity: .4; stroke-width: 5; stroke-dasharray: 9 91; animation-name: tail-lap, trk-fade; }
+@keyframes trk-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes trk-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes car-lap { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
+@keyframes tail-lap { from { stroke-dashoffset: 7.8; } to { stroke-dashoffset: -92.2; } }   /* tail ends where the car is */
 .circuit figcaption { margin-top: .3rem; font-size: .85rem; color: var(--slate); text-align: right; max-width: none; }
 
 /* timing tower */
@@ -270,6 +282,11 @@ select { max-width: 100%; font: inherit; padding: .4rem .6rem; background: var(-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .tower.animate .fill, .race-row .chev { transition: none; }
+  /* no motion: the car sits just past the line, its tail still shows which way the lap runs */
+  .circuit .trk, .circuit .trk-bed, .circuit .sf { animation: none; }
+  .circuit .car, .circuit .car-tail { animation: none; opacity: 1; }
+  .circuit .car { stroke-dashoffset: -8; }
+  .circuit .car-tail { stroke-dashoffset: -0.2; }
 }
 .tower.title.teams li { grid-template-columns: 2.4rem 5px 7.6rem 4.4rem minmax(0, 1fr) 4.6rem; }
 .tower.title.teams .code { font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
