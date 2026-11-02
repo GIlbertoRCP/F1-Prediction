@@ -23,7 +23,7 @@
     "label": "Qualifying"
    }
   ],
-  "note": "Built only from recent form, with no starting grid. In past tests the form-only favourite won about 4 races in 10, against about 55% once the grid is known, so treat these odds as a rough guide.",
+  "note": "Recent form only, no grid yet, so a rough guide.",
   "race": "Brazilian Grand Prix",
   "season": 2026,
   "round": 20,
@@ -33,7 +33,7 @@
     "driver": "VER",
     "team": "red_bull",
     "grid": null,
-    "p": 0.320907,
+    "p": 0.330384,
     "recent": [
      2,
      1,
@@ -47,7 +47,7 @@
     "driver": "ANT",
     "team": "mercedes",
     "grid": null,
-    "p": 0.266694,
+    "p": 0.265264,
     "recent": [
      5,
      2,
@@ -61,7 +61,7 @@
     "driver": "LEC",
     "team": "ferrari",
     "grid": null,
-    "p": 0.151024,
+    "p": 0.150214,
     "recent": [
      4,
      4,
@@ -75,7 +75,7 @@
     "driver": "HAM",
     "team": "ferrari",
     "grid": null,
-    "p": 0.118081,
+    "p": 0.117448,
     "recent": [
      6,
      3,
@@ -85,25 +85,11 @@
     ]
    },
    {
-    "driver_id": "norris",
-    "driver": "NOR",
-    "team": "mclaren",
-    "grid": null,
-    "p": 0.043897,
-    "recent": [
-     null,
-     9,
-     4,
-     5,
-     5
-    ]
-   },
-   {
     "driver_id": "russell",
     "driver": "RUS",
     "team": "mercedes",
     "grid": null,
-    "p": 0.040095,
+    "p": 0.03988,
     "recent": [
      1,
      20,
@@ -113,17 +99,31 @@
     ]
    },
    {
+    "driver_id": "norris",
+    "driver": "NOR",
+    "team": "mclaren",
+    "grid": null,
+    "p": 0.039401,
+    "recent": [
+     null,
+     9,
+     4,
+     5,
+     5
+    ]
+   },
+   {
     "driver_id": "hadjar",
     "driver": "HAD",
     "team": "red_bull",
     "grid": null,
-    "p": 0.018618,
+    "p": 0.020494,
     "recent": [
      3,
      5,
      10,
      6,
-     12
+     9
     ]
    },
    {
@@ -131,13 +131,13 @@
     "driver": "PIA",
     "team": "mclaren",
     "grid": null,
-    "p": 0.017946,
+    "p": 0.013135,
     "recent": [
      13,
      6,
      5,
      7,
-     7
+     13
     ]
    },
    {
@@ -145,13 +145,13 @@
     "driver": "LAW",
     "team": "rb",
     "grid": null,
-    "p": 0.00367,
+    "p": 0.004491,
     "recent": [
      12,
      7,
      7,
      9,
-     9
+     7
     ]
    },
    {
@@ -159,7 +159,7 @@
     "driver": "LIN",
     "team": "rb",
     "grid": null,
-    "p": 0.00225,
+    "p": 0.002395,
     "recent": [
      7,
      10,
@@ -169,31 +169,31 @@
     ]
    },
    {
-    "driver_id": "colapinto",
-    "driver": "COL",
-    "team": "alpine",
-    "grid": null,
-    "p": 0.001959,
-    "recent": [
-     null,
-     13,
-     null,
-     null,
-     8
-    ]
-   },
-   {
     "driver_id": "gasly",
     "driver": "GAS",
     "team": "alpine",
     "grid": null,
-    "p": 0.001834,
+    "p": 0.00163,
     "recent": [
      null,
      16,
      11,
      10,
-     10
+     17
+    ]
+   },
+   {
+    "driver_id": "bortoleto",
+    "driver": "BOR",
+    "team": "audi",
+    "grid": null,
+    "p": 0.001619,
+    "recent": [
+     15,
+     18,
+     null,
+     13,
+     8
     ]
    },
    {
@@ -201,13 +201,37 @@
     "driver": "HUL",
     "team": "audi",
     "grid": null,
-    "p": 0.001516,
+    "p": 0.001609,
     "recent": [
      11,
      11,
      8,
      11,
-     16
+     14
+    ]
+   },
+   {
+    "driver_id": "colapinto",
+    "driver": "COL",
+    "team": "alpine",
+    "grid": null,
+    "p": 0.001564,
+    "recent": [
+     null,
+     13,
+     null,
+     null,
+     15
+    ]
+   },
+   {
+    "driver_id": "ryo_hirakawa",
+    "driver": "HIR",
+    "team": "haas",
+    "grid": null,
+    "p": 0.001452,
+    "recent": [
+     10
     ]
    },
    {
@@ -215,7 +239,7 @@
     "driver": "ALO",
     "team": "aston_martin",
     "grid": null,
-    "p": 0.001435,
+    "p": 0.001428,
     "recent": [
      null,
      8,
@@ -229,7 +253,7 @@
     "driver": "BEA",
     "team": "haas",
     "grid": null,
-    "p": 0.001381,
+    "p": 0.001398,
     "recent": [
      9,
      14,
@@ -239,31 +263,17 @@
     ]
    },
    {
-    "driver_id": "bortoleto",
-    "driver": "BOR",
-    "team": "audi",
-    "grid": null,
-    "p": 0.001324,
-    "recent": [
-     15,
-     18,
-     null,
-     13,
-     11
-    ]
-   },
-   {
     "driver_id": "sainz",
     "driver": "SAI",
     "team": "williams",
     "grid": null,
-    "p": 0.001309,
+    "p": 0.001297,
     "recent": [
      10,
      17,
      14,
      18,
-     15
+     12
     ]
    },
    {
@@ -271,13 +281,13 @@
     "driver": "PER",
     "team": "cadillac",
     "grid": null,
-    "p": 0.001251,
+    "p": 0.001243,
     "recent": [
      14,
      19,
      17,
      19,
-     17
+     16
     ]
    },
    {
@@ -285,7 +295,7 @@
     "driver": "STR",
     "team": "aston_martin",
     "grid": null,
-    "p": 0.001247,
+    "p": 0.00124,
     "recent": [
      null,
      12,
@@ -299,13 +309,13 @@
     "driver": "ALB",
     "team": "williams",
     "grid": null,
-    "p": 0.001239,
+    "p": 0.001229,
     "recent": [
      null,
      null,
      18,
      17,
-     14
+     11
     ]
    },
    {
@@ -313,23 +323,13 @@
     "driver": "BOT",
     "team": "cadillac",
     "grid": null,
-    "p": 0.00119,
+    "p": 0.001184,
     "recent": [
      16,
      null,
      19,
      null,
      null
-    ]
-   },
-   {
-    "driver_id": "ryo_hirakawa",
-    "driver": "HIR",
-    "team": "haas",
-    "grid": null,
-    "p": 0.001133,
-    "recent": [
-     13
     ]
    }
   ]
