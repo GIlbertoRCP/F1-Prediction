@@ -1,4 +1,4 @@
-# F1 Winner Oracle
+# Automata F1
 
 **Calibrated Formula 1 race-winner probabilities, with a public track record that can't be quietly edited.**
 
@@ -31,7 +31,7 @@ Nobody has to run a script.
 |---|---|---|
 | Random guess | 0% | 3.00 |
 | Pole sitter always wins | 54.0% | 1.53 |
-| **Winner Oracle** | **55.2%** | **1.24** |
+| **Automata** | **55.2%** | **1.24** |
 
 The model beats the grid-only baseline on log loss (paired 95% interval -0.45 to -0.16) and its probabilities
 are close to calibrated. As a single pick it is **no better than the pole sitter**. What it adds is honest odds for

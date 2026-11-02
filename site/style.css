@@ -41,6 +41,7 @@ code { font-size: .9em; background: var(--raised); padding: .1em .4em; border-ra
   max-width: 1120px; margin: 0 auto; padding: 14px var(--gutter);
 }
 .brand { display: inline-flex; align-items: center; gap: .65rem; text-decoration: none; font-family: var(--display); font-style: italic; font-weight: 800; font-size: 1.7rem; letter-spacing: .01em; line-height: 1; }
+.brand .brand-sub { margin-left: -.35rem; color: var(--red-text); font-weight: 700; }   /* "F1" names the sport; the brand is Automata */
 .mark { display: inline-block; width: 28px; height: 22px; position: relative; }
 .mark i { position: absolute; bottom: 0; width: 8px; transform: skewX(-14deg); background: var(--ink); }
 .mark i:nth-child(1) { left: 0; height: 12px; background: var(--slate); }
@@ -231,6 +232,7 @@ svg.cal text { fill: var(--slate); font-size: 11px; font-family: inherit; }
 .tower.title li { grid-template-columns: 2.4rem 5px 4.6rem 4.4rem minmax(0, 1fr) 4.6rem; }
 .tower.title li.dim { opacity: .55; }
 .tower.title .pts { color: var(--slate); font-size: .95rem; text-align: right; }
+.tower .pct .champ { display: inline-block; font-size: 1rem; letter-spacing: .04em; text-transform: uppercase; padding: .2rem .8rem .2rem .6rem; background: var(--red); color: #fff; clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
 .remain { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0 1.4rem; padding: 0; list-style: none; }
 .remain li { background: var(--panel); padding: .3rem .9rem .3rem .6rem; font-size: .92rem; clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
 .remain li .s { margin-left: .4rem; background: var(--yellow); color: #0a0b0e; font-weight: 700; font-size: .75rem; padding: 0 .35rem; }

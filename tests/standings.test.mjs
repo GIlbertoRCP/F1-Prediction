@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { driverStandings, teamStandings } from "../site/standings.js";
+import { driverStandings, teamStandings, clinched } from "../site/standings.js";
 
 const real = JSON.parse(fs.readFileSync(new URL("../site/data/h2h.json", import.meta.url)));
 
@@ -44,4 +44,14 @@ test("real seasons reproduce the published final standings", () => {
     const t = teamStandings(real[year]);
     exp.teams.forEach(([id, pts], i) => { assert.equal(t[i].id, id, `${year} team ${i + 1}`); assert.equal(t[i].points, pts); });
   }
+});
+
+test("clinched: a lead bigger than the points left decides the title", () => {
+  const rows = [{ code: "VER", points: 261 }, { code: "ANT", points: 380 }];
+  const races = (n, sprint = false) => Array.from({ length: n }, () => ({ sprint }));
+  assert.equal(clinched(rows, races(4))?.code, "ANT");          // 119 ahead, 100 left
+  assert.equal(clinched(rows, races(5)), null);                  // 125 left
+  assert.equal(clinched(rows, [...races(3), ...races(1, true)]).code, "ANT");   // 3*25 + 33 = 108
+  assert.equal(clinched([{ points: 10 }, { points: 10 }], []), null);           // a tie goes to countback
+  assert.equal(clinched([{ team: "a", points: 600 }, { team: "b", points: 520 }], races(2), "c"), null);   // 86 left for a team
 });
