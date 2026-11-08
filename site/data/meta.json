@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-11-08T17:55:37+00:00",
+ "generated_at": "2026-11-08T22:00:32+00:00",
  "model": "grid_plus_form",
  "model_version": "f242f5dea0",
  "data_through": {
   "season": 2026,
-  "round": 19,
-  "race": "Mexico City Grand Prix",
-  "date": "2026-11-01"
+  "round": 20,
+  "race": "Brazilian Grand Prix",
+  "date": "2026-11-08"
  },
  "live_log": {
   "records": 3,
