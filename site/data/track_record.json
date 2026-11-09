@@ -22,7 +22,7 @@
    "hi": 1.04404997919
   },
   "avg_winner_prob": 0.33456437545198286,
-  "pole_top1": 0.3333333333333333,
+  "pole_top1": 0.6666666666666666,
   "uniform_logloss": 3.091042453358316
  },
  "backtest": {
@@ -48,7 +48,7 @@
    "hi": 0.6441628549514146
   },
   "avg_winner_prob": 0.40939330280241043,
-  "pole_top1": 0.5393258426966292,
+  "pole_top1": 0.5449438202247191,
   "uniform_logloss": 3.005864953370347
  },
  "by_season": {
@@ -283,7 +283,7 @@
     "hi": 0.7479775842756825
    },
    "avg_winner_prob": 0.3483833058712046,
-   "pole_top1": 0.65,
+   "pole_top1": 0.7,
    "uniform_logloss": 3.091042453358316
   }
  },
@@ -339,7 +339,7 @@
   }
  ],
  "reference": {
-  "slot_prior_logloss": 1.5471898091487786
+  "slot_prior_logloss": 1.5333814273943998
  },
  "latest": {
   "season": 2026,
@@ -357,7 +357,7 @@
   "top3": true,
   "logloss": 0.9356376634711926,
   "brier": 0.466724700074133,
-  "pole_hit": false
+  "pole_hit": true
  },
  "races": [
   {
@@ -3562,7 +3562,7 @@
    "top3": true,
    "logloss": 0.9356376634711926,
    "brier": 0.466724700074133,
-   "pole_hit": false
+   "pole_hit": true
   }
  ]
 }
