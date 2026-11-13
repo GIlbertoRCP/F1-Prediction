@@ -3893,7 +3893,7 @@ season,round,race,date,circuit,driver,driver_id,team,grid,finish_position,classi
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,NOR,norris,mclaren,1,1,1,Finished,25
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,PER,perez,cadillac,22,18,1,Lapped,0
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,PIA,piastri,mclaren,10,6,1,Finished,8
-2026,20,Brazilian Grand Prix,2026-11-08,interlagos,rafael_camara,rafael_camara,haas,11,20,1,Lapped,0
+2026,20,Brazilian Grand Prix,2026-11-08,interlagos,CAM,rafael_camara,haas,11,20,1,Lapped,0
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,RUS,russell,mercedes,7,4,1,Finished,12
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,SAI,sainz,williams,12,19,1,Lapped,0
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,STR,stroll,aston_martin,16,,0,Retired,0

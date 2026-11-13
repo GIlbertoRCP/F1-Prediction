@@ -268,7 +268,7 @@
    },
    {
     "driver_id": "rafael_camara",
-    "driver": "rafael_camara",
+    "driver": "CAM",
     "team": "haas",
     "grid": null,
     "p": 0.00132,

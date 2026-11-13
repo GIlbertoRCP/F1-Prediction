@@ -3857,7 +3857,7 @@ season,round,race,date,circuit,driver,driver_id,team,quali_position,q1,q2,q3
 2026,19,Mexico City Grand Prix,2026-11-01,rodriguez,HAD,hadjar,red_bull,7,1:17.385,1:17.047,1:16.900
 2026,19,Mexico City Grand Prix,2026-11-01,rodriguez,HAM,hamilton,ferrari,1,1:17.341,1:16.953,1:16.514
 2026,19,Mexico City Grand Prix,2026-11-01,rodriguez,HUL,hulkenberg,audi,10,1:17.868,1:17.306,
-2026,19,Mexico City Grand Prix,2026-11-01,rodriguez,LAW,lawson,rb,8,,1:17.207,1:17.029
+2026,19,Mexico City Grand Prix,2026-11-01,rodriguez,LAW,lawson,rb,22,,,
 2026,19,Mexico City Grand Prix,2026-11-01,rodriguez,LEC,leclerc,ferrari,3,1:17.506,1:16.944,1:16.633
 2026,19,Mexico City Grand Prix,2026-11-01,rodriguez,VER,max_verstappen,red_bull,4,1:17.942,1:16.876,1:16.692
 2026,19,Mexico City Grand Prix,2026-11-01,rodriguez,NOR,norris,mclaren,6,1:17.733,1:16.728,1:16.824
@@ -3885,7 +3885,7 @@ season,round,race,date,circuit,driver,driver_id,team,quali_position,q1,q2,q3
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,NOR,norris,mclaren,1,1:30.939,1:29.207,1:27.470
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,PER,perez,cadillac,21,1:34.509,,
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,PIA,piastri,mclaren,12,1:32.251,1:30.369,
-2026,20,Brazilian Grand Prix,2026-11-08,interlagos,rafael_camara,rafael_camara,haas,13,1:32.809,1:31.515,
+2026,20,Brazilian Grand Prix,2026-11-08,interlagos,CAM,rafael_camara,haas,13,1:32.809,1:31.515,
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,RUS,russell,mercedes,2,1:31.206,1:26.745,1:27.674
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,SAI,sainz,williams,15,1:32.959,1:31.785,
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,STR,stroll,aston_martin,19,1:33.653,,
