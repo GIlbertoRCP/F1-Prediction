@@ -147,7 +147,7 @@ export async function renderHero(forecast, record) {
          ${forecast.provisional ? SHARE_BTN : ""}
        </div>${nextMap}</div>`
     : `<h1 class="calm">No race to forecast right now</h1>
-       <p class="sub">Forecasts open after qualifying. Here is the last race and how it went.</p>`;
+       <p class="sub">Forecasts open after qualifying. Here is the last race and how it went.${record.latest ? ` <a href="#championship">The ${record.latest.season} season in review</a>.` : ""}</p>`;
   if (next) countdown($("#cd", el), quali && quali > Date.now() ? quali : raceAt, quali && quali > Date.now() ? "qualifying" : "the race");
   if (forecast.provisional) {
     el.append(provisionalPanel(forecast.provisional));

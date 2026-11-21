@@ -79,7 +79,7 @@ function motion() {
     renderRecord(record);
     renderRaces(index, record);
     renderPicks(record);
-    renderChampionship(index).catch((e) => console.error(e));
+    renderChampionship(index, record).catch((e) => console.error(e));
     renderSim(index, forecast);
     renderStandings().catch((e) => { console.error(e); $("#standings-body").textContent = "Standings data is not available."; });
     renderH2H().catch((e) => { console.error(e); $("#h2h-body").textContent = "Head-to-head data is not available."; });

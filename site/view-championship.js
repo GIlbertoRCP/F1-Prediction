@@ -3,7 +3,8 @@
 import { lineChart } from "./linechart.js";
 import { colour, teamName } from "./names.js";
 import { clinched } from "./standings.js";
-import { $, esc, fmtStamp, getJSON, more, shownTitle, titlePct, whole } from "./ui.js";
+import { titleStory, forecastStory } from "./recap.js";
+import { $, esc, fmtStamp, getJSON, getShared, more, pct, shownTitle, titlePct, whole } from "./ui.js";
 import { fmtPts } from "./view-standings.js";
 
 /* ---------- championship ---------- */
@@ -22,7 +23,25 @@ export function rangeRow(r, i, axisMax, label, cls = "", pct = titlePct(r.title)
     <span class="pct num">${pct}</span></li>`;
 }
 
-export async function renderChampionship(index) {
+// A finished season, told in four tiles: both champions and when it was settled, and how the race forecasts did.
+async function seasonInReview(cur, record) {
+  const season = (await getShared("data/h2h.json"))[cur.season];
+  if (!season) return "";
+  const d = titleStory(season, "d"), c = titleStory(season, "c"), f = forecastStory(record.races, cur.season);
+  const settled = (t) => (t.left ? `settled after round ${t.settledAfter}, with ${t.left} to go` : "settled at the last round");
+  const champTile = (t, name, what) => `<div class="tile best"><span class="v">${esc(name)}</span>
+    <span class="l">${what} champion on ${fmtPts(t.champ.points)} points, ${fmtPts(t.margin)} clear; ${settled(t)}</span></div>`;
+  return `<h3>${cur.season} in review</h3>
+    <div class="tiles">
+      ${champTile(d, d.champ.code, "Drivers'")}
+      ${champTile(c, teamName(c.champ.id), "Constructors'")}
+      ${f ? `<div class="tile"><span class="v">${f.hits} of ${f.n}</span><span class="l">races won by our favourite, with ${f.winners} different winners</span></div>
+      <div class="tile warn"><span class="v">${pct(f.upset.p_winner)}</span><span class="l">biggest upset: ${esc(f.upset.winner)} won the ${esc(f.upset.race.replace(/ Grand Prix$/, " GP"))}</span></div>` : ""}
+    </div>
+    ${f?.bestCall ? `<p class="fine">Best call: ${esc(f.bestCall.winner)} at ${whole(f.bestCall.p_winner)} for the ${esc(f.bestCall.race)}.${f.live ? ` ${f.live} of these races were live forecasts, frozen before the start; the rest are replays.` : ""}</p>` : ""}`;
+}
+
+export async function renderChampionship(index, record) {
   const sec = $("#championship");
   let data;
   try { data = await getJSON("data/championship.json"); } catch { return; }
@@ -35,6 +54,7 @@ export async function renderChampionship(index) {
   let kind = "d";
   el.innerHTML = `
     <p class="lede-line" id="ch-lede"></p>
+    <div id="ch-review"></div>
     <div class="simbar">
       <span class="seg" role="group" aria-label="Championship">
         <button type="button" id="ch-d" aria-pressed="true">Drivers</button>
@@ -82,6 +102,7 @@ export async function renderChampionship(index) {
   $("#ch-d").onclick = () => setKind("d");
   $("#ch-c").onclick = () => setKind("c");
   drawTower();
+  if (!cur.remaining.length) seasonInReview(cur, record).then((html) => { $("#ch-review").innerHTML = html; }).catch((e) => console.error(e));
 
   // how the odds moved: this season so far, and past seasons replayed round by round
   const seasons = { [`${cur.season}`]: { label: `${cur.season}${cur.remaining.length ? " so far" : ""}`, cutoffs: data.replay?.cutoffs || [], live: true } };
