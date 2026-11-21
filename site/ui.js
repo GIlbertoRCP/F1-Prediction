@@ -39,7 +39,7 @@ export function formStrip(recent) {
   return `<span class="form" aria-label="Last ${recent.length} finishes: ${recent.map(finishLabel).join(", ")}">${cells}</span>`;
 }
 
-export function tower(predictions, { winnerId = null, limit = 10, animate = false, hold = false, form = false } = {}) {
+export function tower(predictions, { winnerId = null, limit = 10, animate = false, hold = false, form = false, fromGrid = false } = {}) {
   const ol = document.createElement("ol");
   ol.className = "tower" + (animate ? " animate" : "") + (form ? " withform" : "");
   const max = Math.max(...predictions.map((p) => p.p));
@@ -64,6 +64,26 @@ export function tower(predictions, { winnerId = null, limit = 10, animate = fals
   draw(rows);
   const wrap = document.createElement("div");
   wrap.release = () => ol._set();
+  // fromGrid (with hold): the rows wait in starting-grid order, then on release slide into the order of the odds
+  if (fromGrid && hold && rows.every((p) => p.grid)) {
+    const items = [...ol.children], byGrid = items.slice().sort((a, b) => rows[items.indexOf(a)].grid - rows[items.indexOf(b)].grid);
+    ol.classList.add("gridphase");
+    ol.append(...byGrid);
+    wrap.release = () => {
+      const first = new Map(items.map((li) => [li, li.getBoundingClientRect().top]));
+      ol.append(...items);                                   // the order of the odds
+      ol.classList.remove("gridphase");
+      if (!reduceMotion()) {
+        items.forEach((li) => {
+          const dy = first.get(li) - li.getBoundingClientRect().top;
+          if (!dy) return;
+          li.animate([{ transform: `translateY(${dy}px)` }, { transform: "none" }],
+            { duration: 700, easing: "cubic-bezier(.2, .8, .3, 1)", delay: 40 * Math.min(items.indexOf(li), 9) });
+        });
+      }
+      ol._set();
+    };
+  }
   wrap.append(ol);
   if (predictions.length > rows.length) {
     const btn = document.createElement("button");

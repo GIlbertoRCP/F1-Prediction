@@ -432,3 +432,7 @@ select { max-width: 100%; font: inherit; padding: .4rem .6rem; background: var(-
 .drvcard-link { display: block; padding: .7rem 1.1rem .9rem; color: var(--slate); font-size: .92rem; }
 .drvcard-link:hover { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { .drvcard[open] { animation: none; } }
+/* the frozen forecast's rows wait in grid order while the lights count down; ranks and odds appear at lights out */
+.tower.gridphase .rk, .tower.gridphase .pct { opacity: 0; }
+.tower .rk, .tower .pct { transition: opacity .4s ease-out .3s; }
+.tower.gridphase li { position: relative; z-index: 1; }

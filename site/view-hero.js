@@ -122,7 +122,7 @@ export async function renderHero(forecast, record) {
         </div>
         ${map}
       </div>`;
-    const t = tower(forecast.predictions, { animate: true, hold: true });
+    const t = tower(forecast.predictions, { animate: true, hold: true, fromGrid: true });
     el.append(t);
     el.append(pickPanel(forecast, record));
     startLights(el, () => t.release());
