@@ -1,7 +1,7 @@
 [project]
 name = "f1"
 version = "0.1.0"
-description = "Add your description here"
+description = "Calibrated F1 race-winner probabilities, frozen before the start and scored in public"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

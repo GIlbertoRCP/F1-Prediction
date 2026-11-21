@@ -24,7 +24,33 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Between races there is nothing to fetch, so a scheduled run only goes ahead when a race is within a few days,
+  # plus every Monday so a newly published calendar (next season's, in the winter) is still picked up.
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.decide.outputs.run }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: data/results/schedule.csv
+          sparse-checkout-cone-mode: false
+      - id: decide
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import csv, datetime as dt, os
+          today = dt.datetime.now(dt.timezone.utc).date()
+          near = any(-2 <= (dt.date.fromisoformat(r["date"]) - today).days <= 3
+                     for r in csv.DictReader(open("data/results/schedule.csv")) if r["date"])
+          run = os.environ["EVENT"] != "schedule" or near or today.weekday() == 0
+          print(f"run={'true' if run else 'false'}")
+          PY
+        env:
+          EVENT: ${{ github.event_name }}
+
   update:
+    needs: gate
+    if: needs.gate.outputs.run == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

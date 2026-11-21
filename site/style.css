@@ -118,8 +118,8 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter) 3rem; }
 .tower.animate .fill { transition: width .9s cubic-bezier(.2,.7,.2,1); }
 .more { margin-top: .8rem; background: none; border: 0; padding: .3rem 0; font: inherit; color: var(--ink); text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 4px; text-decoration-thickness: 2px; cursor: pointer; }
 
-.callout { margin-top: 2rem; padding: 1rem 1.2rem; background: var(--panel); border-left: 5px solid var(--green); max-width: 62ch; }
-.callout.miss { border-left-color: var(--yellow); }
+.callout { margin-top: 2rem; padding: 1rem 1.2rem; background: var(--panel); border-top: 3px solid var(--green); max-width: 62ch; }
+.callout.miss { border-top-color: var(--yellow); }
 .callout h3 { margin: 0 0 .2rem; font-family: var(--display); font-style: italic; font-size: 1.5rem; font-weight: 700; }
 .callout p { margin: 0; color: var(--slate); }
 .lastrace-title { margin: 2.5rem 0 0; font-family: var(--display); font-style: italic; font-weight: 800; text-transform: uppercase; font-size: clamp(1.8rem, 5vw, 2.8rem); line-height: 1; }
@@ -177,7 +177,7 @@ svg.lc { display: block; width: 100%; height: auto; background: var(--panel); to
 svg.lc text { font-family: inherit; fill: var(--slate); }
 .lc-tick { font-size: 12px; }
 .lc-end { font-size: 13px; font-weight: 700; fill: var(--ink) !important; }
-.lc-tip { position: absolute; top: 8px; min-width: 9rem; padding: .5rem .7rem; background: var(--raised); border-left: 3px solid var(--red); font-size: .92rem; pointer-events: none; }
+.lc-tip { position: absolute; top: 8px; min-width: 9rem; padding: .5rem .7rem; background: var(--raised); border-top: 2px solid var(--red); font-size: .92rem; pointer-events: none; }
 .lc-tip-head { color: var(--slate); margin-bottom: .2rem; }
 .lc-tip-row { display: flex; align-items: center; gap: .5rem; }
 .lc-tip-row b { min-width: 3ch; text-align: right; }
@@ -205,7 +205,7 @@ svg.lc text { font-family: inherit; fill: var(--slate); }
 .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 3rem; align-items: start; }
 @media (max-width: 860px) { .two { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; } }
 .fine { color: var(--slate); font-size: .96rem; max-width: 62ch; }
-.livebox { padding: 1rem 1.2rem; background: var(--panel); border-left: 5px solid var(--red); max-width: 62ch; margin: 1.5rem 0; }
+.livebox { padding: 1rem 1.2rem; background: var(--panel); border-top: 3px solid var(--red); max-width: 62ch; margin: 1.5rem 0; }
 .livebox p { margin: 0; }
 .livebox p + p { margin-top: .4rem; color: var(--slate); font-size: .96rem; }
 
