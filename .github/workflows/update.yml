@@ -47,6 +47,7 @@ jobs:
       - name: Freeze forecast and rebuild site data
         run: python -m oracle.publish
       - name: Commit changes
+        id: commit
         if: github.event_name != 'push'
         run: |
           git config user.name "oracle-bot"
@@ -57,12 +58,25 @@ jobs:
           else
             git commit -m "Update results and forecasts $(date -u +%Y-%m-%dT%H:%MZ)"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+      # A scheduled run that found nothing new has nothing to deploy; pushes and manual runs always deploy.
+      - name: Draw the link-preview picture
+        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
+        continue-on-error: true          # the committed og.png stays in place if this fails
+        run: |
+          python -m http.server 8000 -d site >/dev/null 2>&1 &
+          sleep 1
+          google-chrome --headless=new --disable-gpu --hide-scrollbars --window-size=1200,630 \
+            --virtual-time-budget=10000 --screenshot=site/og.png http://localhost:8000/og.html
       - uses: actions/configure-pages@v5
+        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
       - uses: actions/upload-pages-artifact@v3
+        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
         with:
           path: site
       - uses: actions/deploy-pages@v4
+        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
 
       # A failed weekend run means a forecast that never appears, so say so loudly: one open issue,
       # commented on by each further failure and closed by the next run that works.

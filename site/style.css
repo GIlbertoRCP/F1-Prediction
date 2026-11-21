@@ -399,4 +399,11 @@ select { max-width: 100%; font: inherit; padding: .4rem .6rem; background: var(-
 .share-btn:hover, .share-btn:focus-visible { border-color: var(--slate); background: var(--panel); }
 .share-btn:disabled { opacity: .6; cursor: progress; }
 .hero .stamp + .share-btn { display: flex; width: fit-content; }
-.race-list li { scroll-margin-top: 4.5rem; }
+.top nav a[aria-current] { color: var(--ink); border-bottom-color: var(--red); }
+.stale { margin: 0 0 1rem; padding: .45rem .8rem; width: fit-content; color: var(--yellow); font-size: .92rem; box-shadow: inset 0 0 0 1px var(--yellow); }
+/* the header stays on screen on wider screens, so the nav can show where you are; the shadow paints the paper
+   across the full width behind the centred bar */
+@media (min-width: 721px) {
+  .top { position: sticky; top: 0; z-index: 20; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax -1px); border-bottom: 1px solid var(--rule); }
+  main section[id], .race-list li { scroll-margin-top: 4.5rem; }
+}

@@ -4,25 +4,9 @@ import { compare, teammatePairs } from "./h2h.js";
 import { driverStandings, teamStandings, clinched } from "./standings.js";
 import { lineChart } from "./linechart.js";
 import { circuitFigure } from "./circuits.js";
-import { shareCard } from "./share.js";
+import { shareCard, forecastCard } from "./share.js";
+import { CIRCUIT_NAMES, colour, teamName, venue } from "./names.js";
 
-const TEAM_COLOURS = {
-  red_bull: "#4a6bff", mercedes: "#27d1c0", ferrari: "#ef1a2d", mclaren: "#ff8000",
-  aston_martin: "#2aa58f", alpine: "#ff87bc", williams: "#3ab4ee", rb: "#7da0ff",
-  alphatauri: "#7aa6c6", toro_rosso: "#7aa6c6", haas: "#b58ae6", sauber: "#52e252",
-  alfa: "#d8465c", audi: "#e0334f", cadillac: "#9aa5b8", renault: "#ffd800",
-  racing_point: "#f596c8", force_india: "#f596c8",
-};
-const CIRCUIT_NAMES = {
-  albert_park: "Albert Park, Melbourne", shanghai: "Shanghai International Circuit", suzuka: "Suzuka", bahrain: "Bahrain International Circuit",
-  jeddah: "Jeddah Corniche Circuit", miami: "Miami International Autodrome", villeneuve: "Circuit Gilles Villeneuve, Montréal",
-  monaco: "Circuit de Monaco", catalunya: "Circuit de Barcelona-Catalunya", madring: "Madring, Madrid", red_bull_ring: "Red Bull Ring, Spielberg",
-  silverstone: "Silverstone", spa: "Spa-Francorchamps", hungaroring: "Hungaroring, Budapest", zandvoort: "Zandvoort",
-  monza: "Monza", baku: "Baku City Circuit", marina_bay: "Marina Bay, Singapore", sepang: "Sepang", americas: "Circuit of the Americas, Austin",
-  rodriguez: "Autódromo Hermanos Rodríguez, Mexico City", interlagos: "Interlagos, São Paulo", vegas: "Las Vegas Strip Circuit",
-  losail: "Lusail International Circuit", yas_marina: "Yas Marina, Abu Dhabi", imola: "Imola", istanbul: "Istanbul Park",
-};
-const colour = (team) => TEAM_COLOURS[team] || "#8a8f98";
 const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let CIRCUITS = null;
 
@@ -35,6 +19,8 @@ const titlePct = (p) => (p >= 0.995 ? `${Math.min(99.9, p * 100).toFixed(1)}%` :
 const shownTitle = (r) => (r.title >= 0.001 ? r.title : 0);   // odds that display as "<0.1%" rank by expected points
 const whole = (p) => `${Math.round(p * 100)}%`;
 const getJSON = (path) => fetch(path).then((r) => { if (!r.ok) throw new Error(`${path}: ${r.status}`); return r.json(); });
+const shared = {};
+const getShared = (path) => (shared[path] ||= getJSON(path));   // one download for files several sections read
 const fmtDate = (iso, opts = { day: "numeric", month: "short", year: "numeric" }) =>
   new Date(iso.length === 10 ? `${iso}T12:00:00Z` : iso).toLocaleDateString("en-GB", { ...opts, timeZone: "UTC" });
 const toInstant = (date, time) => (date && time ? new Date(`${date}T${time.endsWith("Z") ? time : time + "Z"}`) : null);
@@ -91,21 +77,17 @@ function tower(predictions, { winnerId = null, limit = 10, animate = false, hold
 
 /* ---------- hero ---------- */
 const mapFor = (circuit, caption) => circuitFigure(CIRCUITS, circuit, caption);
-const venue = (race) => `Round ${race.round}${CIRCUIT_NAMES[race.circuit] ? ` · ${CIRCUIT_NAMES[race.circuit]}` : ""}`;
 const SHARE_BTN = `<button type="button" class="share-btn"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13V3m0 0L6 7m4-4 4 4M4 11v5h12v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Share image</button>`;
 
-// Hooks the hero's share button to a picture of these odds.
-function bindShare(el, race, predictions, { tag, tagColour, footer }) {
+// Hooks the hero's share button to a picture of the odds on show.
+function bindShare(el, forecast) {
   const btn = $(".share-btn", el);
-  if (!btn) return;
+  const card = btn && forecastCard(forecast, CIRCUITS, location.host || "Automata F1");
+  if (!card) return;
   btn.onclick = async () => {
     btn.disabled = true;
     try {
-      const how = await shareCard({
-        eyebrow: venue(race), title: race.race, tag, tagColour, circuit: CIRCUITS?.[race.circuit]?.d ? CIRCUITS[race.circuit] : null,
-        rows: predictions.slice(0, 5).map((p) => ({ code: p.driver, colour: colour(p.team), p: p.p, label: pct(p.p) })),
-        footer: `${footer} · ${location.host || "Automata F1"}`,
-      }, `automata-${race.season}-${race.round}.png`);
+      const how = await shareCard(card, card.filename);
       if (how === "downloaded") { btn.lastChild.textContent = "Saved"; setTimeout(() => (btn.lastChild.textContent = "Share image"), 1800); }
     } finally { btn.disabled = false; }
   };
@@ -212,7 +194,7 @@ async function renderHero(forecast, record) {
     el.append(t);
     el.append(pickPanel(forecast, record));
     startLights(el, () => t.release());
-    bindShare(el, r, forecast.predictions, { tag: "LIVE FORECAST", tagColour: "#e10600", footer: `Frozen ${fmtStamp(forecast.made_at)} · fingerprint ${forecast.hash.slice(0, 12)}` });
+    bindShare(el, forecast);
     return;
   }
   const next = forecast.next_race;
@@ -237,7 +219,7 @@ async function renderHero(forecast, record) {
   if (next) countdown($("#cd", el), quali && quali > Date.now() ? quali : raceAt, quali && quali > Date.now() ? "qualifying" : "the race");
   if (forecast.provisional) {
     el.append(provisionalPanel(forecast.provisional));
-    bindShare(el, next, forecast.provisional.predictions, { tag: "EARLY ODDS · PROVISIONAL", tagColour: "#ffd23f", footer: "Before qualifying, from recent form" });
+    bindShare(el, forecast);
   }
   const last = record.latest;
   if (!last) return;
@@ -517,7 +499,7 @@ const one = (v) => (Math.round(v * 10) / 10).toFixed(1);
 
 async function renderH2H() {
   const el = $("#h2h-body");
-  const data = await getJSON("data/h2h.json");
+  const data = await getShared("data/h2h.json");
   const years = Object.keys(data).sort((a, b) => b - a);
   el.innerHTML = `
     ${more(`<p class="fine">Counted from qualifying positions and race finishes in rounds where both drivers took part. A retirement counts as finishing behind anyone who finished; if both retire, the race does not count for either.</p>`, "How it's counted")}
@@ -571,14 +553,11 @@ async function renderH2H() {
 }
 
 /* ---------- standings ---------- */
-const TEAM_NAMES = { mclaren: "McLaren", rb: "Racing Bulls", alphatauri: "AlphaTauri", toro_rosso: "Toro Rosso", alfa: "Alfa Romeo",
-  haas: "Haas", sauber: "Sauber", audi: "Audi", cadillac: "Cadillac", racing_point: "Racing Point", force_india: "Force India" };
-const teamName = (t) => TEAM_NAMES[t] || t.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 const fmtPts = (v) => (Number.isInteger(v) ? String(v) : v.toFixed(1));
 
 async function renderStandings() {
   const el = $("#standings-body");
-  const data = await getJSON("data/h2h.json");
+  const data = await getShared("data/h2h.json");
   const years = Object.keys(data).sort((a, b) => b - a);
   el.innerHTML = `
     <div class="simbar">
@@ -741,6 +720,34 @@ async function renderChampionship(index) {
       ${live.log.length ? `<p>${live.log.slice(-3).map((r) => `After round ${r.after_round}: ${esc(r.leader)} ${titlePct(r.leader_title)}, frozen ${fmtStamp(r.made_at)}`).join(". ")}.</p>` : "<p>Each forecast is logged after a race, before the next one starts.</p>"}</div>`, "How far to trust it");
 }
 
+/* ---------- freshness ---------- */
+const ago = (ms) => { const h = Math.round(ms / 36e5); return h < 1 ? "under an hour ago" : h < 48 ? `${h} hour${h === 1 ? "" : "s"} ago` : `${Math.round(h / 24)} days ago`; };
+
+// The data refreshes every three hours from Friday to Monday (UTC). If a weekend refresh is overdue, say so on the
+// page instead of quietly showing old odds.
+function freshness(meta) {
+  const at = new Date(meta.generated_at), age = Date.now() - at;
+  if (isNaN(at)) return "";
+  const weekend = [5, 6, 0, 1].includes(new Date().getUTCDay());
+  if (weekend && age > 7 * 36e5)
+    $("#forecast").insertAdjacentHTML("afterbegin", `<p class="stale" role="status">Last refreshed ${ago(age)}. An update is overdue, so these numbers may be behind.</p>`);
+  return `Updated ${ago(age)}. `;
+}
+
+// Marks the nav link for the section on screen.
+function navTracker() {
+  const links = new Map([...document.querySelectorAll(".top nav a")].map((a) => [a.getAttribute("href").slice(1), a]));
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      links.forEach((a) => a.removeAttribute("aria-current"));
+      links.get(e.target.id)?.setAttribute("aria-current", "true");
+    }
+  }, { rootMargin: "-45% 0px -50% 0px" });            // the section crossing the middle of the screen
+  links.forEach((_, id) => { const sec = document.getElementById(id); if (sec) io.observe(sec); });
+}
+
 /* ---------- motion ---------- */
 // Runs `fn` once, the first time `el` is on screen.
 function onceVisible(el, fn, threshold = 0.2) {
@@ -786,8 +793,9 @@ function motion() {
     renderStandings().catch((e) => { console.error(e); $("#standings-body").textContent = "Standings data is not available."; });
     renderH2H().catch((e) => { console.error(e); $("#h2h-body").textContent = "Head-to-head data is not available."; });
     motion();
+    navTracker();
     const through = meta.data_through;
-    $("#foot-meta").textContent =
+    $("#foot-meta").textContent = freshness(meta) +
       `Model ${meta.model} (version ${meta.model_version}). Results through ${through ? `${through.race}, ${fmtDate(through.date)}` : "n/a"}. ` +
       `Live log: ${meta.live_log.detail}.`;
   } catch (err) {
