@@ -60,6 +60,10 @@ jobs:
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+      # Load the built page in a real browser before anything is deployed; a page that throws never ships.
+      - name: Smoke-test the page
+        if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
+        run: python scripts/smoke_test.py
       # A scheduled run that found nothing new has nothing to deploy; pushes and manual runs always deploy.
       - name: Draw the link-preview picture
         if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
