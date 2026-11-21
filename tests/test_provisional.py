@@ -11,16 +11,18 @@ class ProvisionalTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.races = load_races(RESULTS)
+        last = cls.races[-1]
+        cls.nxt = {"season": last.season, "round": last.round + 1, "race": "Test GP", "date": "2030-01-01", "sprint": ""}
 
     def test_form_stage_sums_to_one_and_has_no_grid(self):
-        nxt = {"season": 2030, "round": 1, "race": "Test GP", "date": "2030-01-01", "sprint": ""}
+        nxt = self.nxt
         out = provisional.build(self.races, RESULTS, nxt)
         self.assertEqual(out["stage"], "form")
         self.assertAlmostEqual(sum(r["p"] for r in out["predictions"]), 1.0, places=3)
         self.assertTrue(all(r["grid"] is None for r in out["predictions"]))
 
     def test_recent_form_and_stages(self):
-        nxt = {"season": 2030, "round": 1, "race": "Test GP", "date": "2030-01-01", "sprint": ""}
+        nxt = self.nxt
         out = provisional.build(self.races, RESULTS, nxt)
         self.assertEqual([s["key"] for s in out["stages"]], ["form", "quali"])   # no sprint step on a normal weekend
         last = self.races[-1]
@@ -49,6 +51,11 @@ class ProvisionalTest(unittest.TestCase):
 
     def test_none_without_a_next_race(self):
         self.assertIsNone(provisional.build(self.races, RESULTS, None))
+
+    def test_none_for_a_season_opener(self):
+        # no entry list exists before the first qualifying, and last year's line-ups would be wrong
+        nxt = {**self.nxt, "season": self.races[-1].season + 1, "round": 1}
+        self.assertIsNone(provisional.build(self.races, RESULTS, nxt))
 
 
 if __name__ == "__main__":

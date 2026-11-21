@@ -32,5 +32,7 @@ def build_h2h(races: list[Race], results_dir: Path | None = None) -> dict:
                 d["f"][i] = e.finish_position if (e.classified and e.finish_position) else 0
                 d["pts"][i] = e.points
                 d["spts"][i] = sprint_pts.get((race.season, race.round, e.driver_id), 0)
-        out[str(season)] = {"rounds": [{"round": r.round, "race": r.name} for r in rs], "drivers": drivers}
+        sprint_rounds = {rnd for (s, rnd, _d) in sprint_pts if s == season}
+        out[str(season)] = {"rounds": [{"round": r.round, "race": r.name, **({"sprint": True} if r.round in sprint_rounds else {})}
+                                       for r in rs], "drivers": drivers}
     return out

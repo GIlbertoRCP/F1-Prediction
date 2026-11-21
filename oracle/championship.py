@@ -116,13 +116,20 @@ def build(races, results_dir: Path, pred_dir: Path, history_path: Path, now: dt.
     if history_path.exists():
         out["backtest"] = json.loads(history_path.read_text())
     remaining = remaining_calendar(races, sprints, schedule, season, after)
-    if not remaining:
-        out["status"] = "final" if len([r for r in races if r.season == season]) else "none"
+    if not any(r.season == season for r in races):
+        out["status"] = "none"
     else:
-        out["status"] = "open"
+        # a finished season keeps its final table and its replay until the next one starts; with nothing
+        # left to simulate the outlook is just the final points, with the champion at 100%
+        out["status"] = "open" if remaining else "final"
         out["current"] = current_outlook(races, sprints, schedule, season, after)
         out["tau"] = TAU
         if with_replay:
             out["replay"] = replay(races, sprints, schedule, season)
+            # last season's replay would vanish once this one starts; keep it unless the backtest file has it
+            prev = season - 1
+            known = (out["backtest"] or {}).get("seasons", {})
+            if str(prev) not in known and any(r.season == prev for r in races):
+                out["past_replays"] = {str(prev): replay(races, sprints, schedule, prev)}
     out["live"] = live_summary(pred_dir)
     return out

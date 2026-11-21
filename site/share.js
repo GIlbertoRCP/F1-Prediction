@@ -1,5 +1,8 @@
 // A 1200×630 picture of the current forecast (the size social cards use), drawn on a canvas in the
 // page's own colours and fonts. The phone's share sheet gets it where that exists; elsewhere it downloads.
+// og.html paints the same picture for link previews.
+
+import { colour, venue } from "./names.js";
 
 const W = 1200, H = 630;
 const C = { paper: "#0a0b0e", panel: "#14161b", ink: "#f4f5f7", slate: "#9aa1b0", rule: "#2a2e38", red: "#e10600", redText: "#ff4a40", yellow: "#ffd23f" };
@@ -27,14 +30,45 @@ function fitLines(ctx, text, width, size, font) {
   return { lines: [text], size: 24 };
 }
 
+const pct = (p) => (p < 0.005 ? "<1%" : p < 0.1 ? `${(p * 100).toFixed(1)}%` : `${Math.round(p * 100)}%`);
+const stamp = (iso) => new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "UTC" }) + " UTC";
+
+/** The card for whatever the site is showing: the frozen forecast, else the early odds, else null. */
+export function forecastCard(forecast, circuits, host) {
+  const live = forecast.status === "open", pv = forecast.provisional;
+  const race = live ? forecast.race : pv && forecast.next_race;
+  if (!race) return null;
+  const predictions = live ? forecast.predictions : pv.predictions;
+  return {
+    eyebrow: venue(race), title: race.race,
+    tag: live ? "LIVE FORECAST" : "EARLY ODDS · PROVISIONAL", tagColour: live ? C.red : C.yellow,
+    circuit: circuits?.[race.circuit]?.d ? circuits[race.circuit] : null,
+    rows: predictions.slice(0, 5).map((p) => ({ code: p.driver, colour: colour(p.team), p: p.p, label: pct(p.p) })),
+    footer: `${live ? `Frozen ${stamp(forecast.made_at)} · fingerprint ${forecast.hash.slice(0, 12)}` : "Before qualifying, from recent form"} · ${host}`,
+    filename: `automata-${race.season}-${race.round}.png`,
+  };
+}
+
+/** For when there is nothing to forecast: the brand and what the site does. */
+export const brandCard = (host) => ({
+  eyebrow: "Formula 1 race forecasts", title: "Race-winner odds, scored in public", tag: "FROZEN BEFORE THE START",
+  tagColour: C.red, circuit: null, rows: [], footer: host,
+});
+
 /**
  * card: { eyebrow, title, tag, tagColour, rows: [{ code, colour, p, label }], footer, circuit: {d, w, h, start} | null }
  * Returns a PNG Blob.
  */
 export async function drawCard(card) {
+  const cv = await paintCard(card);
+  return new Promise((res) => cv.toBlob(res, "image/png"));
+}
+
+/** Paints `card` onto a new 1200×630 canvas, or onto `cv` if given. */
+export async function paintCard(card, cv = null) {
   await Promise.all([`italic 800 80px ${DISPLAY}`, `italic 700 40px ${DISPLAY}`, `500 22px ${TEXT}`, `600 22px ${TEXT}`]
     .map((f) => document.fonts?.load(f).catch(() => null)));
-  const cv = Object.assign(document.createElement("canvas"), { width: W, height: H });
+  cv = Object.assign(cv || document.createElement("canvas"), { width: W, height: H });
   const ctx = cv.getContext("2d");
   ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = C.red; ctx.fillRect(0, 0, W, 6);
@@ -68,7 +102,7 @@ export async function drawCard(card) {
 
   // the top of the order
   const max = Math.max(...card.rows.map((r) => r.p));
-  const rowH = Math.min(52, (H - 70 - y) / card.rows.length);
+  const rowH = Math.min(52, (H - 70 - y) / Math.max(1, card.rows.length));
   card.rows.forEach((r, i) => {
     const ry = y + i * rowH;
     ctx.fillStyle = i === 0 ? C.panel : "transparent"; if (i === 0) ctx.fillRect(left, ry, colW, rowH - 6);
@@ -100,7 +134,7 @@ export async function drawCard(card) {
 
   ctx.font = `500 18px ${TEXT}`; ctx.fillStyle = C.slate;
   ctx.fillText(card.footer, left, H - 34);
-  return new Promise((res) => cv.toBlob(res, "image/png"));
+  return cv;
 }
 
 /** Opens the share sheet with the picture where the browser can, else downloads it. */
