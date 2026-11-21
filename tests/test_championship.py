@@ -205,6 +205,18 @@ class RealDataTests(unittest.TestCase):
             self.assertLessEqual(d["p10"], d["p90"])
             self.assertGreaterEqual(d["mean"], d["points"] - 1e-9)
 
+    def test_finished_season_keeps_its_final_table(self):
+        races = [r for r in load_races(REAL) if r.season <= 2025]
+        tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, tmp, True)
+        now = dt.datetime(2026, 1, 15, tzinfo=dt.timezone.utc)
+        out = C.build(races, REAL, tmp, tmp / "none.json", now, with_replay=False)
+        self.assertEqual(out["status"], "final")
+        cur = out["current"]
+        self.assertEqual((cur["season"], cur["after_round"], cur["remaining"]), (2025, 24, []))
+        champ = max(cur["drivers"], key=lambda d: d["title"])
+        self.assertEqual((champ["id"], champ["title"], champ["points"]), ("norris", 1.0, 423))
+
     def test_known_2025_standing_after_round_24(self):
         races = load_races(REAL)
         s = S.standing_after(races, C.load_sprint_points(REAL), 2025, 24)

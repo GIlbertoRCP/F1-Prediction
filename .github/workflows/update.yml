@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
   pages: write
   id-token: write
 
@@ -62,3 +63,29 @@ jobs:
         with:
           path: site
       - uses: actions/deploy-pages@v4
+
+      # A failed weekend run means a forecast that never appears, so say so loudly: one open issue,
+      # commented on by each further failure and closed by the next run that works.
+      - name: Report a failed run
+        if: failure() && github.event_name != 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          open=$(gh issue list --state open --label pipeline-failure --json number --jq '.[0].number')
+          if [ -n "$open" ]; then
+            gh issue comment "$open" --body "Failed again: $RUN_URL"
+          else
+            gh label create pipeline-failure --color d93f0b --description "The scheduled update failed" 2>/dev/null || true
+            gh issue create --label pipeline-failure --title "Scheduled update failed" \
+              --body "The update run failed, so results or the next forecast may be missing from the site. Run: $RUN_URL"
+          fi
+      - name: Close the failure issue once a run works again
+        if: success() && github.event_name != 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          for n in $(gh issue list --state open --label pipeline-failure --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "Fixed: this run worked. $RUN_URL"
+          done

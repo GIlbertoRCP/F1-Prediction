@@ -169,7 +169,12 @@ function countdown(el, target, label) {
   if (!el || !target || isNaN(target)) return;
   const tick = () => {
     const ms = target - Date.now();
-    if (ms <= 0) { el.innerHTML = `<span class="cd-label">${esc(label)} is under way. The forecast follows once the grid is official.</span>`; return; }
+    if (ms <= 0) {
+      el.innerHTML = `<span class="cd-label">${label === "qualifying"
+        ? "Qualifying is under way. The forecast locks once the grid is official."
+        : "The race is under way. It is scored once the results are in."}</span>`;
+      return;
+    }
     const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, sec = Math.floor(ms / 1e3) % 60;
     const unit = (u) => `<span class="cd-u"><b class="num"></b><small>${u}</small></span>`;
     if (!el.querySelector(".cd-u")) el.innerHTML = `${unit("days")}${unit("hrs")}${unit("min")}${unit("sec")}<span class="cd-label">until ${esc(label)}</span>`;
@@ -219,7 +224,7 @@ async function renderHero(forecast, record) {
     ? `<div class="hero-top ${nextMap ? "" : "nomap"}"><div>
          <p class="eyebrow">${esc(venue(next))}${next.sprint ? ' · <span class="s">Sprint weekend</span>' : ""}</p>
          <h1>${esc(next.race)}</h1>
-         <div class="countdown" id="cd"></div>
+         <div class="countdown" id="cd" role="timer" aria-live="off"></div>
          <ul class="weekend">
            ${next.quali_date ? session("Qualifying", quali, next.quali_date) : ""}
            ${session("Race", raceAt, next.date)}
@@ -652,11 +657,10 @@ async function renderChampionship(index) {
       </span>
     </div>
     <div id="ch-tower"></div>
-    <p class="legend-note"><span><i style="background:var(--ink);width:3px;height:12px"></i>points now</span>
+    <p class="legend-note" ${cur.remaining.length ? "" : "hidden"}><span><i style="background:var(--ink);width:3px;height:12px"></i>points now</span>
       <span><i style="background:var(--bar-soft);opacity:.7"></i>80% range for the final total</span>
       <span><i style="background:var(--slate);width:3px;height:12px"></i>middle outcome</span></p>
-    <h3>Races left</h3>
-    <ul class="remain" id="ch-left"></ul>
+    ${cur.remaining.length ? '<h3>Races left</h3><ul class="remain" id="ch-left"></ul>' : ""}
     <h3>How the odds moved</h3>
     <div class="simbar"><label class="select">Season <select id="ch-season"></select></label></div>
     <p class="fine" id="ch-note"></p>
@@ -664,7 +668,7 @@ async function renderChampionship(index) {
     <div id="ch-trust"></div>`;
   // each race left links to its forecast if it is next, else to the last time the series raced there
   const lastHere = (race) => index.filter((x) => x.race === race && x.season < cur.season).sort((a, b) => b.season - a.season)[0];
-  $("#ch-left").innerHTML = cur.remaining.map((r, i) => {
+  if (cur.remaining.length) $("#ch-left").innerHTML = cur.remaining.map((r, i) => {
     const prev = i ? lastHere(r.race) : null;
     const href = i === 0 ? "#forecast" : prev ? `#race-${prev.key}` : null;
     const body = `<b>R${r.round}</b> ${esc(r.race.replace(/ Grand Prix$/, " GP"))}${r.sprint ? '<span class="s" title="Sprint weekend">Sprint</span>' : ""}${href ? `<small>${i === 0 ? "Next" : prev.season}</small>` : ""}`;
@@ -695,8 +699,8 @@ async function renderChampionship(index) {
   drawTower();
 
   // how the odds moved: this season so far, and past seasons replayed round by round
-  const seasons = { [`${cur.season}`]: { label: `${cur.season} so far`, cutoffs: data.replay?.cutoffs || [], live: true } };
-  for (const [y, v] of Object.entries(data.backtest?.seasons || {})) if (!seasons[y]) seasons[y] = { label: `${y}`, cutoffs: v.cutoffs, total: v.total_rounds };
+  const seasons = { [`${cur.season}`]: { label: `${cur.season}${cur.remaining.length ? " so far" : ""}`, cutoffs: data.replay?.cutoffs || [], live: true } };
+  for (const [y, v] of Object.entries({ ...data.backtest?.seasons, ...data.past_replays })) if (!seasons[y]) seasons[y] = { label: `${y}`, cutoffs: v.cutoffs, total: v.total_rounds };
   const keys = Object.keys(seasons).sort((a, b) => b - a);
   $("#ch-season").innerHTML = keys.map((k) => `<option value="${k}">${seasons[k].label}</option>`).join("");
   const drawChart = () => {

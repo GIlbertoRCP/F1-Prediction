@@ -105,11 +105,12 @@ def main(argv=None) -> int:
     ap.add_argument("--predictions-dir", default=str(ROOT / "data" / "predictions"))
     ap.add_argument("--out", default=str(ROOT / "site"))
     ap.add_argument("--rebuild-backtest", action="store_true")
+    ap.add_argument("--now", help="pretend it is this UTC time (ISO), for dry runs of future states")
     args = ap.parse_args(argv)
     results_dir, pred_dir, out = Path(args.results_dir), Path(args.predictions_dir), Path(args.out)
 
     races = load_races(results_dir)
-    now = dt.datetime.now(dt.timezone.utc)
+    now = dt.datetime.fromisoformat(args.now).replace(tzinfo=dt.timezone.utc) if args.now else dt.datetime.now(dt.timezone.utc)
     n = backfill_backtest(races, pred_dir, force=args.rebuild_backtest)
     print(f"backtest: {n} forecasts (re)computed")
     for msg in freeze_live(races, results_dir, pred_dir, now):

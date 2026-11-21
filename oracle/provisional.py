@@ -56,6 +56,8 @@ def build(races: list[Race], results_dir: Path, nxt: dict | None) -> dict | None
     if not nxt or len(races) <= engine.MIN_TRAIN:
         return None
     lineup = races[-1]
+    if lineup.season != nxt["season"]:     # a season opener: last year's line-ups would put drivers in old cars
+        return None
     key = (nxt["season"], nxt["round"])
     grid = _sprint_grid(results_dir, key) if nxt.get("sprint") else {}
     if grid:
