@@ -4,7 +4,7 @@ import { lineChart } from "./linechart.js";
 import { colour, teamName } from "./names.js";
 import { clinched } from "./standings.js";
 import { titleStory, forecastStory } from "./recap.js";
-import { $, esc, fmtStamp, getJSON, getShared, more, pct, shownTitle, titlePct, whole } from "./ui.js";
+import { $, drv, esc, fmtStamp, getShared, more, pct, shownTitle, titlePct, whole } from "./ui.js";
 import { fmtPts } from "./view-standings.js";
 
 /* ---------- championship ---------- */
@@ -12,7 +12,7 @@ export function rangeRow(r, i, axisMax, label, cls = "", pct = titlePct(r.title)
   const at = (v) => `${Math.min(100, (v / axisMax) * 100).toFixed(2)}%`;
   return `<li class="${cls}" style="--team:${colour(r.team)}">
     <span class="rk">${i + 1}</span><span class="tick" style="background:${colour(r.team)}"></span>
-    <span class="code" title="${esc(label)}">${esc(label)}</span>
+    ${r.id ? drv(r.id, label, "code") : `<span class="code" title="${esc(label)}">${esc(label)}</span>`}
     <span class="pts num">${fmtPts(r.points)} pts</span>
     <span class="range" role="img" aria-label="${esc(label)}: ${fmtPts(r.points)} points now; most likely finish between ${Math.round(r.p10)} and ${Math.round(r.p90)}">
       <span class="axis"></span>
@@ -44,7 +44,7 @@ async function seasonInReview(cur, record) {
 export async function renderChampionship(index, record) {
   const sec = $("#championship");
   let data;
-  try { data = await getJSON("data/championship.json"); } catch { return; }
+  try { data = await getShared("data/championship.json"); } catch { return; }
   const cur = data.current;
   if (!cur) return;
   sec.hidden = false;

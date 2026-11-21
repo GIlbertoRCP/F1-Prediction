@@ -3,7 +3,7 @@
 import { lineChart } from "./linechart.js";
 import { colour, teamName } from "./names.js";
 import { driverStandings, teamStandings } from "./standings.js";
-import { $, esc, getShared } from "./ui.js";
+import { $, drv, esc, getShared } from "./ui.js";
 
 /* ---------- standings ---------- */
 export const fmtPts = (v) => (Number.isInteger(v) ? String(v) : v.toFixed(1));
@@ -41,7 +41,7 @@ export async function renderStandings() {
     $("#st-table").innerHTML = `<div class="tablewrap"><table class="simtable"><thead><tr>
       <th>Pos</th><th>${kind === "d" ? "Driver" : "Team"}</th>${kind === "d" ? '<th class="tl">Team</th>' : ""}<th>Points</th><th>Wins</th>${kind === "d" ? "<th>Podiums</th>" : ""}</tr></thead>
       <tbody>${rows.map((r, i) => `<tr><td class="num">${i + 1}</td>
-        <td><span class="tick inline" style="background:${colour(r.team)}"></span><b>${esc(kind === "d" ? r.code : teamName(r.team))}</b></td>
+        <td><span class="tick inline" style="background:${colour(r.team)}"></span>${kind === "d" ? drv(r.id, r.code, "strong") : `<b>${esc(teamName(r.team))}</b>`}</td>
         ${kind === "d" ? `<td class="tl">${esc(teamName(r.team))}</td>` : ""}
         <td class="num">${fmtPts(r.points)}</td><td class="num">${r.wins}</td>${kind === "d" ? `<td class="num">${r.podiums}</td>` : ""}</tr>`).join("")}</tbody></table></div>
       <p class="fine">${kind === "d" ? "Ties are split by best finishes." : "Every car's points count, whoever drove it."}</p>`;

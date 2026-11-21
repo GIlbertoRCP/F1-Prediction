@@ -407,3 +407,28 @@ select { max-width: 100%; font: inherit; padding: .4rem .6rem; background: var(-
   .top { position: sticky; top: 0; z-index: 20; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax -1px); border-bottom: 1px solid var(--rule); }
   main section[id], .race-list li { scroll-margin-top: 4.5rem; }
 }
+
+/* driver codes are buttons that open a driver card; they keep the look of the text they replace */
+.drv { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; text-align: inherit; cursor: pointer; }
+.drv.strong { font-weight: 700; }
+.drv:hover { text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+.drvcard { width: min(26rem, calc(100vw - 2 * var(--gutter))); padding: 0; border: 0; background: var(--panel); color: var(--ink); border-top: 4px solid var(--red); }
+.drvcard::backdrop { background: rgba(5, 6, 8, .72); }
+.drvcard[open] { animation: drv-in .22s cubic-bezier(.2, .8, .3, 1); }
+@keyframes drv-in { from { opacity: 0; transform: translateY(10px); } }
+.drvcard-head { display: grid; grid-template-columns: 6px 1fr auto; gap: .9rem; align-items: center; padding: 1rem 1.1rem .8rem; }
+.drvcard-head .tick { align-self: stretch; }
+.drvcard-head h2 { margin: 0; font-family: var(--display); font-style: italic; font-weight: 800; font-size: 2.6rem; line-height: 1; }
+.drvcard-head p { margin: .15rem 0 0; color: var(--slate); }
+.drvcard-x { align-self: start; background: none; border: 0; color: var(--slate); font-size: 1.6rem; line-height: 1; cursor: pointer; padding: .1rem .3rem; }
+.drvcard-x:hover { color: var(--ink); }
+.drvcard-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--rule); }
+.drvcard-stats div { padding: .6rem .4rem; text-align: center; }
+.drvcard-stats div + div { border-left: 1px solid var(--rule); }
+.drvcard-stats b { display: block; font-family: var(--display); font-style: italic; font-weight: 800; font-size: 1.6rem; line-height: 1; }
+.drvcard-stats span { font-size: .8rem; color: var(--slate); text-transform: uppercase; letter-spacing: .05em; }
+.drvcard-row { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; margin: 0; padding: .6rem 1.1rem; border-bottom: 1px solid var(--rule); }
+.drvcard-row span:first-child { flex: 1 1 100%; font-size: .8rem; color: var(--slate); text-transform: uppercase; letter-spacing: .05em; }
+.drvcard-link { display: block; padding: .7rem 1.1rem .9rem; color: var(--slate); font-size: .92rem; }
+.drvcard-link:hover { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .drvcard[open] { animation: none; } }

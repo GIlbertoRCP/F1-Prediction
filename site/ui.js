@@ -27,6 +27,9 @@ export const fmtStamp = (iso) =>
   new Date(iso).toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "UTC" }) + " UTC";
 // Fine print that backs a number up but would crowd the page: one click away instead of always on screen.
 export const more = (html, label = "How we know") => `<details class="fold"><summary>${label}</summary>${html}</details>`;
+// A driver's code as a button that opens their card (view-driver.js listens for [data-driver] clicks).
+export const drv = (id, text, cls = "") => `<button type="button" class="drv ${cls}" data-driver="${esc(id)}" title="${esc(driverName(id))}">${esc(text)}</button>`;
+export const driverName = (id) => id.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 export const ordinal = (n) => { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
 
 /* ---------- the timing tower ---------- */
@@ -45,7 +48,7 @@ export function tower(predictions, { winnerId = null, limit = 10, animate = fals
       <li class="${i === 0 ? "lead" : ""} ${p.driver_id === winnerId ? "winner" : ""}" style="--team:${colour(p.team)}">
         <span class="rk">${i + 1}</span>
         <span class="tick" style="background:${colour(p.team)}"></span>
-        <span class="code" title="${esc(p.driver_id.replace(/_/g, " "))}">${esc(p.driver)}</span>
+        ${drv(p.driver_id, p.driver, "code")}
         ${form ? formStrip(p.recent) : `<span class="grid">${p.grid ? "P" + p.grid : ""}</span>`}
         <span class="track"><span class="fill" data-w="${(p.p / max) * 100}"></span></span>
         <span class="pct num">${pct(p.p)}</span>

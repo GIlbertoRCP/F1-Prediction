@@ -1,7 +1,8 @@
 // Boot: loads the data, renders each section (one view-*.js module per section) and adds the page-wide
 // touches: the freshness note, the nav that follows the section on screen, and the motion.
 
-import { $, fmtDate, getJSON, reduceMotion, store } from "./ui.js";
+import { $, fmtDate, getJSON, getShared, reduceMotion, store } from "./ui.js";
+import { driverCards } from "./view-driver.js";
 import { renderChampionship } from "./view-championship.js";
 import { renderH2H } from "./view-h2h.js";
 import { renderHero } from "./view-hero.js";
@@ -72,7 +73,7 @@ function motion() {
 (async function main() {
   try {
     const [meta, forecast, record, index] = await Promise.all([
-      getJSON("data/meta.json"), getJSON("data/forecast.json"), getJSON("data/track_record.json"), getJSON("data/races.json"),
+      getJSON("data/meta.json"), getShared("data/forecast.json"), getJSON("data/track_record.json"), getJSON("data/races.json"),
     ]);
     store.circuits = await getJSON("data/circuits.json").catch(() => null);
     await renderHero(forecast, record);
@@ -85,6 +86,7 @@ function motion() {
     renderH2H().catch((e) => { console.error(e); $("#h2h-body").textContent = "Head-to-head data is not available."; });
     motion();
     navTracker();
+    driverCards();
     const through = meta.data_through;
     $("#foot-meta").textContent = freshness(meta) +
       `Model ${meta.model} (version ${meta.model_version}). Results through ${through ? `${through.race}, ${fmtDate(through.date)}` : "n/a"}. ` +
