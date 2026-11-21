@@ -31,7 +31,7 @@ jobs:
     outputs:
       run: ${{ steps.decide.outputs.run }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           sparse-checkout: data/results/schedule.csv
           sparse-checkout-cone-mode: false
@@ -53,8 +53,12 @@ jobs:
     if: needs.gate.outputs.run == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      # The branch tip, not the commit the run was created for: a re-run of an old run would otherwise rebuild
+      # stale data and have its push refused.
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Run tests
@@ -83,7 +87,13 @@ jobs:
             echo "nothing new"
           else
             git commit -m "Update results and forecasts $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push
+            # If main moved during the run (a merge, say), replay this commit on top and try again. A plain rebase
+            # only: on a real conflict the run fails rather than guess, since the forecast log is append-only.
+            for attempt in 1 2 3; do
+              git push && break
+              [ "$attempt" = 3 ] && exit 1
+              git pull --rebase origin "${GITHUB_REF_NAME}" || { git rebase --abort; exit 1; }
+            done
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
       # Load the built page in a real browser before anything is deployed; a page that throws never ships.

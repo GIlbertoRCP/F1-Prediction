@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 350
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install FastF1
@@ -37,7 +37,12 @@ jobs:
             echo "nothing new"
           else
             git commit -m "Draw circuit outlines from real car positions"
-            git push
+            # this job runs for hours, so main has usually moved on: replay the commit on top before pushing
+            for attempt in 1 2 3; do
+              git push && break
+              [ "$attempt" = 3 ] && exit 1
+              git pull --rebase origin "${GITHUB_REF_NAME}" || { git rebase --abort; exit 1; }
+            done
           fi
       - name: Redeploy the site
         env:
