@@ -32,8 +32,8 @@ export async function renderH2H() {
       <thead><tr><th>Teammates</th><th>Races together</th><th>Qualifying</th><th>Race</th><th>Points</th></tr></thead>
       <tbody>${pairs.map((p) => `<tr>
         <td><span class="tick inline" style="background:${colour(p.team)}"></span><b>${name(p.a)}</b> vs <b>${name(p.b)}</b></td>
-        <td class="num">${p.sameTeam}</td>
-        <td>${split(p.quali.a, p.quali.b)}</td><td>${split(p.race.a, p.race.b)}</td><td>${split(p.points.a, p.points.b, (v) => Math.round(v))}</td></tr>`).join("")}</tbody></table></div>
+        <td class="num" data-label="Races together">${p.sameTeam}</td>
+        <td data-label="Qualifying">${split(p.quali.a, p.quali.b)}</td><td data-label="Race">${split(p.race.a, p.race.b)}</td><td data-label="Points">${split(p.points.a, p.points.b, (v) => Math.round(v))}</td></tr>`).join("")}</tbody></table></div>
       <p class="fine">Rounds won by each driver. Race points only, no sprints.</p>`;
     const ids = Object.keys(drv).sort((a, b) => drv[a].code.localeCompare(drv[b].code));
     const opts = (sel) => ids.map((id) => `<option value="${esc(id)}"${id === sel ? " selected" : ""}>${esc(drv[id].code)} (${esc(teamOf(id))})</option>`).join("");

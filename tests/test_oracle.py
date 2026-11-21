@@ -194,5 +194,16 @@ class BacktestTests(unittest.TestCase):
                 self.assertAlmostEqual(p["p"], probs[p["driver_id"]], places=5)
 
 
+class DriverCodeTests(unittest.TestCase):
+    def test_ids_frozen_in_place_of_codes_are_shown_as_codes(self):
+        from oracle.service import with_codes
+        preds = [{"driver": "VER", "driver_id": "max_verstappen"},
+                 {"driver": "rafael_camara", "driver_id": "rafael_camara"},
+                 {"driver": "nico_hulkenberg", "driver_id": "nico_hulkenberg"}]
+        out = with_codes(preds, {"rafael_camara": "CAM"})
+        self.assertEqual([p["driver"] for p in out], ["VER", "CAM", "HUL"])
+        self.assertEqual(preds[1]["driver"], "rafael_camara")      # the frozen record itself is left alone
+
+
 if __name__ == "__main__":
     unittest.main()

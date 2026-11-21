@@ -436,3 +436,17 @@ select { max-width: 100%; font: inherit; padding: .4rem .6rem; background: var(-
 .tower.gridphase .rk, .tower.gridphase .pct { opacity: 0; }
 .tower .rk, .tower .pct { transition: opacity .4s ease-out .3s; }
 .tower.gridphase li { position: relative; z-index: 1; }
+
+/* phones: the teammate table becomes one card per pair, and the wider tables lose their least useful column */
+@media (max-width: 720px) {
+  .h2htable thead { display: none; }
+  .h2htable, .h2htable tbody, .h2htable tr { display: block; }
+  .h2htable tr { padding: .7rem 0; border-bottom: 1px solid var(--rule); }
+  .h2htable td { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); align-items: center; padding: .2rem 0; border: 0; white-space: normal; text-align: left; }
+  .h2htable td:first-child { display: block; padding-bottom: .4rem; }
+  .h2htable td[data-label]::before { content: attr(data-label); color: var(--slate); font-size: .85rem; }
+  .h2htable td[data-label="Races together"] { display: none; }
+  .h2htable .split { min-width: 0; }
+  #st-table .tl { display: none; }
+  .simtable td, .simtable th { padding-left: .45rem; padding-right: .45rem; }
+}

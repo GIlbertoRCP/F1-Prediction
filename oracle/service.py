@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import datetime as dt
 import math
+import re
+import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
@@ -75,6 +77,27 @@ def slot_prior_logloss(races: list[Race], keys: set[tuple[int, int]]) -> float:
     return mean(losses)
 
 
+def driver_codes(races) -> dict[str, str]:
+    """driver_id -> three-letter code, the newest one the results give."""
+    codes = {}
+    for race in races:
+        for e in race.entries:
+            if re.fullmatch(r"[A-Z]{3}", e.driver or ""):
+                codes[e.driver_id] = e.driver
+    return codes
+
+
+def with_codes(predictions: list[dict], codes: dict[str, str]) -> list[dict]:
+    """A forecast frozen before the results API knew a new driver's code stored their id instead ("rafael_camara").
+    The log stays as it was; the page shows the code, or the surname's first three letters."""
+    def code(p):
+        if re.fullmatch(r"[A-Z]{3}", p["driver"]):
+            return p["driver"]
+        surname = unicodedata.normalize("NFKD", p["driver_id"].split("_")[-1]).encode("ascii", "ignore").decode()
+        return codes.get(p["driver_id"]) or surname[:3].upper()
+    return [{**p, "driver": code(p)} for p in predictions]
+
+
 def _public(row: dict) -> dict:
     return {k: v for k, v in row.items() if not k.startswith("_")}
 
@@ -85,6 +108,7 @@ def build_bundle(results_dir: Path, pred_dir: Path, now: dt.datetime | None = No
     results_dir, pred_dir = Path(results_dir), Path(pred_dir)
     races = load_races(results_dir)
     by_key = {r.key: r for r in races}
+    codes = driver_codes(races)
     live = store.read_log(pred_dir / LIVE_FILE)
     backtest = store.read_log(pred_dir / BACKTEST_FILE)
     chain_ok, chain_msg = store.verify_chain(live)
@@ -114,7 +138,7 @@ def build_bundle(results_dir: Path, pred_dir: Path, now: dt.datetime | None = No
                                                "circuit": circuits.get((rec["season"], rec["round"]))},
                     "made_at": rec["made_at"], "grid_source": rec["grid_source"],
                     "model": rec["model"], "model_version": rec["model_version"],
-                    "hash": rec["hash"], "predictions": rec["predictions"], "simulator": rec.get("simulator"),
+                    "hash": rec["hash"], "predictions": with_codes(rec["predictions"], codes), "simulator": rec.get("simulator"),
                     "next_race": next_race(schedule, today)}
     latest = all_rows[-1] if all_rows else None
 
@@ -135,7 +159,7 @@ def build_bundle(results_dir: Path, pred_dir: Path, now: dt.datetime | None = No
             "season": key[0], "round": key[1], "race": rec["race"], "date": rec["date"],
             "circuit": circuits.get(key),
             "kind": rec["kind"], "made_at": rec.get("made_at"), "grid_source": rec["grid_source"], "hash": rec.get("hash"),
-            "predictions": rec["predictions"], "result": result, "simulator": rec.get("simulator"),
+            "predictions": with_codes(rec["predictions"], codes), "result": result, "simulator": rec.get("simulator"),
         }
 
     return {
