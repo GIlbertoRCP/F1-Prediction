@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-11-22T06:41:21+00:00",
+ "generated_at": "2026-11-22T17:07:44+00:00",
  "model": "grid_plus_form",
  "model_version": "f242f5dea0",
  "data_through": {
   "season": 2026,
-  "round": 20,
-  "race": "Brazilian Grand Prix",
-  "date": "2026-11-08"
+  "round": 21,
+  "race": "Las Vegas Grand Prix",
+  "date": "2026-11-22"
  },
  "live_log": {
   "records": 4,

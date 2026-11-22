@@ -3897,3 +3897,25 @@ season,round,race,date,circuit,driver,driver_id,team,grid,finish_position,classi
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,RUS,russell,mercedes,7,4,1,Finished,12
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,SAI,sainz,williams,12,19,1,Lapped,0
 2026,20,Brazilian Grand Prix,2026-11-08,interlagos,STR,stroll,aston_martin,16,,0,Retired,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,ALB,albon,williams,14,,0,Did not start,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,ALO,alonso,aston_martin,18,19,1,Retired,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,ANT,antonelli,mercedes,6,4,1,Finished,12
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,LIN,arvid_lindblad,rb,5,,0,Retired,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,BEA,bearman,haas,22,13,1,Finished,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,BOR,bortoleto,audi,13,12,1,Finished,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,BOT,bottas,cadillac,19,18,1,Finished,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,COL,colapinto,alpine,9,6,1,Finished,8
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,GAS,gasly,alpine,8,5,1,Finished,10
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,HAD,hadjar,red_bull,4,15,1,Finished,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,HAM,hamilton,ferrari,11,7,1,Finished,6
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,HUL,hulkenberg,audi,12,11,1,Finished,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,LAW,lawson,rb,7,14,1,Finished,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,LEC,leclerc,ferrari,10,10,1,Finished,1
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,VER,max_verstappen,red_bull,1,1,1,Finished,25
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,NOR,norris,mclaren,3,2,1,Finished,18
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,PER,perez,cadillac,16,,0,Retired,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,PIA,piastri,mclaren,17,3,1,Finished,15
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,CAM,rafael_camara,haas,15,16,1,Finished,0
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,RUS,russell,mercedes,2,9,1,Finished,2
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,SAI,sainz,williams,20,8,1,Finished,4
+2026,21,Las Vegas Grand Prix,2026-11-22,vegas,STR,stroll,aston_martin,21,17,1,Finished,0
