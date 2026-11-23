@@ -2,13 +2,13 @@
  "status": "none",
  "next_race": {
   "season": 2026,
-  "round": 21,
-  "race": "Las Vegas Grand Prix",
-  "circuit": "vegas",
-  "date": "2026-11-22",
-  "time": "04:00:00Z",
-  "quali_date": "2026-11-21",
-  "quali_time": "04:00:00Z",
+  "round": 22,
+  "race": "Qatar Grand Prix",
+  "circuit": "losail",
+  "date": "2026-11-29",
+  "time": "16:00:00Z",
+  "quali_date": "2026-11-28",
+  "quali_time": "18:00:00Z",
   "sprint": ""
  },
  "provisional": {
@@ -24,9 +24,9 @@
    }
   ],
   "note": "Recent form only, no grid yet, so a rough guide.",
-  "race": "Las Vegas Grand Prix",
+  "race": "Qatar Grand Prix",
   "season": 2026,
-  "round": 21,
+  "round": 22,
   "predictions": [
    {
     "driver_id": "max_verstappen",
